@@ -1,0 +1,86 @@
+---
+import { safeCtaHref } from "../links";
+
+interface Props {
+	node: {
+		_type?: string;
+		_key?: string;
+		eyebrow?: string;
+		heading?: string;
+		body?: string;
+		ctaLabel?: string;
+		ctaHref?: string;
+	};
+}
+
+const { node } = Astro.props;
+const ctaHref = safeCtaHref(node.ctaHref);
+const showCta = Boolean(node.ctaLabel && ctaHref);
+---
+
+<section class="dinkus-cta-band" data-dinkus-block="cta-band">
+	<div class="dinkus-cta-band__copy">
+		{node.eyebrow && <p class="dinkus-cta-band__eyebrow">{node.eyebrow}</p>}
+		{node.heading && <h2>{node.heading}</h2>}
+		{node.body && <p class="dinkus-cta-band__body">{node.body}</p>}
+	</div>
+	{
+		showCta && (
+			<a class="dinkus-cta-band__action" href={ctaHref}>
+				{node.ctaLabel}
+			</a>
+		)
+	}
+</section>
+
+<style>
+	.dinkus-cta-band {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+		border-radius: 1rem;
+		background: color-mix(in srgb, currentColor 4%, transparent);
+	}
+
+	.dinkus-cta-band__copy {
+		max-width: 48rem;
+	}
+
+	.dinkus-cta-band__eyebrow {
+		margin: 0 0 0.5rem;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	h2,
+	.dinkus-cta-band__body {
+		margin: 0;
+	}
+
+	.dinkus-cta-band__body {
+		margin-top: 0.75rem;
+		line-height: 1.6;
+	}
+
+	.dinkus-cta-band__action {
+		flex: none;
+		padding: 0.75rem 1rem;
+		border-radius: 999px;
+		background: CanvasText;
+		color: Canvas;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	@media (max-width: 40rem) {
+		.dinkus-cta-band {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+	}
+</style>

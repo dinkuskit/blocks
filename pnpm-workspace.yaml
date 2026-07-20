@@ -1,0 +1,7 @@
+packages:
+  - tests/fixture-site
+allowBuilds:
+  better-sqlite3: true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - astro@7.1.3

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "meta": {
+    "name": "Dinkus blocks compatibility fixture",
+    "description": "Local acceptance harness for editable Portable Text blocks",
+    "author": "Dinkus contributors"
+  },
+  "collections": [
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "supports": [
+        "drafts",
+        "revisions"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "content",
+          "label": "Content",
+          "type": "portableText"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "pages": [
+      {
+        "id": "home",
+        "slug": "home",
+        "status": "published",
+        "data": {
+          "title": "Home",
+          "content": [
+            {
+              "_type": "dinkus.cta-band",
+              "_key": "cta-band-seed",
+              "eyebrow": "Compatibility fixture",
+              "heading": "Before: Portable Text fields are editable",
+              "body": "This sentinel content must round-trip through the EmDash admin.",
+              "ctaLabel": "Read the proof",
+              "ctaHref": "/proof"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "title": "Dinkus blocks fixture",
+    "tagline": "Portable Text compatibility proof"
+  },
+  "menus": []
+}
