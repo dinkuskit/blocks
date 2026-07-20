@@ -62,6 +62,8 @@ describe("safeCtaHref", () => {
 		"javascript:alert(1)",
 		"data:text/html,<script>alert(1)</script>",
 		"//evil.example/path",
+		"/\\evil.example/path",
+		"\\/evil.example/path",
 		"relative/path",
 		"",
 	])("rejects unsafe CTA href %s", (input) => {
