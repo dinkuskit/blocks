@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm check
+      - run: pnpm test:e2e
+
+      - name: Upload browser proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dinkus-blocks-browser-proof
+          path: tests/fixture-site/.artifacts/e2e
+          if-no-files-found: error
+          retention-days: 7
