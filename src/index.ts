@@ -6,6 +6,26 @@ import {
 	type ResolvedPlugin,
 } from "emdash";
 
+export { safeCtaHref } from "./links";
+export type {
+	CtaBandNode,
+	DispatchNode,
+	FactItem,
+	FactRailNode,
+	GalleryHeroNode,
+	GalleryLane,
+	GalleryLanesNode,
+	LedgerCard,
+	LedgerCardsNode,
+	LegendEntry,
+	PageHeroNode,
+	PortableTextNode,
+	SearchBoardNode,
+	SearchLink,
+	SectionHeaderNode,
+	ServiceAreaMapNode,
+} from "./types";
+
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
 export const CTA_BAND_BLOCK_TYPE = "dinkus.cta-band";
 export const PAGE_HERO_BLOCK_TYPE = "dinkus.page-hero";

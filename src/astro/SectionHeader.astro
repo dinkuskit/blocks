@@ -1,13 +1,8 @@
 ---
+import type { SectionHeaderNode } from "../types";
+
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		number?: string;
-		kicker?: string;
-		title?: string;
-		intro?: string;
-	};
+	node: SectionHeaderNode;
 }
 
 const { node } = Astro.props;

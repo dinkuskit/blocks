@@ -1,17 +1,8 @@
 ---
-interface FactItem {
-	label?: string;
-	value?: string;
-	icon?: string;
-}
+import type { FactItem, FactRailNode } from "../types";
 
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		ariaLabel?: string;
-		facts?: FactItem[];
-	};
+	node: FactRailNode;
 }
 
 const { node } = Astro.props;

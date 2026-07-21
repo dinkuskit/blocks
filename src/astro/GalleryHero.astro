@@ -1,20 +1,9 @@
 ---
+import type { GalleryHeroNode } from "../types";
 import { safeCtaHref } from "../links";
 
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		image?: string;
-		imageAlt?: string;
-		eyebrow?: string;
-		headline?: string;
-		deck?: string;
-		primaryLabel?: string;
-		primaryHref?: string;
-		secondaryLabel?: string;
-		secondaryHref?: string;
-	};
+	node: GalleryHeroNode;
 }
 
 const { node } = Astro.props;

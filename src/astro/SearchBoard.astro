@@ -1,21 +1,9 @@
 ---
+import type { SearchBoardNode, SearchLink } from "../types";
 import { safeCtaHref } from "../links";
 
-interface SearchLink {
-	label?: string;
-	href?: string;
-}
-
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		number?: string;
-		kicker?: string;
-		title?: string;
-		intro?: string;
-		links?: SearchLink[];
-	};
+	node: SearchBoardNode;
 }
 
 const { node } = Astro.props;

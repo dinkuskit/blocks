@@ -1,20 +1,9 @@
 ---
+import type { LedgerCard, LedgerCardsNode } from "../types";
 import { safeCtaHref } from "../links";
 
-interface LedgerCard {
-	code?: string;
-	title?: string;
-	body?: string;
-	ctaLabel?: string;
-	ctaHref?: string;
-}
-
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		cards?: LedgerCard[];
-	};
+	node: LedgerCardsNode;
 }
 
 const { node } = Astro.props;

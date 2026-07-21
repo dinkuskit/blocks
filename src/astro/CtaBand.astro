@@ -1,16 +1,9 @@
 ---
+import type { CtaBandNode } from "../types";
 import { safeCtaHref } from "../links";
 
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		eyebrow?: string;
-		heading?: string;
-		body?: string;
-		ctaLabel?: string;
-		ctaHref?: string;
-	};
+	node: CtaBandNode;
 }
 
 const { node } = Astro.props;

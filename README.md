@@ -63,6 +63,36 @@ components entry; sites can also import a single block (for example
 `import { PageHero } from "@dinkuskit/blocks/astro"`) to wrap it with a
 pixel-locked override.
 
+## Consumer API
+
+The package root exports `safeCtaHref`, the shared `PortableTextNode` base,
+one `*Node` type for each block, and the repeater item types `FactItem`,
+`LedgerCard`, `GalleryLane`, `SearchLink`, and `LegendEntry`.
+
+A site-level renderer override can use the same node contract as the
+shipped renderer and the same URL policy:
+
+```astro
+---
+import {
+	safeCtaHref,
+	type CtaBandNode,
+} from "@dinkuskit/blocks";
+
+interface Props {
+	node: CtaBandNode;
+}
+
+const { node } = Astro.props;
+const ctaHref = safeCtaHref(node.ctaHref);
+---
+
+<section class="site-cta">
+	{node.heading && <h2>{node.heading}</h2>}
+	{node.ctaLabel && ctaHref && <a href={ctaHref}>{node.ctaLabel}</a>}
+</section>
+```
+
 ## Verify
 
 ```sh
