@@ -1,18 +1,8 @@
 ---
-interface LegendEntry {
-	label?: string;
-	icon?: string;
-}
+import type { LegendEntry, ServiceAreaMapNode } from "../types";
 
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		image?: string;
-		imageAlt?: string;
-		caption?: string;
-		legend?: LegendEntry[];
-	};
+	node: ServiceAreaMapNode;
 }
 
 const { node } = Astro.props;

@@ -1,19 +1,9 @@
 ---
+import type { GalleryLane, GalleryLanesNode } from "../types";
 import { safeCtaHref } from "../links";
 
-interface GalleryLane {
-	label?: string;
-	meta?: string;
-	href?: string;
-	image?: string;
-}
-
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		lanes?: GalleryLane[];
-	};
+	node: GalleryLanesNode;
 }
 
 const { node } = Astro.props;

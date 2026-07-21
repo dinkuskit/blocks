@@ -21,6 +21,7 @@ for (const required of [
 	"package.json",
 	"src/index.ts",
 	"src/links.ts",
+	"src/types.ts",
 	"src/astro/CtaBand.astro",
 	"src/astro/index.ts",
 ]) {

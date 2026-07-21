@@ -1,18 +1,9 @@
 ---
+import type { PageHeroNode } from "../types";
 import { safeCtaHref } from "../links";
 
 interface Props {
-	node: {
-		_type?: string;
-		_key?: string;
-		eyebrow?: string;
-		headline?: string;
-		deck?: string;
-		primaryLabel?: string;
-		primaryHref?: string;
-		secondaryLabel?: string;
-		secondaryHref?: string;
-	};
+	node: PageHeroNode;
 }
 
 const { node } = Astro.props;
