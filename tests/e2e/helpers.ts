@@ -75,14 +75,18 @@ export async function submitModalAndWaitForSave(
 		timeout: 15_000,
 	});
 
-	// Heal the upstream block-modal double-save race (dinkuskit/blocks#2): the
-	// Block Kit modal renders in a portal whose container has its own React
-	// root, so one Save click dispatches handleSubmit twice — a fresh PUT and a
-	// stale pre-edit PUT race, and under a loaded runner the stale write can
-	// land last and silently revert the edit. The debounced autosave is a
-	// single serialized writer of the live ProseMirror doc, so nudging the
-	// document forces one more fresh write that is scheduled after — and so
-	// lands after — both modal PUTs, deterministically winning.
+	// Heal the upstream block-modal double-save race (dinkuskit/blocks#2; fix
+	// filed upstream as emdash-cms/emdash#2160). The Block Kit modal is a React
+	// descendant of the page form even when portaled, so one Save click invokes
+	// the submit handler twice — a fresh PUT and a stale pre-edit PUT race, and
+	// under a loaded runner the stale write can land last and silently revert
+	// the edit. The upstream one-line fix (stopPropagation in the modal submit
+	// handler) is not in a released version yet, so EmDash 0.29.0 that this
+	// package pins is still affected. Heal it here until the pin includes the
+	// fix: the debounced autosave is a single serialized writer of the live
+	// ProseMirror doc, so nudging the document forces one more fresh write that
+	// is scheduled after — and so lands after — both modal PUTs, deterministically
+	// winning. Remove this heal once the emdash pin includes emdash-cms/emdash#2160.
 	//
 	// The nudge appends a throwaway empty paragraph: a guaranteed net doc change
 	// (so autosave always fires) that carries no block, so it is invisible to
