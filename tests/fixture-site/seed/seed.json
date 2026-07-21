@@ -50,6 +50,242 @@
             }
           ]
         }
+      },
+      {
+        "id": "page-hero",
+        "slug": "page-hero",
+        "status": "published",
+        "data": {
+          "title": "Page hero fixture",
+          "content": [
+            {
+              "_type": "dinkus.page-hero",
+              "_key": "page-hero-seed",
+              "eyebrow": "Compatibility fixture",
+              "headline": "Before: Page hero headline is editable",
+              "deck": "This sentinel deck must round-trip through the EmDash admin.",
+              "primaryLabel": "Primary proof",
+              "primaryHref": "/proof",
+              "secondaryLabel": "Secondary proof",
+              "secondaryHref": "/proof-secondary"
+            }
+          ]
+        }
+      },
+      {
+        "id": "section-header",
+        "slug": "section-header",
+        "status": "published",
+        "data": {
+          "title": "Section header fixture",
+          "content": [
+            {
+              "_type": "dinkus.section-header",
+              "_key": "section-header-seed",
+              "number": "01",
+              "kicker": "Compatibility fixture",
+              "title": "Before: Section header title is editable",
+              "intro": "This sentinel intro must round-trip through the EmDash admin."
+            }
+          ]
+        }
+      },
+      {
+        "id": "fact-rail",
+        "slug": "fact-rail",
+        "status": "published",
+        "data": {
+          "title": "Fact rail fixture",
+          "content": [
+            {
+              "_type": "dinkus.fact-rail",
+              "_key": "fact-rail-seed",
+              "ariaLabel": "Fixture facts",
+              "facts": [
+                {
+                  "_key": "fact-crew",
+                  "label": "Crew",
+                  "value": "Three on site",
+                  "icon": "crew"
+                },
+                {
+                  "_key": "fact-radius",
+                  "label": "Radius",
+                  "value": "40 miles",
+                  "icon": "map-pin"
+                },
+                {
+                  "_key": "fact-since",
+                  "label": "Since",
+                  "value": "2019"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gallery-hero",
+        "slug": "gallery-hero",
+        "status": "published",
+        "data": {
+          "title": "Gallery hero fixture",
+          "content": [
+            {
+              "_type": "dinkus.gallery-hero",
+              "_key": "gallery-hero-seed",
+              "image": "/media/fixture/hero.jpg",
+              "imageAlt": "Fixture hero image",
+              "eyebrow": "Compatibility fixture",
+              "headline": "Before: Gallery hero headline is editable",
+              "deck": "This sentinel deck must round-trip through the EmDash admin.",
+              "primaryLabel": "Primary proof",
+              "primaryHref": "/proof",
+              "secondaryLabel": "Secondary proof",
+              "secondaryHref": "/work"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ledger-cards",
+        "slug": "ledger-cards",
+        "status": "published",
+        "data": {
+          "title": "Ledger cards fixture",
+          "content": [
+            {
+              "_type": "dinkus.ledger-cards",
+              "_key": "ledger-cards-seed",
+              "cards": [
+                {
+                  "_key": "card-field",
+                  "code": "field",
+                  "title": "Before: Ledger card title is editable",
+                  "body": "This sentinel body must round-trip through the EmDash admin.",
+                  "ctaLabel": "Review field work",
+                  "ctaHref": "/field"
+                },
+                {
+                  "_key": "card-interior",
+                  "code": "interior",
+                  "title": "Second ledger card",
+                  "body": "Finish work, scoped honestly."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gallery-lanes",
+        "slug": "gallery-lanes",
+        "status": "published",
+        "data": {
+          "title": "Gallery lanes fixture",
+          "content": [
+            {
+              "_type": "dinkus.gallery-lanes",
+              "_key": "gallery-lanes-seed",
+              "lanes": [
+                {
+                  "_key": "lane-land",
+                  "label": "Before: Gallery lane label is editable",
+                  "meta": "Clearing · trenching · grading",
+                  "href": "/land",
+                  "image": "/media/fixture/lane-land.jpg"
+                },
+                {
+                  "_key": "lane-remodel",
+                  "label": "Kitchen & bath",
+                  "meta": "Finish work, scoped honestly",
+                  "href": "/remodel",
+                  "image": "/media/fixture/lane-remodel.jpg"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "search-board",
+        "slug": "search-board",
+        "status": "published",
+        "data": {
+          "title": "Search board fixture",
+          "content": [
+            {
+              "_type": "dinkus.search-board",
+              "_key": "search-board-seed",
+              "number": "LOC",
+              "kicker": "Compatibility fixture",
+              "title": "Before: Search board title is editable",
+              "intro": "This sentinel intro must round-trip through the EmDash admin.",
+              "links": [
+                {
+                  "_key": "link-clearing",
+                  "label": "Land clearing near me",
+                  "href": "/land"
+                },
+                {
+                  "_key": "link-remodel",
+                  "label": "Kitchen remodel",
+                  "href": "/remodel"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "service-area-map",
+        "slug": "service-area-map",
+        "status": "published",
+        "data": {
+          "title": "Service area map fixture",
+          "content": [
+            {
+              "_type": "dinkus.service-area-map",
+              "_key": "service-area-map-seed",
+              "image": "/media/fixture/map.png",
+              "imageAlt": "Fixture service area map",
+              "caption": "Before: Service area caption is editable",
+              "legend": [
+                {
+                  "_key": "legend-base",
+                  "label": "Working bases",
+                  "icon": "map-pin"
+                },
+                {
+                  "_key": "legend-town",
+                  "label": "Service town",
+                  "icon": "dot"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "dispatch",
+        "slug": "dispatch",
+        "status": "published",
+        "data": {
+          "title": "Dispatch fixture",
+          "content": [
+            {
+              "_type": "dinkus.dispatch",
+              "_key": "dispatch-seed",
+              "kicker": "Compatibility fixture",
+              "title": "Before: Dispatch title is editable",
+              "body": "This sentinel body must round-trip through the EmDash admin.",
+              "ctaLabel": "Request a quote",
+              "ctaHref": "/proof",
+              "phone": "tel:+15551234567",
+              "email": "mailto:hello@example.com"
+            }
+          ]
+        }
       }
     ]
   },
