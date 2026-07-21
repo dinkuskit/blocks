@@ -80,13 +80,19 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 	await waitForAdmin(page);
 	await editor.getByText("CTA Band", { exact: true }).first().hover();
 	await editor.getByRole("button", { name: "Edit" }).first().click();
-	await expect(headingField(page.getByRole("dialog", { name: "Edit CTA Band" }))).toHaveValue(
-		CANARY_HEADING,
-	);
+	const persistedHeading = await headingField(
+		page.getByRole("dialog", { name: "Edit CTA Band" }),
+	).inputValue();
 
 	test.fail(
 		true,
 		"EmDash 0.29.0 dispatches the block modal submit to the surrounding content form",
 	);
-	expect(writes.filter((payload) => payload.skipRevision !== true)).toEqual([]);
+	expect({
+		persistedHeading,
+		manualWrites: writes.filter((payload) => payload.skipRevision !== true),
+	}).toEqual({
+		persistedHeading: CANARY_HEADING,
+		manualWrites: [],
+	});
 });
