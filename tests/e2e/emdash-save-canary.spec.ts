@@ -29,6 +29,18 @@ function headingField(dialog: import("@playwright/test").Locator) {
 		.getByRole("textbox");
 }
 
+function headingsIn(payload: Record<string, unknown>) {
+	const data = payload.data;
+	if (!data || typeof data !== "object") return [];
+	const content = (data as { content?: unknown }).content;
+	if (!Array.isArray(content)) return [];
+	return content.flatMap((block) => {
+		if (!block || typeof block !== "object") return [];
+		const heading = (block as { heading?: unknown }).heading;
+		return typeof heading === "string" ? [heading] : [];
+	});
+}
+
 test("EmDash compatibility: a block edit does not trigger competing manual saves", async ({
 	page,
 }) => {
@@ -56,7 +68,9 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 	await editor.getByRole("button", { name: "Edit" }).first().click();
 
 	const dialog = page.getByRole("dialog", { name: "Edit CTA Band" });
-	await headingField(dialog).fill(CANARY_HEADING);
+	const heading = headingField(dialog);
+	const initialHeading = await heading.inputValue();
+	await heading.fill(CANARY_HEADING);
 	const saved = page.waitForResponse(
 		(response) => {
 			if (
@@ -73,7 +87,8 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 		{ timeout: 15_000 },
 	);
 	await dialog.getByRole("button", { name: "Save" }).click();
-	await saved;
+	const savedResponse = await saved;
+	expect(savedResponse.ok()).toBe(true);
 	await page.waitForTimeout(500);
 
 	await page.reload();
@@ -83,16 +98,20 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 	const persistedHeading = await headingField(
 		page.getByRole("dialog", { name: "Edit CTA Band" }),
 	).inputValue();
+	const manualWrites = writes.filter((payload) => payload.skipRevision !== true);
+	const knownRaceObserved =
+		manualWrites.length >= 2 &&
+		manualWrites.some((payload) => headingsIn(payload).includes(initialHeading)) &&
+		manualWrites.some((payload) => headingsIn(payload).includes(CANARY_HEADING));
+
+	if (!knownRaceObserved) {
+		expect(manualWrites).toEqual([]);
+		expect(persistedHeading).toBe(CANARY_HEADING);
+	}
 
 	test.fail(
 		true,
 		"EmDash 0.29.0 dispatches the block modal submit to the surrounding content form",
 	);
-	expect({
-		persistedHeading,
-		manualWrites: writes.filter((payload) => payload.skipRevision !== true),
-	}).toEqual({
-		persistedHeading: CANARY_HEADING,
-		manualWrites: [],
-	});
+	expect(manualWrites).toEqual([]);
 });
