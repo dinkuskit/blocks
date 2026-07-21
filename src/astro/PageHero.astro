@@ -1,0 +1,97 @@
+---
+import { safeCtaHref } from "../links";
+
+interface Props {
+	node: {
+		_type?: string;
+		_key?: string;
+		eyebrow?: string;
+		headline?: string;
+		deck?: string;
+		primaryLabel?: string;
+		primaryHref?: string;
+		secondaryLabel?: string;
+		secondaryHref?: string;
+	};
+}
+
+const { node } = Astro.props;
+const primaryHref = safeCtaHref(node.primaryHref);
+const secondaryHref = safeCtaHref(node.secondaryHref);
+const showPrimary = Boolean(node.primaryLabel && primaryHref);
+const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
+---
+
+<section class="dinkus-page-hero" data-dinkus-block="page-hero">
+	{node.eyebrow && <p class="dinkus-page-hero__eyebrow">{node.eyebrow}</p>}
+	{node.headline && <h1>{node.headline}</h1>}
+	{node.deck && <p class="dinkus-page-hero__deck">{node.deck}</p>}
+	{
+		(showPrimary || showSecondary) && (
+			<div class="dinkus-page-hero__actions">
+				{showPrimary && (
+					<a class="dinkus-page-hero__action" href={primaryHref}>
+						{node.primaryLabel}
+					</a>
+				)}
+				{showSecondary && (
+					<a
+						class="dinkus-page-hero__action dinkus-page-hero__action--secondary"
+						href={secondaryHref}
+					>
+						{node.secondaryLabel}
+					</a>
+				)}
+			</div>
+		)
+	}
+</section>
+
+<style>
+	.dinkus-page-hero {
+		padding: clamp(2rem, 6vw, 4.5rem) 0;
+	}
+
+	.dinkus-page-hero__eyebrow {
+		margin: 0 0 0.75rem;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 3.25rem);
+		line-height: 1.1;
+	}
+
+	.dinkus-page-hero__deck {
+		margin: 1rem 0 0;
+		max-width: 44rem;
+		font-size: 1.125rem;
+		line-height: 1.6;
+	}
+
+	.dinkus-page-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.5rem;
+	}
+
+	.dinkus-page-hero__action {
+		padding: 0.75rem 1rem;
+		border-radius: 999px;
+		background: CanvasText;
+		color: Canvas;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.dinkus-page-hero__action--secondary {
+		background: transparent;
+		color: inherit;
+		border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+	}
+</style>

@@ -50,6 +50,79 @@
             }
           ]
         }
+      },
+      {
+        "id": "page-hero",
+        "slug": "page-hero",
+        "status": "published",
+        "data": {
+          "title": "Page hero fixture",
+          "content": [
+            {
+              "_type": "dinkus.page-hero",
+              "_key": "page-hero-seed",
+              "eyebrow": "Compatibility fixture",
+              "headline": "Before: Page hero headline is editable",
+              "deck": "This sentinel deck must round-trip through the EmDash admin.",
+              "primaryLabel": "Primary proof",
+              "primaryHref": "/proof",
+              "secondaryLabel": "Secondary proof",
+              "secondaryHref": "/proof-secondary"
+            }
+          ]
+        }
+      },
+      {
+        "id": "section-header",
+        "slug": "section-header",
+        "status": "published",
+        "data": {
+          "title": "Section header fixture",
+          "content": [
+            {
+              "_type": "dinkus.section-header",
+              "_key": "section-header-seed",
+              "number": "01",
+              "kicker": "Compatibility fixture",
+              "title": "Before: Section header title is editable",
+              "intro": "This sentinel intro must round-trip through the EmDash admin."
+            }
+          ]
+        }
+      },
+      {
+        "id": "fact-rail",
+        "slug": "fact-rail",
+        "status": "published",
+        "data": {
+          "title": "Fact rail fixture",
+          "content": [
+            {
+              "_type": "dinkus.fact-rail",
+              "_key": "fact-rail-seed",
+              "ariaLabel": "Fixture facts",
+              "facts": [
+                {
+                  "_key": "fact-crew",
+                  "label": "Crew",
+                  "value": "Three on site",
+                  "icon": "crew"
+                },
+                {
+                  "_key": "fact-radius",
+                  "label": "Radius",
+                  "value": "40 miles",
+                  "icon": "map-pin"
+                },
+                {
+                  "_key": "fact-since",
+                  "label": "Since",
+                  "value": "2019"
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   },

@@ -3,9 +3,15 @@ import { describe, expect, it } from "vitest";
 import {
 	CTA_BAND_BLOCK_TYPE,
 	DINKUS_BLOCKS_PLUGIN_ID,
+	FACT_RAIL_BLOCK_TYPE,
+	PAGE_HERO_BLOCK_TYPE,
+	SECTION_HEADER_BLOCK_TYPE,
 	createPlugin,
 	ctaBandFields,
 	dinkusBlocks,
+	factRailFields,
+	pageHeroFields,
+	sectionHeaderFields,
 } from "../../src/index";
 import { safeCtaHref } from "../../src/links";
 
@@ -19,7 +25,7 @@ describe("@dinkuskit/blocks", () => {
 		});
 	});
 
-	it("declares one capability-free editable CTA block", () => {
+	it("declares the capability-free editable section blocks", () => {
 		const plugin = createPlugin();
 
 		expect(plugin).toMatchObject({
@@ -34,6 +40,24 @@ describe("@dinkuskit/blocks", () => {
 						category: "Sections",
 						fields: ctaBandFields,
 					},
+					{
+						type: PAGE_HERO_BLOCK_TYPE,
+						label: "Page Hero",
+						category: "Sections",
+						fields: pageHeroFields,
+					},
+					{
+						type: SECTION_HEADER_BLOCK_TYPE,
+						label: "Section Header",
+						category: "Sections",
+						fields: sectionHeaderFields,
+					},
+					{
+						type: FACT_RAIL_BLOCK_TYPE,
+						label: "Fact Rail",
+						category: "Sections",
+						fields: factRailFields,
+					},
 				],
 			},
 		});
@@ -44,6 +68,49 @@ describe("@dinkuskit/blocks", () => {
 			"ctaLabel",
 			"ctaHref",
 		]);
+	});
+
+	it("locks the page-hero field contract", () => {
+		expect(pageHeroFields.map((field) => field.action_id)).toEqual([
+			"eyebrow",
+			"headline",
+			"deck",
+			"primaryLabel",
+			"primaryHref",
+			"secondaryLabel",
+			"secondaryHref",
+		]);
+	});
+
+	it("locks the section-header field contract", () => {
+		expect(sectionHeaderFields.map((field) => field.action_id)).toEqual([
+			"number",
+			"kicker",
+			"title",
+			"intro",
+		]);
+	});
+
+	it("locks the fact-rail field contract, repeater sub-fields included", () => {
+		expect(factRailFields.map((field) => field.action_id)).toEqual([
+			"ariaLabel",
+			"facts",
+		]);
+
+		const facts = factRailFields.find((field) => field.action_id === "facts");
+		if (facts?.type !== "repeater") {
+			throw new Error("facts must be a repeater element");
+		}
+		expect(facts.fields.map((field) => field.action_id)).toEqual([
+			"label",
+			"value",
+			"icon",
+		]);
+		// Repeater sub-fields only support scalar element types; media stays a
+		// top-level media_picker (URL-string) field.
+		expect(facts.fields.every((field) => field.type === "text_input")).toBe(
+			true,
+		);
 	});
 });
 
