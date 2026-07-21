@@ -70,7 +70,12 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 	const dialog = page.getByRole("dialog", { name: "Edit CTA Band" });
 	const heading = headingField(dialog);
 	const initialHeading = await heading.inputValue();
-	await heading.fill(CANARY_HEADING);
+	const editedHeading =
+		initialHeading === CANARY_HEADING
+			? `${CANARY_HEADING} (rerun)`
+			: CANARY_HEADING;
+	expect(editedHeading).not.toBe(initialHeading);
+	await heading.fill(editedHeading);
 	const saved = page.waitForResponse(
 		(response) => {
 			if (
@@ -81,7 +86,7 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 			}
 			const payload = response.request().postDataJSON();
 			return payload?.data?.content?.some(
-				(block: { heading?: string }) => block.heading === CANARY_HEADING,
+				(block: { heading?: string }) => block.heading === editedHeading,
 			);
 		},
 		{ timeout: 15_000 },
@@ -102,11 +107,11 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 	const knownRaceObserved =
 		manualWrites.length >= 2 &&
 		manualWrites.some((payload) => headingsIn(payload).includes(initialHeading)) &&
-		manualWrites.some((payload) => headingsIn(payload).includes(CANARY_HEADING));
+		manualWrites.some((payload) => headingsIn(payload).includes(editedHeading));
 
 	if (!knownRaceObserved) {
 		expect(manualWrites).toEqual([]);
-		expect(persistedHeading).toBe(CANARY_HEADING);
+		expect(persistedHeading).toBe(editedHeading);
 	}
 
 	test.fail(
