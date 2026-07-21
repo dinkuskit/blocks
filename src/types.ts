@@ -123,3 +123,31 @@ export interface DispatchNode extends PortableTextNode {
 	phone?: string;
 	email?: string;
 }
+
+export interface ProjectRecordLink {
+	_key?: string;
+	label?: string;
+	href?: string;
+}
+
+export interface ProjectRecordNode extends PortableTextNode {
+	_type?: "dinkus.project-record";
+	recordId?: string;
+	category?: string;
+	title?: string;
+	summary?: string;
+	identityImage?: string;
+	identityAlt?: string;
+	statusKicker?: string;
+	status?: string;
+	roleKicker?: string;
+	roleHeadline?: string;
+	roleBody?: string;
+	evidenceKicker?: string;
+	proofHeadline?: string;
+	evidence?: string;
+	links?: ProjectRecordLink[];
+	nextKicker?: string;
+	nextTitle?: string;
+	nextHref?: string;
+}

@@ -14,6 +14,8 @@ import {
 	type LegendEntry,
 	type PageHeroNode,
 	type PortableTextNode,
+	type ProjectRecordLink,
+	type ProjectRecordNode,
 	type SearchBoardNode,
 	type SearchLink,
 	type SectionHeaderNode,
@@ -28,6 +30,7 @@ type PublicBlockNode =
 	| GalleryLanesNode
 	| LedgerCardsNode
 	| PageHeroNode
+	| ProjectRecordNode
 	| SearchBoardNode
 	| SectionHeaderNode
 	| ServiceAreaMapNode;
@@ -37,6 +40,7 @@ type PublicRepeaterItem =
 	| GalleryLane
 	| LedgerCard
 	| LegendEntry
+	| ProjectRecordLink
 	| SearchLink;
 
 describe("public package entrypoint", () => {
@@ -60,21 +64,37 @@ describe("public package entrypoint", () => {
 			_type: "dinkus.fact-rail",
 			facts: [fact],
 		} satisfies FactRailNode;
+		const projectLink = {
+			_key: "project-proof",
+			label: "Read the proof",
+			href: "/proof",
+		} satisfies ProjectRecordLink;
+		const projectRecord = {
+			_type: "dinkus.project-record",
+			recordId: "typed-record",
+			title: "A typed project record",
+			proofHeadline: "The contract is public.",
+			links: [projectLink],
+			nextTitle: "Next typed project",
+			nextHref: "/next",
+		} satisfies ProjectRecordNode;
 
 		const nodes = [
 			scalar,
 			media,
 			repeater,
+			projectRecord,
 		] satisfies PublicBlockNode[];
 		const portableNodes: PortableTextNode[] = nodes;
-		const items: PublicRepeaterItem[] = [fact];
+		const items: PublicRepeaterItem[] = [fact, projectLink];
 
 		expect(portableNodes.map((node) => node._type)).toEqual([
 			"dinkus.section-header",
 			"dinkus.gallery-hero",
 			"dinkus.fact-rail",
+			"dinkus.project-record",
 		]);
-		expect(items).toEqual([fact]);
+		expect(items).toEqual([fact, projectLink]);
 		expect(safeCtaHref("/contact")).toBe("/contact");
 		expect(safeCtaHref("javascript:alert(1)")).toBeUndefined();
 	});

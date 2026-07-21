@@ -1,0 +1,86 @@
+---
+import {
+	safeCtaHref,
+	type PortableTextNode,
+	type ProjectRecordLink,
+	type ProjectRecordNode,
+} from "@dinkuskit/blocks";
+import { ProjectRecord } from "@dinkuskit/blocks/astro";
+
+const proofLink = {
+	_key: "slot-proof",
+	label: "Read slotted proof",
+	href: "/proof",
+} satisfies ProjectRecordLink;
+const node = {
+	_type: "dinkus.project-record",
+	recordId: "slotted-record",
+	category: "Consumer override fixture",
+	title: "Slotted project title",
+	summary: "The direct Astro export keeps the public node contract while allowing site-owned art and icons.",
+	statusKicker: "Current status",
+	status: "Slots verified",
+	roleKicker: "Project role",
+	roleHeadline: "The package owns structure; the site owns identity.",
+	roleBody: "Named slots avoid forking the public block data contract.",
+	evidenceKicker: "Evidence state",
+	proofHeadline: "The override surface renders.",
+	evidence: "This page imports safe URL handling, the Portable Text base, the Project Record node, and its repeater item from the package root.",
+	links: [{ ...proofLink, href: safeCtaHref(proofLink.href) }],
+	nextKicker: "Next project",
+	nextTitle: "Fixture home",
+	nextHref: "/",
+} satisfies ProjectRecordNode;
+const portableNode: PortableTextNode = node;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Project record slot fixture</title>
+	</head>
+	<body data-portable-type={portableNode._type}>
+		<main>
+			<ProjectRecord node={node}>
+				<span slot="category-icon" data-slot="category-icon" aria-hidden="true">◆</span>
+				<Fragment slot="title">Slotted project <wbr />title</Fragment>
+				<div slot="identity" data-slot="identity" aria-hidden="true">PR</div>
+				<span slot="status-icon" data-slot="status-icon" aria-hidden="true">↗</span>
+				<span slot="role-icon" data-slot="role-icon" aria-hidden="true">◆</span>
+				<span slot="evidence-icon" data-slot="evidence-icon" aria-hidden="true">◆</span>
+				<span slot="link-icon" data-slot="link-icon" aria-hidden="true">↗</span>
+				<span slot="next-icon" data-slot="next-icon" aria-hidden="true">→</span>
+			</ProjectRecord>
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+		color: #1e293b;
+		background: #f8fafc;
+	}
+
+	body {
+		margin: 0;
+	}
+
+	main {
+		width: min(68rem, calc(100% - 2rem));
+		margin: 0 auto;
+		padding: 4rem 0;
+	}
+
+	[data-slot="identity"] {
+		display: grid;
+		width: 10rem;
+		aspect-ratio: 1;
+		place-items: center;
+		border: 0.5rem solid currentColor;
+		font-size: 3rem;
+		font-weight: 900;
+	}
+</style>
