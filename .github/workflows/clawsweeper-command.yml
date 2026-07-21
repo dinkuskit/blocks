@@ -1,21 +1,23 @@
 name: ClawSweeper command
 
 # Thin caller for each public DinkusKit product repo.
-# Requires dinkuskit/.github reusable workflow on main (path B).
-# Copy to: .github/workflows/clawsweeper-command.yml
+# Calls the reviewed reusable workflow by immutable full commit SHA.
 
 on:
   issue_comment:
     types: [created]
 
 permissions:
-  actions: read
   contents: read
-  issues: write
+  issues: read
   pull-requests: read
 
 jobs:
   review:
-    uses: dinkuskit/.github/.github/workflows/clawsweeper-command.yml@main
+    uses: dinkuskit/.github/.github/workflows/clawsweeper-command.yml@0bffcdd057d435d68290f2beb02b25708a7ebaa6
+    with:
+      clawsweeper_app_id: ${{ vars.CLAWSWEEPER_APP_ID }}
+      clawsweeper_app_bot_login: ${{ vars.CLAWSWEEPER_APP_BOT_LOGIN }}
     secrets:
+      CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
       COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
