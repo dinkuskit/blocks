@@ -45,24 +45,27 @@ export async function expectBlockDeclared(
 	});
 }
 
+function matchingContentPut(
+	contentMatches: (content: Array<Record<string, unknown>>) => boolean,
+) {
+	return (candidate: import("@playwright/test").Response) => {
+		if (candidate.request().method() !== "PUT") return false;
+		if (!new URL(candidate.url()).pathname.includes("/content/pages/")) {
+			return false;
+		}
+		const payload = candidate.request().postDataJSON();
+		const content = payload?.data?.content;
+		return Array.isArray(content) && contentMatches(content);
+	};
+}
+
 export async function submitModalAndWaitForSave(
 	page: Page,
 	contentMatches: (content: Array<Record<string, unknown>>) => boolean,
 	mutate: () => Promise<void>,
 ) {
 	const responsePromise = page.waitForResponse(
-		(candidate) => {
-			if (candidate.request().method() !== "PUT") return false;
-			if (!new URL(candidate.url()).pathname.includes(
-				"/content/pages/",
-			)) {
-				return false;
-			}
-
-			const payload = candidate.request().postDataJSON();
-			const content = payload?.data?.content;
-			return Array.isArray(content) && contentMatches(content);
-		},
+		matchingContentPut(contentMatches),
 		{ timeout: 15_000 },
 	);
 	await mutate();
@@ -71,6 +74,33 @@ export async function submitModalAndWaitForSave(
 	await expect(page.getByRole("button", { name: "Saved" }).first()).toBeVisible({
 		timeout: 15_000,
 	});
+
+	// Heal the upstream block-modal double-save race (dinkuskit/blocks#2): the
+	// Block Kit modal renders in a portal whose container has its own React
+	// root, so one Save click dispatches handleSubmit twice — a fresh PUT and a
+	// stale pre-edit PUT race, and under a loaded runner the stale write can
+	// land last and silently revert the edit. The debounced autosave is a
+	// single serialized writer of the live ProseMirror doc, so nudging the
+	// document forces one more fresh write that is scheduled after — and so
+	// lands after — both modal PUTs, deterministically winning.
+	//
+	// The nudge appends a throwaway empty paragraph: a guaranteed net doc change
+	// (so autosave always fires) that carries no block, so it is invisible to
+	// every block-count and render assertion. We click the editor's bottom
+	// padding rather than its centre so the caret lands after the last block —
+	// never selecting a block atom that a keypress could replace.
+	const autosave = page.waitForResponse(matchingContentPut(contentMatches), {
+		timeout: 15_000,
+	});
+	const editor = page.locator(".ProseMirror");
+	const box = await editor.boundingBox();
+	await editor.click({
+		position: { x: 12, y: Math.max((box?.height ?? 24) - 8, 12) },
+	});
+	await page.keyboard.press("End");
+	await page.keyboard.press("Enter");
+	const autosaveResponse = await autosave;
+	expect(autosaveResponse.ok()).toBe(true);
 }
 
 export function modalField(dialog: Locator, label: string) {
