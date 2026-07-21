@@ -79,14 +79,32 @@ Key artifacts:
 CI uploads the ignored E2E proof root as `dinkus-blocks-browser-proof`.
 The regression test and seed are the durable, reproducible proof.
 
+## Post-dogfood correction
+
+The first Smoky Works integration exposed a runtime-dependent save race that
+the Node fixture did not reject. One Block Kit modal submission reached the
+surrounding content form twice, producing competing manual saves with the old
+and new block values. Node consistently committed the edited write last;
+Cloudflare workerd committed the stale write last in the dogfood runs.
+
+`tests/e2e/emdash-save-canary.spec.ts` now records this as an expected failure
+against the exact EmDash 0.29.0 fixture pin. It will fail CI by unexpectedly
+passing when the dependency starts suppressing the competing manual saves,
+forcing the compatibility verdict and pin to be reviewed. Keep the fixture on
+0.29.0 and the package peer requirement exact until an EmDash release contains
+the regression test and fix proposed in
+[emdash-cms/emdash#2160](https://github.com/emdash-cms/emdash/pull/2160); do not
+widen the tested range from canary or unreleased-source evidence.
+
 ## Decision
 
-Use native Portable Text blocks for S1. Do not open an upstream #637 fix
-lane from this result.
+Use native Portable Text blocks for S1, with the modal save race tracked as an
+upstream release blocker rather than a reason to replace the block model.
 
-The next slice is an isolated Smoky Works dogfood integration of this block.
-That slice must separately gate production schema/content writes, deploy,
-merge, and any later npm or EmDash registry release.
+The first Smoky Works dogfood integration and production proof are complete.
+Further block-vocabulary work may continue, but npm or EmDash registry release
+remains gated on a fixed EmDash version and a green, non-expected-failure
+compatibility canary.
 
 Out of scope here: field editing inside the public inline visual editor,
 Sections admin behavior, marketplace-sandboxed plugin behavior, production
