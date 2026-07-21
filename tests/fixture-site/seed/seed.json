@@ -206,6 +206,86 @@
             }
           ]
         }
+      },
+      {
+        "id": "search-board",
+        "slug": "search-board",
+        "status": "published",
+        "data": {
+          "title": "Search board fixture",
+          "content": [
+            {
+              "_type": "dinkus.search-board",
+              "_key": "search-board-seed",
+              "number": "LOC",
+              "kicker": "Compatibility fixture",
+              "title": "Before: Search board title is editable",
+              "intro": "This sentinel intro must round-trip through the EmDash admin.",
+              "links": [
+                {
+                  "_key": "link-clearing",
+                  "label": "Land clearing near me",
+                  "href": "/land"
+                },
+                {
+                  "_key": "link-remodel",
+                  "label": "Kitchen remodel",
+                  "href": "/remodel"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "service-area-map",
+        "slug": "service-area-map",
+        "status": "published",
+        "data": {
+          "title": "Service area map fixture",
+          "content": [
+            {
+              "_type": "dinkus.service-area-map",
+              "_key": "service-area-map-seed",
+              "image": "/media/fixture/map.png",
+              "imageAlt": "Fixture service area map",
+              "caption": "Before: Service area caption is editable",
+              "legend": [
+                {
+                  "_key": "legend-base",
+                  "label": "Working bases",
+                  "icon": "map-pin"
+                },
+                {
+                  "_key": "legend-town",
+                  "label": "Service town",
+                  "icon": "dot"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "dispatch",
+        "slug": "dispatch",
+        "status": "published",
+        "data": {
+          "title": "Dispatch fixture",
+          "content": [
+            {
+              "_type": "dinkus.dispatch",
+              "_key": "dispatch-seed",
+              "kicker": "Compatibility fixture",
+              "title": "Before: Dispatch title is editable",
+              "body": "This sentinel body must round-trip through the EmDash admin.",
+              "ctaLabel": "Request a quote",
+              "ctaHref": "/proof",
+              "phone": "tel:+15551234567",
+              "email": "mailto:hello@example.com"
+            }
+          ]
+        }
       }
     ]
   },

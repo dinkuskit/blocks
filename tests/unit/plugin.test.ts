@@ -3,21 +3,27 @@ import { describe, expect, it } from "vitest";
 import {
 	CTA_BAND_BLOCK_TYPE,
 	DINKUS_BLOCKS_PLUGIN_ID,
+	DISPATCH_BLOCK_TYPE,
 	FACT_RAIL_BLOCK_TYPE,
 	GALLERY_HERO_BLOCK_TYPE,
 	GALLERY_LANES_BLOCK_TYPE,
 	LEDGER_CARDS_BLOCK_TYPE,
 	PAGE_HERO_BLOCK_TYPE,
+	SEARCH_BOARD_BLOCK_TYPE,
 	SECTION_HEADER_BLOCK_TYPE,
+	SERVICE_AREA_MAP_BLOCK_TYPE,
 	createPlugin,
 	ctaBandFields,
 	dinkusBlocks,
+	dispatchFields,
 	factRailFields,
 	galleryHeroFields,
 	galleryLanesFields,
 	ledgerCardsFields,
 	pageHeroFields,
+	searchBoardFields,
 	sectionHeaderFields,
+	serviceAreaMapFields,
 } from "../../src/index";
 import { safeCtaHref } from "../../src/links";
 
@@ -81,6 +87,24 @@ describe("@dinkuskit/blocks", () => {
 						label: "Gallery Lanes",
 						category: "Sections",
 						fields: galleryLanesFields,
+					},
+					{
+						type: SEARCH_BOARD_BLOCK_TYPE,
+						label: "Search Board",
+						category: "Sections",
+						fields: searchBoardFields,
+					},
+					{
+						type: SERVICE_AREA_MAP_BLOCK_TYPE,
+						label: "Service Area Map",
+						category: "Sections",
+						fields: serviceAreaMapFields,
+					},
+					{
+						type: DISPATCH_BLOCK_TYPE,
+						label: "Dispatch",
+						category: "Sections",
+						fields: dispatchFields,
 					},
 				],
 			},
@@ -189,6 +213,59 @@ describe("@dinkuskit/blocks", () => {
 		expect(lanes.fields.every((field) => field.type === "text_input")).toBe(
 			true,
 		);
+	});
+
+	it("locks the search-board contract with a links repeater", () => {
+		expect(searchBoardFields.map((field) => field.action_id)).toEqual([
+			"number",
+			"kicker",
+			"title",
+			"intro",
+			"links",
+		]);
+		const links = searchBoardFields.find((field) => field.action_id === "links");
+		if (links?.type !== "repeater") {
+			throw new Error("links must be a repeater element");
+		}
+		expect(links.fields.map((field) => field.action_id)).toEqual([
+			"label",
+			"href",
+		]);
+	});
+
+	it("locks the service-area-map contract with a media picker and legend", () => {
+		expect(serviceAreaMapFields.map((field) => field.action_id)).toEqual([
+			"image",
+			"imageAlt",
+			"caption",
+			"legend",
+		]);
+		const image = serviceAreaMapFields.find(
+			(field) => field.action_id === "image",
+		);
+		expect(image?.type).toBe("media_picker");
+		const legend = serviceAreaMapFields.find(
+			(field) => field.action_id === "legend",
+		);
+		if (legend?.type !== "repeater") {
+			throw new Error("legend must be a repeater element");
+		}
+		expect(legend.fields.map((field) => field.action_id)).toEqual([
+			"label",
+			"icon",
+		]);
+	});
+
+	it("locks the dispatch contract with cta and contact fields", () => {
+		expect(dispatchFields.map((field) => field.action_id)).toEqual([
+			"kicker",
+			"title",
+			"body",
+			"ctaLabel",
+			"ctaHref",
+			"phone",
+			"email",
+		]);
 	});
 });
 

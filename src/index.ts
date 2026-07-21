@@ -14,6 +14,9 @@ export const FACT_RAIL_BLOCK_TYPE = "dinkus.fact-rail";
 export const GALLERY_HERO_BLOCK_TYPE = "dinkus.gallery-hero";
 export const LEDGER_CARDS_BLOCK_TYPE = "dinkus.ledger-cards";
 export const GALLERY_LANES_BLOCK_TYPE = "dinkus.gallery-lanes";
+export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
+export const SERVICE_AREA_MAP_BLOCK_TYPE = "dinkus.service-area-map";
+export const DISPATCH_BLOCK_TYPE = "dinkus.dispatch";
 
 export const ctaBandFields = [
 	{
@@ -267,6 +270,129 @@ export const galleryLanesFields = [
 	},
 ] satisfies Element[];
 
+export const searchBoardFields = [
+	{
+		type: "text_input",
+		action_id: "number",
+		label: "Section number",
+		placeholder: "LOC",
+	},
+	{
+		type: "text_input",
+		action_id: "kicker",
+		label: "Kicker",
+	},
+	{
+		type: "text_input",
+		action_id: "title",
+		label: "Title",
+	},
+	{
+		type: "text_input",
+		action_id: "intro",
+		label: "Intro",
+		multiline: true,
+	},
+	{
+		type: "repeater",
+		action_id: "links",
+		label: "Links",
+		item_label: "Link",
+		fields: [
+			{
+				type: "text_input",
+				action_id: "label",
+				label: "Label",
+			},
+			{
+				type: "text_input",
+				action_id: "href",
+				label: "Link URL",
+			},
+		],
+	},
+] satisfies Element[];
+
+export const serviceAreaMapFields = [
+	{
+		type: "media_picker",
+		action_id: "image",
+		label: "Map image",
+	},
+	{
+		type: "text_input",
+		action_id: "imageAlt",
+		label: "Map image alt text",
+	},
+	{
+		type: "text_input",
+		action_id: "caption",
+		label: "Caption",
+		multiline: true,
+	},
+	{
+		type: "repeater",
+		action_id: "legend",
+		label: "Legend",
+		item_label: "Legend entry",
+		fields: [
+			{
+				type: "text_input",
+				action_id: "label",
+				label: "Label",
+			},
+			{
+				// Neutral swatch/icon slug for site override renderers.
+				type: "text_input",
+				action_id: "icon",
+				label: "Icon slug",
+			},
+		],
+	},
+] satisfies Element[];
+
+export const dispatchFields = [
+	{
+		type: "text_input",
+		action_id: "kicker",
+		label: "Kicker",
+	},
+	{
+		type: "text_input",
+		action_id: "title",
+		label: "Title",
+	},
+	{
+		type: "text_input",
+		action_id: "body",
+		label: "Body",
+		multiline: true,
+	},
+	{
+		type: "text_input",
+		action_id: "ctaLabel",
+		label: "CTA label",
+	},
+	{
+		type: "text_input",
+		action_id: "ctaHref",
+		label: "CTA URL",
+		placeholder: "/contact",
+	},
+	{
+		type: "text_input",
+		action_id: "phone",
+		label: "Phone",
+		placeholder: "tel:+15551234567",
+	},
+	{
+		type: "text_input",
+		action_id: "email",
+		label: "Email",
+		placeholder: "mailto:hello@example.com",
+	},
+] satisfies Element[];
+
 const definition: PluginDefinition = {
 	id: DINKUS_BLOCKS_PLUGIN_ID,
 	version: "0.0.0",
@@ -321,6 +447,27 @@ const definition: PluginDefinition = {
 				category: "Sections",
 				description: "Linked image lanes with a label and meta line",
 				fields: galleryLanesFields,
+			},
+			{
+				type: SEARCH_BOARD_BLOCK_TYPE,
+				label: "Search Board",
+				category: "Sections",
+				description: "A titled board of plain-language links",
+				fields: searchBoardFields,
+			},
+			{
+				type: SERVICE_AREA_MAP_BLOCK_TYPE,
+				label: "Service Area Map",
+				category: "Sections",
+				description: "A map figure with a caption and legend",
+				fields: serviceAreaMapFields,
+			},
+			{
+				type: DISPATCH_BLOCK_TYPE,
+				label: "Dispatch",
+				category: "Sections",
+				description: "A contact band with a call to action and contact links",
+				fields: dispatchFields,
 			},
 		],
 	},
