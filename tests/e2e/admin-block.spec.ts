@@ -1,71 +1,16 @@
 import { expect, test } from "@playwright/test";
 
+import {
+	authenticate,
+	expectBlockDeclared,
+	modalField,
+	submitModalAndWaitForSave,
+	waitForAdmin,
+} from "./helpers";
+
 const SEEDED_HEADING = "Before: Portable Text fields are editable";
 const EDITED_HEADING = "After: Portable Text fields persisted";
 const INSERTED_HEADING = "Inserted: Slash menu block persisted";
-
-async function authenticate(page: import("@playwright/test").Page) {
-	await page.goto(
-		"/_emdash/api/setup/dev-bypass?redirect=/_emdash/api/auth/me",
-	);
-	await page.waitForURL((url) => url.pathname === "/_emdash/api/auth/me");
-
-	const dismissed = await page.request.post("/_emdash/api/auth/me", {
-		headers: { "X-EmDash-Request": "1" },
-		data: { action: "dismissWelcome" },
-	});
-	expect(dismissed.status()).toBe(200);
-}
-
-async function waitForAdmin(page: import("@playwright/test").Page) {
-	await page.waitForSelector('aside[aria-label="Admin navigation"]', {
-		timeout: 30_000,
-	});
-	await page.waitForSelector("astro-island:not([ssr])", {
-		timeout: 30_000,
-	});
-}
-
-async function submitModalAndWaitForSave(
-	page: import("@playwright/test").Page,
-	expectedHeading: string,
-	mutate: () => Promise<void>,
-) {
-	const responsePromise = page.waitForResponse(
-		(candidate) => {
-			if (candidate.request().method() !== "PUT") return false;
-			if (!new URL(candidate.url()).pathname.includes(
-				"/content/pages/",
-			)) {
-				return false;
-			}
-
-			const payload = candidate.request().postDataJSON();
-			const content = payload?.data?.content;
-			return (
-				Array.isArray(content) &&
-				content.some((block) => block?.heading === expectedHeading)
-			);
-		},
-		{ timeout: 15_000 },
-	);
-	await mutate();
-	const response = await responsePromise;
-	expect(response.ok()).toBe(true);
-	await expect(page.getByRole("button", { name: "Saved" }).first()).toBeVisible({
-		timeout: 15_000,
-	});
-}
-
-function modalField(
-	dialog: import("@playwright/test").Locator,
-	label: string,
-) {
-	return dialog
-		.getByText(label, { exact: true })
-		.locator("..")
-		.getByRole("textbox");
-}
 
 test("declares, inserts, edits, persists, and renders a CTA band", async (
 	{ page },
@@ -73,27 +18,10 @@ test("declares, inserts, edits, persists, and renders a CTA band", async (
 ) => {
 	await authenticate(page);
 
-	const manifestResponse = await page.request.get("/_emdash/api/manifest");
-	expect(manifestResponse.ok()).toBe(true);
-	const manifest = await manifestResponse.json();
-	const plugins = manifest.plugins ?? manifest.data?.plugins;
-	const plugin = Array.isArray(plugins)
-		? plugins.find((candidate) => candidate.id === "dinkus-blocks")
-		: plugins?.["dinkus-blocks"];
-
-	expect(plugin).toBeDefined();
-	expect(plugin.portableTextBlocks).toEqual(
-		expect.arrayContaining([
-			expect.objectContaining({
-				type: "dinkus.cta-band",
-				label: "CTA Band",
-				category: "Sections",
-			}),
-		]),
-	);
-	await testInfo.attach("manifest.json", {
-		body: JSON.stringify(plugin, null, 2),
-		contentType: "application/json",
+	await expectBlockDeclared(page, testInfo, {
+		type: "dinkus.cta-band",
+		label: "CTA Band",
+		category: "Sections",
 	});
 
 	await page.goto("/_emdash/admin/content/pages/home");
@@ -110,9 +38,13 @@ test("declares, inserts, edits, persists, and renders a CTA band", async (
 	await expect(editDialog).toBeVisible();
 	await expect(modalField(editDialog, "Heading")).toHaveValue(SEEDED_HEADING);
 	await modalField(editDialog, "Heading").fill(EDITED_HEADING);
-	await submitModalAndWaitForSave(page, EDITED_HEADING, async () => {
-		await editDialog.getByRole("button", { name: "Save" }).click();
-	});
+	await submitModalAndWaitForSave(
+		page,
+		(content) => content.some((block) => block?.heading === EDITED_HEADING),
+		async () => {
+			await editDialog.getByRole("button", { name: "Save" }).click();
+		},
+	);
 
 	await page.reload();
 	await waitForAdmin(page);
@@ -156,9 +88,13 @@ test("declares, inserts, edits, persists, and renders a CTA band", async (
 		path: testInfo.outputPath("admin-modal.png"),
 		fullPage: true,
 	});
-	await submitModalAndWaitForSave(page, INSERTED_HEADING, async () => {
-		await insertDialog.getByRole("button", { name: "Insert" }).click();
-	});
+	await submitModalAndWaitForSave(
+		page,
+		(content) => content.some((block) => block?.heading === INSERTED_HEADING),
+		async () => {
+			await insertDialog.getByRole("button", { name: "Insert" }).click();
+		},
+	);
 
 	await page.reload();
 	await waitForAdmin(page);
