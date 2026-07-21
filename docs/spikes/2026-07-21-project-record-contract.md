@@ -85,3 +85,6 @@ The portfolio consumer swap remains blocked on human review and merge of its
 existing baseline PR and this blocks PR. This branch does not modify the
 consumer repository. No merge, publish, registry release, deploy, production
 mutation, commerce work, or crypto work occurred.
+
+This blocks PR requires OpenClaw review plus ClawSweeper before Bobby's merge
+gate. Neither review rail authorizes an automated or agent-owned merge.
