@@ -1,0 +1,135 @@
+---
+import { safeCtaHref } from "../links";
+
+interface Props {
+	node: {
+		_type?: string;
+		_key?: string;
+		image?: string;
+		imageAlt?: string;
+		eyebrow?: string;
+		headline?: string;
+		deck?: string;
+		primaryLabel?: string;
+		primaryHref?: string;
+		secondaryLabel?: string;
+		secondaryHref?: string;
+	};
+}
+
+const { node } = Astro.props;
+const primaryHref = safeCtaHref(node.primaryHref);
+const secondaryHref = safeCtaHref(node.secondaryHref);
+const showPrimary = Boolean(node.primaryLabel && primaryHref);
+const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
+---
+
+<section class="dinkus-gallery-hero" data-dinkus-block="gallery-hero">
+	{
+		node.image ? (
+			<img
+				class="dinkus-gallery-hero__img"
+				src={node.image}
+				alt={node.imageAlt ?? ""}
+				loading="eager"
+				decoding="async"
+			/>
+		) : (
+			<div class="dinkus-gallery-hero__media" aria-hidden="true" />
+		)
+	}
+	<div class="dinkus-gallery-hero__copy">
+		{node.eyebrow && <p class="dinkus-gallery-hero__eyebrow">{node.eyebrow}</p>}
+		{node.headline && <h1>{node.headline}</h1>}
+		{node.deck && <p class="dinkus-gallery-hero__deck">{node.deck}</p>}
+		{
+			(showPrimary || showSecondary) && (
+				<div class="dinkus-gallery-hero__actions">
+					{showPrimary && (
+						<a class="dinkus-gallery-hero__action" href={primaryHref}>
+							{node.primaryLabel}
+						</a>
+					)}
+					{showSecondary && (
+						<a class="dinkus-gallery-hero__link" href={secondaryHref}>
+							{node.secondaryLabel}
+						</a>
+					)}
+				</div>
+			)
+		}
+	</div>
+</section>
+
+<style>
+	.dinkus-gallery-hero {
+		position: relative;
+		display: grid;
+		gap: 1.5rem;
+		align-items: end;
+		min-height: 24rem;
+		padding: clamp(1.5rem, 4vw, 3rem);
+		border-radius: 1rem;
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.dinkus-gallery-hero__img,
+	.dinkus-gallery-hero__media {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: -1;
+	}
+
+	.dinkus-gallery-hero__media {
+		background: color-mix(in srgb, currentColor 8%, transparent);
+	}
+
+	.dinkus-gallery-hero__copy {
+		max-width: 44rem;
+	}
+
+	.dinkus-gallery-hero__eyebrow {
+		margin: 0 0 0.5rem;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 3.25rem);
+		line-height: 1.1;
+	}
+
+	.dinkus-gallery-hero__deck {
+		margin: 1rem 0 0;
+		line-height: 1.6;
+	}
+
+	.dinkus-gallery-hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.dinkus-gallery-hero__action {
+		padding: 0.75rem 1rem;
+		border-radius: 999px;
+		background: CanvasText;
+		color: Canvas;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.dinkus-gallery-hero__link {
+		font-weight: 700;
+		text-decoration: none;
+	}
+</style>

@@ -123,6 +123,89 @@
             }
           ]
         }
+      },
+      {
+        "id": "gallery-hero",
+        "slug": "gallery-hero",
+        "status": "published",
+        "data": {
+          "title": "Gallery hero fixture",
+          "content": [
+            {
+              "_type": "dinkus.gallery-hero",
+              "_key": "gallery-hero-seed",
+              "image": "/media/fixture/hero.jpg",
+              "imageAlt": "Fixture hero image",
+              "eyebrow": "Compatibility fixture",
+              "headline": "Before: Gallery hero headline is editable",
+              "deck": "This sentinel deck must round-trip through the EmDash admin.",
+              "primaryLabel": "Primary proof",
+              "primaryHref": "/proof",
+              "secondaryLabel": "Secondary proof",
+              "secondaryHref": "/work"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ledger-cards",
+        "slug": "ledger-cards",
+        "status": "published",
+        "data": {
+          "title": "Ledger cards fixture",
+          "content": [
+            {
+              "_type": "dinkus.ledger-cards",
+              "_key": "ledger-cards-seed",
+              "cards": [
+                {
+                  "_key": "card-field",
+                  "code": "field",
+                  "title": "Before: Ledger card title is editable",
+                  "body": "This sentinel body must round-trip through the EmDash admin.",
+                  "ctaLabel": "Review field work",
+                  "ctaHref": "/field"
+                },
+                {
+                  "_key": "card-interior",
+                  "code": "interior",
+                  "title": "Second ledger card",
+                  "body": "Finish work, scoped honestly."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "gallery-lanes",
+        "slug": "gallery-lanes",
+        "status": "published",
+        "data": {
+          "title": "Gallery lanes fixture",
+          "content": [
+            {
+              "_type": "dinkus.gallery-lanes",
+              "_key": "gallery-lanes-seed",
+              "lanes": [
+                {
+                  "_key": "lane-land",
+                  "label": "Before: Gallery lane label is editable",
+                  "meta": "Clearing · trenching · grading",
+                  "href": "/land",
+                  "image": "/media/fixture/lane-land.jpg"
+                },
+                {
+                  "_key": "lane-remodel",
+                  "label": "Kitchen & bath",
+                  "meta": "Finish work, scoped honestly",
+                  "href": "/remodel",
+                  "image": "/media/fixture/lane-remodel.jpg"
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   },

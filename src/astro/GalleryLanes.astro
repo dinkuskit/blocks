@@ -1,0 +1,106 @@
+---
+import { safeCtaHref } from "../links";
+
+interface GalleryLane {
+	label?: string;
+	meta?: string;
+	href?: string;
+	image?: string;
+}
+
+interface Props {
+	node: {
+		_type?: string;
+		_key?: string;
+		lanes?: GalleryLane[];
+	};
+}
+
+const { node } = Astro.props;
+const lanes = (Array.isArray(node.lanes) ? node.lanes : [])
+	.filter(
+		(lane): lane is GalleryLane =>
+			Boolean(lane && typeof lane === "object" && (lane.label || lane.image)),
+	)
+	.map((lane) => ({ ...lane, href: safeCtaHref(lane.href) }));
+---
+
+{
+	lanes.length > 0 && (
+		<div class="dinkus-gallery-lanes" data-dinkus-block="gallery-lanes">
+			{lanes.map((lane) => {
+				const Tag = lane.href ? "a" : "div";
+				return (
+					<Tag class="dinkus-gallery-lanes__lane" href={lane.href}>
+						{lane.image ? (
+							<img
+								class="dinkus-gallery-lanes__img"
+								src={lane.image}
+								alt=""
+								loading="lazy"
+								decoding="async"
+							/>
+						) : (
+							<span
+								class="dinkus-gallery-lanes__media"
+								aria-hidden="true"
+							/>
+						)}
+						{lane.label && (
+							<span class="dinkus-gallery-lanes__label">{lane.label}</span>
+						)}
+						{lane.meta && (
+							<span class="dinkus-gallery-lanes__meta">{lane.meta}</span>
+						)}
+					</Tag>
+				);
+			})}
+		</div>
+	)
+}
+
+<style>
+	.dinkus-gallery-lanes {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: 1rem;
+		margin: 1.5rem 0;
+	}
+
+	.dinkus-gallery-lanes__lane {
+		position: relative;
+		display: grid;
+		align-content: end;
+		gap: 0.25rem;
+		min-height: 14rem;
+		padding: 1rem;
+		border-radius: 0.75rem;
+		overflow: hidden;
+		isolation: isolate;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.dinkus-gallery-lanes__img,
+	.dinkus-gallery-lanes__media {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: -1;
+	}
+
+	.dinkus-gallery-lanes__media {
+		background: color-mix(in srgb, currentColor 8%, transparent);
+	}
+
+	.dinkus-gallery-lanes__label {
+		font-weight: 700;
+	}
+
+	.dinkus-gallery-lanes__meta {
+		font-size: 0.875rem;
+		opacity: 0.85;
+	}
+</style>

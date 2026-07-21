@@ -1,0 +1,98 @@
+---
+import { safeCtaHref } from "../links";
+
+interface LedgerCard {
+	code?: string;
+	title?: string;
+	body?: string;
+	ctaLabel?: string;
+	ctaHref?: string;
+}
+
+interface Props {
+	node: {
+		_type?: string;
+		_key?: string;
+		cards?: LedgerCard[];
+	};
+}
+
+const { node } = Astro.props;
+const cards = (Array.isArray(node.cards) ? node.cards : [])
+	.filter(
+		(card): card is LedgerCard =>
+			Boolean(card && typeof card === "object" && (card.title || card.body)),
+	)
+	.map((card) => {
+		const ctaHref = safeCtaHref(card.ctaHref);
+		return {
+			...card,
+			ctaHref,
+			showCta: Boolean(card.ctaLabel && ctaHref),
+		};
+	});
+---
+
+{
+	cards.length > 0 && (
+		<div class="dinkus-ledger-cards" data-dinkus-block="ledger-cards">
+			{cards.map((card) => (
+				<article class="dinkus-ledger-cards__card">
+					{card.code && (
+						<span class="dinkus-ledger-cards__code">{card.code}</span>
+					)}
+					{card.title && <h3>{card.title}</h3>}
+					{card.body && <p>{card.body}</p>}
+					{card.showCta && (
+						<a class="dinkus-ledger-cards__action" href={card.ctaHref}>
+							{card.ctaLabel}
+						</a>
+					)}
+				</article>
+			))}
+		</div>
+	)
+}
+
+<style>
+	.dinkus-ledger-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: 1rem;
+		margin: 1.5rem 0;
+	}
+
+	.dinkus-ledger-cards__card {
+		display: grid;
+		gap: 0.5rem;
+		align-content: start;
+		padding: 1.25rem;
+		border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+		border-radius: 0.75rem;
+		background: color-mix(in srgb, currentColor 4%, transparent);
+	}
+
+	.dinkus-ledger-cards__code {
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		opacity: 0.7;
+	}
+
+	h3 {
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+		line-height: 1.6;
+	}
+
+	.dinkus-ledger-cards__action {
+		justify-self: start;
+		margin-top: 0.5rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+</style>

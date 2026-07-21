@@ -4,12 +4,18 @@ import {
 	CTA_BAND_BLOCK_TYPE,
 	DINKUS_BLOCKS_PLUGIN_ID,
 	FACT_RAIL_BLOCK_TYPE,
+	GALLERY_HERO_BLOCK_TYPE,
+	GALLERY_LANES_BLOCK_TYPE,
+	LEDGER_CARDS_BLOCK_TYPE,
 	PAGE_HERO_BLOCK_TYPE,
 	SECTION_HEADER_BLOCK_TYPE,
 	createPlugin,
 	ctaBandFields,
 	dinkusBlocks,
 	factRailFields,
+	galleryHeroFields,
+	galleryLanesFields,
+	ledgerCardsFields,
 	pageHeroFields,
 	sectionHeaderFields,
 } from "../../src/index";
@@ -57,6 +63,24 @@ describe("@dinkuskit/blocks", () => {
 						label: "Fact Rail",
 						category: "Sections",
 						fields: factRailFields,
+					},
+					{
+						type: GALLERY_HERO_BLOCK_TYPE,
+						label: "Gallery Hero",
+						category: "Sections",
+						fields: galleryHeroFields,
+					},
+					{
+						type: LEDGER_CARDS_BLOCK_TYPE,
+						label: "Ledger Cards",
+						category: "Sections",
+						fields: ledgerCardsFields,
+					},
+					{
+						type: GALLERY_LANES_BLOCK_TYPE,
+						label: "Gallery Lanes",
+						category: "Sections",
+						fields: galleryLanesFields,
 					},
 				],
 			},
@@ -109,6 +133,60 @@ describe("@dinkuskit/blocks", () => {
 		// Repeater sub-fields only support scalar element types; media stays a
 		// top-level media_picker (URL-string) field.
 		expect(facts.fields.every((field) => field.type === "text_input")).toBe(
+			true,
+		);
+	});
+
+	it("locks the gallery-hero field contract with a top-level media picker", () => {
+		expect(galleryHeroFields.map((field) => field.action_id)).toEqual([
+			"image",
+			"imageAlt",
+			"eyebrow",
+			"headline",
+			"deck",
+			"primaryLabel",
+			"primaryHref",
+			"secondaryLabel",
+			"secondaryHref",
+		]);
+		const image = galleryHeroFields.find((field) => field.action_id === "image");
+		expect(image?.type).toBe("media_picker");
+	});
+
+	it("locks the ledger-cards repeater contract", () => {
+		expect(ledgerCardsFields.map((field) => field.action_id)).toEqual([
+			"cards",
+		]);
+		const cards = ledgerCardsFields.find((field) => field.action_id === "cards");
+		if (cards?.type !== "repeater") {
+			throw new Error("cards must be a repeater element");
+		}
+		expect(cards.fields.map((field) => field.action_id)).toEqual([
+			"code",
+			"title",
+			"body",
+			"ctaLabel",
+			"ctaHref",
+		]);
+	});
+
+	it("locks the gallery-lanes repeater contract, media as URL string", () => {
+		expect(galleryLanesFields.map((field) => field.action_id)).toEqual([
+			"lanes",
+		]);
+		const lanes = galleryLanesFields.find((field) => field.action_id === "lanes");
+		if (lanes?.type !== "repeater") {
+			throw new Error("lanes must be a repeater element");
+		}
+		expect(lanes.fields.map((field) => field.action_id)).toEqual([
+			"label",
+			"meta",
+			"href",
+			"image",
+		]);
+		// media_picker is not a valid repeater sub-field, so the lane image is
+		// a plain URL-string text input.
+		expect(lanes.fields.every((field) => field.type === "text_input")).toBe(
 			true,
 		);
 	});

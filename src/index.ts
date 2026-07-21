@@ -11,6 +11,9 @@ export const CTA_BAND_BLOCK_TYPE = "dinkus.cta-band";
 export const PAGE_HERO_BLOCK_TYPE = "dinkus.page-hero";
 export const SECTION_HEADER_BLOCK_TYPE = "dinkus.section-header";
 export const FACT_RAIL_BLOCK_TYPE = "dinkus.fact-rail";
+export const GALLERY_HERO_BLOCK_TYPE = "dinkus.gallery-hero";
+export const LEDGER_CARDS_BLOCK_TYPE = "dinkus.ledger-cards";
+export const GALLERY_LANES_BLOCK_TYPE = "dinkus.gallery-lanes";
 
 export const ctaBandFields = [
 	{
@@ -143,6 +146,127 @@ export const factRailFields = [
 	},
 ] satisfies Element[];
 
+export const galleryHeroFields = [
+	{
+		type: "media_picker",
+		action_id: "image",
+		label: "Hero image",
+	},
+	{
+		type: "text_input",
+		action_id: "imageAlt",
+		label: "Image alt text",
+	},
+	{
+		type: "text_input",
+		action_id: "eyebrow",
+		label: "Eyebrow",
+	},
+	{
+		type: "text_input",
+		action_id: "headline",
+		label: "Headline",
+	},
+	{
+		type: "text_input",
+		action_id: "deck",
+		label: "Deck",
+		multiline: true,
+	},
+	{
+		type: "text_input",
+		action_id: "primaryLabel",
+		label: "Primary CTA label",
+	},
+	{
+		type: "text_input",
+		action_id: "primaryHref",
+		label: "Primary CTA URL",
+		placeholder: "/contact",
+	},
+	{
+		type: "text_input",
+		action_id: "secondaryLabel",
+		label: "Secondary link label",
+	},
+	{
+		type: "text_input",
+		action_id: "secondaryHref",
+		label: "Secondary link URL",
+		placeholder: "/work",
+	},
+] satisfies Element[];
+
+export const ledgerCardsFields = [
+	{
+		type: "repeater",
+		action_id: "cards",
+		label: "Cards",
+		item_label: "Card",
+		fields: [
+			{
+				type: "text_input",
+				action_id: "code",
+				label: "Record code",
+			},
+			{
+				type: "text_input",
+				action_id: "title",
+				label: "Title",
+			},
+			{
+				type: "text_input",
+				action_id: "body",
+				label: "Body",
+				multiline: true,
+			},
+			{
+				type: "text_input",
+				action_id: "ctaLabel",
+				label: "CTA label",
+			},
+			{
+				type: "text_input",
+				action_id: "ctaHref",
+				label: "CTA URL",
+			},
+		],
+	},
+] satisfies Element[];
+
+export const galleryLanesFields = [
+	{
+		type: "repeater",
+		action_id: "lanes",
+		label: "Lanes",
+		item_label: "Lane",
+		fields: [
+			{
+				type: "text_input",
+				action_id: "label",
+				label: "Label",
+			},
+			{
+				type: "text_input",
+				action_id: "meta",
+				label: "Meta",
+			},
+			{
+				type: "text_input",
+				action_id: "href",
+				label: "Link URL",
+			},
+			{
+				// Repeater sub-fields only support scalar element types, so
+				// lane images are URL strings rather than a media picker.
+				type: "text_input",
+				action_id: "image",
+				label: "Image URL",
+			},
+		],
+	},
+] satisfies Element[];
+
 const definition: PluginDefinition = {
 	id: DINKUS_BLOCKS_PLUGIN_ID,
 	version: "0.0.0",
@@ -176,6 +300,27 @@ const definition: PluginDefinition = {
 				category: "Sections",
 				description: "A horizontal rail of short label/value facts",
 				fields: factRailFields,
+			},
+			{
+				type: GALLERY_HERO_BLOCK_TYPE,
+				label: "Gallery Hero",
+				category: "Sections",
+				description: "Hero with a large image, headline, deck, and calls to action",
+				fields: galleryHeroFields,
+			},
+			{
+				type: LEDGER_CARDS_BLOCK_TYPE,
+				label: "Ledger Cards",
+				category: "Sections",
+				description: "A grid of record cards with code, title, and body",
+				fields: ledgerCardsFields,
+			},
+			{
+				type: GALLERY_LANES_BLOCK_TYPE,
+				label: "Gallery Lanes",
+				category: "Sections",
+				description: "Linked image lanes with a label and meta line",
+				fields: galleryLanesFields,
 			},
 		],
 	},
