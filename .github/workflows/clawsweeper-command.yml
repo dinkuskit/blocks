@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   review:
-    uses: dinkuskit/.github/.github/workflows/clawsweeper-command.yml@dc08a5dde46bd1f63d789228d0c64bbe8ce1f561
+    uses: dinkuskit/.github/.github/workflows/clawsweeper-command.yml@1d322b7189df35428822810692e1c3d98928dd42
     with:
       clawsweeper_app_id: ${{ vars.CLAWSWEEPER_APP_ID }}
       clawsweeper_app_bot_login: ${{ vars.CLAWSWEEPER_APP_BOT_LOGIN }}
