@@ -30,12 +30,12 @@ jobs:
     permissions:
       actions: read
       contents: read
-    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@0193306d264e74aec90bc5f136b32e095cb2eda0
+    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@f826526fee03e728b15ec028f45dad05de2dd74e
     with:
       pr_number: ${{ inputs.pr_number }}
       expected_base_sha: ${{ inputs.expected_base_sha }}
       expected_head_sha: ${{ inputs.expected_head_sha }}
-      engine_sha: 0193306d264e74aec90bc5f136b32e095cb2eda0
+      engine_sha: f826526fee03e728b15ec028f45dad05de2dd74e
       publish: ${{ inputs.publish }}
     secrets:
       CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
