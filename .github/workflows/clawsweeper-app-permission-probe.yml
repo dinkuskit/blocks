@@ -52,18 +52,34 @@ jobs:
 
           comment_url = "https://api.github.com/repos/dinkuskit/blocks/issues/comments/5041450260"
           read_status, _ = request("GET", comment_url)
+          issue_reaction_status, issue_reaction_headers = request(
+              "POST",
+              "https://api.github.com/repos/dinkuskit/blocks/issues/2/reactions",
+              {"content": "not-a-valid-reaction"},
+          )
+          pull_reaction_status, pull_reaction_headers = request(
+              "POST",
+              "https://api.github.com/repos/dinkuskit/blocks/issues/7/reactions",
+              {"content": "not-a-valid-reaction"},
+          )
           reaction_status, reaction_headers = request(
               "POST",
               f"{comment_url}/reactions",
               {"content": "not-a-valid-reaction"},
           )
+          issue_accepted = issue_reaction_headers.get("x-accepted-github-permissions", "missing")
+          pull_accepted = pull_reaction_headers.get("x-accepted-github-permissions", "missing")
           accepted = reaction_headers.get("x-accepted-github-permissions", "missing")
           print(f"issues_only_read_status={read_status}")
+          print(f"issues_only_issue_invalid_reaction_status={issue_reaction_status}")
+          print(f"issues_only_issue_accepted_permissions={issue_accepted}")
+          print(f"issues_only_pull_invalid_reaction_status={pull_reaction_status}")
+          print(f"issues_only_pull_accepted_permissions={pull_accepted}")
           print(f"issues_only_invalid_reaction_status={reaction_status}")
           print(f"issues_only_accepted_permissions={accepted}")
           if read_status != 200:
               raise SystemExit("issues-only token cannot read the fixed probe comment")
-          if reaction_status == 201:
+          if 201 in (issue_reaction_status, pull_reaction_status, reaction_status):
               raise SystemExit("invalid reaction unexpectedly mutated GitHub state")
           PY
 
