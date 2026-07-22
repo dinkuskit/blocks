@@ -24,6 +24,12 @@ Every block ships a neutral renderer with `dinkus-*` classes and a
 same field contract. Copy always lives in EmDash content, never the
 package.
 
+The vocabulary is intentionally small. Patterns are copied compositions of
+existing blocks and are the default source of variety; a new block must prove
+that composition cannot express its reusable data, behavior, accessibility,
+or runtime contract. See [the architecture contract](docs/architecture.md)
+and [pattern catalog contract](patterns/README.md).
+
 | Block | Type | Shape |
 | --- | --- | --- |
 | CTA Band | `dinkus.cta-band` | eyebrow, heading, body, single CTA |
@@ -63,6 +69,37 @@ components entry; sites can also import a single block (for example
 `import { PageHero } from "@dinkuskit/blocks/astro"`) to wrap it with a
 pixel-locked override.
 
+## Theming contract
+
+Default renderer styles live in the low-priority `dinkus-blocks` cascade
+layer. A template can set these custom properties globally or on one block,
+and ordinary unlayered site CSS can override the documented class hooks:
+
+| Token | Purpose |
+| --- | --- |
+| `--dinkus-section-spacing` | Major section margin or vertical padding |
+| `--dinkus-content-gap` | Space between sibling content groups |
+| `--dinkus-item-gap` | Space inside a repeated/card item |
+| `--dinkus-panel-padding` | Panel/card inset |
+| `--dinkus-panel-border` | Panel/card border |
+| `--dinkus-panel-radius` | Panel/card corner radius |
+| `--dinkus-panel-surface` | Neutral panel/placeholder background |
+| `--dinkus-copy-max-width` | Long-form copy measure |
+| `--dinkus-title-size` | Primary heading size inside a block |
+| `--dinkus-title-line-height` | Primary heading line height |
+| `--dinkus-action-background` | Primary action background |
+| `--dinkus-action-color` | Primary action foreground |
+| `--dinkus-action-radius` | Primary action corner radius |
+| `--dinkus-muted-opacity` | Secondary metadata opacity |
+
+Fallbacks preserve the current neutral rendering, so adopting the contract
+does not require a theme.
+
+The initial template insertion-point names (`before-header`, `after-header`,
+`before-content`, `after-content`, `before-footer`, and `end-of-body`) are
+defined in [the architecture contract](docs/architecture.md). This package
+does not yet ship a display-conditions engine.
+
 ## Consumer API
 
 The package root exports `safeCtaHref`, the shared `PortableTextNode` base,
@@ -92,6 +129,10 @@ const ctaHref = safeCtaHref(node.ctaHref);
 	{node.ctaLabel && ctaHref && <a href={ctaHref}>{node.ctaLabel}</a>}
 </section>
 ```
+
+Stored block fields and documented hooks follow the
+[compatibility covenant](COMPAT.md). Breaking field changes require migration
+fixtures and tooling in the same change.
 
 ## Verify
 

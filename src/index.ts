@@ -7,6 +7,7 @@ import {
 } from "emdash";
 
 export { safeCtaHref } from "./links";
+export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type {
 	CtaBandNode,
 	DispatchNode,

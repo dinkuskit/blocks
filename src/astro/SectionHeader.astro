@@ -28,16 +28,17 @@ const { node } = Astro.props;
 </header>
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-section-header {
 		display: grid;
-		gap: 0.75rem;
-		margin: clamp(1.5rem, 4vw, 3rem) 0 1.5rem;
+		gap: var(--dinkus-item-gap, 0.75rem);
+		margin: var(--dinkus-section-spacing, clamp(1.5rem, 4vw, 3rem)) 0 1.5rem;
 	}
 
 	.dinkus-section-header__meta {
 		display: flex;
 		align-items: baseline;
-		gap: 0.75rem;
+		gap: var(--dinkus-item-gap, 0.75rem);
 		margin: 0;
 		font-size: 0.75rem;
 		font-weight: 700;
@@ -46,18 +47,19 @@ const { node } = Astro.props;
 	}
 
 	.dinkus-section-header__number {
-		opacity: 0.5;
+		opacity: var(--dinkus-muted-opacity, 0.5);
 	}
 
 	h2 {
 		margin: 0;
-		font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-		line-height: 1.2;
+		font-size: var(--dinkus-title-size, clamp(1.5rem, 3.5vw, 2.25rem));
+		line-height: var(--dinkus-title-line-height, 1.2);
 	}
 
 	.dinkus-section-header__intro {
 		margin: 0.5rem 0 0;
-		max-width: 44rem;
+		max-width: var(--dinkus-copy-max-width, 44rem);
 		line-height: 1.6;
+	}
 	}
 </style>

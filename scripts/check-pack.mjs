@@ -16,11 +16,14 @@ if (forbidden.length > 0) {
 }
 
 for (const required of [
+	"COMPAT.md",
 	"LICENSE",
 	"README.md",
 	"package.json",
+	"patterns/README.md",
 	"src/index.ts",
 	"src/links.ts",
+	"src/theme.ts",
 	"src/types.ts",
 	"src/astro/CtaBand.astro",
 	"src/astro/index.ts",
