@@ -30,7 +30,7 @@ jobs:
     permissions:
       actions: read
       contents: read
-    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@eaa65c01229f2a1920b2c5d6efece63e0dc8a0a7
+    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@34f89477730acd712fe7f88e016cf69ea21d28b8
     with:
       pr_number: ${{ inputs.pr_number }}
       expected_base_sha: ${{ inputs.expected_base_sha }}
