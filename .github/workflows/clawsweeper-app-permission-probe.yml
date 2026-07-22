@@ -1,0 +1,117 @@
+name: ClawSweeper App permission probe
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/clawsweeper-app-permission-probe.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Mint issues-only App token
+        id: issues_only
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.CLAWSWEEPER_APP_ID }}
+          private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-issues: write
+
+      - name: Probe issues-only token without mutation
+        env:
+          APP_TOKEN: ${{ steps.issues_only.outputs.token }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+
+          headers = {
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {os.environ['APP_TOKEN']}",
+              "Content-Type": "application/json",
+              "User-Agent": "dinkuskit-clawsweeper-permission-probe",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+
+          def request(method, url, body=None):
+              data = None if body is None else json.dumps(body).encode("utf-8")
+              probe = urllib.request.Request(url, data=data, headers=headers, method=method)
+              try:
+                  with urllib.request.urlopen(probe, timeout=20) as response:
+                      return response.status, response.headers
+              except urllib.error.HTTPError as error:
+                  return error.code, error.headers
+
+          comment_url = "https://api.github.com/repos/dinkuskit/blocks/issues/comments/5041450260"
+          read_status, _ = request("GET", comment_url)
+          reaction_status, reaction_headers = request(
+              "POST",
+              f"{comment_url}/reactions",
+              {"content": "not-a-valid-reaction"},
+          )
+          accepted = reaction_headers.get("x-accepted-github-permissions", "missing")
+          print(f"issues_only_read_status={read_status}")
+          print(f"issues_only_invalid_reaction_status={reaction_status}")
+          print(f"issues_only_accepted_permissions={accepted}")
+          if read_status != 200:
+              raise SystemExit("issues-only token cannot read the fixed probe comment")
+          if reaction_status == 201:
+              raise SystemExit("invalid reaction unexpectedly mutated GitHub state")
+          PY
+
+      - name: Mint current-scope App token
+        id: current_scope
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.CLAWSWEEPER_APP_ID }}
+          private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-issues: write
+          permission-pull-requests: read
+
+      - name: Probe current-scope token without mutation
+        env:
+          APP_TOKEN: ${{ steps.current_scope.outputs.token }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+
+          headers = {
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {os.environ['APP_TOKEN']}",
+              "Content-Type": "application/json",
+              "User-Agent": "dinkuskit-clawsweeper-permission-probe",
+              "X-GitHub-Api-Version": "2022-11-28",
+          }
+          url = "https://api.github.com/repos/dinkuskit/blocks/issues/comments/5041450260/reactions"
+          probe = urllib.request.Request(
+              url,
+              data=json.dumps({"content": "not-a-valid-reaction"}).encode("utf-8"),
+              headers=headers,
+              method="POST",
+          )
+          try:
+              with urllib.request.urlopen(probe, timeout=20) as response:
+                  status = response.status
+                  response_headers = response.headers
+          except urllib.error.HTTPError as error:
+              status = error.code
+              response_headers = error.headers
+          accepted = response_headers.get("x-accepted-github-permissions", "missing")
+          print(f"current_scope_invalid_reaction_status={status}")
+          print(f"current_scope_accepted_permissions={accepted}")
+          if status == 201:
+              raise SystemExit("invalid reaction unexpectedly mutated GitHub state")
+          PY
