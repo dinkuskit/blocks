@@ -4,10 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       pr_number:
-        description: Pull request number (the first canary is restricted to #7)
+        description: Exact open Bundles pull request number for rollout proof
         required: true
         type: string
-        default: "7"
       expected_base_sha:
         description: Exact current main SHA to review against
         required: true
@@ -30,12 +29,14 @@ jobs:
     permissions:
       actions: read
       contents: read
-    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@6380a0b6e7a92e337052c55d076037c2694c34d5
+    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@84650c06549cab4b335e3f06b7341f078a324785
     with:
+      target_repository: bundles
+      target_repository_id: "1307843885"
       pr_number: ${{ inputs.pr_number }}
       expected_base_sha: ${{ inputs.expected_base_sha }}
       expected_head_sha: ${{ inputs.expected_head_sha }}
-      engine_sha: 6380a0b6e7a92e337052c55d076037c2694c34d5
+      engine_sha: 84650c06549cab4b335e3f06b7341f078a324785
       publish: ${{ inputs.publish }}
     secrets:
       CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
