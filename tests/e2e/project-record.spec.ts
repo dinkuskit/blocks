@@ -63,6 +63,7 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	await modalField(editDialog, "Proof headline").fill(EDITED_PROOF);
 	await editDialog.getByText("Read project proof", { exact: true }).click();
 	await modalField(editDialog, "Label").fill(EDITED_LINK);
+	await modalField(editDialog, "Proof headline").scrollIntoViewIfNeeded();
 	await page.screenshot({
 		path: testInfo.outputPath("admin-modal-edit.png"),
 		fullPage: true,
@@ -88,6 +89,11 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	);
 	await persistedDialog.getByText(EDITED_LINK, { exact: true }).click();
 	await expect(modalField(persistedDialog, "Label")).toHaveValue(EDITED_LINK);
+	await modalField(persistedDialog, "Proof headline").scrollIntoViewIfNeeded();
+	await page.screenshot({
+		path: testInfo.outputPath("admin-modal-persisted.png"),
+		fullPage: true,
+	});
 	await persistedDialog.getByRole("button", { name: "Cancel" }).click();
 
 	const editorBox = await persistedEditor.boundingBox();

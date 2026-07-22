@@ -68,6 +68,29 @@ Generated browser output remains ignored under
 `tests/fixture-site/.artifacts/e2e/`; the full run ID is
 `project-record-closeout-20260721`.
 
+## Inspectable live proof
+
+The fixture is a real EmDash 0.29.0 editor and Astro SSR setup using an isolated
+throwaway database and uploads root. It contains no customer data, credentials,
+Smoky branding, or production configuration. The Project Record acceptance run
+captures four redacted screenshots:
+
+1. `admin-modal-edit.png` — the seeded record edited in the EmDash modal;
+2. `admin-modal-persisted.png` — the same values present after save, full page
+   reload, and reopening the editor;
+3. `rendered-project-record-desktop.png` — the published values rendered by
+   Astro SSR at desktop width; and
+4. `rendered-project-record-mobile.png` — the same published record at 390 px
+   with horizontal containment verified.
+
+CI uploads those four screenshots separately as the bounded
+`project-record-live-proof` artifact. This small artifact is the inspectable
+editor-to-persistence-to-public-render proof; the broader ignored browser bundle
+remains available only for deeper trace debugging.
+
+Local proof rerun `project-record-clawsweeper-full-20260722` passed all 12
+serial browser tests after the persisted-state capture was added.
+
 ## Dogfood findings
 
 - The existing EmDash 0.29.0 block-modal double-save race tracked in
