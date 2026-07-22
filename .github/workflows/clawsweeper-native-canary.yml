@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       pr_number:
-        description: Exact open Bundles pull request number for rollout proof
+        description: Exact open pull request number to review
         required: true
         type: string
       expected_base_sha:
@@ -31,8 +31,8 @@ jobs:
       contents: read
     uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@84650c06549cab4b335e3f06b7341f078a324785
     with:
-      target_repository: bundles
-      target_repository_id: "1307843885"
+      target_repository: blocks
+      target_repository_id: "1306882611"
       pr_number: ${{ inputs.pr_number }}
       expected_base_sha: ${{ inputs.expected_base_sha }}
       expected_head_sha: ${{ inputs.expected_head_sha }}
