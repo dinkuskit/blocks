@@ -50,11 +50,12 @@ const lanes = (Array.isArray(node.lanes) ? node.lanes : [])
 }
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-gallery-lanes {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-		gap: 1rem;
-		margin: 1.5rem 0;
+		gap: var(--dinkus-content-gap, 1rem);
+		margin: var(--dinkus-section-spacing, 1.5rem) 0;
 	}
 
 	.dinkus-gallery-lanes__lane {
@@ -63,8 +64,8 @@ const lanes = (Array.isArray(node.lanes) ? node.lanes : [])
 		align-content: end;
 		gap: 0.25rem;
 		min-height: 14rem;
-		padding: 1rem;
-		border-radius: 0.75rem;
+		padding: var(--dinkus-panel-padding, 1rem);
+		border-radius: var(--dinkus-panel-radius, 0.75rem);
 		overflow: hidden;
 		isolation: isolate;
 		color: inherit;
@@ -82,7 +83,10 @@ const lanes = (Array.isArray(node.lanes) ? node.lanes : [])
 	}
 
 	.dinkus-gallery-lanes__media {
-		background: color-mix(in srgb, currentColor 8%, transparent);
+		background: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, currentColor 8%, transparent)
+		);
 	}
 
 	.dinkus-gallery-lanes__label {
@@ -91,6 +95,7 @@ const lanes = (Array.isArray(node.lanes) ? node.lanes : [])
 
 	.dinkus-gallery-lanes__meta {
 		font-size: 0.875rem;
-		opacity: 0.85;
+		opacity: var(--dinkus-muted-opacity, 0.85);
+	}
 	}
 </style>

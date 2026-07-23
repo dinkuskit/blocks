@@ -128,6 +128,22 @@ test("declares, inserts, edits, persists, and renders a page hero", async (
 	await expect(
 		rendered.nth(1).getByRole("link", { name: "Secondary fixture" }),
 	).toHaveAttribute("href", "/inserted-secondary");
+	await rendered.nth(0).evaluate((element) => {
+		const root = element as HTMLElement;
+		root.style.setProperty("--dinkus-title-size", "37px");
+		root.style.setProperty("--dinkus-action-radius", "3px");
+		root.style.setProperty("--dinkus-action-background", "rgb(1, 2, 3)");
+		root.style.setProperty("--dinkus-action-color", "rgb(250, 251, 252)");
+	});
+	await expect(
+		rendered.nth(0).getByRole("heading", { level: 1 }),
+	).toHaveCSS("font-size", "37px");
+	const themedAction = rendered.nth(0).getByRole("link", {
+		name: "Primary proof",
+	});
+	await expect(themedAction).toHaveCSS("border-radius", "3px");
+	await expect(themedAction).toHaveCSS("background-color", "rgb(1, 2, 3)");
+	await expect(themedAction).toHaveCSS("color", "rgb(250, 251, 252)");
 	await page.screenshot({
 		path: testInfo.outputPath("rendered-blocks.png"),
 		fullPage: true,

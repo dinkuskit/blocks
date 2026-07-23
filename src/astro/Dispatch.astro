@@ -46,17 +46,21 @@ const hasContact = Boolean(phoneHref || emailHref);
 </section>
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-dispatch {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 2rem;
-		padding: clamp(1.5rem, 4vw, 3rem);
-		border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+		gap: var(--dinkus-content-gap, 2rem);
+		padding: var(--dinkus-panel-padding, clamp(1.5rem, 4vw, 3rem));
+		border-top: var(
+			--dinkus-panel-border,
+			1px solid color-mix(in srgb, currentColor 20%, transparent)
+		);
 	}
 
 	.dinkus-dispatch__copy {
-		max-width: 48rem;
+		max-width: var(--dinkus-copy-max-width, 48rem);
 	}
 
 	.dinkus-dispatch__kicker {
@@ -91,9 +95,9 @@ const hasContact = Boolean(phoneHref || emailHref);
 	.dinkus-dispatch__action {
 		flex: none;
 		padding: 0.75rem 1rem;
-		border-radius: 999px;
-		background: CanvasText;
-		color: Canvas;
+		border-radius: var(--dinkus-action-radius, 999px);
+		background: var(--dinkus-action-background, CanvasText);
+		color: var(--dinkus-action-color, Canvas);
 		font-weight: 700;
 		text-decoration: none;
 	}
@@ -103,5 +107,6 @@ const hasContact = Boolean(phoneHref || emailHref);
 			align-items: flex-start;
 			flex-direction: column;
 		}
+	}
 	}
 </style>

@@ -186,6 +186,41 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 		fullPage: true,
 	});
 
+	await seeded.evaluate((element) => {
+		const root = element as HTMLElement;
+		root.style.setProperty(
+			"--dinkus-action-background",
+			"linear-gradient(90deg, rgb(1, 2, 3), rgb(4, 5, 6))",
+		);
+		root.style.setProperty(
+			"--dinkus-panel-surface",
+			"linear-gradient(90deg, rgb(7, 8, 9), rgb(10, 11, 12))",
+		);
+	});
+	const sheet = seeded.locator(".dinkus-project-record__sheet");
+	const evidenceLink = seeded.getByRole("link", { name: EDITED_LINK });
+	await expect
+		.poll(() =>
+			evidenceLink.evaluate(
+				(element) => getComputedStyle(element).backgroundImage,
+			),
+		)
+		.toContain("linear-gradient");
+	await expect
+		.poll(() =>
+			sheet.evaluate((element) => getComputedStyle(element).backgroundImage),
+		)
+		.toContain("linear-gradient");
+	await expect(sheet).toHaveCSS("border-top-style", "solid");
+	await expect
+		.poll(() => sheet.evaluate((element) => getComputedStyle(element).boxShadow))
+		.not.toBe("none");
+	await seeded.evaluate((element) => {
+		const root = element as HTMLElement;
+		root.style.removeProperty("--dinkus-action-background");
+		root.style.removeProperty("--dinkus-panel-surface");
+	});
+
 	await page.setViewportSize({ width: 390, height: 844 });
 	await expect
 		.poll(async () =>

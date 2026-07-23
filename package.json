@@ -10,6 +10,9 @@
   },
   "files": [
     "src",
+    "patterns",
+    "docs/architecture.md",
+    "COMPAT.md",
     "README.md",
     "LICENSE"
   ],

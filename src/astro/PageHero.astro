@@ -39,8 +39,9 @@ const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
 </section>
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-page-hero {
-		padding: clamp(2rem, 6vw, 4.5rem) 0;
+		padding: var(--dinkus-section-spacing, clamp(2rem, 6vw, 4.5rem)) 0;
 	}
 
 	.dinkus-page-hero__eyebrow {
@@ -53,13 +54,13 @@ const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
 
 	h1 {
 		margin: 0;
-		font-size: clamp(2rem, 5vw, 3.25rem);
-		line-height: 1.1;
+		font-size: var(--dinkus-title-size, clamp(2rem, 5vw, 3.25rem));
+		line-height: var(--dinkus-title-line-height, 1.1);
 	}
 
 	.dinkus-page-hero__deck {
 		margin: 1rem 0 0;
-		max-width: 44rem;
+		max-width: var(--dinkus-copy-max-width, 44rem);
 		font-size: 1.125rem;
 		line-height: 1.6;
 	}
@@ -67,15 +68,15 @@ const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
 	.dinkus-page-hero__actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.75rem;
+		gap: var(--dinkus-content-gap, 0.75rem);
 		margin-top: 1.5rem;
 	}
 
 	.dinkus-page-hero__action {
 		padding: 0.75rem 1rem;
-		border-radius: 999px;
-		background: CanvasText;
-		color: Canvas;
+		border-radius: var(--dinkus-action-radius, 999px);
+		background: var(--dinkus-action-background, CanvasText);
+		color: var(--dinkus-action-color, Canvas);
 		font-weight: 700;
 		text-decoration: none;
 	}
@@ -84,5 +85,6 @@ const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
 		background: transparent;
 		color: inherit;
 		border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+	}
 	}
 </style>
