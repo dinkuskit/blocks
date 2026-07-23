@@ -8,6 +8,10 @@ Part of [Dinkus](https://github.com/dinkuskit) — blocks, commerce, and templat
 
 Under construction, dogfooding in the open. MIT.
 
+See [ROADMAP.md](ROADMAP.md) for the North-Star-shaped kit trajectory,
+[CONTRIBUTING.md](CONTRIBUTING.md) for what PRs we will not accept during
+dogfood, and [COMPAT.md](COMPAT.md) for stored-content change rules.
+
 ## Block vocabulary
 
 The package declares a vocabulary of recurring section blocks as native

@@ -13,6 +13,8 @@
     "patterns",
     "docs/architecture.md",
     "COMPAT.md",
+    "ROADMAP.md",
+    "CONTRIBUTING.md",
     "README.md",
     "LICENSE"
   ],
