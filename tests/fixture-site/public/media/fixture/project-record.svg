@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract project identity</title>
+  <desc id="desc">Three offset rectangles surrounding a central circle.</desc>
+  <rect width="640" height="480" fill="#f1efe8"/>
+  <rect x="96" y="72" width="448" height="336" fill="none" stroke="#1e293b" stroke-width="8"/>
+  <rect x="136" y="112" width="368" height="256" fill="#dbe4de" stroke="#1e293b" stroke-width="8"/>
+  <circle cx="320" cy="240" r="88" fill="#e7be39" stroke="#1e293b" stroke-width="8"/>
+</svg>

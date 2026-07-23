@@ -31,10 +31,11 @@ const facts = (Array.isArray(node.facts) ? node.facts : []).filter(
 }
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-fact-rail {
 		display: flex;
-		gap: 1rem;
-		margin: 1.5rem 0;
+		gap: var(--dinkus-content-gap, 1rem);
+		margin: var(--dinkus-section-spacing, 1.5rem) 0;
 		padding: 0.25rem;
 		overflow-x: auto;
 	}
@@ -42,10 +43,16 @@ const facts = (Array.isArray(node.facts) ? node.facts : []).filter(
 	.dinkus-fact-rail__fact {
 		flex: none;
 		min-width: 9rem;
-		padding: 0.75rem 1rem;
-		border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
-		border-radius: 0.75rem;
-		background: color-mix(in srgb, currentColor 4%, transparent);
+		padding: var(--dinkus-panel-padding, 0.75rem 1rem);
+		border: var(
+			--dinkus-panel-border,
+			1px solid color-mix(in srgb, currentColor 20%, transparent)
+		);
+		border-radius: var(--dinkus-panel-radius, 0.75rem);
+		background: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, currentColor 4%, transparent)
+		);
 	}
 
 	dt {
@@ -54,11 +61,12 @@ const facts = (Array.isArray(node.facts) ? node.facts : []).filter(
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		opacity: 0.7;
+		opacity: var(--dinkus-muted-opacity, 0.7);
 	}
 
 	dd {
 		margin: 0;
 		font-weight: 600;
+	}
 	}
 </style>

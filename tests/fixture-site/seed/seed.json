@@ -267,6 +267,49 @@
         }
       },
       {
+        "id": "project-record",
+        "slug": "project-record",
+        "status": "published",
+        "data": {
+          "title": "Project record fixture",
+          "content": [
+            {
+              "_type": "dinkus.project-record",
+              "_key": "project-record-seed",
+              "recordId": "field-notes",
+              "category": "Compatibility fixture · portfolio",
+              "title": "Before: Project record title is editable",
+              "summary": "This sentinel summary must round-trip through the EmDash admin.",
+              "identityImage": "/media/fixture/project-record.svg",
+              "identityAlt": "Abstract project identity",
+              "statusKicker": "Current status",
+              "status": "Proof in progress",
+              "roleKicker": "Project role",
+              "roleHeadline": "A reusable record for real work.",
+              "roleBody": "The role body keeps the project context beside its evidence.",
+              "evidenceKicker": "Evidence state",
+              "proofHeadline": "Before: Proof headline is editable",
+              "evidence": "The fixture proves typed fields, safe links, persistence, and public rendering.",
+              "links": [
+                {
+                  "_key": "link-proof",
+                  "label": "Read project proof",
+                  "href": "/proof"
+                },
+                {
+                  "_key": "link-unsafe",
+                  "label": "Unsafe link is rejected",
+                  "href": "javascript:alert(1)"
+                }
+              ],
+              "nextKicker": "Next project",
+              "nextTitle": "Dispatch fixture",
+              "nextHref": "/dispatch"
+            }
+          ]
+        }
+      },
+      {
         "id": "dispatch",
         "slug": "dispatch",
         "status": "published",

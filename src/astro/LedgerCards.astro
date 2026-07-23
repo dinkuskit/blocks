@@ -44,21 +44,28 @@ const cards = (Array.isArray(node.cards) ? node.cards : [])
 }
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-ledger-cards {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-		gap: 1rem;
-		margin: 1.5rem 0;
+		gap: var(--dinkus-content-gap, 1rem);
+		margin: var(--dinkus-section-spacing, 1.5rem) 0;
 	}
 
 	.dinkus-ledger-cards__card {
 		display: grid;
-		gap: 0.5rem;
+		gap: var(--dinkus-item-gap, 0.5rem);
 		align-content: start;
-		padding: 1.25rem;
-		border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
-		border-radius: 0.75rem;
-		background: color-mix(in srgb, currentColor 4%, transparent);
+		padding: var(--dinkus-panel-padding, 1.25rem);
+		border: var(
+			--dinkus-panel-border,
+			1px solid color-mix(in srgb, currentColor 20%, transparent)
+		);
+		border-radius: var(--dinkus-panel-radius, 0.75rem);
+		background: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, currentColor 4%, transparent)
+		);
 	}
 
 	.dinkus-ledger-cards__code {
@@ -66,7 +73,7 @@ const cards = (Array.isArray(node.cards) ? node.cards : [])
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		opacity: 0.7;
+		opacity: var(--dinkus-muted-opacity, 0.7);
 	}
 
 	h3 {
@@ -83,5 +90,6 @@ const cards = (Array.isArray(node.cards) ? node.cards : [])
 		margin-top: 0.5rem;
 		font-weight: 700;
 		text-decoration: none;
+	}
 	}
 </style>

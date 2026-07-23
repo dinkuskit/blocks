@@ -47,12 +47,13 @@ const legend = (Array.isArray(node.legend) ? node.legend : []).filter(
 </section>
 
 <style>
+	@layer dinkus-blocks {
 	.dinkus-service-area-map {
 		display: grid;
 		grid-template-columns: 2fr 1fr;
-		gap: 1.5rem;
+		gap: var(--dinkus-content-gap, 1.5rem);
 		align-items: start;
-		margin: clamp(1.5rem, 4vw, 3rem) 0;
+		margin: var(--dinkus-section-spacing, clamp(1.5rem, 4vw, 3rem)) 0;
 	}
 
 	@media (max-width: 56rem) {
@@ -68,20 +69,26 @@ const legend = (Array.isArray(node.legend) ? node.legend : []).filter(
 	.dinkus-service-area-map__img,
 	.dinkus-service-area-map__placeholder {
 		width: 100%;
-		border-radius: 0.5rem;
-		border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+		border-radius: var(--dinkus-panel-radius, 0.5rem);
+		border: var(
+			--dinkus-panel-border,
+			1px solid color-mix(in srgb, currentColor 20%, transparent)
+		);
 	}
 
 	.dinkus-service-area-map__placeholder {
 		aspect-ratio: 9 / 7;
-		background: color-mix(in srgb, currentColor 6%, transparent);
+		background: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, currentColor 6%, transparent)
+		);
 	}
 
 	.dinkus-service-area-map__caption {
 		margin-top: 0.75rem;
 		font-size: 0.85rem;
 		line-height: 1.5;
-		opacity: 0.75;
+		opacity: var(--dinkus-muted-opacity, 0.75);
 	}
 
 	.dinkus-service-area-map__legend {
@@ -89,9 +96,16 @@ const legend = (Array.isArray(node.legend) ? node.legend : []).filter(
 		display: grid;
 		gap: 0.6rem;
 		margin: 0;
-		padding: 1rem 1.25rem;
-		border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
-		border-radius: 0.75rem;
-		background: color-mix(in srgb, currentColor 4%, transparent);
+		padding: var(--dinkus-panel-padding, 1rem 1.25rem);
+		border: var(
+			--dinkus-panel-border,
+			1px solid color-mix(in srgb, currentColor 20%, transparent)
+		);
+		border-radius: var(--dinkus-panel-radius, 0.75rem);
+		background: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, currentColor 4%, transparent)
+		);
+	}
 	}
 </style>
