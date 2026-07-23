@@ -39,3 +39,16 @@ jobs:
           path: tests/fixture-site/.artifacts/e2e
           if-no-files-found: error
           retention-days: 7
+
+      - name: Upload Project Record live proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-record-live-proof
+          path: |
+            tests/fixture-site/.artifacts/e2e/**/admin-modal-edit.png
+            tests/fixture-site/.artifacts/e2e/**/admin-modal-persisted.png
+            tests/fixture-site/.artifacts/e2e/**/rendered-project-record-desktop.png
+            tests/fixture-site/.artifacts/e2e/**/rendered-project-record-mobile.png
+          if-no-files-found: error
+          retention-days: 7
