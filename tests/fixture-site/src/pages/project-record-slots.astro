@@ -32,6 +32,21 @@ const node = {
 	nextHref: "/",
 } satisfies ProjectRecordNode;
 const portableNode: PortableTextNode = node;
+const absoluteNode = {
+	_type: "dinkus.project-record",
+	recordId: "absolute-slot-record",
+	category: "Absolute-only art fixture",
+	title: "Absolute slot record",
+	summary: "The direct Astro export keeps the public node contract while allowing site-owned art and icons.",
+	statusKicker: "Current status",
+	status: "Layered art verified",
+	roleKicker: "Project role",
+	roleHeadline: "Absolute-only slot roots keep a sized containing block.",
+	roleBody: "The identity cell stretches the slotted root so it never collapses to zero width.",
+	evidenceKicker: "Evidence state",
+	proofHeadline: "Layered artwork renders.",
+	evidence: "This fixture layers two absolutely positioned spans inside an unsized identity slot wrapper.",
+} satisfies ProjectRecordNode;
 ---
 
 <!doctype html>
@@ -52,6 +67,12 @@ const portableNode: PortableTextNode = node;
 				<span slot="evidence-icon" data-slot="evidence-icon" aria-hidden="true">◆</span>
 				<span slot="link-icon" data-slot="link-icon" aria-hidden="true">↗</span>
 				<span slot="next-icon" data-slot="next-icon" aria-hidden="true">→</span>
+			</ProjectRecord>
+			<ProjectRecord node={absoluteNode}>
+				<div slot="identity" data-slot="identity-absolute" aria-hidden="true">
+					<span data-slot-layer="a"></span>
+					<span data-slot-layer="b"></span>
+				</div>
 			</ProjectRecord>
 		</main>
 	</body>
@@ -82,5 +103,25 @@ const portableNode: PortableTextNode = node;
 		border: 0.5rem solid currentColor;
 		font-size: 3rem;
 		font-weight: 900;
+	}
+
+	[data-slot="identity-absolute"] {
+		position: relative;
+		min-height: 12rem;
+	}
+
+	[data-slot="identity-absolute"] > span {
+		position: absolute;
+		inset: 0;
+	}
+
+	[data-slot="identity-absolute"] [data-slot-layer="a"] {
+		background: repeating-linear-gradient(45deg, currentColor 0 2px, transparent 2px 12px);
+		opacity: 0.35;
+	}
+
+	[data-slot="identity-absolute"] [data-slot-layer="b"] {
+		margin: 1rem;
+		border: 4px solid currentColor;
 	}
 </style>

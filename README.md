@@ -144,7 +144,11 @@ site-owned identity art, deliberate title breaks, and icons, so a consumer can
 keep an already-approved visual system while importing the node and repeater
 types from the package root rather than redeclaring them. Its default CSS lives
 in the low-priority `dinkus-blocks` cascade layer, leaving ordinary unlayered
-site styles authoritative for pixel-locked overrides.
+site styles authoritative for pixel-locked overrides. The identity cell
+stretches a slotted art root to the cell's full width, so wrappers whose
+children are entirely absolutely positioned keep a sized containing block. A
+slot root that declares its own width keeps it, and absolute-only roots should
+bring their own height; the cell only guarantees a minimum height.
 
 Stored block fields and documented hooks follow the
 [compatibility covenant](COMPAT.md). Breaking field changes require migration
