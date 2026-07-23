@@ -21,10 +21,11 @@
   "scripts": {
     "typecheck": "tsc --noEmit && pnpm --dir tests/fixture-site typecheck",
     "test": "vitest run",
+    "test:workflows": "node --test tests/workflows/*.test.mjs",
     "build:fixture": "pnpm --dir tests/fixture-site build",
     "test:e2e": "node scripts/run-e2e.mjs",
     "check:pack": "node scripts/check-pack.mjs",
-    "check": "pnpm typecheck && pnpm test && pnpm build:fixture && pnpm check:pack"
+    "check": "pnpm typecheck && pnpm test && pnpm test:workflows && pnpm build:fixture && pnpm check:pack"
   },
   "peerDependencies": {
     "astro": ">=7.0.0 <8.0.0",
