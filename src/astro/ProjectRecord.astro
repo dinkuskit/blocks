@@ -138,19 +138,10 @@ const hasTitleSlot = Astro.slots.has("title");
 <style>
 	@layer dinkus-blocks {
 	.dinkus-project-record {
-		--dinkus-project-record-ink: var(
-			--dinkus-action-background,
-			CanvasText
-		);
-		--dinkus-project-record-paper: var(--dinkus-action-color, Canvas);
-		--dinkus-project-record-signal: var(
-			--dinkus-panel-surface,
-			color-mix(in srgb, CanvasText 16%, Canvas)
-		);
-		--dinkus-project-record-evidence: var(
-			--dinkus-panel-surface,
-			color-mix(in srgb, CanvasText 8%, Canvas)
-		);
+		--dinkus-project-record-ink: CanvasText;
+		--dinkus-project-record-paper: Canvas;
+		--dinkus-project-record-signal: color-mix(in srgb, CanvasText 16%, Canvas);
+		--dinkus-project-record-evidence: color-mix(in srgb, CanvasText 8%, Canvas);
 	}
 
 	.dinkus-project-record__sheet {
@@ -166,7 +157,10 @@ const hasTitleSlot = Astro.slots.has("title");
 			--dinkus-panel-border,
 			1px solid var(--dinkus-project-record-ink)
 		);
-		background: var(--dinkus-project-record-paper);
+		background: var(
+			--dinkus-panel-surface,
+			var(--dinkus-project-record-paper)
+		);
 		box-shadow: 0.7rem 0.7rem 0 var(--dinkus-project-record-signal);
 		transform: rotate(-0.15deg);
 	}
@@ -249,7 +243,10 @@ const hasTitleSlot = Astro.slots.has("title");
 		gap: var(--dinkus-item-gap, 1rem);
 		padding: var(--dinkus-panel-padding, 1rem);
 		border: 1px solid var(--dinkus-project-record-ink);
-		background: var(--dinkus-project-record-signal);
+		background: var(
+			--dinkus-panel-surface,
+			var(--dinkus-project-record-signal)
+		);
 		box-shadow: 0.32rem 0.32rem 0 var(--dinkus-project-record-ink);
 	}
 
@@ -285,7 +282,10 @@ const hasTitleSlot = Astro.slots.has("title");
 		align-self: start;
 		padding: clamp(1.5rem, 3vw, 2.2rem);
 		border: 1px solid var(--dinkus-project-record-ink);
-		background: var(--dinkus-project-record-evidence);
+		background: var(
+			--dinkus-panel-surface,
+			var(--dinkus-project-record-evidence)
+		);
 		box-shadow: 0.4rem 0.4rem 0 var(--dinkus-project-record-ink);
 		transform: rotate(-1deg);
 	}
@@ -314,8 +314,11 @@ const hasTitleSlot = Astro.slots.has("title");
 		gap: 0.5rem;
 		padding: 0.75rem 1rem;
 		border: 1px solid var(--dinkus-project-record-ink);
-		background: var(--dinkus-project-record-ink);
-		color: var(--dinkus-project-record-paper);
+		background: var(
+			--dinkus-action-background,
+			var(--dinkus-project-record-ink)
+		);
+		color: var(--dinkus-action-color, var(--dinkus-project-record-paper));
 		font-weight: 700;
 		text-decoration: none;
 	}
@@ -329,7 +332,10 @@ const hasTitleSlot = Astro.slots.has("title");
 		margin-top: 1.75rem;
 		padding: var(--dinkus-panel-padding, 1.5rem);
 		border: 1px solid var(--dinkus-project-record-ink);
-		background: var(--dinkus-project-record-signal);
+		background: var(
+			--dinkus-panel-surface,
+			var(--dinkus-project-record-signal)
+		);
 		color: inherit;
 		text-decoration: none;
 	}

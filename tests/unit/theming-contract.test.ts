@@ -50,4 +50,23 @@ describe("renderer theming contract", () => {
 			expect(readme, token).toContain(token);
 		}
 	});
+
+	it("keeps Project Record color-only palette values independent", () => {
+		const projectRecord = rendererSources.find(
+			({ file }) => file === "ProjectRecord.astro",
+		)?.source;
+
+		expect(projectRecord).toContain(
+			"--dinkus-project-record-ink: CanvasText",
+		);
+		expect(projectRecord).toContain(
+			"--dinkus-project-record-signal: color-mix(",
+		);
+		expect(projectRecord).not.toContain(
+			"--dinkus-project-record-ink: var(",
+		);
+		expect(projectRecord).not.toContain(
+			"--dinkus-project-record-signal: var(",
+		);
+	});
 });

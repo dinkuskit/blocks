@@ -5,10 +5,13 @@ const output = execFileSync("npm", ["pack", "--dry-run", "--json"], {
 });
 const [pack] = JSON.parse(output);
 const files = pack.files.map((file) => file.path).sort();
-const forbidden = files.filter((file) =>
-	/(^|\/)(tests|docs|scripts|node_modules|\.artifacts|uploads|test-results|playwright-report)(\/|$)/.test(
-		file,
-	),
+const allowedDocs = new Set(["docs/architecture.md"]);
+const forbidden = files.filter(
+	(file) =>
+		!allowedDocs.has(file) &&
+		/(^|\/)(tests|docs|scripts|node_modules|\.artifacts|uploads|test-results|playwright-report)(\/|$)/.test(
+			file,
+		),
 );
 
 if (forbidden.length > 0) {
@@ -19,6 +22,7 @@ for (const required of [
 	"COMPAT.md",
 	"LICENSE",
 	"README.md",
+	"docs/architecture.md",
 	"package.json",
 	"patterns/README.md",
 	"src/index.ts",
