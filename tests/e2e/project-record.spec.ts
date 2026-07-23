@@ -1,3 +1,4 @@
+import { writeFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
 
 import {
@@ -260,6 +261,23 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 		"/proof",
 	);
 
+	const centeredRecord = page.locator('[data-project-record="slotted-record"]');
+	const centeredIdentity = centeredRecord.locator(
+		".dinkus-project-record__identity",
+	);
+	const centeredArt = centeredRecord.locator('[data-slot="identity"]');
+	const centeredIdentityBox = await centeredIdentity.boundingBox();
+	const centeredArtBox = await centeredArt.boundingBox();
+	expect(centeredIdentityBox).not.toBeNull();
+	expect(centeredArtBox).not.toBeNull();
+	expect(centeredArtBox!.width).toBeLessThan(centeredIdentityBox!.width);
+	const centeredLeftGap = centeredArtBox!.x - centeredIdentityBox!.x;
+	const centeredRightGap =
+		centeredIdentityBox!.x +
+		centeredIdentityBox!.width -
+		(centeredArtBox!.x + centeredArtBox!.width);
+	expect(Math.abs(centeredLeftGap - centeredRightGap)).toBeLessThanOrEqual(2);
+
 	const absoluteRecord = page.locator('[data-project-record="absolute-slot-record"]');
 	await expect(absoluteRecord).toBeVisible();
 	const absoluteIdentity = absoluteRecord.locator(".dinkus-project-record__identity");
@@ -274,4 +292,53 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	expect(layerBox).not.toBeNull();
 	expect(layerBox!.width).toBeGreaterThan(200);
 	expect(layerBox!.height).toBeGreaterThan(100);
+
+	await absoluteArt.evaluate((element) =>
+		element.removeAttribute("data-dinkus-project-record-identity"),
+	);
+	const optOutBox = await absoluteArt.boundingBox();
+	expect(optOutBox).not.toBeNull();
+	expect(optOutBox!.width).toBeLessThan(5);
+	await page.screenshot({
+		path: testInfo.outputPath("project-record-identity-slot-opt-out-control.png"),
+		fullPage: true,
+	});
+
+	await absoluteArt.evaluate((element) =>
+		element.setAttribute("data-dinkus-project-record-identity", "fill"),
+	);
+	await expect
+		.poll(() =>
+			absoluteArt.evaluate((element) => element.getBoundingClientRect().width),
+		)
+		.toBeGreaterThan(250);
+	const restoredArtBox = await absoluteArt.boundingBox();
+	expect(restoredArtBox).not.toBeNull();
+	expect(
+		Math.abs(restoredArtBox!.width - identityBox!.width),
+	).toBeLessThanOrEqual(2);
+
+	const geometryProof = {
+		centeredDefault: {
+			cellWidth: centeredIdentityBox!.width,
+			artWidth: centeredArtBox!.width,
+			leftGap: centeredLeftGap,
+			rightGap: centeredRightGap,
+		},
+		absoluteOnlyOptIn: {
+			cellWidth: identityBox!.width,
+			optedInWidth: restoredArtBox!.width,
+			optedOutControlWidth: optOutBox!.width,
+			layerWidth: layerBox!.width,
+			layerHeight: layerBox!.height,
+		},
+	};
+	await writeFile(
+		testInfo.outputPath("project-record-identity-slot-geometry.json"),
+		`${JSON.stringify(geometryProof, null, 2)}\n`,
+	);
+	await page.screenshot({
+		path: testInfo.outputPath("project-record-identity-slot-proof.png"),
+		fullPage: true,
+	});
 });

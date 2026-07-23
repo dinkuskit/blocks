@@ -210,12 +210,15 @@ const hasTitleSlot = Astro.slots.has("title");
 	.dinkus-project-record__identity {
 		display: grid;
 		min-height: 18.75rem;
-		align-items: center;
-		/* stretch keeps absolute-only slotted art from collapsing to zero width */
-		justify-items: stretch;
+		place-items: center;
 		border: 1px solid var(--dinkus-project-record-ink);
 		background: var(--dinkus-project-record-paper);
 		overflow: hidden;
+	}
+
+	.dinkus-project-record__identity
+		> :global([data-dinkus-project-record-identity="fill"]) {
+		justify-self: stretch;
 	}
 
 	.dinkus-project-record__identity :global(img) {

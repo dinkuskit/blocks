@@ -41,11 +41,13 @@ const absoluteNode = {
 	statusKicker: "Current status",
 	status: "Layered art verified",
 	roleKicker: "Project role",
-	roleHeadline: "Absolute-only slot roots keep a sized containing block.",
-	roleBody: "The identity cell stretches the slotted root so it never collapses to zero width.",
+	roleHeadline: "Absolute-only slot roots can opt into a sized containing block.",
+	roleBody:
+		"The identity cell stretches only roots that request the public fill contract.",
 	evidenceKicker: "Evidence state",
 	proofHeadline: "Layered artwork renders.",
-	evidence: "This fixture layers two absolutely positioned spans inside an unsized identity slot wrapper.",
+	evidence:
+		"This fixture layers two absolutely positioned spans inside an unsized identity slot wrapper with explicit fill sizing.",
 } satisfies ProjectRecordNode;
 ---
 
@@ -69,7 +71,12 @@ const absoluteNode = {
 				<span slot="next-icon" data-slot="next-icon" aria-hidden="true">→</span>
 			</ProjectRecord>
 			<ProjectRecord node={absoluteNode}>
-				<div slot="identity" data-slot="identity-absolute" aria-hidden="true">
+				<div
+					slot="identity"
+					data-slot="identity-absolute"
+					data-dinkus-project-record-identity="fill"
+					aria-hidden="true"
+				>
 					<span data-slot-layer="a"></span>
 					<span data-slot-layer="b"></span>
 				</div>
@@ -97,9 +104,9 @@ const absoluteNode = {
 
 	[data-slot="identity"] {
 		display: grid;
-		width: 10rem;
 		aspect-ratio: 1;
 		place-items: center;
+		padding: 2rem;
 		border: 0.5rem solid currentColor;
 		font-size: 3rem;
 		font-weight: 900;

@@ -145,10 +145,12 @@ keep an already-approved visual system while importing the node and repeater
 types from the package root rather than redeclaring them. Its default CSS lives
 in the low-priority `dinkus-blocks` cascade layer, leaving ordinary unlayered
 site styles authoritative for pixel-locked overrides. The identity cell
-stretches a slotted art root to the cell's full width, so wrappers whose
-children are entirely absolutely positioned keep a sized containing block. A
-slot root that declares its own width keeps it, and absolute-only roots should
-bring their own height; the cell only guarantees a minimum height.
+keeps widthless slotted roots intrinsically sized and centered for compatibility.
+An absolute-only art wrapper can opt into the cell's full width with
+`data-dinkus-project-record-identity="fill"`; opted-in roots should bring their
+own height because the cell only guarantees a minimum height. This explicit
+hook prevents unrelated custom identity roots from changing alignment during an
+upgrade.
 
 Stored block fields and documented hooks follow the
 [compatibility covenant](COMPAT.md). Breaking field changes require migration
