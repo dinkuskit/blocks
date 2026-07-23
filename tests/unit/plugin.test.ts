@@ -9,6 +9,7 @@ import {
 	GALLERY_LANES_BLOCK_TYPE,
 	LEDGER_CARDS_BLOCK_TYPE,
 	PAGE_HERO_BLOCK_TYPE,
+	PROJECT_RECORD_BLOCK_TYPE,
 	SEARCH_BOARD_BLOCK_TYPE,
 	SECTION_HEADER_BLOCK_TYPE,
 	SERVICE_AREA_MAP_BLOCK_TYPE,
@@ -21,6 +22,7 @@ import {
 	galleryLanesFields,
 	ledgerCardsFields,
 	pageHeroFields,
+	projectRecordFields,
 	searchBoardFields,
 	sectionHeaderFields,
 	serviceAreaMapFields,
@@ -105,6 +107,12 @@ describe("@dinkuskit/blocks", () => {
 						label: "Dispatch",
 						category: "Sections",
 						fields: dispatchFields,
+					},
+					{
+						type: PROJECT_RECORD_BLOCK_TYPE,
+						label: "Project Record",
+						category: "Sections",
+						fields: projectRecordFields,
 					},
 				],
 			},
@@ -266,6 +274,46 @@ describe("@dinkuskit/blocks", () => {
 			"phone",
 			"email",
 		]);
+	});
+
+	it("locks the project-record contract with identity media and evidence links", () => {
+		expect(projectRecordFields.map((field) => field.action_id)).toEqual([
+			"recordId",
+			"category",
+			"title",
+			"summary",
+			"identityImage",
+			"identityAlt",
+			"statusKicker",
+			"status",
+			"roleKicker",
+			"roleHeadline",
+			"roleBody",
+			"evidenceKicker",
+			"proofHeadline",
+			"evidence",
+			"links",
+			"nextKicker",
+			"nextTitle",
+			"nextHref",
+		]);
+		const identityImage = projectRecordFields.find(
+			(field) => field.action_id === "identityImage",
+		);
+		expect(identityImage?.type).toBe("media_picker");
+		const links = projectRecordFields.find(
+			(field) => field.action_id === "links",
+		);
+		if (links?.type !== "repeater") {
+			throw new Error("links must be a repeater element");
+		}
+		expect(links.fields.map((field) => field.action_id)).toEqual([
+			"label",
+			"href",
+		]);
+		expect(links.fields.every((field) => field.type === "text_input")).toBe(
+			true,
+		);
 	});
 });
 

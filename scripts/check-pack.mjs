@@ -26,6 +26,7 @@ for (const required of [
 	"src/theme.ts",
 	"src/types.ts",
 	"src/astro/CtaBand.astro",
+	"src/astro/ProjectRecord.astro",
 	"src/astro/index.ts",
 ]) {
 	if (!files.includes(required)) {

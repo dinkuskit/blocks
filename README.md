@@ -42,6 +42,7 @@ and [pattern catalog contract](patterns/README.md).
 | Search Board | `dinkus.search-board` | header + repeater of plain-language links |
 | Service Area Map | `dinkus.service-area-map` | map image, caption, legend repeater |
 | Dispatch | `dinkus.dispatch` | contact band with CTA + tel/mailto links |
+| Project Record | `dinkus.project-record` | identity art, status ticket, role, evidence-link repeater, next-project navigation |
 
 Repeater sub-fields are scalar only in Block Kit 0.29.0, so image
 sub-fields (gallery lanes) carry URL strings rather than a media picker —
@@ -104,7 +105,8 @@ does not yet ship a display-conditions engine.
 
 The package root exports `safeCtaHref`, the shared `PortableTextNode` base,
 one `*Node` type for each block, and the repeater item types `FactItem`,
-`LedgerCard`, `GalleryLane`, `SearchLink`, and `LegendEntry`.
+`LedgerCard`, `GalleryLane`, `SearchLink`, `LegendEntry`, and
+`ProjectRecordLink`.
 
 A site-level renderer override can use the same node contract as the
 shipped renderer and the same URL policy:
@@ -129,6 +131,16 @@ const ctaHref = safeCtaHref(node.ctaHref);
 	{node.ctaLabel && ctaHref && <a href={ctaHref}>{node.ctaLabel}</a>}
 </section>
 ```
+
+`ProjectRecordNode` is the thin composed-record contract used by portfolio
+dogfood sites. It keeps project identity, status, role, proof, safe evidence
+links, and next navigation in one editable block without claiming to be a
+full-site starter template. The neutral renderer exposes named Astro slots for
+site-owned identity art, deliberate title breaks, and icons, so a consumer can
+keep an already-approved visual system while importing the node and repeater
+types from the package root rather than redeclaring them. Its default CSS lives
+in the low-priority `dinkus-blocks` cascade layer, leaving ordinary unlayered
+site styles authoritative for pixel-locked overrides.
 
 Stored block fields and documented hooks follow the
 [compatibility covenant](COMPAT.md). Breaking field changes require migration

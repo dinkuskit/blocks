@@ -1,0 +1,396 @@
+---
+import {
+	safeCtaHref,
+	type ProjectRecordLink,
+	type ProjectRecordNode,
+} from "@dinkuskit/blocks";
+
+interface Props {
+	node: ProjectRecordNode;
+}
+
+const { node } = Astro.props;
+const links = (Array.isArray(node.links) ? node.links : [])
+	.map((link) => ({ ...link, href: safeCtaHref(link?.href) }))
+	.filter((link): link is ProjectRecordLink & { label: string; href: string } =>
+		Boolean(link.label && link.href),
+	);
+const nextHref = safeCtaHref(node.nextHref);
+const showNext = Boolean(node.nextTitle && nextHref);
+const hasIdentitySlot = Astro.slots.has("identity");
+const hasTitleSlot = Astro.slots.has("title");
+---
+
+<article
+	class="dinkus-project-record"
+	data-dinkus-block="project-record"
+	data-project-record={node.recordId || undefined}
+>
+	<div class="dinkus-project-record__sheet">
+		<header class="dinkus-project-record__intro">
+			{
+				node.category && (
+					<p class="dinkus-project-record__kicker">
+						<slot name="category-icon" />
+						<span>{node.category}</span>
+					</p>
+				)
+			}
+			{
+				(node.title || hasTitleSlot) && (
+					<h1>
+						<slot name="title">{node.title}</slot>
+					</h1>
+				)
+			}
+			{node.summary && <p class="dinkus-project-record__summary">{node.summary}</p>}
+		</header>
+
+		<aside
+			class="dinkus-project-record__companion"
+			aria-label={node.title ? `${node.title} identity and status` : "Project identity and status"}
+		>
+			<div class="dinkus-project-record__identity">
+				{
+					hasIdentitySlot ? (
+						<slot name="identity" />
+					) : node.identityImage ? (
+						<img
+							src={node.identityImage}
+							alt={node.identityAlt ?? ""}
+							loading="eager"
+							decoding="async"
+						/>
+					) : (
+						<span class="dinkus-project-record__identity-placeholder" aria-hidden="true" />
+					)
+				}
+			</div>
+			{
+				(node.statusKicker || node.status) && (
+					<div class="dinkus-project-record__status-ticket">
+						<div>
+							{node.statusKicker && (
+								<span class="dinkus-project-record__label">{node.statusKicker}</span>
+							)}
+							{node.status && <strong>{node.status}</strong>}
+						</div>
+						<slot name="status-icon" />
+					</div>
+				)
+			}
+		</aside>
+
+		<section class="dinkus-project-record__role">
+			{
+				node.roleKicker && (
+					<p class="dinkus-project-record__kicker">
+						<slot name="role-icon" />
+						<span>{node.roleKicker}</span>
+					</p>
+				)
+			}
+			{node.roleHeadline && <h2>{node.roleHeadline}</h2>}
+			{node.roleBody && <p>{node.roleBody}</p>}
+		</section>
+
+		<section class="dinkus-project-record__evidence">
+			{
+				node.evidenceKicker && (
+					<p class="dinkus-project-record__kicker">
+						<slot name="evidence-icon" />
+						<span>{node.evidenceKicker}</span>
+					</p>
+				)
+			}
+			{node.proofHeadline && <h2>{node.proofHeadline}</h2>}
+			{node.evidence && <p>{node.evidence}</p>}
+			{
+				links.length > 0 && (
+					<div class="dinkus-project-record__links">
+						{links.map((link) => (
+							<a href={link.href}>
+								<span>{link.label}</span>
+								<slot name="link-icon" />
+							</a>
+						))}
+					</div>
+				)
+			}
+		</section>
+
+		{
+			showNext && (
+				<a class="dinkus-project-record__next" href={nextHref}>
+					<span>
+						{node.nextKicker && (
+							<span class="dinkus-project-record__label">{node.nextKicker}</span>
+						)}
+						<strong>{node.nextTitle}</strong>
+					</span>
+					<slot name="next-icon" />
+				</a>
+			)
+		}
+	</div>
+</article>
+
+<style>
+	@layer dinkus-blocks {
+	.dinkus-project-record {
+		--dinkus-project-record-ink: var(
+			--dinkus-action-background,
+			CanvasText
+		);
+		--dinkus-project-record-paper: var(--dinkus-action-color, Canvas);
+		--dinkus-project-record-signal: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, CanvasText 16%, Canvas)
+		);
+		--dinkus-project-record-evidence: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, CanvasText 8%, Canvas)
+		);
+	}
+
+	.dinkus-project-record__sheet {
+		display: grid;
+		grid-template-areas:
+			"intro companion"
+			"role evidence"
+			"next next";
+		grid-template-columns: minmax(0, 1fr) minmax(18rem, 20rem);
+		gap: var(--dinkus-content-gap, 0 1.75rem);
+		padding: var(--dinkus-panel-padding, 1.75rem);
+		border: var(
+			--dinkus-panel-border,
+			1px solid var(--dinkus-project-record-ink)
+		);
+		background: var(--dinkus-project-record-paper);
+		box-shadow: 0.7rem 0.7rem 0 var(--dinkus-project-record-signal);
+		transform: rotate(-0.15deg);
+	}
+
+	.dinkus-project-record__intro {
+		grid-area: intro;
+		min-height: 20.5rem;
+		padding: clamp(2rem, 5vw, 4rem) 1.125rem;
+	}
+
+	.dinkus-project-record__kicker,
+	.dinkus-project-record__label {
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.dinkus-project-record__kicker {
+		display: flex;
+		align-items: center;
+		gap: 0.55rem;
+		margin: 0 0 1rem;
+	}
+
+	.dinkus-project-record__intro h1 {
+		margin: 0 0 1.5rem;
+		font-size: var(--dinkus-title-size, clamp(3rem, 7vw, 6.5rem));
+		line-height: var(--dinkus-title-line-height, 0.9);
+		overflow-wrap: anywhere;
+	}
+
+	.dinkus-project-record__summary {
+		max-width: var(--dinkus-copy-max-width, 46rem);
+		margin: 0;
+		font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+		line-height: 1.55;
+	}
+
+	.dinkus-project-record__companion {
+		position: relative;
+		grid-area: companion;
+		align-self: start;
+		padding-bottom: 4.25rem;
+	}
+
+	.dinkus-project-record__identity {
+		display: grid;
+		min-height: 18.75rem;
+		place-items: center;
+		border: 1px solid var(--dinkus-project-record-ink);
+		background: var(--dinkus-project-record-paper);
+		overflow: hidden;
+	}
+
+	.dinkus-project-record__identity :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-height: 18.75rem;
+		object-fit: contain;
+	}
+
+	.dinkus-project-record__identity-placeholder {
+		width: 42%;
+		aspect-ratio: 1;
+		border: 1px dashed var(--dinkus-project-record-ink);
+		transform: rotate(-3deg);
+	}
+
+	.dinkus-project-record__status-ticket {
+		position: absolute;
+		right: 1.25rem;
+		bottom: 0.75rem;
+		left: 1.25rem;
+		z-index: 2;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: var(--dinkus-item-gap, 1rem);
+		padding: var(--dinkus-panel-padding, 1rem);
+		border: 1px solid var(--dinkus-project-record-ink);
+		background: var(--dinkus-project-record-signal);
+		box-shadow: 0.32rem 0.32rem 0 var(--dinkus-project-record-ink);
+	}
+
+	.dinkus-project-record__status-ticket strong {
+		display: block;
+		margin-top: 0.65rem;
+		font-size: clamp(1.35rem, 3vw, 1.85rem);
+		line-height: 0.95;
+	}
+
+	.dinkus-project-record__role {
+		grid-area: role;
+		padding: clamp(2rem, 5vw, 4rem) 1.125rem;
+		border-top: 1px dashed var(--dinkus-project-record-ink);
+	}
+
+	.dinkus-project-record__role h2 {
+		max-width: 14ch;
+		margin: 0 0 1.5rem;
+		font-size: clamp(2.75rem, 5.5vw, 5rem);
+		line-height: 0.95;
+	}
+
+	.dinkus-project-record__role > p:last-child {
+		max-width: 46rem;
+		margin: 0;
+		font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+		line-height: 1.55;
+	}
+
+	.dinkus-project-record__evidence {
+		grid-area: evidence;
+		align-self: start;
+		padding: clamp(1.5rem, 3vw, 2.2rem);
+		border: 1px solid var(--dinkus-project-record-ink);
+		background: var(--dinkus-project-record-evidence);
+		box-shadow: 0.4rem 0.4rem 0 var(--dinkus-project-record-ink);
+		transform: rotate(-1deg);
+	}
+
+	.dinkus-project-record__evidence h2 {
+		margin: 0 0 1rem;
+		font-size: clamp(2.2rem, 4vw, 3.2rem);
+		line-height: 1;
+	}
+
+	.dinkus-project-record__evidence > p:not(.dinkus-project-record__kicker) {
+		margin: 0;
+		line-height: 1.55;
+	}
+
+	.dinkus-project-record__links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--dinkus-item-gap, 0.75rem);
+		margin-top: 1.5rem;
+	}
+
+	.dinkus-project-record__links a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--dinkus-project-record-ink);
+		background: var(--dinkus-project-record-ink);
+		color: var(--dinkus-project-record-paper);
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.dinkus-project-record__next {
+		display: flex;
+		grid-area: next;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--dinkus-content-gap, 1.5rem);
+		margin-top: 1.75rem;
+		padding: var(--dinkus-panel-padding, 1.5rem);
+		border: 1px solid var(--dinkus-project-record-ink);
+		background: var(--dinkus-project-record-signal);
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.dinkus-project-record__next strong {
+		display: block;
+		margin-top: 0.45rem;
+		font-size: clamp(1.5rem, 3vw, 2.2rem);
+		line-height: 0.95;
+	}
+
+	@media (max-width: 58rem) {
+		.dinkus-project-record__sheet {
+			display: flex;
+			flex-direction: column;
+			padding: 0;
+			box-shadow: none;
+			transform: none;
+		}
+
+		.dinkus-project-record__companion {
+			order: 1;
+			width: 100%;
+			align-self: stretch;
+			padding-bottom: 0;
+		}
+
+		.dinkus-project-record__identity {
+			min-height: 17rem;
+			border-width: 0 0 1px;
+		}
+
+		.dinkus-project-record__status-ticket {
+			position: static;
+			margin: 0;
+			border-width: 0 0 1px;
+			box-shadow: none;
+		}
+
+		.dinkus-project-record__intro {
+			order: 2;
+			min-height: 0;
+		}
+
+		.dinkus-project-record__role {
+			order: 3;
+		}
+
+		.dinkus-project-record__evidence {
+			order: 4;
+			margin: 0;
+			border-width: 1px 0 0;
+			box-shadow: none;
+			transform: none;
+		}
+
+		.dinkus-project-record__next {
+			order: 5;
+			margin-top: 0;
+			border-width: 1px 0 0;
+		}
+	}
+	}
+</style>
