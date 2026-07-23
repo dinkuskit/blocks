@@ -216,6 +216,11 @@ const hasTitleSlot = Astro.slots.has("title");
 		overflow: hidden;
 	}
 
+	.dinkus-project-record__identity
+		> :global([data-dinkus-project-record-identity="fill"]) {
+		justify-self: stretch;
+	}
+
 	.dinkus-project-record__identity :global(img) {
 		display: block;
 		width: 100%;

@@ -50,5 +50,8 @@ jobs:
             tests/fixture-site/.artifacts/e2e/**/admin-modal-persisted.png
             tests/fixture-site/.artifacts/e2e/**/rendered-project-record-desktop.png
             tests/fixture-site/.artifacts/e2e/**/rendered-project-record-mobile.png
+            tests/fixture-site/.artifacts/e2e/**/project-record-identity-slot-opt-out-control.png
+            tests/fixture-site/.artifacts/e2e/**/project-record-identity-slot-proof.png
+            tests/fixture-site/.artifacts/e2e/**/project-record-identity-slot-geometry.json
           if-no-files-found: error
           retention-days: 7
