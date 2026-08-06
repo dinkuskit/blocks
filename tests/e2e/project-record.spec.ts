@@ -5,6 +5,7 @@ import {
 	authenticate,
 	expectBlockDeclared,
 	modalField,
+	publishChanges,
 	submitModalAndWaitForSave,
 	waitForAdmin,
 } from "./helpers";
@@ -140,10 +141,7 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	await page.reload();
 	await waitForAdmin(page);
 	await expect(page.getByRole("button", { name: "Edit" })).toHaveCount(2);
-	await page.getByRole("button", { name: "Publish changes" }).click();
-	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
-		timeout: 15_000,
-	});
+	await publishChanges(page);
 
 	await page.goto("/project-record");
 	const records = page.locator('[data-dinkus-block="project-record"]');

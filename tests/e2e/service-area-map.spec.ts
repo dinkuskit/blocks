@@ -4,6 +4,7 @@ import {
 	authenticate,
 	expectBlockDeclared,
 	modalField,
+	publishChanges,
 	submitModalAndWaitForSave,
 	waitForAdmin,
 } from "./helpers";
@@ -103,10 +104,7 @@ test("declares, inserts, edits, persists, and renders a service area map", async
 	await expect(
 		reloadedEditor.getByRole("button", { name: "Edit" }),
 	).toHaveCount(2);
-	await page.getByRole("button", { name: "Publish changes" }).click();
-	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
-		timeout: 15_000,
-	});
+	await publishChanges(page);
 
 	await page.goto("/service-area-map");
 	const rendered = page.locator('[data-dinkus-block="service-area-map"]');

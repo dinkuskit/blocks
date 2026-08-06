@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { isLegacyEmdashDoubleSaveRace } from "./helpers";
+
 const CANARY_HEADING = "Canary: one modal edit, one save path";
 
 async function authenticate(page: import("@playwright/test").Page) {
@@ -109,14 +111,16 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 		manualWrites.some((payload) => headingsIn(payload).includes(initialHeading)) &&
 		manualWrites.some((payload) => headingsIn(payload).includes(editedHeading));
 
-	if (!knownRaceObserved) {
+	if (isLegacyEmdashDoubleSaveRace) {
+		test.fail(
+			knownRaceObserved,
+			"EmDash 0.29.0 dispatches the block modal submit to the surrounding content form",
+		);
 		expect(manualWrites).toEqual([]);
 		expect(persistedHeading).toBe(editedHeading);
+	} else {
+		expect(manualWrites).toEqual([]);
+		expect(persistedHeading).toBe(editedHeading);
+		expect(knownRaceObserved).toBe(false);
 	}
-
-	test.fail(
-		true,
-		"EmDash 0.29.0 dispatches the block modal submit to the surrounding content form",
-	);
-	expect(manualWrites).toEqual([]);
 });

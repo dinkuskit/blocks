@@ -1,4 +1,4 @@
-import type { Element } from "@emdash-cms/blocks";
+import type { PortableTextBlockField } from "emdash";
 import {
 	definePlugin,
 	type PluginDescriptor,
@@ -73,7 +73,7 @@ export const ctaBandFields = [
 		label: "CTA URL",
 		placeholder: "/contact",
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const pageHeroFields = [
 	{
@@ -114,7 +114,7 @@ export const pageHeroFields = [
 		label: "Secondary CTA URL",
 		placeholder: "/about",
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const sectionHeaderFields = [
 	{
@@ -139,7 +139,7 @@ export const sectionHeaderFields = [
 		label: "Intro",
 		multiline: true,
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const factRailFields = [
 	{
@@ -174,7 +174,7 @@ export const factRailFields = [
 			},
 		],
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const galleryHeroFields = [
 	{
@@ -225,7 +225,7 @@ export const galleryHeroFields = [
 		label: "Secondary link URL",
 		placeholder: "/work",
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const ledgerCardsFields = [
 	{
@@ -262,7 +262,7 @@ export const ledgerCardsFields = [
 			},
 		],
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const galleryLanesFields = [
 	{
@@ -295,7 +295,7 @@ export const galleryLanesFields = [
 			},
 		],
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const searchBoardFields = [
 	{
@@ -338,7 +338,7 @@ export const searchBoardFields = [
 			},
 		],
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const serviceAreaMapFields = [
 	{
@@ -376,7 +376,7 @@ export const serviceAreaMapFields = [
 			},
 		],
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const dispatchFields = [
 	{
@@ -418,7 +418,7 @@ export const dispatchFields = [
 		label: "Email",
 		placeholder: "mailto:hello@example.com",
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 export const projectRecordFields = [
 	{
@@ -528,7 +528,7 @@ export const projectRecordFields = [
 		action_id: "nextHref",
 		label: "Next-project URL",
 	},
-] satisfies Element[];
+] satisfies PortableTextBlockField[];
 
 const definition: PluginDefinition = {
 	id: DINKUS_BLOCKS_PLUGIN_ID,

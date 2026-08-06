@@ -4,6 +4,7 @@ import {
 	authenticate,
 	expectBlockDeclared,
 	modalField,
+	publishChanges,
 	submitModalAndWaitForSave,
 	waitForAdmin,
 } from "./helpers";
@@ -102,10 +103,7 @@ test("declares, inserts, edits, persists, and renders a section header", async (
 		reloadedEditor.getByRole("button", { name: "Edit" }),
 	).toHaveCount(2);
 	await expect(reloadedEditor).toContainText(INSERTED_TITLE);
-	await page.getByRole("button", { name: "Publish changes" }).click();
-	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
-		timeout: 15_000,
-	});
+	await publishChanges(page);
 
 	await page.goto("/section-header");
 	const rendered = page.locator('[data-dinkus-block="section-header"]');

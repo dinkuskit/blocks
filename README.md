@@ -15,13 +15,17 @@ dogfood, and [COMPAT.md](COMPAT.md) for stored-content change rules.
 ## Block vocabulary
 
 The package declares a vocabulary of recurring section blocks as native
-Portable Text blocks, each proven end to end against EmDash 0.29.0:
+Portable Text blocks, each proven end to end against the EmDash matrix:
 
 - native plugin registration;
 - admin slash-menu insertion and field editing;
 - modal save and hard-reload persistence;
 - automatic Astro renderer registration; and
 - published SSR updates without a rebuild.
+
+Current compatibility work tracks EmDash 0.29.0 and 0.32.0 with a conditional
+expected-failure sentinel when the modal race appears in 0.29.0. Matrix execution and captured evidence are
+tracked in [the compatibility spike notes](docs/spikes/2026-08-06-emdash-compat-matrix.md).
 
 Every block ships a neutral renderer with `dinkus-*` classes and a
 `data-dinkus-block` hook so sites can override the look while keeping the
@@ -48,9 +52,9 @@ and [pattern catalog contract](patterns/README.md).
 | Dispatch | `dinkus.dispatch` | contact band with CTA + tel/mailto links |
 | Project Record | `dinkus.project-record` | identity art, status ticket, role, evidence-link repeater, next-project navigation |
 
-Repeater sub-fields are scalar only in Block Kit 0.29.0, so image
-sub-fields (gallery lanes) carry URL strings rather than a media picker —
-a gap noted for later tooling.
+Repeater sub-fields remain scalar-only for the current supported blocks, so image
+sub-fields (gallery lanes) carry URL strings rather than a media picker — a gap
+noted for later tooling.
 
 The package is intentionally private at `0.0.0`. It has not passed the
 Smoky Works dogfood gate and is not published to npm or an EmDash registry.

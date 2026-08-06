@@ -35,8 +35,9 @@ make a breaking schema change and promise the migration later.
 ## Platform range
 
 EmDash is pre-1.0. Fixture versions stay exact, and the peer range names only
-versions proven by the compatibility suite. A wider range requires current
-admin edit/save/publish and public SSR proof.
+versions proven by the compatibility suite. The current matrix includes 0.29.0 and
+0.32.0, and both versions require current admin edit/save/publish and public SSR
+proof before widening.
 
 The first schema-changing release must also add the package's machine-readable
 schema-version manifest and migration command. Until then, the current field
