@@ -1,0 +1,127 @@
+From 98e887354163c43b9d4538946620d0cce4298c24 Mon Sep 17 00:00:00 2001
+From: Bobby Bones <159389674+saariuslystoned@users.noreply.github.com>
+Date: Tue, 21 Jul 2026 01:53:39 -0400
+Subject: [PATCH] fix(admin): isolate plugin block modal saves (#2160)
+
+Prevent block dialog submissions from reaching the surrounding content form so stale page state cannot race the intended block update.
+
+Co-authored-by: Cursor <cursoragent@cursor.com>
+---
+ .changeset/quiet-blocks-save.md               |  5 ++
+ .../src/components/PortableTextEditor.tsx     |  1 +
+ .../tests/editor/plugin-block-modal.test.tsx  | 79 +++++++++++++++++++
+ 3 files changed, 85 insertions(+)
+ create mode 100644 .changeset/quiet-blocks-save.md
+ create mode 100644 packages/admin/tests/editor/plugin-block-modal.test.tsx
+
+diff --git a/.changeset/quiet-blocks-save.md b/.changeset/quiet-blocks-save.md
+new file mode 100644
+index 00000000..f434c93e
+--- /dev/null
++++ b/.changeset/quiet-blocks-save.md
+@@ -0,0 +1,5 @@
++---
++"@emdash-cms/admin": patch
++---
++
++Fixes plugin block edits being overwritten when saving from the block modal.
+diff --git a/packages/admin/src/components/PortableTextEditor.tsx b/packages/admin/src/components/PortableTextEditor.tsx
+index 28b13a3f..d38f4bf3 100644
+--- a/packages/admin/src/components/PortableTextEditor.tsx
++++ b/packages/admin/src/components/PortableTextEditor.tsx
+@@ -1396,6 +1396,7 @@ function PluginBlockModal({
+ 
+ 	const handleSubmit = (e: React.FormEvent) => {
+ 		e.preventDefault();
++		e.stopPropagation();
+ 		if (block?.fields && block.fields.length > 0) {
+ 			onInsert(formValues);
+ 		} else {
+diff --git a/packages/admin/tests/editor/plugin-block-modal.test.tsx b/packages/admin/tests/editor/plugin-block-modal.test.tsx
+new file mode 100644
+index 00000000..aee1e451
+--- /dev/null
++++ b/packages/admin/tests/editor/plugin-block-modal.test.tsx
+@@ -0,0 +1,79 @@
++import * as React from "react";
++import { describe, expect, it, vi } from "vitest";
++
++import {
++	PortableTextEditor,
++	type PortableTextEditorProps,
++} from "../../src/components/PortableTextEditor";
++import { render } from "../utils/render";
++
++vi.mock("../../src/components/MediaPickerModal", () => ({
++	MediaPickerModal: () => null,
++}));
++
++vi.mock("../../src/components/SectionPickerModal", () => ({
++	SectionPickerModal: () => null,
++}));
++
++vi.mock("../../src/components/editor/DragHandleWrapper", () => ({
++	DragHandleWrapper: () => null,
++}));
++
++const pluginBlocks: NonNullable<PortableTextEditorProps["pluginBlocks"]> = [
++	{
++		type: "test.hero",
++		pluginId: "test-blocks",
++		label: "Test Hero",
++		fields: [
++			{
++				type: "text_input",
++				action_id: "heading",
++				label: "Heading",
++			},
++		],
++	},
++];
++
++describe("plugin block modal", () => {
++	it("saves an edited block without submitting the surrounding content form", async () => {
++		const onPageSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
++		const onChange = vi.fn<NonNullable<PortableTextEditorProps["onChange"]>>();
++		const screen = await render(
++			<form onSubmit={onPageSubmit}>
++				<PortableTextEditor
++					value={[
++						{
++							_type: "test.hero",
++							_key: "hero-1",
++							heading: "Before",
++						},
++					]}
++					onChange={onChange}
++					pluginBlocks={pluginBlocks}
++				/>
++			</form>,
++		);
++
++		const editButton = screen.getByRole("button", { name: "Edit" });
++		await expect.element(editButton).toBeVisible();
++		await editButton.click();
++
++		const heading = screen.getByRole("textbox");
++		await expect.element(heading).toHaveValue("Before");
++		await heading.fill("After");
++		screen.getByRole("button", { name: "Save", exact: true }).element().click();
++
++		expect(onPageSubmit).not.toHaveBeenCalled();
++		await vi.waitFor(() => {
++			const savedBlocks = onChange.mock.lastCall?.[0];
++			expect(savedBlocks).toEqual(
++				expect.arrayContaining([
++					expect.objectContaining({
++						_type: "test.hero",
++						heading: "After",
++					}),
++				]),
++			);
++		});
++	});
++});
+-- 
+2.55.0
+
