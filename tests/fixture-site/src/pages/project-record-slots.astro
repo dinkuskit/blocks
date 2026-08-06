@@ -1,16 +1,76 @@
 ---
 import {
 	safeCtaHref,
+	type ProjectRecordAnnotations,
 	type PortableTextNode,
 	type ProjectRecordLink,
 	type ProjectRecordNode,
 } from "@dinkuskit/blocks";
 import { ProjectRecord } from "@dinkuskit/blocks/astro";
 
+const projectRecordAnnotations: ProjectRecordAnnotations = {
+	category: {
+		"data-project-record-annotation": "category",
+	},
+	title: {
+		"data-project-record-annotation": "title",
+	},
+	summary: {
+		"data-project-record-annotation": "summary",
+	},
+	statusKicker: {
+		"data-project-record-annotation": "status-kicker",
+	},
+	status: {
+		"data-project-record-annotation": "status",
+	},
+	roleKicker: {
+		"data-project-record-annotation": "role-kicker",
+	},
+	roleHeadline: {
+		"data-project-record-annotation": "role-headline",
+	},
+	roleBody: {
+		"data-project-record-annotation": "role-body",
+	},
+	evidenceKicker: {
+		"data-project-record-annotation": "evidence-kicker",
+	},
+	proofHeadline: {
+		"data-project-record-annotation": "proof-headline",
+	},
+	evidence: {
+		"data-project-record-annotation": "evidence",
+	},
+	nextKicker: {
+		"data-project-record-annotation": "next-kicker",
+	},
+	nextTitle: {
+		"data-project-record-annotation": "next-title",
+	},
+	links: [
+		{
+			label: {
+				"data-project-record-annotation": "filtered-link-label",
+			},
+			href: {
+				"data-project-record-annotation": "filtered-link-href",
+			},
+		},
+		{
+			label: {
+				"data-project-record-annotation": "proof-link-label",
+			},
+			href: {
+				"data-project-record-annotation": "proof-link-href",
+			},
+		},
+	],
+};
 const proofLink = {
 	_key: "slot-proof",
 	label: "Read slotted proof",
-	href: "/proof",
+	href: safeCtaHref("/proof") ?? "/proof",
 } satisfies ProjectRecordLink;
 const node = {
 	_type: "dinkus.project-record",
@@ -26,7 +86,10 @@ const node = {
 	evidenceKicker: "Evidence state",
 	proofHeadline: "The override surface renders.",
 	evidence: "This page imports safe URL handling, the Portable Text base, the Project Record node, and its repeater item from the package root.",
-	links: [{ ...proofLink, href: safeCtaHref(proofLink.href) }],
+	links: [
+		{ _key: "unsafe-proof", label: "Filtered unsafe proof", href: "javascript:alert(1)" },
+		{ ...proofLink, href: safeCtaHref(proofLink.href) },
+	],
 	nextKicker: "Next project",
 	nextTitle: "Fixture home",
 	nextHref: "/",
@@ -60,7 +123,7 @@ const absoluteNode = {
 	</head>
 	<body data-portable-type={portableNode._type}>
 		<main>
-			<ProjectRecord node={node}>
+			<ProjectRecord node={node} annotations={projectRecordAnnotations}>
 				<span slot="category-icon" data-slot="category-icon" aria-hidden="true">◆</span>
 				<Fragment slot="title">Slotted project <wbr />title</Fragment>
 				<div slot="identity" data-slot="identity" aria-hidden="true">PR</div>

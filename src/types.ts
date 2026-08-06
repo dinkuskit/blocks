@@ -130,6 +130,33 @@ export interface ProjectRecordLink {
 	href?: string;
 }
 
+/** Presentation-neutral metadata hooks; structural attributes stay renderer-owned. */
+export type FieldAnnotationAttributes = Partial<
+	Record<`data-${string}`, string | number | boolean>
+>;
+
+export interface ProjectRecordLinkAnnotation {
+	label?: FieldAnnotationAttributes;
+	href?: FieldAnnotationAttributes;
+}
+
+export interface ProjectRecordAnnotations {
+	category?: FieldAnnotationAttributes;
+	title?: FieldAnnotationAttributes;
+	summary?: FieldAnnotationAttributes;
+	statusKicker?: FieldAnnotationAttributes;
+	status?: FieldAnnotationAttributes;
+	roleKicker?: FieldAnnotationAttributes;
+	roleHeadline?: FieldAnnotationAttributes;
+	roleBody?: FieldAnnotationAttributes;
+	evidenceKicker?: FieldAnnotationAttributes;
+	proofHeadline?: FieldAnnotationAttributes;
+	evidence?: FieldAnnotationAttributes;
+	nextTitle?: FieldAnnotationAttributes;
+	nextKicker?: FieldAnnotationAttributes;
+	links?: ProjectRecordLinkAnnotation[];
+}
+
 export interface ProjectRecordNode extends PortableTextNode {
 	_type?: "dinkus.project-record";
 	recordId?: string;
