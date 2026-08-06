@@ -1,0 +1,43 @@
+{
+	"description": "Block types outside the registered vocabulary; parse fails and the components map never dispatches them.",
+	"cases": [
+		{
+			"name": "unregistered dinkus type",
+			"type": "dinkus.testimonial",
+			"node": {
+				"_type": "dinkus.testimonial",
+				"_key": "unknown-1",
+				"quote": "Hi"
+			},
+			"expect": {
+				"code": "unknown-block",
+				"path": "$"
+			}
+		},
+		{
+			"name": "core text block type",
+			"type": "block",
+			"node": {
+				"_type": "block",
+				"_key": "unknown-2",
+				"children": []
+			},
+			"expect": {
+				"code": "unknown-block",
+				"path": "$"
+			}
+		},
+		{
+			"name": "empty type",
+			"type": "",
+			"node": {
+				"_type": "",
+				"_key": "unknown-3"
+			},
+			"expect": {
+				"code": "unknown-block",
+				"path": "$"
+			}
+		}
+	]
+}

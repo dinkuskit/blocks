@@ -2,6 +2,8 @@
 import { getEmDashEntry, type PortableTextBlock } from "emdash";
 import { PortableText } from "emdash/ui";
 
+import "../dinkus-policy";
+
 const { entry: page } = await getEmDashEntry("pages", "home");
 const content = page?.data.content as PortableTextBlock[] | undefined;
 ---

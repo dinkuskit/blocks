@@ -2,6 +2,8 @@
 import { getEmDashEntry, type PortableTextBlock } from "emdash";
 import { PortableText } from "emdash/ui";
 
+import "../dinkus-policy";
+
 const { slug } = Astro.params;
 const { entry: page } = await getEmDashEntry("pages", slug ?? "");
 

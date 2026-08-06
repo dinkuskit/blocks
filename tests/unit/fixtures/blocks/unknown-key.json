@@ -1,0 +1,90 @@
+{
+	"description": "Undeclared keys: rejected at the strict boundary, stripped (never rendered) at the render boundary.",
+	"cases": [
+		{
+			"name": "unknown top-level key",
+			"type": "dinkus.cta-band",
+			"node": {
+				"_type": "dinkus.cta-band",
+				"_key": "unknown-top",
+				"heading": "Kept heading",
+				"onclick": "alert(1)"
+			},
+			"expect": {
+				"code": "unknown-key",
+				"path": "onclick"
+			},
+			"keptFields": [
+				"_type",
+				"_key",
+				"heading"
+			]
+		},
+		{
+			"name": "unknown repeater item key",
+			"type": "dinkus.fact-rail",
+			"node": {
+				"_type": "dinkus.fact-rail",
+				"_key": "unknown-item",
+				"facts": [
+					{
+						"_key": "fact-1",
+						"label": "Kept label",
+						"onmouseover": "alert(1)"
+					}
+				]
+			},
+			"expect": {
+				"code": "unknown-key",
+				"path": "facts[0].onmouseover"
+			},
+			"keptFields": [
+				"_type",
+				"_key",
+				"facts"
+			]
+		},
+		{
+			"name": "underscore-prefixed internal key",
+			"type": "dinkus.cta-band",
+			"node": {
+				"_type": "dinkus.cta-band",
+				"_key": "unknown-underscore",
+				"heading": "Kept heading",
+				"_metadata": {
+					"editor": "unknown"
+				}
+			},
+			"expect": {
+				"code": "unknown-key",
+				"path": "_metadata"
+			},
+			"keptFields": [
+				"_type",
+				"_key",
+				"heading"
+			]
+		},
+		{
+			"name": "__proto__ key never pollutes",
+			"type": "dinkus.cta-band",
+			"node": {
+				"_type": "dinkus.cta-band",
+				"_key": "unknown-proto",
+				"heading": "Kept heading",
+				"__proto__": {
+					"polluted": true
+				}
+			},
+			"expect": {
+				"code": "unknown-key",
+				"path": "__proto__"
+			},
+			"keptFields": [
+				"_type",
+				"_key",
+				"heading"
+			]
+		}
+	]
+}

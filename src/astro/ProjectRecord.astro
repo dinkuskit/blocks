@@ -1,6 +1,8 @@
 ---
 import {
-	safeCtaHref,
+	guardDinkusBlockNode,
+	safeMediaSrc,
+	safeNavigationHref,
 	type FieldAnnotationAttributes,
 	type ProjectRecordLink,
 	type ProjectRecordAnnotations,
@@ -10,13 +12,19 @@ import {
 interface Props {
 	node: ProjectRecordNode;
 	annotations?: ProjectRecordAnnotations;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node, annotations = {} } = Astro.props;
-const links = (Array.isArray(node.links) ? node.links : [])
+const { node: rawNode, annotations = {}, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.project-record", rawNode, {
+	siteId,
+	entryId,
+});
+const links = (node?.links ?? [])
 	.map((link, annotationIndex) => ({
 		...link,
-		href: safeCtaHref(link?.href),
+		href: safeNavigationHref(link?.href),
 		annotationIndex,
 	}))
 	.filter((link): link is ProjectRecordLink & {
@@ -26,8 +34,9 @@ const links = (Array.isArray(node.links) ? node.links : [])
 	} =>
 		Boolean(link.label && link.href),
 	);
-const nextHref = safeCtaHref(node.nextHref);
-const showNext = Boolean(node.nextTitle && nextHref);
+const identitySrc = safeMediaSrc(node?.identityImage);
+const nextHref = safeNavigationHref(node?.nextHref);
+const showNext = Boolean(node?.nextTitle && nextHref);
 const hasIdentitySlot = Astro.slots.has("identity");
 const hasTitleSlot = Astro.slots.has("title");
 
@@ -73,147 +82,146 @@ const annotationsByField = {
 } as const;
 ---
 
-<article
-	class="dinkus-project-record"
-	data-dinkus-block="project-record"
-	data-project-record={node.recordId || undefined}
->
-	<div class="dinkus-project-record__sheet">
-		<header class="dinkus-project-record__intro">
-			{
-				node.category && (
-					<p class="dinkus-project-record__kicker">
-						<slot name="category-icon" />
-						<span {...annotationsByField.category}>{node.category}</span>
-					</p>
-				)
-			}
-			{
-				(node.title || hasTitleSlot) && (
-					<h1 {...annotationsByField.title}>
-						<slot name="title">{node.title}</slot>
-					</h1>
-				)
-			}
-			{node.summary && (
-				<p
-					class="dinkus-project-record__summary"
-					{...annotationsByField.summary}
-				>
-					{node.summary}
-				</p>
-			)}
-		</header>
-
-		<aside
-			class="dinkus-project-record__companion"
-			aria-label={node.title ? `${node.title} identity and status` : "Project identity and status"}
+{
+	node && (
+		<article
+			class="dinkus-project-record"
+			data-dinkus-block="project-record"
+			data-project-record={node.recordId || undefined}
 		>
-			<div class="dinkus-project-record__identity">
-				{
-					hasIdentitySlot ? (
-						<slot name="identity" />
-					) : node.identityImage ? (
-						<img
-							src={node.identityImage}
-							alt={node.identityAlt ?? ""}
-							loading="eager"
-							decoding="async"
-						/>
-					) : (
-						<span class="dinkus-project-record__identity-placeholder" aria-hidden="true" />
-					)
-				}
-			</div>
-			{
-				(node.statusKicker || node.status) && (
-					<div class="dinkus-project-record__status-ticket">
-						<div>
-							{node.statusKicker && (
+			<div class="dinkus-project-record__sheet">
+				<header class="dinkus-project-record__intro">
+					{node.category && (
+						<p class="dinkus-project-record__kicker">
+							<slot name="category-icon" />
+							<span {...annotationsByField.category}>{node.category}</span>
+						</p>
+					)}
+					{(node.title || hasTitleSlot) && (
+						<h1 {...annotationsByField.title}>
+							<slot name="title">{node.title}</slot>
+						</h1>
+					)}
+					{node.summary && (
+						<p
+							class="dinkus-project-record__summary"
+							{...annotationsByField.summary}
+						>
+							{node.summary}
+						</p>
+					)}
+				</header>
+
+				<aside
+					class="dinkus-project-record__companion"
+					aria-label={node.title ? `${node.title} identity and status` : "Project identity and status"}
+				>
+					<div class="dinkus-project-record__identity">
+						{hasIdentitySlot ? (
+							<slot name="identity" />
+						) : identitySrc ? (
+							<img
+								src={identitySrc}
+								alt={node.identityAlt ?? ""}
+								loading="eager"
+								decoding="async"
+							/>
+						) : (
+							<span
+								class="dinkus-project-record__identity-placeholder"
+								aria-hidden="true"
+							/>
+						)}
+					</div>
+					{(node.statusKicker || node.status) && (
+						<div class="dinkus-project-record__status-ticket">
+							<div>
+								{node.statusKicker && (
+									<span
+										class="dinkus-project-record__label"
+										{...annotationsByField.statusKicker}
+									>
+										{node.statusKicker}
+									</span>
+								)}
+								{node.status && (
+									<strong {...annotationsByField.status}>{node.status}</strong>
+								)}
+							</div>
+							<slot name="status-icon" />
+						</div>
+					)}
+				</aside>
+
+				<section class="dinkus-project-record__role">
+					{node.roleKicker && (
+						<p class="dinkus-project-record__kicker">
+							<slot name="role-icon" />
+							<span {...annotationsByField.roleKicker}>{node.roleKicker}</span>
+						</p>
+					)}
+					{node.roleHeadline && (
+						<h2 {...annotationsByField.roleHeadline}>{node.roleHeadline}</h2>
+					)}
+					{node.roleBody && (
+						<p {...annotationsByField.roleBody}>{node.roleBody}</p>
+					)}
+				</section>
+
+				<section class="dinkus-project-record__evidence">
+					{node.evidenceKicker && (
+						<p class="dinkus-project-record__kicker">
+							<slot name="evidence-icon" />
+							<span {...annotationsByField.evidenceKicker}>
+								{node.evidenceKicker}
+							</span>
+						</p>
+					)}
+					{node.proofHeadline && (
+						<h2 {...annotationsByField.proofHeadline}>{node.proofHeadline}</h2>
+					)}
+					{node.evidence && (
+						<p {...annotationsByField.evidence}>{node.evidence}</p>
+					)}
+					{links.length > 0 && (
+						<div class="dinkus-project-record__links">
+							{links.map((link) => (
+								<a
+									href={link.href}
+									{...annotationsByField.links[link.annotationIndex]?.href}
+								>
+									<span
+										{...annotationsByField.links[link.annotationIndex]?.label}
+									>
+										{link.label}
+									</span>
+									<slot name="link-icon" />
+								</a>
+							))}
+						</div>
+					)}
+				</section>
+
+				{showNext && (
+					<a class="dinkus-project-record__next" href={nextHref}>
+						<span>
+							{node.nextKicker && (
 								<span
 									class="dinkus-project-record__label"
-									{...annotationsByField.statusKicker}
+									{...annotationsByField.nextKicker}
 								>
-									{node.statusKicker}
+									{node.nextKicker}
 								</span>
 							)}
-							{node.status && <strong {...annotationsByField.status}>{node.status}</strong>}
-						</div>
-						<slot name="status-icon" />
-					</div>
-				)
-			}
-		</aside>
-
-		<section class="dinkus-project-record__role">
-			{
-				node.roleKicker && (
-					<p class="dinkus-project-record__kicker">
-						<slot name="role-icon" />
-						<span {...annotationsByField.roleKicker}>{node.roleKicker}</span>
-					</p>
-				)
-			}
-			{node.roleHeadline && (
-				<h2 {...annotationsByField.roleHeadline}>{node.roleHeadline}</h2>
-			)}
-			{node.roleBody && <p {...annotationsByField.roleBody}>{node.roleBody}</p>}
-		</section>
-
-		<section class="dinkus-project-record__evidence">
-			{
-				node.evidenceKicker && (
-					<p class="dinkus-project-record__kicker">
-						<slot name="evidence-icon" />
-						<span {...annotationsByField.evidenceKicker}>{node.evidenceKicker}</span>
-					</p>
-				)
-			}
-			{node.proofHeadline && (
-				<h2 {...annotationsByField.proofHeadline}>{node.proofHeadline}</h2>
-			)}
-			{node.evidence && <p {...annotationsByField.evidence}>{node.evidence}</p>}
-			{
-				links.length > 0 && (
-					<div class="dinkus-project-record__links">
-						{links.map((link) => (
-							<a
-								href={link.href}
-								{...annotationsByField.links[link.annotationIndex]?.href}
-							>
-								<span
-									{...annotationsByField.links[link.annotationIndex]?.label}
-								>
-									{link.label}
-								</span>
-								<slot name="link-icon" />
-							</a>
-						))}
-					</div>
-				)
-			}
-		</section>
-
-		{
-			showNext && (
-				<a class="dinkus-project-record__next" href={nextHref}>
-					<span>
-						{node.nextKicker && (
-							<span
-								class="dinkus-project-record__label"
-								{...annotationsByField.nextKicker}
-							>
-								{node.nextKicker}
-							</span>
-						)}
-						<strong {...annotationsByField.nextTitle}>{node.nextTitle}</strong>
-					</span>
-					<slot name="next-icon" />
-				</a>
-			)
-		}
-	</div>
-</article>
+							<strong {...annotationsByField.nextTitle}>{node.nextTitle}</strong>
+						</span>
+						<slot name="next-icon" />
+					</a>
+				)}
+			</div>
+		</article>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

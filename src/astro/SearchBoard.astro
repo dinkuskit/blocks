@@ -1,57 +1,64 @@
 ---
 import type { SearchBoardNode, SearchLink } from "../types";
-import { safeCtaHref } from "../links";
+import { safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: SearchBoardNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const links = (Array.isArray(node.links) ? node.links : [])
-	.map((link) => ({ ...link, href: safeCtaHref(link?.href) }))
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.search-board", rawNode, {
+	siteId,
+	entryId,
+});
+const links = (node?.links ?? [])
+	.map((link: SearchLink) => ({ ...link, href: safeNavigationHref(link?.href) }))
 	.filter((link): link is { label: string; href: string } =>
 		Boolean(link.label && link.href),
 	);
 ---
 
-<section class="dinkus-search-board" data-dinkus-block="search-board">
-	{
-		(node.number || node.kicker || node.title || node.intro) && (
-			<header class="dinkus-search-board__header">
-				{(node.number || node.kicker) && (
-					<p class="dinkus-search-board__meta">
-						{node.number && (
-							<span
-								class="dinkus-search-board__number"
-								aria-hidden="true"
-							>
-								{node.number}
-							</span>
-						)}
-						{node.kicker && (
-							<span class="dinkus-search-board__kicker">{node.kicker}</span>
-						)}
-					</p>
-				)}
-				{node.title && <h2>{node.title}</h2>}
-				{node.intro && (
-					<p class="dinkus-search-board__intro">{node.intro}</p>
-				)}
-			</header>
-		)
-	}
-	{
-		links.length > 0 && (
-			<ul class="dinkus-search-board__list">
-				{links.map((link) => (
-					<li>
-						<a href={link.href}>{link.label}</a>
-					</li>
-				))}
-			</ul>
-		)
-	}
-</section>
+{
+	node && (
+		<section class="dinkus-search-board" data-dinkus-block="search-board">
+			{(node.number || node.kicker || node.title || node.intro) && (
+				<header class="dinkus-search-board__header">
+					{(node.number || node.kicker) && (
+						<p class="dinkus-search-board__meta">
+							{node.number && (
+								<span
+									class="dinkus-search-board__number"
+									aria-hidden="true"
+								>
+									{node.number}
+								</span>
+							)}
+							{node.kicker && (
+								<span class="dinkus-search-board__kicker">{node.kicker}</span>
+							)}
+						</p>
+					)}
+					{node.title && <h2>{node.title}</h2>}
+					{node.intro && (
+						<p class="dinkus-search-board__intro">{node.intro}</p>
+					)}
+				</header>
+			)}
+			{links.length > 0 && (
+				<ul class="dinkus-search-board__list">
+					{links.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))}
+				</ul>
+			)}
+		</section>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

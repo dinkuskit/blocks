@@ -329,6 +329,56 @@
             }
           ]
         }
+      },
+      {
+        "id": "hardening",
+        "slug": "hardening",
+        "status": "published",
+        "data": {
+          "title": "Runtime guard fixture",
+          "content": [
+            {
+              "_type": "dinkus.section-header",
+              "_key": "hardening-valid",
+              "number": "H1",
+              "kicker": "Runtime guard",
+              "title": "Valid blocks render",
+              "intro": "Sibling malformed blocks are omitted without taking down this page."
+            },
+            {
+              "_type": "dinkus.cta-band",
+              "_key": "hardening-malformed",
+              "heading": 42,
+              "body": "This malformed block must be omitted at render.",
+              "ctaLabel": "Never rendered",
+              "ctaHref": "/never"
+            },
+            {
+              "_type": "dinkus.cta-band",
+              "_key": "hardening-unknown-key",
+              "heading": "Unknown keys are stripped",
+              "onclick": "alert(1)"
+            },
+            {
+              "_type": "dinkus.gallery-lanes",
+              "_key": "hardening-media",
+              "lanes": [
+                {
+                  "_key": "lane-approved",
+                  "label": "Approved media host",
+                  "image": "https://media.dinkuskit.example/approved.jpg",
+                  "href": "https://partner.dinkuskit.example/case"
+                },
+                {
+                  "_key": "lane-unapproved",
+                  "label": "Unapproved media host",
+                  "image": "https://evil.example/leak.jpg",
+                  "href": "https://evil.example/away"
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   },

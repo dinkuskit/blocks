@@ -6,7 +6,38 @@ import {
 	type ResolvedPlugin,
 } from "emdash";
 
-export { safeCtaHref } from "./links";
+export {
+	DINKUS_URL_MAX_LENGTH,
+	configureDinkusUrlPolicy,
+	safeCtaHref,
+	safeMediaSrc,
+	safeNavigationHref,
+	type DinkusUrlPolicy,
+} from "./links";
+export {
+	DINKUS_BLOCK_SCHEMA_VERSION,
+	DINKUS_REPEATER_BLOCK_MAX_BYTES,
+	DINKUS_SCALAR_BLOCK_MAX_BYTES,
+	DINKUS_STRING_CAPS,
+	configureDinkusBlockRuntime,
+	dinkusBlockSchemas,
+	guardDinkusBlockNode,
+	isDinkusBlockType,
+	parseDinkusBlockNode,
+	type DinkusBlockGuardContext,
+	type DinkusBlockIssue,
+	type DinkusBlockIssueCode,
+	type DinkusBlockLogEvent,
+	type DinkusBlockLogger,
+	type DinkusBlockNodeMap,
+	type DinkusBlockParseResult,
+	type DinkusBlockSchema,
+	type DinkusBlockType,
+	type DinkusRepeaterSchema,
+	type DinkusStringKind,
+	type DinkusUnknownKeyPolicy,
+	type ParseDinkusBlockNodeOptions,
+} from "./schema";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type {
 	CtaBandNode,

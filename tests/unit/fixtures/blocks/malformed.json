@@ -1,0 +1,135 @@
+{
+	"description": "Known keys carrying wrong-typed values; every case must fail closed (block omitted at render).",
+	"cases": [
+		{
+			"name": "scalar field holds a number",
+			"type": "dinkus.cta-band",
+			"node": {
+				"_type": "dinkus.cta-band",
+				"_key": "bad-heading",
+				"heading": 42
+			},
+			"expect": {
+				"code": "invalid-value",
+				"path": "heading"
+			}
+		},
+		{
+			"name": "scalar field holds an object",
+			"type": "dinkus.page-hero",
+			"node": {
+				"_type": "dinkus.page-hero",
+				"_key": "bad-headline",
+				"headline": {
+					"evil": true
+				}
+			},
+			"expect": {
+				"code": "invalid-value",
+				"path": "headline"
+			}
+		},
+		{
+			"name": "repeater holds a string",
+			"type": "dinkus.fact-rail",
+			"node": {
+				"_type": "dinkus.fact-rail",
+				"_key": "bad-facts",
+				"facts": "nope"
+			},
+			"expect": {
+				"code": "invalid-value",
+				"path": "facts"
+			}
+		},
+		{
+			"name": "repeater item is not an object",
+			"type": "dinkus.fact-rail",
+			"node": {
+				"_type": "dinkus.fact-rail",
+				"_key": "bad-fact-item",
+				"facts": [
+					{
+						"_key": "ok",
+						"label": "Fine"
+					},
+					"nope"
+				]
+			},
+			"expect": {
+				"code": "invalid-value",
+				"path": "facts[1]"
+			}
+		},
+		{
+			"name": "repeater item field holds a number",
+			"type": "dinkus.ledger-cards",
+			"node": {
+				"_type": "dinkus.ledger-cards",
+				"_key": "bad-card-title",
+				"cards": [
+					{
+						"_key": "card-1",
+						"title": 7
+					}
+				]
+			},
+			"expect": {
+				"code": "invalid-value",
+				"path": "cards[0].title"
+			}
+		},
+		{
+			"name": "_key is not a string",
+			"type": "dinkus.cta-band",
+			"node": {
+				"_type": "dinkus.cta-band",
+				"_key": 9,
+				"heading": "Fine"
+			},
+			"expect": {
+				"code": "invalid-value",
+				"path": "_key"
+			}
+		},
+		{
+			"name": "_type does not match the schema",
+			"type": "dinkus.cta-band",
+			"node": {
+				"_type": "dinkus.page-hero",
+				"_key": "wrong-type"
+			},
+			"expect": {
+				"code": "wrong-block-type",
+				"path": "_type"
+			}
+		},
+		{
+			"name": "node is a string",
+			"type": "dinkus.cta-band",
+			"node": "not-a-block",
+			"expect": {
+				"code": "not-an-object",
+				"path": "$"
+			}
+		},
+		{
+			"name": "node is an array",
+			"type": "dinkus.cta-band",
+			"node": [],
+			"expect": {
+				"code": "not-an-object",
+				"path": "$"
+			}
+		},
+		{
+			"name": "node is null",
+			"type": "dinkus.cta-band",
+			"node": null,
+			"expect": {
+				"code": "not-an-object",
+				"path": "$"
+			}
+		}
+	]
+}

@@ -1,18 +1,26 @@
 ---
 import type { GalleryLane, GalleryLanesNode } from "../types";
-import { safeCtaHref } from "../links";
+import { safeMediaSrc, safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: GalleryLanesNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const lanes = (Array.isArray(node.lanes) ? node.lanes : [])
-	.filter(
-		(lane): lane is GalleryLane =>
-			Boolean(lane && typeof lane === "object" && (lane.label || lane.image)),
-	)
-	.map((lane) => ({ ...lane, href: safeCtaHref(lane.href) }));
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.gallery-lanes", rawNode, {
+	siteId,
+	entryId,
+});
+const lanes = (node?.lanes ?? [])
+	.map((lane: GalleryLane) => ({
+		...lane,
+		href: safeNavigationHref(lane.href),
+		image: safeMediaSrc(lane.image),
+	}))
+	.filter((lane) => Boolean(lane.label || lane.image));
 ---
 
 {

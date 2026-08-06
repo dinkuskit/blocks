@@ -1,0 +1,173 @@
+{
+	"dinkus.cta-band": {
+		"_type": "dinkus.cta-band",
+		"_key": "fixture-cta-band",
+		"eyebrow": "Compatibility fixture",
+		"heading": "A focused call to action",
+		"body": "Stored copy that must round-trip untouched.",
+		"ctaLabel": "Read the proof",
+		"ctaHref": "/proof"
+	},
+	"dinkus.page-hero": {
+		"_type": "dinkus.page-hero",
+		"_key": "fixture-page-hero",
+		"eyebrow": "Compatibility fixture",
+		"headline": "Page hero headline",
+		"deck": "A deck sentence for the hero.",
+		"primaryLabel": "Primary",
+		"primaryHref": "/contact",
+		"secondaryLabel": "Secondary",
+		"secondaryHref": "https://example.com/about"
+	},
+	"dinkus.section-header": {
+		"_type": "dinkus.section-header",
+		"_key": "fixture-section-header",
+		"number": "01",
+		"kicker": "Kicker",
+		"title": "Section title",
+		"intro": "Intro copy for the section."
+	},
+	"dinkus.fact-rail": {
+		"_type": "dinkus.fact-rail",
+		"_key": "fixture-fact-rail",
+		"ariaLabel": "Quick facts",
+		"facts": [
+			{
+				"_key": "fact-1",
+				"label": "Coverage",
+				"value": "24/7",
+				"icon": "clock"
+			},
+			{
+				"_key": "fact-2",
+				"label": "Radius",
+				"value": "40 miles"
+			}
+		]
+	},
+	"dinkus.gallery-hero": {
+		"_type": "dinkus.gallery-hero",
+		"_key": "fixture-gallery-hero",
+		"image": "/media/fixture/hero.jpg",
+		"imageAlt": "A neutral hero image",
+		"eyebrow": "Compatibility fixture",
+		"headline": "Gallery hero headline",
+		"deck": "Deck for the gallery hero.",
+		"primaryLabel": "Primary",
+		"primaryHref": "/contact",
+		"secondaryLabel": "Secondary",
+		"secondaryHref": "/work"
+	},
+	"dinkus.ledger-cards": {
+		"_type": "dinkus.ledger-cards",
+		"_key": "fixture-ledger-cards",
+		"cards": [
+			{
+				"_key": "card-1",
+				"code": "REC-001",
+				"title": "First record",
+				"body": "Body copy for the first record.",
+				"ctaLabel": "Open",
+				"ctaHref": "/records/first"
+			}
+		]
+	},
+	"dinkus.gallery-lanes": {
+		"_type": "dinkus.gallery-lanes",
+		"_key": "fixture-gallery-lanes",
+		"lanes": [
+			{
+				"_key": "lane-1",
+				"label": "Land",
+				"meta": "12 projects",
+				"href": "/land",
+				"image": "/media/fixture/lane-land.jpg"
+			},
+			{
+				"_key": "lane-2",
+				"label": "Remodel",
+				"meta": "8 projects",
+				"href": "/remodel",
+				"image": "/media/fixture/lane-remodel.jpg"
+			}
+		]
+	},
+	"dinkus.search-board": {
+		"_type": "dinkus.search-board",
+		"_key": "fixture-search-board",
+		"number": "LOC",
+		"kicker": "Find work",
+		"title": "Search the board",
+		"intro": "Plain-language links.",
+		"links": [
+			{
+				"_key": "link-1",
+				"label": "Land clearing",
+				"href": "/land"
+			},
+			{
+				"_key": "link-2",
+				"label": "Remodels",
+				"href": "/remodel"
+			}
+		]
+	},
+	"dinkus.service-area-map": {
+		"_type": "dinkus.service-area-map",
+		"_key": "fixture-service-area-map",
+		"image": "/media/fixture/map.png",
+		"imageAlt": "Service area map",
+		"caption": "Coverage caption.",
+		"legend": [
+			{
+				"_key": "legend-1",
+				"label": "Primary area",
+				"icon": "solid"
+			},
+			{
+				"_key": "legend-2",
+				"label": "Extended area",
+				"icon": "dashed"
+			}
+		]
+	},
+	"dinkus.dispatch": {
+		"_type": "dinkus.dispatch",
+		"_key": "fixture-dispatch",
+		"kicker": "Dispatch",
+		"title": "Talk to a human",
+		"body": "Contact band body copy.",
+		"ctaLabel": "Book",
+		"ctaHref": "/contact",
+		"phone": "tel:+15551234567",
+		"email": "mailto:hello@example.com"
+	},
+	"dinkus.project-record": {
+		"_type": "dinkus.project-record",
+		"_key": "fixture-project-record",
+		"recordId": "project-fixture",
+		"category": "Case study",
+		"title": "A project record",
+		"summary": "Summary copy.",
+		"identityImage": "/media/fixture/project-record.svg",
+		"identityAlt": "Identity artwork",
+		"statusKicker": "Status",
+		"status": "Shipped",
+		"roleKicker": "Role",
+		"roleHeadline": "What we did",
+		"roleBody": "Role body copy.",
+		"evidenceKicker": "Evidence",
+		"proofHeadline": "The proof",
+		"evidence": "Evidence copy.",
+		"links": [
+			{
+				"_key": "proof-1",
+				"label": "Read the proof",
+				"href": "/proof"
+			}
+		],
+		"nextKicker": "Next",
+		"nextTitle": "Next project",
+		"nextHref": "/next"
+	}
+}

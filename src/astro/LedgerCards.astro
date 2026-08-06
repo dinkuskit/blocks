@@ -1,19 +1,26 @@
 ---
 import type { LedgerCard, LedgerCardsNode } from "../types";
-import { safeCtaHref } from "../links";
+import { safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: LedgerCardsNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const cards = (Array.isArray(node.cards) ? node.cards : [])
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.ledger-cards", rawNode, {
+	siteId,
+	entryId,
+});
+const cards = (node?.cards ?? [])
 	.filter(
 		(card): card is LedgerCard =>
 			Boolean(card && typeof card === "object" && (card.title || card.body)),
 	)
 	.map((card) => {
-		const ctaHref = safeCtaHref(card.ctaHref);
+		const ctaHref = safeNavigationHref(card.ctaHref);
 		return {
 			...card,
 			ctaHref,

@@ -1,31 +1,42 @@
 ---
 import type { SectionHeaderNode } from "../types";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: SectionHeaderNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.section-header", rawNode, {
+	siteId,
+	entryId,
+});
 ---
 
-<header class="dinkus-section-header" data-dinkus-block="section-header">
-	{
-		(node.number || node.kicker) && (
-			<p class="dinkus-section-header__meta">
-				{node.number && (
-					<span class="dinkus-section-header__number" aria-hidden="true">
-						{node.number}
-					</span>
-				)}
-				{node.kicker && <span class="dinkus-section-header__kicker">{node.kicker}</span>}
-			</p>
-		)
-	}
-	<div class="dinkus-section-header__title-wrap">
-		{node.title && <h2>{node.title}</h2>}
-		{node.intro && <p class="dinkus-section-header__intro">{node.intro}</p>}
-	</div>
-</header>
+{
+	node && (
+		<header class="dinkus-section-header" data-dinkus-block="section-header">
+			{(node.number || node.kicker) && (
+				<p class="dinkus-section-header__meta">
+					{node.number && (
+						<span class="dinkus-section-header__number" aria-hidden="true">
+							{node.number}
+						</span>
+					)}
+					{node.kicker && (
+						<span class="dinkus-section-header__kicker">{node.kicker}</span>
+					)}
+				</p>
+			)}
+			<div class="dinkus-section-header__title-wrap">
+				{node.title && <h2>{node.title}</h2>}
+				{node.intro && <p class="dinkus-section-header__intro">{node.intro}</p>}
+			</div>
+		</header>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

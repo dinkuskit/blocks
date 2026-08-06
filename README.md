@@ -112,6 +112,51 @@ one `*Node` type for each block, and the repeater item types `FactItem`,
 `LedgerCard`, `GalleryLane`, `SearchLink`, `LegendEntry`, and
 `ProjectRecordLink`.
 
+### Runtime schemas and the render guard
+
+TypeScript types vanish at runtime, and the admin form is only one of the
+writers — importers, seeds, and agent writers skip it. Every block type
+therefore has a versioned runtime schema (`dinkusBlockSchemas`,
+`DINKUS_BLOCK_SCHEMA_VERSION`) enforcing a strict unknown-key policy,
+string length caps (`DINKUS_STRING_CAPS`), repeater item caps, and a
+per-block serialized-byte cap.
+
+- `parseDinkusBlockNode(type, value, { unknownKeys })` is the strict
+  boundary for write paths and importers: unknown keys reject by default.
+- `guardDinkusBlockNode(type, value, { siteId, entryId })` is the render
+  boundary the shipped renderers already use: a malformed block renders as
+  nothing and emits one structured log event (ids and issue codes only,
+  never stored content) instead of throwing; unknown keys are stripped and
+  logged so saved copy survives editor quirks without reaching markup.
+- `configureDinkusBlockRuntime({ siteId, logger })` stamps a site id onto
+  those events and/or routes them to a custom sink.
+
+The caps are abuse bounds, far above anything the admin produces in normal
+use: 320 chars for single-line fields, 8192 for top-level multiline copy,
+2048 for URLs, 24–32 repeater items, 16 KiB serialized bytes for scalar
+blocks and 128 KiB for repeater blocks.
+
+### URL policy: navigation vs media
+
+Stored URLs pass through a context-specific policy before reaching markup:
+
+- `safeNavigationHref(value, policy?)` — anchor hrefs. Same-origin paths
+  and `#` links always pass; `mailto:`/`tel:` stay available;
+  absolute `http(s)` links can be limited to `navigationExternalHosts`
+  and to HTTPS (`httpsOnly`, the production option).
+- `safeMediaSrc(value, policy?)` — `img src` sinks. Same-origin paths
+  pass; absolute URLs must be HTTPS on an approved `mediaHosts` entry, and
+  no host is approved until the site says so.
+- `configureDinkusUrlPolicy({...})` sets those defaults once per site.
+- Every policy rejects credentials, control characters, backslashes, and
+  protocol-relative forms, and caps length at `DINKUS_URL_MAX_LENGTH`.
+
+`safeCtaHref` remains exported as the historical name for the navigation
+policy. Without site configuration the navigation behavior is unchanged
+from earlier releases; media, however, is same-origin only until hosts are
+approved — a site that hotlinks images from an external CDN must add that
+host to `mediaHosts` when upgrading.
+
 A site-level renderer override can use the same node contract as the
 shipped renderer and the same URL policy:
 

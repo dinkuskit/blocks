@@ -1,30 +1,39 @@
 ---
 import type { CtaBandNode } from "../types";
-import { safeCtaHref } from "../links";
+import { safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: CtaBandNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const ctaHref = safeCtaHref(node.ctaHref);
-const showCta = Boolean(node.ctaLabel && ctaHref);
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.cta-band", rawNode, {
+	siteId,
+	entryId,
+});
+const ctaHref = safeNavigationHref(node?.ctaHref);
+const showCta = Boolean(node?.ctaLabel && ctaHref);
 ---
 
-<section class="dinkus-cta-band" data-dinkus-block="cta-band">
-	<div class="dinkus-cta-band__copy">
-		{node.eyebrow && <p class="dinkus-cta-band__eyebrow">{node.eyebrow}</p>}
-		{node.heading && <h2>{node.heading}</h2>}
-		{node.body && <p class="dinkus-cta-band__body">{node.body}</p>}
-	</div>
-	{
-		showCta && (
-			<a class="dinkus-cta-band__action" href={ctaHref}>
-				{node.ctaLabel}
-			</a>
-		)
-	}
-</section>
+{
+	node && (
+		<section class="dinkus-cta-band" data-dinkus-block="cta-band">
+			<div class="dinkus-cta-band__copy">
+				{node.eyebrow && <p class="dinkus-cta-band__eyebrow">{node.eyebrow}</p>}
+				{node.heading && <h2>{node.heading}</h2>}
+				{node.body && <p class="dinkus-cta-band__body">{node.body}</p>}
+			</div>
+			{showCta && (
+				<a class="dinkus-cta-band__action" href={ctaHref}>
+					{node.ctaLabel}
+				</a>
+			)}
+		</section>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

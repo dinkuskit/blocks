@@ -1,12 +1,19 @@
 ---
 import type { FactItem, FactRailNode } from "../types";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: FactRailNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const facts = (Array.isArray(node.facts) ? node.facts : []).filter(
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.fact-rail", rawNode, {
+	siteId,
+	entryId,
+});
+const facts = (node?.facts ?? []).filter(
 	(fact): fact is FactItem =>
 		Boolean(fact && typeof fact === "object" && (fact.label || fact.value)),
 );
@@ -18,7 +25,7 @@ const facts = (Array.isArray(node.facts) ? node.facts : []).filter(
 			class="dinkus-fact-rail"
 			data-dinkus-block="fact-rail"
 			tabindex="0"
-			aria-label={node.ariaLabel || "Quick facts"}
+			aria-label={node?.ariaLabel || "Quick facts"}
 		>
 			{facts.map((fact) => (
 				<div class="dinkus-fact-rail__fact" data-dinkus-icon={fact.icon || undefined}>

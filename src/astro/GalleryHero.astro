@@ -1,54 +1,64 @@
 ---
 import type { GalleryHeroNode } from "../types";
-import { safeCtaHref } from "../links";
+import { safeMediaSrc, safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: GalleryHeroNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const primaryHref = safeCtaHref(node.primaryHref);
-const secondaryHref = safeCtaHref(node.secondaryHref);
-const showPrimary = Boolean(node.primaryLabel && primaryHref);
-const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.gallery-hero", rawNode, {
+	siteId,
+	entryId,
+});
+const imageSrc = safeMediaSrc(node?.image);
+const primaryHref = safeNavigationHref(node?.primaryHref);
+const secondaryHref = safeNavigationHref(node?.secondaryHref);
+const showPrimary = Boolean(node?.primaryLabel && primaryHref);
+const showSecondary = Boolean(node?.secondaryLabel && secondaryHref);
 ---
 
-<section class="dinkus-gallery-hero" data-dinkus-block="gallery-hero">
-	{
-		node.image ? (
-			<img
-				class="dinkus-gallery-hero__img"
-				src={node.image}
-				alt={node.imageAlt ?? ""}
-				loading="eager"
-				decoding="async"
-			/>
-		) : (
-			<div class="dinkus-gallery-hero__media" aria-hidden="true" />
-		)
-	}
-	<div class="dinkus-gallery-hero__copy">
-		{node.eyebrow && <p class="dinkus-gallery-hero__eyebrow">{node.eyebrow}</p>}
-		{node.headline && <h1>{node.headline}</h1>}
-		{node.deck && <p class="dinkus-gallery-hero__deck">{node.deck}</p>}
-		{
-			(showPrimary || showSecondary) && (
-				<div class="dinkus-gallery-hero__actions">
-					{showPrimary && (
-						<a class="dinkus-gallery-hero__action" href={primaryHref}>
-							{node.primaryLabel}
-						</a>
-					)}
-					{showSecondary && (
-						<a class="dinkus-gallery-hero__link" href={secondaryHref}>
-							{node.secondaryLabel}
-						</a>
-					)}
-				</div>
-			)
-		}
-	</div>
-</section>
+{
+	node && (
+		<section class="dinkus-gallery-hero" data-dinkus-block="gallery-hero">
+			{imageSrc ? (
+				<img
+					class="dinkus-gallery-hero__img"
+					src={imageSrc}
+					alt={node.imageAlt ?? ""}
+					loading="eager"
+					decoding="async"
+				/>
+			) : (
+				<div class="dinkus-gallery-hero__media" aria-hidden="true" />
+			)}
+			<div class="dinkus-gallery-hero__copy">
+				{node.eyebrow && (
+					<p class="dinkus-gallery-hero__eyebrow">{node.eyebrow}</p>
+				)}
+				{node.headline && <h1>{node.headline}</h1>}
+				{node.deck && <p class="dinkus-gallery-hero__deck">{node.deck}</p>}
+				{(showPrimary || showSecondary) && (
+					<div class="dinkus-gallery-hero__actions">
+						{showPrimary && (
+							<a class="dinkus-gallery-hero__action" href={primaryHref}>
+								{node.primaryLabel}
+							</a>
+						)}
+						{showSecondary && (
+							<a class="dinkus-gallery-hero__link" href={secondaryHref}>
+								{node.secondaryLabel}
+							</a>
+						)}
+					</div>
+				)}
+			</div>
+		</section>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

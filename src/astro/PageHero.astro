@@ -1,42 +1,51 @@
 ---
 import type { PageHeroNode } from "../types";
-import { safeCtaHref } from "../links";
+import { safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: PageHeroNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const primaryHref = safeCtaHref(node.primaryHref);
-const secondaryHref = safeCtaHref(node.secondaryHref);
-const showPrimary = Boolean(node.primaryLabel && primaryHref);
-const showSecondary = Boolean(node.secondaryLabel && secondaryHref);
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.page-hero", rawNode, {
+	siteId,
+	entryId,
+});
+const primaryHref = safeNavigationHref(node?.primaryHref);
+const secondaryHref = safeNavigationHref(node?.secondaryHref);
+const showPrimary = Boolean(node?.primaryLabel && primaryHref);
+const showSecondary = Boolean(node?.secondaryLabel && secondaryHref);
 ---
 
-<section class="dinkus-page-hero" data-dinkus-block="page-hero">
-	{node.eyebrow && <p class="dinkus-page-hero__eyebrow">{node.eyebrow}</p>}
-	{node.headline && <h1>{node.headline}</h1>}
-	{node.deck && <p class="dinkus-page-hero__deck">{node.deck}</p>}
-	{
-		(showPrimary || showSecondary) && (
-			<div class="dinkus-page-hero__actions">
-				{showPrimary && (
-					<a class="dinkus-page-hero__action" href={primaryHref}>
-						{node.primaryLabel}
-					</a>
-				)}
-				{showSecondary && (
-					<a
-						class="dinkus-page-hero__action dinkus-page-hero__action--secondary"
-						href={secondaryHref}
-					>
-						{node.secondaryLabel}
-					</a>
-				)}
-			</div>
-		)
-	}
-</section>
+{
+	node && (
+		<section class="dinkus-page-hero" data-dinkus-block="page-hero">
+			{node.eyebrow && <p class="dinkus-page-hero__eyebrow">{node.eyebrow}</p>}
+			{node.headline && <h1>{node.headline}</h1>}
+			{node.deck && <p class="dinkus-page-hero__deck">{node.deck}</p>}
+			{(showPrimary || showSecondary) && (
+				<div class="dinkus-page-hero__actions">
+					{showPrimary && (
+						<a class="dinkus-page-hero__action" href={primaryHref}>
+							{node.primaryLabel}
+						</a>
+					)}
+					{showSecondary && (
+						<a
+							class="dinkus-page-hero__action dinkus-page-hero__action--secondary"
+							href={secondaryHref}
+						>
+							{node.secondaryLabel}
+						</a>
+					)}
+				</div>
+			)}
+		</section>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

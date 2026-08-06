@@ -1,49 +1,56 @@
 ---
 import type { DispatchNode } from "../types";
-import { safeCtaHref } from "../links";
+import { safeNavigationHref } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: DispatchNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const ctaHref = safeCtaHref(node.ctaHref);
-const showCta = Boolean(node.ctaLabel && ctaHref);
-const phoneHref = safeCtaHref(node.phone);
-const emailHref = safeCtaHref(node.email);
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.dispatch", rawNode, {
+	siteId,
+	entryId,
+});
+const ctaHref = safeNavigationHref(node?.ctaHref);
+const showCta = Boolean(node?.ctaLabel && ctaHref);
+const phoneHref = safeNavigationHref(node?.phone);
+const emailHref = safeNavigationHref(node?.email);
 const hasContact = Boolean(phoneHref || emailHref);
 ---
 
-<section class="dinkus-dispatch" data-dinkus-block="dispatch">
-	<div class="dinkus-dispatch__copy">
-		{node.kicker && <p class="dinkus-dispatch__kicker">{node.kicker}</p>}
-		{node.title && <h2>{node.title}</h2>}
-		{node.body && <p class="dinkus-dispatch__body">{node.body}</p>}
-		{
-			hasContact && (
-				<p class="dinkus-dispatch__contact">
-					{phoneHref && (
-						<a class="dinkus-dispatch__contact-link" href={phoneHref}>
-							{node.phone}
-						</a>
-					)}
-					{emailHref && (
-						<a class="dinkus-dispatch__contact-link" href={emailHref}>
-							{node.email}
-						</a>
-					)}
-				</p>
-			)
-		}
-	</div>
-	{
-		showCta && (
-			<a class="dinkus-dispatch__action" href={ctaHref}>
-				{node.ctaLabel}
-			</a>
-		)
-	}
-</section>
+{
+	node && (
+		<section class="dinkus-dispatch" data-dinkus-block="dispatch">
+			<div class="dinkus-dispatch__copy">
+				{node.kicker && <p class="dinkus-dispatch__kicker">{node.kicker}</p>}
+				{node.title && <h2>{node.title}</h2>}
+				{node.body && <p class="dinkus-dispatch__body">{node.body}</p>}
+				{hasContact && (
+					<p class="dinkus-dispatch__contact">
+						{phoneHref && (
+							<a class="dinkus-dispatch__contact-link" href={phoneHref}>
+								{node.phone}
+							</a>
+						)}
+						{emailHref && (
+							<a class="dinkus-dispatch__contact-link" href={emailHref}>
+								{node.email}
+							</a>
+						)}
+					</p>
+				)}
+			</div>
+			{showCta && (
+				<a class="dinkus-dispatch__action" href={ctaHref}>
+					{node.ctaLabel}
+				</a>
+			)}
+		</section>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

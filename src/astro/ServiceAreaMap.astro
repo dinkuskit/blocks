@@ -1,50 +1,63 @@
 ---
 import type { LegendEntry, ServiceAreaMapNode } from "../types";
+import { safeMediaSrc } from "../links";
+import { guardDinkusBlockNode } from "../schema";
 
 interface Props {
 	node: ServiceAreaMapNode;
+	siteId?: string;
+	entryId?: string;
 }
 
-const { node } = Astro.props;
-const legend = (Array.isArray(node.legend) ? node.legend : []).filter(
+const { node: rawNode, siteId, entryId } = Astro.props;
+const node = guardDinkusBlockNode("dinkus.service-area-map", rawNode, {
+	siteId,
+	entryId,
+});
+const imageSrc = safeMediaSrc(node?.image);
+const legend = (node?.legend ?? []).filter(
 	(entry): entry is LegendEntry =>
 		Boolean(entry && typeof entry === "object" && entry.label),
 );
 ---
 
-<section class="dinkus-service-area-map" data-dinkus-block="service-area-map">
-	<figure class="dinkus-service-area-map__figure">
-		{
-			node.image ? (
-				<img
-					class="dinkus-service-area-map__img"
-					src={node.image}
-					alt={node.imageAlt ?? ""}
-					loading="lazy"
-					decoding="async"
-				/>
-			) : (
-				<div class="dinkus-service-area-map__placeholder" aria-hidden="true" />
-			)
-		}
-		{
-			node.caption && (
-				<figcaption class="dinkus-service-area-map__caption">
-					{node.caption}
-				</figcaption>
-			)
-		}
-	</figure>
-	{
-		legend.length > 0 && (
-			<ul class="dinkus-service-area-map__legend">
-				{legend.map((entry) => (
-					<li data-dinkus-icon={entry.icon || undefined}>{entry.label}</li>
-				))}
-			</ul>
-		)
-	}
-</section>
+{
+	node && (
+		<section
+			class="dinkus-service-area-map"
+			data-dinkus-block="service-area-map"
+		>
+			<figure class="dinkus-service-area-map__figure">
+				{imageSrc ? (
+					<img
+						class="dinkus-service-area-map__img"
+						src={imageSrc}
+						alt={node.imageAlt ?? ""}
+						loading="lazy"
+						decoding="async"
+					/>
+				) : (
+					<div
+						class="dinkus-service-area-map__placeholder"
+						aria-hidden="true"
+					/>
+				)}
+				{node.caption && (
+					<figcaption class="dinkus-service-area-map__caption">
+						{node.caption}
+					</figcaption>
+				)}
+			</figure>
+			{legend.length > 0 && (
+				<ul class="dinkus-service-area-map__legend">
+					{legend.map((entry) => (
+						<li data-dinkus-icon={entry.icon || undefined}>{entry.label}</li>
+					))}
+				</ul>
+			)}
+		</section>
+	)
+}
 
 <style>
 	@layer dinkus-blocks {

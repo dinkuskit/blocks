@@ -13,7 +13,9 @@ const runtimeRoot = resolve(
 	"tests/fixture-site/.artifacts/runtime",
 	runId,
 );
-const fixtureUrl = "http://127.0.0.1:46371";
+// Overridable so parallel worktrees can run the suite side by side.
+const fixturePort = Number(process.env.DINKUS_E2E_PORT ?? 46371);
+const fixtureUrl = `http://127.0.0.1:${fixturePort}`;
 
 mkdirSync(runRoot, { recursive: true });
 mkdirSync(runtimeRoot, { recursive: true });
@@ -43,8 +45,7 @@ export default defineConfig({
 		},
 	],
 	webServer: {
-		command:
-			"pnpm --dir tests/fixture-site dev --host 127.0.0.1 --port 46371 --ignore-lock",
+		command: `pnpm --dir tests/fixture-site dev --host 127.0.0.1 --port ${fixturePort} --ignore-lock`,
 		url: fixtureUrl,
 		reuseExistingServer: false,
 		timeout: 120_000,
