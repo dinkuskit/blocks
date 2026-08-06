@@ -1,24 +1,76 @@
 ---
 import {
 	safeCtaHref,
+	type FieldAnnotationAttributes,
 	type ProjectRecordLink,
+	type ProjectRecordAnnotations,
 	type ProjectRecordNode,
 } from "@dinkuskit/blocks";
 
 interface Props {
 	node: ProjectRecordNode;
+	annotations?: ProjectRecordAnnotations;
 }
 
-const { node } = Astro.props;
+const { node, annotations = {} } = Astro.props;
 const links = (Array.isArray(node.links) ? node.links : [])
-	.map((link) => ({ ...link, href: safeCtaHref(link?.href) }))
-	.filter((link): link is ProjectRecordLink & { label: string; href: string } =>
+	.map((link, annotationIndex) => ({
+		...link,
+		href: safeCtaHref(link?.href),
+		annotationIndex,
+	}))
+	.filter((link): link is ProjectRecordLink & {
+		label: string;
+		href: string;
+		annotationIndex: number;
+	} =>
 		Boolean(link.label && link.href),
 	);
 const nextHref = safeCtaHref(node.nextHref);
 const showNext = Boolean(node.nextTitle && nextHref);
 const hasIdentitySlot = Astro.slots.has("identity");
 const hasTitleSlot = Astro.slots.has("title");
+
+const cleanFieldAnnotation = (
+	annotation?: FieldAnnotationAttributes,
+): Record<string, string | number | boolean> => {
+	if (!annotation) return {};
+	const output: Record<string, string | number | boolean> = {};
+	for (const [key, value] of Object.entries(annotation)) {
+		if (!key.startsWith("data-")) continue;
+		if (
+			key === "data-project-record" ||
+			key.startsWith("data-dinkus-") ||
+			key.startsWith("data-astro-")
+		) continue;
+		if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+			output[key] = value;
+		}
+	}
+	return output;
+};
+
+const annotationsByField = {
+	category: cleanFieldAnnotation(annotations.category),
+	title: cleanFieldAnnotation(annotations.title),
+	summary: cleanFieldAnnotation(annotations.summary),
+	statusKicker: cleanFieldAnnotation(annotations.statusKicker),
+	status: cleanFieldAnnotation(annotations.status),
+	roleKicker: cleanFieldAnnotation(annotations.roleKicker),
+	roleHeadline: cleanFieldAnnotation(annotations.roleHeadline),
+	roleBody: cleanFieldAnnotation(annotations.roleBody),
+	evidenceKicker: cleanFieldAnnotation(annotations.evidenceKicker),
+	proofHeadline: cleanFieldAnnotation(annotations.proofHeadline),
+	evidence: cleanFieldAnnotation(annotations.evidence),
+	nextTitle: cleanFieldAnnotation(annotations.nextTitle),
+	nextKicker: cleanFieldAnnotation(annotations.nextKicker),
+	links: Array.isArray(annotations.links)
+		? annotations.links.map((linkAnnotation) => ({
+				label: cleanFieldAnnotation(linkAnnotation?.label),
+				href: cleanFieldAnnotation(linkAnnotation?.href),
+			}))
+		: [],
+} as const;
 ---
 
 <article
@@ -32,18 +84,25 @@ const hasTitleSlot = Astro.slots.has("title");
 				node.category && (
 					<p class="dinkus-project-record__kicker">
 						<slot name="category-icon" />
-						<span>{node.category}</span>
+						<span {...annotationsByField.category}>{node.category}</span>
 					</p>
 				)
 			}
 			{
 				(node.title || hasTitleSlot) && (
-					<h1>
+					<h1 {...annotationsByField.title}>
 						<slot name="title">{node.title}</slot>
 					</h1>
 				)
 			}
-			{node.summary && <p class="dinkus-project-record__summary">{node.summary}</p>}
+			{node.summary && (
+				<p
+					class="dinkus-project-record__summary"
+					{...annotationsByField.summary}
+				>
+					{node.summary}
+				</p>
+			)}
 		</header>
 
 		<aside
@@ -71,9 +130,14 @@ const hasTitleSlot = Astro.slots.has("title");
 					<div class="dinkus-project-record__status-ticket">
 						<div>
 							{node.statusKicker && (
-								<span class="dinkus-project-record__label">{node.statusKicker}</span>
+								<span
+									class="dinkus-project-record__label"
+									{...annotationsByField.statusKicker}
+								>
+									{node.statusKicker}
+								</span>
 							)}
-							{node.status && <strong>{node.status}</strong>}
+							{node.status && <strong {...annotationsByField.status}>{node.status}</strong>}
 						</div>
 						<slot name="status-icon" />
 					</div>
@@ -86,12 +150,14 @@ const hasTitleSlot = Astro.slots.has("title");
 				node.roleKicker && (
 					<p class="dinkus-project-record__kicker">
 						<slot name="role-icon" />
-						<span>{node.roleKicker}</span>
+						<span {...annotationsByField.roleKicker}>{node.roleKicker}</span>
 					</p>
 				)
 			}
-			{node.roleHeadline && <h2>{node.roleHeadline}</h2>}
-			{node.roleBody && <p>{node.roleBody}</p>}
+			{node.roleHeadline && (
+				<h2 {...annotationsByField.roleHeadline}>{node.roleHeadline}</h2>
+			)}
+			{node.roleBody && <p {...annotationsByField.roleBody}>{node.roleBody}</p>}
 		</section>
 
 		<section class="dinkus-project-record__evidence">
@@ -99,18 +165,27 @@ const hasTitleSlot = Astro.slots.has("title");
 				node.evidenceKicker && (
 					<p class="dinkus-project-record__kicker">
 						<slot name="evidence-icon" />
-						<span>{node.evidenceKicker}</span>
+						<span {...annotationsByField.evidenceKicker}>{node.evidenceKicker}</span>
 					</p>
 				)
 			}
-			{node.proofHeadline && <h2>{node.proofHeadline}</h2>}
-			{node.evidence && <p>{node.evidence}</p>}
+			{node.proofHeadline && (
+				<h2 {...annotationsByField.proofHeadline}>{node.proofHeadline}</h2>
+			)}
+			{node.evidence && <p {...annotationsByField.evidence}>{node.evidence}</p>}
 			{
 				links.length > 0 && (
 					<div class="dinkus-project-record__links">
 						{links.map((link) => (
-							<a href={link.href}>
-								<span>{link.label}</span>
+							<a
+								href={link.href}
+								{...annotationsByField.links[link.annotationIndex]?.href}
+							>
+								<span
+									{...annotationsByField.links[link.annotationIndex]?.label}
+								>
+									{link.label}
+								</span>
 								<slot name="link-icon" />
 							</a>
 						))}
@@ -124,9 +199,14 @@ const hasTitleSlot = Astro.slots.has("title");
 				<a class="dinkus-project-record__next" href={nextHref}>
 					<span>
 						{node.nextKicker && (
-							<span class="dinkus-project-record__label">{node.nextKicker}</span>
+							<span
+								class="dinkus-project-record__label"
+								{...annotationsByField.nextKicker}
+							>
+								{node.nextKicker}
+							</span>
 						)}
-						<strong>{node.nextTitle}</strong>
+						<strong {...annotationsByField.nextTitle}>{node.nextTitle}</strong>
 					</span>
 					<slot name="next-icon" />
 				</a>

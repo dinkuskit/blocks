@@ -14,6 +14,9 @@ import {
 	type LegendEntry,
 	type PageHeroNode,
 	type PortableTextNode,
+	type FieldAnnotationAttributes,
+	type ProjectRecordAnnotations,
+	type ProjectRecordLinkAnnotation,
 	type ProjectRecordLink,
 	type ProjectRecordNode,
 	type SearchBoardNode,
@@ -78,6 +81,24 @@ describe("public package entrypoint", () => {
 			nextTitle: "Next typed project",
 			nextHref: "/next",
 		} satisfies ProjectRecordNode;
+		const projectRecordAnnotations = {
+			title: {
+				"data-test": true,
+			} satisfies FieldAnnotationAttributes,
+			evidence: {
+				"data-test": true,
+			} satisfies FieldAnnotationAttributes,
+			links: [
+				{
+					label: {
+						"data-test": true,
+					},
+					href: {
+						"data-test-href": true,
+					},
+				} satisfies ProjectRecordLinkAnnotation,
+			],
+		} satisfies ProjectRecordAnnotations;
 
 		const nodes = [
 			scalar,
@@ -87,6 +108,9 @@ describe("public package entrypoint", () => {
 		] satisfies PublicBlockNode[];
 		const portableNodes: PortableTextNode[] = nodes;
 		const items: PublicRepeaterItem[] = [fact, projectLink];
+		const annotations: Array<ProjectRecordAnnotations | undefined> = [
+			projectRecordAnnotations,
+		];
 
 		expect(portableNodes.map((node) => node._type)).toEqual([
 			"dinkus.section-header",
@@ -97,5 +121,6 @@ describe("public package entrypoint", () => {
 		expect(items).toEqual([fact, projectLink]);
 		expect(safeCtaHref("/contact")).toBe("/contact");
 		expect(safeCtaHref("javascript:alert(1)")).toBeUndefined();
+		expect(annotations.every(Boolean)).toBe(true);
 	});
 });

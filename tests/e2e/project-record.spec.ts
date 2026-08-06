@@ -241,10 +241,52 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 		"data-portable-type",
 		"dinkus.project-record",
 	);
-	await expect(page.locator('[data-project-record="slotted-record"]')).toBeVisible();
+	const slottedRecord = page.locator('[data-project-record="slotted-record"]');
+	await expect(slottedRecord).toBeVisible();
 	await expect(
-		page.locator('[data-project-record="slotted-record"]').getByRole("heading", { level: 1 }),
+		slottedRecord.getByRole("heading", { level: 1 }),
 	).toHaveText("Slotted project title");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="category"]'),
+	).toHaveText("Consumer override fixture");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="category"]').locator(".."),
+	).toContainText("◆");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="title"]'),
+	).toHaveText("Slotted project title");
+	await expect(slottedRecord).toHaveAttribute("data-dinkus-block", "project-record");
+	await expect(slottedRecord).toHaveAttribute("data-project-record", "slotted-record");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="title"]'),
+	).not.toHaveAttribute("data-astro-cid");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="summary"]'),
+	).toBeVisible();
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="status-kicker"]'),
+	).toHaveText("Current status");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="status"]'),
+	).toHaveText("Slots verified");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="role-kicker"]'),
+	).toHaveText("Project role");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="role-headline"]'),
+	).toHaveText("The package owns structure; the site owns identity.");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="role-body"]'),
+	).toHaveText("Named slots avoid forking the public block data contract.");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="evidence-kicker"]'),
+	).toHaveText("Evidence state");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="proof-headline"]'),
+	).toHaveText("The override surface renders.");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="evidence"]'),
+	).toContainText("safe URL handling");
 	await expect(page.locator('[data-slot="identity"]')).toHaveText("PR");
 	for (const slot of [
 		"category-icon",
@@ -256,10 +298,24 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	]) {
 		await expect(page.locator(`[data-slot="${slot}"]`)).toBeVisible();
 	}
-	await expect(page.getByRole("link", { name: "Read slotted proof" })).toHaveAttribute(
+	await expect(slottedRecord.getByRole("link", { name: "Read slotted proof" })).toHaveAttribute(
 		"href",
 		"/proof",
 	);
+	await expect(
+		slottedRecord.getByRole("link", { name: "Read slotted proof" }),
+	).toHaveAttribute("data-project-record-annotation", "proof-link-href");
+	await expect(
+		slottedRecord
+			.getByRole("link", { name: "Read slotted proof" })
+			.locator("[data-project-record-annotation='proof-link-label']"),
+	).toHaveText("Read slotted proof");
+	await expect(slottedRecord.locator('[data-project-record-annotation="next-kicker"]')).toHaveText(
+		"Next project",
+	);
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="next-title"]'),
+	).toHaveText("Fixture home");
 
 	const centeredRecord = page.locator('[data-project-record="slotted-record"]');
 	const centeredIdentity = centeredRecord.locator(
