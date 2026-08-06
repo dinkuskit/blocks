@@ -1,6 +1,8 @@
 export interface PortableTextNode {
 	_type?: string;
 	_key?: string;
+	/** Stamped onto block nodes by the EmDash 0.29.0 editor on save. */
+	id?: string;
 }
 
 export interface CtaBandNode extends PortableTextNode {

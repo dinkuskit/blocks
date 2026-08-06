@@ -6,7 +6,8 @@
 		"heading": "A focused call to action",
 		"body": "Stored copy that must round-trip untouched.",
 		"ctaLabel": "Read the proof",
-		"ctaHref": "/proof"
+		"ctaHref": "/proof",
+		"id": "cta-band-editor-id"
 	},
 	"dinkus.page-hero": {
 		"_type": "dinkus.page-hero",

@@ -119,7 +119,8 @@ writers — importers, seeds, and agent writers skip it. Every block type
 therefore has a versioned runtime schema (`dinkusBlockSchemas`,
 `DINKUS_BLOCK_SCHEMA_VERSION`) enforcing a strict unknown-key policy,
 string length caps (`DINKUS_STRING_CAPS`), repeater item caps, and a
-per-block serialized-byte cap.
+per-block serialized-byte cap. `_type`, `_key`, and the `id` the EmDash
+0.29.0 editor stamps on save are declared system keys, not unknown keys.
 
 - `parseDinkusBlockNode(type, value, { unknownKeys })` is the strict
   boundary for write paths and importers: unknown keys reject by default.

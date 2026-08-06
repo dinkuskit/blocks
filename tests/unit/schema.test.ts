@@ -175,6 +175,31 @@ describe("parseDinkusBlockNode", () => {
 		},
 	);
 
+	it("round-trips the editor-stamped id system key at both boundaries", () => {
+		// The EmDash 0.29.0 editor adds an "id" alongside "_key" on every
+		// block it saves; it is a declared system key, not an unknown key.
+		const node = {
+			_type: "dinkus.section-header",
+			_key: "editor-block",
+			id: "editor-stamped-id",
+			title: "Kept",
+		};
+		const strict = parseDinkusBlockNode("dinkus.section-header", node);
+		expect(strict.ok).toBe(true);
+		expect(strict.issues).toEqual([]);
+		expect(strict.value).toEqual(node);
+		const guarded = guardDinkusBlockNode("dinkus.section-header", node);
+		expect(guarded).toEqual(node);
+		const badId = parseDinkusBlockNode("dinkus.section-header", {
+			...node,
+			id: 7,
+		});
+		expect(badId.ok).toBe(false);
+		expect(badId.issues).toContainEqual(
+			expect.objectContaining({ code: "invalid-value", path: "id" }),
+		);
+	});
+
 	it("never pollutes Object.prototype through a __proto__ key", () => {
 		const testCase = unknownKey.cases.find((c) => c.name.includes("__proto__"));
 		expect(testCase).toBeDefined();

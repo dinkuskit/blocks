@@ -402,9 +402,11 @@ export function parseDinkusBlockNode(
 			output._type = raw;
 			continue;
 		}
-		if (key === "_key") {
-			const parsed = parseKey(raw, "_key");
-			if (parsed !== undefined) output._key = parsed;
+		if (key === "_key" || key === "id") {
+			// "id" is stamped onto every block node by the EmDash 0.29.0
+			// editor on save; both are system identifiers, not content.
+			const parsed = parseKey(raw, key);
+			if (parsed !== undefined) output[key] = parsed;
 			continue;
 		}
 		if (Object.prototype.hasOwnProperty.call(blockSchema.fields, key)) {
