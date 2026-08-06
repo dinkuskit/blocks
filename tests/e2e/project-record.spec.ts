@@ -248,10 +248,18 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	).toHaveText("Slotted project title");
 	await expect(
 		slottedRecord.locator('[data-project-record-annotation="category"]'),
-	).toBeVisible();
+	).toHaveText("Consumer override fixture");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="category"]').locator(".."),
+	).toContainText("◆");
 	await expect(
 		slottedRecord.locator('[data-project-record-annotation="title"]'),
 	).toHaveText("Slotted project title");
+	await expect(slottedRecord).toHaveAttribute("data-dinkus-block", "project-record");
+	await expect(slottedRecord).toHaveAttribute("data-project-record", "slotted-record");
+	await expect(
+		slottedRecord.locator('[data-project-record-annotation="title"]'),
+	).not.toHaveAttribute("data-astro-cid");
 	await expect(
 		slottedRecord.locator('[data-project-record-annotation="summary"]'),
 	).toBeVisible();

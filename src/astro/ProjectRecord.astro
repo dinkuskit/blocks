@@ -38,6 +38,11 @@ const cleanFieldAnnotation = (
 	const output: Record<string, string | number | boolean> = {};
 	for (const [key, value] of Object.entries(annotation)) {
 		if (!key.startsWith("data-")) continue;
+		if (
+			key === "data-project-record" ||
+			key.startsWith("data-dinkus-") ||
+			key.startsWith("data-astro-")
+		) continue;
 		if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
 			output[key] = value;
 		}
@@ -77,12 +82,9 @@ const annotationsByField = {
 		<header class="dinkus-project-record__intro">
 			{
 				node.category && (
-					<p
-						class="dinkus-project-record__kicker"
-						{...annotationsByField.category}
-					>
+					<p class="dinkus-project-record__kicker">
 						<slot name="category-icon" />
-						<span>{node.category}</span>
+						<span {...annotationsByField.category}>{node.category}</span>
 					</p>
 				)
 			}

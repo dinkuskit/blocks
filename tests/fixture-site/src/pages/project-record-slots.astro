@@ -14,6 +14,11 @@ const projectRecordAnnotations: ProjectRecordAnnotations = {
 	},
 	title: {
 		"data-project-record-annotation": "title",
+		// Runtime filtering must protect structural namespaces even from an
+		// untyped or JavaScript consumer.
+		"data-dinkus-block": "spoofed-block",
+		"data-astro-cid": "spoofed-component",
+		"data-project-record": "spoofed-record",
 	},
 	summary: {
 		"data-project-record-annotation": "summary",
@@ -66,7 +71,7 @@ const projectRecordAnnotations: ProjectRecordAnnotations = {
 			},
 		},
 	],
-};
+} as unknown as ProjectRecordAnnotations;
 const proofLink = {
 	_key: "slot-proof",
 	label: "Read slotted proof",

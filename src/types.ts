@@ -130,10 +130,19 @@ export interface ProjectRecordLink {
 	href?: string;
 }
 
-/** Presentation-neutral metadata hooks; structural attributes stay renderer-owned. */
+type FieldAnnotationValue = string | number | boolean;
+
+/**
+ * Presentation-neutral metadata hooks; package/framework structural namespaces
+ * stay renderer-owned and are also rejected at runtime.
+ */
 export type FieldAnnotationAttributes = Partial<
-	Record<`data-${string}`, string | number | boolean>
->;
+	Record<`data-${string}`, FieldAnnotationValue>
+> & {
+	[K in `data-dinkus-${string}` | `data-astro-${string}`]?: never;
+} & {
+	"data-project-record"?: never;
+};
 
 export interface ProjectRecordLinkAnnotation {
 	label?: FieldAnnotationAttributes;
