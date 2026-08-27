@@ -5,11 +5,19 @@ import {
 	type PluginDefinition,
 	type ResolvedPlugin,
 } from "emdash";
+import {
+	CTA_BAND_BLOCK_TYPE,
+	ctaBandFields,
+} from "./features/cta-band";
 
+export {
+	CTA_BAND_BLOCK_TYPE,
+	ctaBandFields,
+	type CtaBandNode,
+} from "./features/cta-band";
 export { safeCtaHref } from "./links";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type {
-	CtaBandNode,
 	DispatchNode,
 	FactItem,
 	FactRailNode,
@@ -33,7 +41,6 @@ export type {
 } from "./types";
 
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
-export const CTA_BAND_BLOCK_TYPE = "dinkus.cta-band";
 export const PAGE_HERO_BLOCK_TYPE = "dinkus.page-hero";
 export const SECTION_HEADER_BLOCK_TYPE = "dinkus.section-header";
 export const FACT_RAIL_BLOCK_TYPE = "dinkus.fact-rail";
@@ -44,36 +51,6 @@ export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
 export const SERVICE_AREA_MAP_BLOCK_TYPE = "dinkus.service-area-map";
 export const DISPATCH_BLOCK_TYPE = "dinkus.dispatch";
 export const PROJECT_RECORD_BLOCK_TYPE = "dinkus.project-record";
-
-export const ctaBandFields = [
-	{
-		type: "text_input",
-		action_id: "eyebrow",
-		label: "Eyebrow",
-	},
-	{
-		type: "text_input",
-		action_id: "heading",
-		label: "Heading",
-	},
-	{
-		type: "text_input",
-		action_id: "body",
-		label: "Body",
-		multiline: true,
-	},
-	{
-		type: "text_input",
-		action_id: "ctaLabel",
-		label: "CTA label",
-	},
-	{
-		type: "text_input",
-		action_id: "ctaHref",
-		label: "CTA URL",
-		placeholder: "/contact",
-	},
-] satisfies Element[];
 
 export const pageHeroFields = [
 	{
@@ -165,9 +142,6 @@ export const factRailFields = [
 				label: "Value",
 			},
 			{
-				// Neutral icon slug (e.g. an icon-set name). The default
-				// renderer ignores it; site override renderers may map it to
-				// their icon system.
 				type: "text_input",
 				action_id: "icon",
 				label: "Icon slug",
@@ -287,8 +261,6 @@ export const galleryLanesFields = [
 				label: "Link URL",
 			},
 			{
-				// Repeater sub-fields only support scalar element types, so
-				// lane images are URL strings rather than a media picker.
 				type: "text_input",
 				action_id: "image",
 				label: "Image URL",
@@ -369,7 +341,6 @@ export const serviceAreaMapFields = [
 				label: "Label",
 			},
 			{
-				// Neutral swatch/icon slug for site override renderers.
 				type: "text_input",
 				action_id: "icon",
 				label: "Icon slug",

@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+import { spawnSync } from "node:child_process";
+import { performance } from "node:perf_hooks";
+import { resolve } from "node:path";
+
+const root = resolve(import.meta.dirname, "..");
+const scope = process.argv[2] ?? "quick";
+const command = process.platform === "win32" ? "pnpm.cmd" : "pnpm";
+const scopes = {
+	quick: [
+		[command, ["typecheck"]],
+		[command, ["test"]],
+		["node", ["--test", "tests/workflows/architecture-rules.test.mjs"]],
+		["node", ["scripts/check-architecture.mjs", "all"]],
+	],
+	full: [
+		["node", ["scripts/check-architecture.mjs", "all"]],
+		[command, ["check"]],
+		[command, ["test:e2e"]],
+	],
+};
+
+if (!(scope in scopes)) {
+	console.error("Usage: bin/verify-blocks [quick|full]");
+	process.exit(2);
+}
+
+const started = performance.now();
+for (const [program, arguments_] of scopes[scope]) {
+	const result = spawnSync(program, arguments_, { cwd: root, stdio: "inherit" });
+	if (result.error) throw result.error;
+	if (result.status !== 0) {
+		console.error(`verify-blocks ${scope} failed after ${((performance.now() - started) / 1000).toFixed(2)}s`);
+		process.exit(result.status ?? 1);
+	}
+}
+
+console.log(`verify-blocks ${scope} passed in ${((performance.now() - started) / 1000).toFixed(2)}s`);

@@ -49,7 +49,6 @@ test("declares, inserts, edits, persists, and renders ledger cards", async (
 	const editDialog = page.getByRole("dialog", { name: "Edit Ledger Cards" });
 	await expect(editDialog).toBeVisible();
 
-	// Seeded repeater cards are titled by their first text sub-field (code).
 	await editDialog.getByText("field", { exact: true }).click();
 	await expect(modalField(editDialog, "Title")).toHaveValue(SEEDED_TITLE);
 	await modalField(editDialog, "Title").fill(EDITED_TITLE);

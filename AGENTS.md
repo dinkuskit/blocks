@@ -15,6 +15,9 @@ credentials, and production configuration do not belong here.
 - `docs/spikes/` records durable compatibility verdicts.
 - Generated databases, uploads, traces, reports, and package archives stay
   ignored.
+- Routine proof media belongs in immutable `saari-co/swarm-pr-assets` release
+  assets, not Git. Retained text proof records each asset URL, byte size,
+  SHA-256 digest, provenance, redaction status, and source head.
 
 ## Architecture
 

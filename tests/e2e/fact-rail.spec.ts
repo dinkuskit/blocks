@@ -51,8 +51,6 @@ test("declares, inserts, edits, persists, and renders a fact rail", async (
 		"Fixture facts",
 	);
 
-	// Seeded repeater items render as collapsed cards titled by their first
-	// text sub-field; expand "Crew" and edit its value in place.
 	await expect(editDialog.getByText("Crew", { exact: true })).toBeVisible();
 	await expect(editDialog.getByText("Radius", { exact: true })).toBeVisible();
 	await expect(editDialog.getByText("Since", { exact: true })).toBeVisible();
@@ -100,9 +98,6 @@ test("declares, inserts, edits, persists, and renders a fact rail", async (
 
 	const insertDialog = page.getByRole("dialog", { name: "Insert Fact Rail" });
 	await modalField(insertDialog, "Accessible label").fill("Inserted facts");
-	// A freshly added repeater item is auto-expanded with empty sub-fields.
-	// The repeater renders an "Add Fact" button in both its header row and
-	// below the item list; either works.
 	await insertDialog.getByRole("button", { name: "Add Fact" }).first().click();
 	await modalField(insertDialog, "Label").fill("Lead time");
 	await modalField(insertDialog, "Value").fill("Two weeks");

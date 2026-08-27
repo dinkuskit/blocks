@@ -49,7 +49,6 @@ test("declares, inserts, edits, persists, and renders gallery lanes", async (
 	const editDialog = page.getByRole("dialog", { name: "Edit Gallery Lanes" });
 	await expect(editDialog).toBeVisible();
 
-	// Seeded repeater lanes are titled by their first text sub-field (label).
 	await editDialog.getByText(SEEDED_LABEL, { exact: true }).click();
 	await expect(modalField(editDialog, "Label")).toHaveValue(SEEDED_LABEL);
 	await modalField(editDialog, "Label").fill(EDITED_LABEL);
@@ -106,8 +105,6 @@ test("declares, inserts, edits, persists, and renders gallery lanes", async (
 		page,
 		(content) => laneWithLabel(content, "Inserted lane"),
 		async () => {
-			// exact: the new lane's collapsible card title button is named
-			// "Inserted lane", whose text contains "Insert".
 			await insertDialog
 				.getByRole("button", { name: "Insert", exact: true })
 				.click();

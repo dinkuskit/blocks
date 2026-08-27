@@ -1,16 +1,7 @@
-export interface PortableTextNode {
-	_type?: string;
-	_key?: string;
-}
+import type { PortableTextNode } from "./shared/portable-text";
 
-export interface CtaBandNode extends PortableTextNode {
-	_type?: "dinkus.cta-band";
-	eyebrow?: string;
-	heading?: string;
-	body?: string;
-	ctaLabel?: string;
-	ctaHref?: string;
-}
+export type { CtaBandNode } from "./features/cta-band";
+export type { PortableTextNode } from "./shared/portable-text";
 
 export interface PageHeroNode extends PortableTextNode {
 	_type?: "dinkus.page-hero";
@@ -132,10 +123,6 @@ export interface ProjectRecordLink {
 
 type FieldAnnotationValue = string | number | boolean;
 
-/**
- * Presentation-neutral metadata hooks; package/framework structural namespaces
- * stay renderer-owned and are also rejected at runtime.
- */
 export type FieldAnnotationAttributes = Partial<
 	Record<`data-${string}`, FieldAnnotationValue>
 > & {

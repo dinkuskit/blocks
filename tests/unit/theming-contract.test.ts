@@ -5,23 +5,23 @@ import { describe, expect, it } from "vitest";
 import { DINKUS_THEME_TOKENS } from "@dinkuskit/blocks";
 
 const rendererFiles = [
-	"CtaBand.astro",
-	"Dispatch.astro",
-	"FactRail.astro",
-	"GalleryHero.astro",
-	"GalleryLanes.astro",
-	"LedgerCards.astro",
-	"PageHero.astro",
-	"ProjectRecord.astro",
-	"SearchBoard.astro",
-	"SectionHeader.astro",
-	"ServiceAreaMap.astro",
+	["CtaBand.astro", "../../src/features/cta-band/renderer.astro"],
+	["Dispatch.astro", "../../src/astro/Dispatch.astro"],
+	["FactRail.astro", "../../src/astro/FactRail.astro"],
+	["GalleryHero.astro", "../../src/astro/GalleryHero.astro"],
+	["GalleryLanes.astro", "../../src/astro/GalleryLanes.astro"],
+	["LedgerCards.astro", "../../src/astro/LedgerCards.astro"],
+	["PageHero.astro", "../../src/astro/PageHero.astro"],
+	["ProjectRecord.astro", "../../src/astro/ProjectRecord.astro"],
+	["SearchBoard.astro", "../../src/astro/SearchBoard.astro"],
+	["SectionHeader.astro", "../../src/astro/SectionHeader.astro"],
+	["ServiceAreaMap.astro", "../../src/astro/ServiceAreaMap.astro"],
 ] as const;
 
 const documentedTokens = Object.values(DINKUS_THEME_TOKENS);
-const rendererSources = rendererFiles.map((file) => ({
+const rendererSources = rendererFiles.map(([file, path]) => ({
 	file,
-	source: readFileSync(new URL(`../../src/astro/${file}`, import.meta.url), "utf8"),
+	source: readFileSync(new URL(path, import.meta.url), "utf8"),
 }));
 
 describe("renderer theming contract", () => {
