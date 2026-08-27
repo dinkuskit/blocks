@@ -180,7 +180,14 @@ function quotedMarkerComments(path, source, markers) {
 			else if (character === quote) quote = "";
 			continue;
 		}
-		if (character === "\"" || character === "'" || character === "`") {
+		const beforeQuote = source.slice(0, index);
+		const quoteStartsValue =
+			character === "`" ||
+			index === 0 ||
+			/(?:[=([{,:;!?&|+*%/-]|\b(?:await|case|return|throw|yield))\s*$/.test(
+				beforeQuote,
+			);
+		if ((character === "\"" || character === "'" || character === "`") && quoteStartsValue) {
 			quote = character;
 			continue;
 		}

@@ -63,22 +63,76 @@
           "review_source_identity": null,
           "to": "verified",
           "verification_ref": null
+        },
+        {
+          "at": "2026-08-27T22:08:38+00:00",
+          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
+          "from": "verified",
+          "implementation_ref": "file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-architecture.mjs",
+          "note": "adjudicated review requires a fix",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "needs_reverification",
+          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+        },
+        {
+          "at": "2026-08-27T22:10:00+00:00",
+          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
+          "from": "needs_reverification",
+          "implementation_ref": "file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-architecture.mjs",
+          "note": "bounded implementation recorded",
+          "repair_required": true,
+          "review_classifications": [
+            "required_fix"
+          ],
+          "review_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
+          "review_result": "findings",
+          "review_source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2",
+          "to": "implemented",
+          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+        },
+        {
+          "at": "2026-08-27T22:10:00+00:00",
+          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
+          "from": "implemented",
+          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "verification recorded in cumulative context",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "verified",
+          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
         }
       ],
       "id": "architecture-contract",
-      "implementation_ref": "file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-architecture.mjs",
+      "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
       "question": "What durable convention should Blocks establish for agent-contained feature work?",
       "rationale": "Blocks is the first portfolio repository to establish a reusable convention before agents work across repositories; Inventory and Commerce will adapt the concepts to their own feature grains.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [],
+      "review_history": [
+        {
+          "classifications": [
+            "required_fix"
+          ],
+          "ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
+          "result": "findings",
+          "reviewed_at": "2026-08-27T22:08:38+00:00",
+          "source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2"
+        }
+      ],
       "review_ref": null,
       "review_result": null,
       "review_source_identity": null,
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-27T20:59:11+00:00",
-      "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+      "updated_at": "2026-08-27T22:10:00+00:00",
+      "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
     },
     {
       "baseline_ref": "git:17529d477ab19a0c3fbae05e514d14029e70feda",
@@ -206,22 +260,76 @@
           "review_source_identity": null,
           "to": "verified",
           "verification_ref": null
+        },
+        {
+          "at": "2026-08-27T22:08:47+00:00",
+          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "from": "verified",
+          "implementation_ref": "file:bin/verify-blocks;file:.github/workflows/ci.yml;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "adjudicated review requires a fix",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "needs_reverification",
+          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+        },
+        {
+          "at": "2026-08-27T22:10:00+00:00",
+          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "from": "needs_reverification",
+          "implementation_ref": "file:bin/verify-blocks;file:.github/workflows/ci.yml;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "bounded implementation recorded",
+          "repair_required": true,
+          "review_classifications": [
+            "required_fix"
+          ],
+          "review_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
+          "review_result": "findings",
+          "review_source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2",
+          "to": "implemented",
+          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+        },
+        {
+          "at": "2026-08-27T22:10:00+00:00",
+          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "from": "implemented",
+          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "verification recorded in cumulative context",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "verified",
+          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
         }
       ],
       "id": "verification-entrypoint",
-      "implementation_ref": "file:bin/verify-blocks;file:.github/workflows/ci.yml;file:tests/workflows/architecture-rules.test.mjs",
+      "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
       "question": "How should contributors verify the architecture and behavior?",
       "rationale": "One deterministic verifier makes the convention usable by people and agents while retaining existing checks.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [],
+      "review_history": [
+        {
+          "classifications": [
+            "required_fix"
+          ],
+          "ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
+          "result": "findings",
+          "reviewed_at": "2026-08-27T22:08:47+00:00",
+          "source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2"
+        }
+      ],
       "review_ref": null,
       "review_result": null,
       "review_source_identity": null,
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-27T20:59:11+00:00",
-      "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+      "updated_at": "2026-08-27T22:10:00+00:00",
+      "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
     },
     {
       "baseline_ref": "git:17529d477ab19a0c3fbae05e514d14029e70feda",
@@ -316,5 +424,5 @@
   "status": "active",
   "title": "Agent-contained feature architecture pilot",
   "track_id": "gt-20260827204742-2f62eb",
-  "updated_at": "2026-08-27T21:30:49+00:00"
+  "updated_at": "2026-08-27T22:10:00+00:00"
 }

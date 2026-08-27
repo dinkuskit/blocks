@@ -86,12 +86,26 @@ test("accepts machine directives and comment-like strings, URLs, and regular exp
 		),
 		[],
 	);
+	assert.deepEqual(
+		findCommentViolations(
+			"src/example.astro",
+			`<div data-copy="It's <!-- text -->">{(() => { return '/* text */'; })()}</div>`,
+		),
+		[],
+	);
 });
 
 test("rejects line, block, documentation, HTML, and configuration comments", () => {
 	assert.equal(findCommentViolations("src/example.ts", "// rationale\nexport {};").length, 1);
 	assert.equal(findCommentViolations("src/example.ts", "/** rationale */\nexport {};").length, 1);
 	assert.equal(findCommentViolations("src/example.astro", "<!-- rationale -->").length, 1);
+	assert.equal(
+		findCommentViolations(
+			"src/example.astro",
+			`<p>It's visible text.</p> <!-- rationale -->`,
+		).length,
+		1,
+	);
 	assert.equal(findCommentViolations("src/example.astro", "<style>/* rationale */</style>").length, 1);
 	assert.equal(findCommentViolations("config.yml", "key: value # rationale").length, 1);
 });
