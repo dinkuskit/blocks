@@ -51,6 +51,19 @@ const ROOT_CONFIGURATION_FILES = new Set([
 	"vitest.config.ts",
 ]);
 
+const PROOF_MEDIA_ROOTS = ["proof", ".grilltrack/proof"];
+
+const ROUTINE_PROOF_MEDIA_EXTENSIONS = new Set([
+	".gif",
+	".jpeg",
+	".jpg",
+	".mov",
+	".mp4",
+	".png",
+	".webm",
+	".webp",
+]);
+
 function lineNumber(source, offset) {
 	return source.slice(0, offset).split("\n").length;
 }
@@ -110,6 +123,20 @@ export function governedFiles(root) {
 				GOVERNED_EXTENSIONS.has(extname(file)) || file === "bin/verify-blocks",
 		)
 		.sort();
+}
+
+export function findProofMediaViolations(paths) {
+	return paths
+		.map(normalizePath)
+		.filter((path) =>
+			PROOF_MEDIA_ROOTS.some((root) => path.startsWith(`${root}/`)),
+		)
+		.filter((path) => ROUTINE_PROOF_MEDIA_EXTENSIONS.has(extname(path).toLowerCase()))
+		.sort()
+		.map((path) => ({
+			path,
+			reason: "routine proof media must use immutable release assets referenced from text proof",
+		}));
 }
 
 function allowedComment(path, text, offset) {
@@ -495,5 +522,11 @@ export function repositoryImportViolations(root) {
 export function repositoryCommentViolations(root) {
 	return governedFiles(root).flatMap((path) =>
 		findCommentViolations(path, readFileSync(resolve(root, path), "utf8")),
+	);
+}
+
+export function repositoryProofMediaViolations(root) {
+	return findProofMediaViolations(
+		PROOF_MEDIA_ROOTS.flatMap((proofRoot) => walkFiles(root, proofRoot)),
 	);
 }

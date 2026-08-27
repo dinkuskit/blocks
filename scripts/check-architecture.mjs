@@ -2,12 +2,13 @@ import { resolve } from "node:path";
 import {
 	repositoryCommentViolations,
 	repositoryImportViolations,
+	repositoryProofMediaViolations,
 	validateFeatureMap,
 } from "./architecture-rules.mjs";
 
 const root = resolve(import.meta.dirname, "..");
 const requested = process.argv[2] ?? "all";
-const supported = new Set(["all", "comments", "imports", "map"]);
+const supported = new Set(["all", "comments", "imports", "map", "media"]);
 
 if (!supported.has(requested)) {
 	console.error(`Unknown architecture check: ${requested}`);
@@ -26,6 +27,11 @@ if (requested === "all" || requested === "imports") {
 if (requested === "all" || requested === "comments") {
 	for (const violation of repositoryCommentViolations(root)) {
 		failures.push(`${violation.path}:${violation.line}: human-authored comment ${JSON.stringify(violation.text)}`);
+	}
+}
+if (requested === "all" || requested === "media") {
+	for (const violation of repositoryProofMediaViolations(root)) {
+		failures.push(`${violation.path}: ${violation.reason}`);
 	}
 }
 

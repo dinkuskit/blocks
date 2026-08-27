@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
 	findCommentViolations,
 	findImportViolations,
+	findProofMediaViolations,
 } from "../../scripts/architecture-rules.mjs";
 
 test("accepts imports through feature and package public entries", () => {
@@ -143,4 +144,26 @@ test("rejects line, block, documentation, HTML, and configuration comments", () 
 		1,
 	);
 	assert.equal(findCommentViolations("config.yml", "key: value # rationale").length, 1);
+});
+
+test("rejects routine media under every retained proof root", () => {
+	assert.deepEqual(
+		findProofMediaViolations([
+			"proof/browser/screenshot.jpg",
+			".grilltrack/proof/cta-band/admin-modal.png",
+			".grilltrack/proof/PROOF.md",
+			".grilltrack/work/candidate.png",
+			"tests/fixture-site/public/media/fixture/project-record.svg",
+		]),
+		[
+			{
+				path: ".grilltrack/proof/cta-band/admin-modal.png",
+				reason: "routine proof media must use immutable release assets referenced from text proof",
+			},
+			{
+				path: "proof/browser/screenshot.jpg",
+				reason: "routine proof media must use immutable release assets referenced from text proof",
+			},
+		],
+	);
 });

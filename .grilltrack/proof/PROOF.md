@@ -26,11 +26,15 @@ The fixture build retained its existing EmDash `createCoalescingDialect` and lar
 
 ## Curated visible evidence
 
-- `cta-band/slash-menu.png` shows the registered CTA Band slash-menu item. SHA-256: `77a63377b8dabd944652f5257c4911844d45af36e3f08bdbfa2c860650e22af7`.
-- `cta-band/admin-modal.png` shows the real CTA Band insert form with the fixture values. SHA-256: `cfa124e23b9b53d67973a179961c2caffa0c1522673c098e01b4f97b814a54d6`.
-- `cta-band/rendered-blocks.png` shows the published SSR result with both persisted CTA Band instances and unchanged public styling hooks. SHA-256: `1a3b6b2495b1c631cb9f2f2e21b3d9193b3b8d770a3caf12d0598de750824514`.
+The source head for all three captures is `5909c0a3b95a4d9a441ae93506726b1eaead0ccb`. The images were produced by the repository's Playwright/Chromium fixture flow on 2026-08-27 and visually inspected before publication. Redaction status for each asset is `inspected; no redaction required`: the captures contain only generic local fixture content and no credentials, personal identities, production data, browser address bar, or device chrome.
 
-All three screenshots are 1280 by 720 pixels and were directly inspected after the run. The live browser interaction and Playwright assertions are the behavioral source of truth; the screenshots are supporting visual evidence.
+| Asset | Immutable release URL | Size | SHA-256 | Provenance and claim |
+| --- | --- | ---: | --- | --- |
+| Slash menu | [slash-menu.png](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-35-cta-band-5909c0a3b95a/slash-menu.png) | 78,622 bytes | `77a63377b8dabd944652f5257c4911844d45af36e3f08bdbfa2c860650e22af7` | Playwright CTA Band registration flow; shows the registered slash-menu item. |
+| Admin modal | [admin-modal.png](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-35-cta-band-5909c0a3b95a/admin-modal.png) | 99,527 bytes | `cfa124e23b9b53d67973a179961c2caffa0c1522673c098e01b4f97b814a54d6` | Playwright CTA Band insertion flow; shows the real insert form with fixture values. |
+| Published blocks | [rendered-blocks.png](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-35-cta-band-5909c0a3b95a/rendered-blocks.png) | 46,592 bytes | `1a3b6b2495b1c631cb9f2f2e21b3d9193b3b8d770a3caf12d0598de750824514` | Playwright publish and SSR flow; shows both persisted CTA Band instances and unchanged public styling hooks. |
+
+All three release assets are 1280 by 720 pixels. GitHub's release API independently reports the same byte sizes and SHA-256 digests. The live browser interaction and Playwright assertions remain the behavioral source of truth; the screenshots are supporting visual evidence.
 
 ## Inspection and review gate
 
