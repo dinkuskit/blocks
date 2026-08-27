@@ -35,6 +35,20 @@ test("accepts imports through feature and package public entries", () => {
 		),
 		[],
 	);
+	assert.deepEqual(
+		findImportViolations(
+			"src/features/page-hero/renderer.ts",
+			'import { safeCtaHref } from "../../shared/links";',
+		),
+		[],
+	);
+	assert.deepEqual(
+		findImportViolations(
+			"src/features/page-hero/contract.ts",
+			'import type { PortableTextNode } from "../../shared/portable-text";',
+		),
+		[],
+	);
 });
 
 test("rejects feature internals, deep package imports, and undeclared shared modules", () => {
@@ -63,6 +77,13 @@ test("rejects feature internals, deep package imports, and undeclared shared mod
 		findImportViolations(
 			"src/features/page-hero/renderer.ts",
 			'import { CTA_BAND_BLOCK_TYPE } from "../cta-band/contract";',
+		).length,
+		1,
+	);
+	assert.equal(
+		findImportViolations(
+			"src/features/page-hero/renderer.ts",
+			'import { safeCtaHref } from "../../links";',
 		).length,
 		1,
 	);

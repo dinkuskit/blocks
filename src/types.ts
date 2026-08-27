@@ -1,18 +1,8 @@
 import type { PortableTextNode } from "./shared/portable-text";
 
 export type { CtaBandNode } from "./features/cta-band";
+export type { PageHeroNode } from "./features/page-hero";
 export type { PortableTextNode } from "./shared/portable-text";
-
-export interface PageHeroNode extends PortableTextNode {
-	_type?: "dinkus.page-hero";
-	eyebrow?: string;
-	headline?: string;
-	deck?: string;
-	primaryLabel?: string;
-	primaryHref?: string;
-	secondaryLabel?: string;
-	secondaryHref?: string;
-}
 
 export interface SectionHeaderNode extends PortableTextNode {
 	_type?: "dinkus.section-header";

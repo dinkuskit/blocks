@@ -11,6 +11,8 @@ import {
 const SEEDED_HEADLINE = "Before: Page hero headline is editable";
 const EDITED_HEADLINE = "After: Page hero headline persisted";
 const INSERTED_HEADLINE = "Inserted: Page hero via slash menu";
+const UNSAFE_PRIMARY_HREF = "javascript:alert(1)";
+const UNSAFE_SECONDARY_HREF = "data:text/plain,unsafe";
 
 test("declares, inserts, edits, persists, and renders a page hero", async (
 	{ page },
@@ -23,6 +25,15 @@ test("declares, inserts, edits, persists, and renders a page hero", async (
 		label: "Page Hero",
 		category: "Sections",
 	});
+
+	await page.goto("/page-hero");
+	const safeSeeded = page.locator('[data-dinkus-block="page-hero"]');
+	await expect(
+		safeSeeded.getByRole("link", { name: "Primary proof" }),
+	).toHaveAttribute("href", "/proof");
+	await expect(
+		safeSeeded.getByRole("link", { name: "Secondary proof" }),
+	).toHaveAttribute("href", "/proof-secondary");
 
 	await page.goto("/_emdash/admin/content/pages/page-hero");
 	await waitForAdmin(page);
@@ -40,9 +51,19 @@ test("declares, inserts, edits, persists, and renders a page hero", async (
 		SEEDED_HEADLINE,
 	);
 	await modalField(editDialog, "Headline").fill(EDITED_HEADLINE);
+	await modalField(editDialog, "Primary CTA URL").fill(UNSAFE_PRIMARY_HREF);
+	await modalField(editDialog, "Secondary CTA URL").fill(
+		UNSAFE_SECONDARY_HREF,
+	);
 	await submitModalAndWaitForSave(
 		page,
-		(content) => content.some((block) => block?.headline === EDITED_HEADLINE),
+		(content) =>
+			content.some(
+				(block) =>
+					block?.headline === EDITED_HEADLINE &&
+					block?.primaryHref === UNSAFE_PRIMARY_HREF &&
+					block?.secondaryHref === UNSAFE_SECONDARY_HREF,
+			),
 		async () => {
 			await editDialog.getByRole("button", { name: "Save" }).click();
 		},
@@ -58,6 +79,12 @@ test("declares, inserts, edits, persists, and renders a page hero", async (
 	});
 	await expect(modalField(persistedDialog, "Headline")).toHaveValue(
 		EDITED_HEADLINE,
+	);
+	await expect(modalField(persistedDialog, "Primary CTA URL")).toHaveValue(
+		UNSAFE_PRIMARY_HREF,
+	);
+	await expect(modalField(persistedDialog, "Secondary CTA URL")).toHaveValue(
+		UNSAFE_SECONDARY_HREF,
 	);
 	await persistedDialog.getByRole("button", { name: "Cancel" }).click();
 
@@ -122,13 +149,14 @@ test("declares, inserts, edits, persists, and renders a page hero", async (
 	await expect(rendered.nth(1).getByRole("heading", { level: 1 })).toHaveText(
 		INSERTED_HEADLINE,
 	);
+	await expect(rendered.nth(0).getByRole("link")).toHaveCount(0);
 	await expect(
 		rendered.nth(1).getByRole("link", { name: "Primary fixture" }),
 	).toHaveAttribute("href", "/inserted-primary");
 	await expect(
 		rendered.nth(1).getByRole("link", { name: "Secondary fixture" }),
 	).toHaveAttribute("href", "/inserted-secondary");
-	await rendered.nth(0).evaluate((element) => {
+	await rendered.nth(1).evaluate((element) => {
 		const root = element as HTMLElement;
 		root.style.setProperty("--dinkus-title-size", "37px");
 		root.style.setProperty("--dinkus-action-radius", "3px");
@@ -136,10 +164,10 @@ test("declares, inserts, edits, persists, and renders a page hero", async (
 		root.style.setProperty("--dinkus-action-color", "rgb(250, 251, 252)");
 	});
 	await expect(
-		rendered.nth(0).getByRole("heading", { level: 1 }),
+		rendered.nth(1).getByRole("heading", { level: 1 }),
 	).toHaveCSS("font-size", "37px");
-	const themedAction = rendered.nth(0).getByRole("link", {
-		name: "Primary proof",
+	const themedAction = rendered.nth(1).getByRole("link", {
+		name: "Primary fixture",
 	});
 	await expect(themedAction).toHaveCSS("border-radius", "3px");
 	await expect(themedAction).toHaveCSS("background-color", "rgb(1, 2, 3)");
