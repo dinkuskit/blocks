@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, extname, join, relative, resolve } from "node:path";
+import { parse as parseAstro } from "@astrojs/compiler/sync";
 import ts from "typescript";
 
 const FEATURE_IDS = [
@@ -180,14 +181,7 @@ function quotedMarkerComments(path, source, markers) {
 			else if (character === quote) quote = "";
 			continue;
 		}
-		const beforeQuote = source.slice(0, index);
-		const quoteStartsValue =
-			character === "`" ||
-			index === 0 ||
-			/(?:[=([{,:;!?&|+*%/-]|\b(?:await|case|return|throw|yield))\s*$/.test(
-				beforeQuote,
-			);
-		if ((character === "\"" || character === "'" || character === "`") && quoteStartsValue) {
+		if (character === "\"" || character === "'" || character === "`") {
 			quote = character;
 			continue;
 		}
@@ -243,27 +237,67 @@ function yamlComments(path, source) {
 }
 
 function astroComments(path, source) {
-	const findings = quotedMarkerComments(path, source, ["<!--", "/*", "//"]);
-	if (!source.startsWith("---")) return findings;
-	const closing = source.indexOf("\n---", 3);
-	if (closing === -1) return findings;
-	const frontmatterOffset = source.indexOf("\n") + 1;
-	const frontmatter = source.slice(frontmatterOffset, closing);
-	const frontmatterFindings = scriptComments(path, frontmatter, frontmatterOffset).map(
-		(finding) => ({
-			...finding,
-			line: finding.line + lineNumber(source, frontmatterOffset) - 1,
-		}),
-	);
-	const identities = new Set(
-		frontmatterFindings.map((finding) => `${finding.line}:${finding.text}`),
-	);
-	return [
-		...frontmatterFindings,
-		...findings.filter(
-			(finding) => !identities.has(`${finding.line}:${finding.text}`),
-		),
-	];
+	const { ast } = parseAstro(source, { position: true });
+	const findings = [];
+	const addScriptFindings = (value, offset) => {
+		const baseLine = lineNumber(source, offset);
+		for (const finding of scriptComments(path, value, offset)) {
+			findings.push({ ...finding, line: baseLine + finding.line - 1 });
+		}
+	};
+	const addStyleFindings = (value, offset, supportsLineComments) => {
+		const baseLine = lineNumber(source, offset);
+		const markers = supportsLineComments ? ["/*", "//"] : ["/*"];
+		for (const finding of quotedMarkerComments(path, value, markers)) {
+			findings.push({ ...finding, line: baseLine + finding.line - 1 });
+		}
+	};
+	const valueOffset = (node, value) =>
+		source.indexOf(value, node.position?.start?.offset ?? 0);
+	const visit = (node) => {
+		if (node.type === "frontmatter") {
+			addScriptFindings(node.value, valueOffset(node, node.value));
+			return;
+		}
+		if (node.type === "comment") {
+			findings.push({
+				path,
+				line: node.position?.start?.line ?? 1,
+				text: `<!--${node.value}-->`,
+			});
+			return;
+		}
+		for (const attribute of node.attributes ?? []) {
+			if (attribute.kind === "expression") {
+				addScriptFindings(attribute.value, valueOffset(attribute, attribute.value));
+			}
+		}
+		if (node.type === "element" && node.name === "style") {
+			const language = node.attributes?.find((attribute) => attribute.name === "lang")?.value;
+			for (const child of node.children ?? []) {
+				if (child.type === "text") {
+					addStyleFindings(child.value, valueOffset(child, child.value), language === "scss");
+				}
+			}
+			return;
+		}
+		if (node.type === "element" && node.name === "script") {
+			for (const child of node.children ?? []) {
+				if (child.type === "text") addScriptFindings(child.value, valueOffset(child, child.value));
+			}
+			return;
+		}
+		if (node.type === "expression") {
+			for (const child of node.children ?? []) {
+				if (child.type === "text") addScriptFindings(child.value, valueOffset(child, child.value));
+				else visit(child);
+			}
+			return;
+		}
+		for (const child of node.children ?? []) visit(child);
+	};
+	visit(ast);
+	return findings;
 }
 
 export function findCommentViolations(path, source) {
@@ -272,7 +306,10 @@ export function findCommentViolations(path, source) {
 	if (extension === ".yaml" || extension === ".yml" || extension === ".toml") {
 		return yamlComments(path, source);
 	}
-	if (extension === ".css" || extension === ".scss") {
+	if (extension === ".css") {
+		return quotedMarkerComments(path, source, ["/*"]);
+	}
+	if (extension === ".scss") {
 		return quotedMarkerComments(path, source, ["/*", "//"]);
 	}
 	return scriptComments(path, source);

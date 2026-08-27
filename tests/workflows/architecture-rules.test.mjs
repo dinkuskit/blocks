@@ -89,6 +89,13 @@ test("accepts machine directives and comment-like strings, URLs, and regular exp
 	assert.deepEqual(
 		findCommentViolations(
 			"src/example.astro",
+			`<p>Visible // text and Quote: 'unfinished</p>`,
+		),
+		[],
+	);
+	assert.deepEqual(
+		findCommentViolations(
+			"src/example.astro",
 			`<div data-copy="It's <!-- text -->">{(() => { return '/* text */'; })()}</div>`,
 		),
 		[],
@@ -106,6 +113,34 @@ test("rejects line, block, documentation, HTML, and configuration comments", () 
 		).length,
 		1,
 	);
+	assert.equal(
+		findCommentViolations(
+			"src/example.astro",
+			`<p>Quote: 'unfinished <!-- rationale --></p>`,
+		).length,
+		1,
+	);
+	assert.equal(
+		findCommentViolations(
+			"src/example.astro",
+			`<div data-value={(() => { // rationale\n return "x"; })()}></div>`,
+		).length,
+		1,
+	);
 	assert.equal(findCommentViolations("src/example.astro", "<style>/* rationale */</style>").length, 1);
+	assert.equal(
+		findCommentViolations(
+			"src/example.astro",
+			`---\nconst value = 1; // rationale\n---\n<p>{value}</p>`,
+		).length,
+		1,
+	);
+	assert.equal(
+		findCommentViolations(
+			"src/example.astro",
+			`<script>const value = 1; // rationale\n</script>`,
+		).length,
+		1,
+	);
 	assert.equal(findCommentViolations("config.yml", "key: value # rationale").length, 1);
 });
