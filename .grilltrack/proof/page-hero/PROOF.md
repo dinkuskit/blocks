@@ -32,4 +32,4 @@ The fixture build retained the baseline-existing `createCoalescingDialect` and l
 
 ## Review and delivery boundary
 
-The implementation is verified but uncommitted. Exact-source standards and source-intent review requires a separately authorized immutable commit identity. Commit, push, pull request, merge, publish, deployment, and external mutation remain unauthorized.
+The user authorized a local task-owned commit solely to establish an immutable review identity. Initial implementation commit `9a00651591570ffe240655131b79e61a9174c2a1` received a `required_fix` because this proof still described the work as uncommitted. This text repair does not change source or behavior. Push, pull request, merge, publish, deployment, and external mutation remain unauthorized.

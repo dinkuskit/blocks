@@ -175,22 +175,76 @@
           "review_source_identity": null,
           "to": "verified",
           "verification_ref": null
+        },
+        {
+          "at": "2026-08-27T23:16:09+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
+          "from": "verified",
+          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "adjudicated review requires a fix",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "needs_reverification",
+          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
+        },
+        {
+          "at": "2026-08-27T23:17:04+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
+          "from": "needs_reverification",
+          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "bounded implementation recorded",
+          "repair_required": true,
+          "review_classifications": [
+            "required_fix"
+          ],
+          "review_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
+          "review_result": "findings",
+          "review_source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1",
+          "to": "implemented",
+          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
+        },
+        {
+          "at": "2026-08-27T23:17:22+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
+          "from": "implemented",
+          "implementation_ref": "file:.grilltrack/proof/page-hero/PROOF.md;file:.grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
+          "note": "verification recorded in cumulative context",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "verified",
+          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
         }
       ],
       "id": "page-hero-pilot-fcd539a",
-      "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+      "implementation_ref": "file:.grilltrack/proof/page-hero/PROOF.md;file:.grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
       "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
       "rationale": "PR #35 merged during verification as fcd539aa08fbce708761361832e4ff12fd33a761; its tree e8b6473dc2f3a69ff73cca569414a937f0009d3a is identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e, so the confirmed Page Hero scope and verified worktree are unchanged.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [],
+      "review_history": [
+        {
+          "classifications": [
+            "required_fix"
+          ],
+          "ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
+          "result": "findings",
+          "reviewed_at": "2026-08-27T23:16:09+00:00",
+          "source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1"
+        }
+      ],
       "review_ref": null,
       "review_result": null,
       "review_source_identity": null,
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-27T23:02:57+00:00",
-      "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
+      "updated_at": "2026-08-27T23:17:22+00:00",
+      "verification_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md#repair-verification"
     }
   ],
   "last_activation": {
@@ -218,5 +272,5 @@
   "status": "active",
   "title": "Page Hero second feature-local pilot",
   "track_id": "gt-20260827223336-b5457f",
-  "updated_at": "2026-08-27T23:14:59+00:00"
+  "updated_at": "2026-08-27T23:17:22+00:00"
 }
