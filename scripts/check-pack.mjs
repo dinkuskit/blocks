@@ -20,6 +20,7 @@ if (forbidden.length > 0) {
 
 for (const required of [
 	"COMPAT.md",
+	"FEATURE_MAP.md",
 	"LICENSE",
 	"README.md",
 	"docs/architecture.md",
@@ -29,7 +30,12 @@ for (const required of [
 	"src/links.ts",
 	"src/theme.ts",
 	"src/types.ts",
-	"src/astro/CtaBand.astro",
+	"src/features/cta-band/contract.ts",
+	"src/features/cta-band/fields.ts",
+	"src/features/cta-band/index.ts",
+	"src/features/cta-band/renderer.astro",
+	"src/shared/links.ts",
+	"src/shared/portable-text.ts",
 	"src/astro/ProjectRecord.astro",
 	"src/astro/index.ts",
 ]) {

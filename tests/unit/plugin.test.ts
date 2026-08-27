@@ -23,11 +23,11 @@ import {
 	ledgerCardsFields,
 	pageHeroFields,
 	projectRecordFields,
+	safeCtaHref,
 	searchBoardFields,
 	sectionHeaderFields,
 	serviceAreaMapFields,
 } from "../../src/index";
-import { safeCtaHref } from "../../src/links";
 
 describe("@dinkuskit/blocks", () => {
 	it("publishes a native descriptor with automatic Astro components", () => {
@@ -162,8 +162,6 @@ describe("@dinkuskit/blocks", () => {
 			"value",
 			"icon",
 		]);
-		// Repeater sub-fields only support scalar element types; media stays a
-		// top-level media_picker (URL-string) field.
 		expect(facts.fields.every((field) => field.type === "text_input")).toBe(
 			true,
 		);
@@ -216,8 +214,6 @@ describe("@dinkuskit/blocks", () => {
 			"href",
 			"image",
 		]);
-		// media_picker is not a valid repeater sub-field, so the lane image is
-		// a plain URL-string text input.
 		expect(lanes.fields.every((field) => field.type === "text_input")).toBe(
 			true,
 		);

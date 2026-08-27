@@ -1,4 +1,4 @@
-import CtaBandComponent from "./CtaBand.astro";
+import CtaBandComponent from "../features/cta-band/renderer.astro";
 import DispatchComponent from "./Dispatch.astro";
 import FactRailComponent from "./FactRail.astro";
 import GalleryHeroComponent from "./GalleryHero.astro";

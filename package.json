@@ -11,6 +11,7 @@
   "files": [
     "src",
     "patterns",
+    "FEATURE_MAP.md",
     "docs/architecture.md",
     "COMPAT.md",
     "ROADMAP.md",
@@ -25,6 +26,8 @@
     "build:fixture": "pnpm --dir tests/fixture-site build",
     "test:e2e": "node scripts/run-e2e.mjs",
     "check:pack": "node scripts/check-pack.mjs",
+    "verify:quick": "bin/verify-blocks quick",
+    "verify:full": "bin/verify-blocks full",
     "check": "pnpm typecheck && pnpm test && pnpm test:workflows && pnpm build:fixture && pnpm check:pack"
   },
   "peerDependencies": {
