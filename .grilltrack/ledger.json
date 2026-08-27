@@ -7,7 +7,7 @@
     "confirmed_at": "2026-08-27T23:02:10+00:00",
     "domain": "Page Hero as the second feature-local pilot",
     "started_at": "2026-08-27T22:35:14+00:00",
-    "status": "confirmed",
+    "status": "inspected",
     "summary": "The user explicitly confirms Page Hero, not CTA Band, as the second feature-local pilot and authorized using fresh origin/main when PR #35 merged. The exact baseline is merge commit fcd539aa08fbce708761361832e4ff12fd33a761, tree-identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e. Localize only Page Hero's constant, node contract, seven-field schema, unchanged renderer, and public feature entry; preserve all public, stored-content, renderer, CTA, architecture, verifier, and proof-media contracts; prove safe and unsafe behavior on both CTA paths; make no excluded or delivery changes."
   },
   "decisions": [
@@ -226,7 +226,10 @@
       "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
       "rationale": "PR #35 merged during verification as fcd539aa08fbce708761361832e4ff12fd33a761; its tree e8b6473dc2f3a69ff73cca569414a937f0009d3a is identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e, so the confirmed Page Hero scope and verified worktree are unchanged.",
       "repair_required": false,
-      "review_classifications": [],
+      "review_classifications": [
+        "reject_false_positive",
+        "human_gate"
+      ],
       "review_history": [
         {
           "classifications": [
@@ -236,41 +239,65 @@
           "result": "findings",
           "reviewed_at": "2026-08-27T23:16:09+00:00",
           "source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1"
+        },
+        {
+          "classifications": [],
+          "ref": ".grilltrack/proof/review/2d671b86c0757879cad2b058aa1aa7722e526ed5.md",
+          "result": "clean",
+          "reviewed_at": "2026-08-27T23:18:15+00:00",
+          "source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5"
+        },
+        {
+          "classifications": [
+            "reject_false_positive",
+            "human_gate"
+          ],
+          "ref": ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
+          "result": "findings",
+          "reviewed_at": "2026-08-27T23:47:27+00:00",
+          "source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5"
         }
       ],
-      "review_ref": null,
-      "review_result": null,
-      "review_source_identity": null,
+      "review_ref": ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
+      "review_result": "findings",
+      "review_source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5",
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-27T23:17:22+00:00",
+      "updated_at": "2026-08-27T23:47:27+00:00",
       "verification_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md#repair-verification"
     }
   ],
   "last_activation": {
-    "at": "2026-08-27T23:14:59+00:00",
+    "at": "2026-08-27T23:49:05+00:00",
     "mechanism": "implicit"
   },
   "last_pause": {
     "artifact_refs": [
       ".grilltrack/ledger.json",
-      ".grilltrack/proof/page-hero/PROOF.md",
-      ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
-      "FEATURE_MAP.md",
-      "src/features/page-hero/",
-      "tests/e2e/page-hero.spec.ts"
+      ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
+      ".grilltrack/work/page-hero-media-2d671b8/MANIFEST.md",
+      "git:2d671b86c0757879cad2b058aa1aa7722e526ed5",
+      "https://github.com/dinkuskit/blocks/pull/36#issuecomment-5446514173"
     ],
-    "next_safe_action": "If the user separately authorizes a local commit, resume the track, create one task-owned commit without pushing, perform and adjudicate exact-source review against that full SHA, repair and reverify any required finding, then inspect for the next grill or closure. Do not push, open a PR, publish, deploy, or mutate external state without separate authorization.",
-    "paused_at": "2026-08-27T23:03:24+00:00",
-    "reason": "The confirmed Page Hero implementation is complete and cumulatively verified, but exact-source standards and source-intent review requires an immutable commit SHA and the user explicitly withheld commit authorization.",
-    "resumed_at": "2026-08-27T23:14:59+00:00"
+    "next_safe_action": "If the user explicitly authorizes immutable proof publication and the accompanying PR/source updates, publish the three inspected Page Hero candidates to the approved saari-co/swarm-pr-assets route with full hashes and provenance, update retained proof and PR context, bind any source change to a fresh immutable review, push as authorized, and request ClawSweeper re-review. Otherwise preserve the current PR head and do not remove the successor ledger.",
+    "paused_at": "2026-08-27T23:47:27+00:00",
+    "reason": "ClawSweeper PR #36 feedback was inspected and adjudicated. Removing all successor GrillTrack state is a rejected false positive; immutable external media is a real proof-rating gate. Fresh local media candidates were generated and directly inspected under the user-authorized gathering scope, but publication and PR/re-review updates are not yet authorized.",
+    "resumed_at": "2026-08-27T23:49:05+00:00"
   },
   "pause": null,
   "predecessor_track_id": "gt-20260827204742-2f62eb",
-  "recommendation": null,
+  "recommendation": {
+    "alternatives": [
+      "Section Header as the lowest-complexity scalar-only pilot.",
+      "Fact Rail as a later repeater-boundary pilot after one media-bearing feature is proven."
+    ],
+    "reason": "Gallery Hero is the smallest adjacent increase in feature-boundary pressure: its primary and secondary CTA paths should reuse the already-proven shared policy, while its image and image-alt fields add one new media-rendering seam without requiring repeater ownership or shared-policy redesign.",
+    "recommended": "Gallery Hero as the third feature-local pilot, preserving the cumulative CTA Band and Page Hero locks while proving the existing two-path safe-link policy alongside its bounded image and image-alt contract.",
+    "recorded_at": "2026-08-27T23:18:26+00:00"
+  },
   "schema_version": "grilltrack/v0.1",
   "status": "active",
   "title": "Page Hero second feature-local pilot",
   "track_id": "gt-20260827223336-b5457f",
-  "updated_at": "2026-08-27T23:17:22+00:00"
+  "updated_at": "2026-08-27T23:49:05+00:00"
 }
