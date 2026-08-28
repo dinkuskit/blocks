@@ -29,18 +29,6 @@ function headingField(dialog: import("@playwright/test").Locator) {
 		.getByRole("textbox");
 }
 
-function headingsIn(payload: Record<string, unknown>) {
-	const data = payload.data;
-	if (!data || typeof data !== "object") return [];
-	const content = (data as { content?: unknown }).content;
-	if (!Array.isArray(content)) return [];
-	return content.flatMap((block) => {
-		if (!block || typeof block !== "object") return [];
-		const heading = (block as { heading?: unknown }).heading;
-		return typeof heading === "string" ? [heading] : [];
-	});
-}
-
 test("EmDash compatibility: a block edit does not trigger competing manual saves", async ({
 	page,
 }) => {
@@ -104,19 +92,6 @@ test("EmDash compatibility: a block edit does not trigger competing manual saves
 		page.getByRole("dialog", { name: "Edit CTA Band" }),
 	).inputValue();
 	const manualWrites = writes.filter((payload) => payload.skipRevision !== true);
-	const knownRaceObserved =
-		manualWrites.length >= 2 &&
-		manualWrites.some((payload) => headingsIn(payload).includes(initialHeading)) &&
-		manualWrites.some((payload) => headingsIn(payload).includes(editedHeading));
-
-	if (!knownRaceObserved) {
-		expect(manualWrites).toEqual([]);
-		expect(persistedHeading).toBe(editedHeading);
-	}
-
-	test.fail(
-		true,
-		"EmDash 0.29.0 dispatches the block modal submit to the surrounding content form",
-	);
 	expect(manualWrites).toEqual([]);
+	expect(persistedHeading).toBe(editedHeading);
 });

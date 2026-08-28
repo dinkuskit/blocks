@@ -15,7 +15,7 @@ dogfood, and [COMPAT.md](COMPAT.md) for stored-content change rules.
 ## Block vocabulary
 
 The package declares a vocabulary of recurring section blocks as native
-Portable Text blocks, each proven end to end against EmDash 0.29.0:
+Portable Text blocks, each proven end to end against EmDash 0.35.0:
 
 - native plugin registration;
 - admin slash-menu insertion and field editing;
@@ -48,9 +48,9 @@ and [pattern catalog contract](patterns/README.md).
 | Dispatch | `dinkus.dispatch` | contact band with CTA + tel/mailto links |
 | Project Record | `dinkus.project-record` | identity art, status ticket, role, evidence-link repeater, next-project navigation |
 
-Repeater sub-fields are scalar only in Block Kit 0.29.0, so image
-sub-fields (gallery lanes) carry URL strings rather than a media picker —
-a gap noted for later tooling.
+The current stored contract keeps repeater sub-fields scalar, so image
+sub-fields (gallery lanes) carry URL strings rather than a media picker — a
+gap noted for later tooling.
 
 The package is intentionally private at `0.0.0`. It has not passed the
 Smoky Works dogfood gate and is not published to npm or an EmDash registry.

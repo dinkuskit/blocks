@@ -8,6 +8,7 @@ test-results/
 tests/fixture-site/data.db*
 tests/fixture-site/uploads/
 tests/fixture-site/.artifacts/
+tests/fixture-site/.emdash/
 
 *.tgz
 .env

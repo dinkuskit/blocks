@@ -38,6 +38,11 @@ EmDash is pre-1.0. Fixture versions stay exact, and the peer range names only
 versions proven by the compatibility suite. A wider range requires current
 admin edit/save/publish and public SSR proof.
 
+The current dogfood matrix is exact EmDash `0.35.0`,
+`@emdash-cms/blocks` `0.35.0`, and Astro `7.1.3`. The verified migration from
+the prior `0.29.0` baseline is recorded in
+[`docs/spikes/2026-08-27-emdash-0.35-compatibility.md`](docs/spikes/2026-08-27-emdash-0.35-compatibility.md).
+
 The first schema-changing release must also add the package's machine-readable
 schema-version manifest and migration command. Until then, the current field
 contracts and their unit/e2e fixtures are the version-one baseline.

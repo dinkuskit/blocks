@@ -97,7 +97,7 @@ test("declares, inserts, edits, persists, and renders a dispatch band", async (
 		reloadedEditor.getByRole("button", { name: "Edit" }),
 	).toHaveCount(2);
 	await expect(reloadedEditor).toContainText(INSERTED_TITLE);
-	await page.getByRole("button", { name: "Publish changes" }).click();
+	await page.getByRole("button", { name: "Publish", exact: true }).click();
 	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
 		timeout: 15_000,
 	});
