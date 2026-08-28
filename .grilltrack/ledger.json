@@ -80,13 +80,21 @@
       "rationale": "Fact Rail is the smallest adjacent increase in boundary pressure: it introduces the first nested repeater and reusable item type while avoiding link, media, and shared-policy changes.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [],
-      "review_ref": null,
-      "review_result": null,
-      "review_source_identity": null,
+      "review_history": [
+        {
+          "classifications": [],
+          "ref": ".grilltrack/proof/review/41deeb7c34f7b4cb804963b66165ba5fa681282e.md",
+          "result": "clean",
+          "reviewed_at": "2026-08-28T23:30:47+00:00",
+          "source_identity": "git:41deeb7c34f7b4cb804963b66165ba5fa681282e"
+        }
+      ],
+      "review_ref": ".grilltrack/proof/review/41deeb7c34f7b4cb804963b66165ba5fa681282e.md",
+      "review_result": "clean",
+      "review_source_identity": "git:41deeb7c34f7b4cb804963b66165ba5fa681282e",
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-28T23:21:50+00:00",
+      "updated_at": "2026-08-28T23:30:47+00:00",
       "verification_ref": ".grilltrack/proof/fact-rail/PROOF.md#verification"
     }
   ],
@@ -110,5 +118,5 @@
   "status": "active",
   "title": "Fact Rail first repeater feature-local pilot",
   "track_id": "gt-20260828230318-6bc31b",
-  "updated_at": "2026-08-28T23:29:09+00:00"
+  "updated_at": "2026-08-28T23:30:47+00:00"
 }
