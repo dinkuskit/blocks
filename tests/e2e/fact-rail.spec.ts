@@ -24,7 +24,7 @@ function factRailWithValue(
 	);
 }
 
-test("declares, inserts, edits, persists, and renders a fact rail", async (
+test("declares, inserts, edits, persists, and accessibly renders fact rows", async (
 	{ page },
 	testInfo,
 ) => {
@@ -97,11 +97,11 @@ test("declares, inserts, edits, persists, and renders a fact rail", async (
 	await slashMenuItem.click();
 
 	const insertDialog = page.getByRole("dialog", { name: "Insert Fact Rail" });
-	await modalField(insertDialog, "Accessible label").fill("Inserted facts");
 	await insertDialog.getByRole("button", { name: "Add Fact" }).first().click();
 	await modalField(insertDialog, "Label").fill("Lead time");
 	await modalField(insertDialog, "Value").fill("Two weeks");
 	await modalField(insertDialog, "Icon slug").fill("clock");
+	await insertDialog.getByRole("button", { name: "Add Fact" }).first().click();
 	await page.screenshot({
 		path: testInfo.outputPath("admin-modal-insert.png"),
 		fullPage: true,
@@ -130,7 +130,9 @@ test("declares, inserts, edits, persists, and renders a fact rail", async (
 	await expect(rendered).toHaveCount(2);
 
 	const seededRail = rendered.nth(0);
+	expect(await seededRail.evaluate((element) => element.tagName)).toBe("DL");
 	await expect(seededRail).toHaveAttribute("aria-label", "Fixture facts");
+	await expect(seededRail).toHaveAttribute("tabindex", "0");
 	const seededFacts = seededRail.locator(".dinkus-fact-rail__fact");
 	await expect(seededFacts).toHaveCount(3);
 	await expect(seededFacts.nth(0).locator("dt")).toHaveText("Crew");
@@ -143,11 +145,16 @@ test("declares, inserts, edits, persists, and renders a fact rail", async (
 	);
 
 	const insertedRail = rendered.nth(1);
-	await expect(insertedRail).toHaveAttribute("aria-label", "Inserted facts");
+	expect(await insertedRail.evaluate((element) => element.tagName)).toBe("DL");
+	await expect(insertedRail).toHaveAttribute("aria-label", "Quick facts");
+	await expect(insertedRail).toHaveAttribute("tabindex", "0");
 	const insertedFacts = insertedRail.locator(".dinkus-fact-rail__fact");
 	await expect(insertedFacts).toHaveCount(1);
 	await expect(insertedFacts.nth(0).locator("dt")).toHaveText("Lead time");
 	await expect(insertedFacts.nth(0).locator("dd")).toHaveText("Two weeks");
+	expect(
+		await insertedRail.evaluate((element) => getComputedStyle(element).overflowX),
+	).toBe("auto");
 	await page.screenshot({
 		path: testInfo.outputPath("rendered-blocks.png"),
 		fullPage: true,

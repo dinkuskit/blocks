@@ -10,6 +10,10 @@ import {
 	ctaBandFields,
 } from "./features/cta-band";
 import {
+	FACT_RAIL_BLOCK_TYPE,
+	factRailFields,
+} from "./features/fact-rail";
+import {
 	GALLERY_HERO_BLOCK_TYPE,
 	galleryHeroFields,
 } from "./features/gallery-hero";
@@ -24,6 +28,12 @@ export {
 	type CtaBandNode,
 } from "./features/cta-band";
 export {
+	FACT_RAIL_BLOCK_TYPE,
+	factRailFields,
+	type FactItem,
+	type FactRailNode,
+} from "./features/fact-rail";
+export {
 	GALLERY_HERO_BLOCK_TYPE,
 	galleryHeroFields,
 	type GalleryHeroNode,
@@ -37,8 +47,6 @@ export { safeCtaHref } from "./links";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type {
 	DispatchNode,
-	FactItem,
-	FactRailNode,
 	GalleryLane,
 	GalleryLanesNode,
 	LedgerCard,
@@ -58,7 +66,6 @@ export type {
 
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
 export const SECTION_HEADER_BLOCK_TYPE = "dinkus.section-header";
-export const FACT_RAIL_BLOCK_TYPE = "dinkus.fact-rail";
 export const LEDGER_CARDS_BLOCK_TYPE = "dinkus.ledger-cards";
 export const GALLERY_LANES_BLOCK_TYPE = "dinkus.gallery-lanes";
 export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
@@ -88,38 +95,6 @@ export const sectionHeaderFields = [
 		action_id: "intro",
 		label: "Intro",
 		multiline: true,
-	},
-] satisfies Element[];
-
-export const factRailFields = [
-	{
-		type: "text_input",
-		action_id: "ariaLabel",
-		label: "Accessible label",
-		placeholder: "Quick facts",
-	},
-	{
-		type: "repeater",
-		action_id: "facts",
-		label: "Facts",
-		item_label: "Fact",
-		fields: [
-			{
-				type: "text_input",
-				action_id: "label",
-				label: "Label",
-			},
-			{
-				type: "text_input",
-				action_id: "value",
-				label: "Value",
-			},
-			{
-				type: "text_input",
-				action_id: "icon",
-				label: "Icon slug",
-			},
-		],
 	},
 ] satisfies Element[];
 

@@ -1,40 +1,39 @@
 {
   "closeout": null,
-  "created_at": "2026-08-28T21:24:14+00:00",
+  "created_at": "2026-08-28T23:03:18+00:00",
   "current_focus": {
     "cadence": "sequential",
     "confirmed": true,
-    "confirmed_at": "2026-08-28T21:27:13+00:00",
-    "domain": "Gallery Hero as the third feature-local pilot",
-    "started_at": "2026-08-28T21:24:18+00:00",
+    "confirmed_at": "2026-08-28T23:06:41+00:00",
+    "domain": "Fact Rail as the first repeater feature-local pilot",
+    "started_at": "2026-08-28T23:03:18+00:00",
     "status": "confirmed",
-    "summary": "The user explicitly confirms Gallery Hero as the third feature-local pilot on exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62. Migrate only its constant, GalleryHeroNode contract, unchanged nine stored fields, unchanged renderer, and public feature entry into src/features/gallery-hero/; preserve package and Astro facades, stored content, markup, classes, data hook, tokens, eager/async image behavior, empty-alt fallback, no-image placeholder, both CTA paths through the approved shared safe-link policy, CTA Band, Page Hero, architecture gates, and EmDash 0.35. Update only boundary metadata, public facades, focused fixtures/tests, and curated local proof. Verify renderer identity, image/alt and fallback behavior, safe/unsafe behavior on both CTA paths, quick and full repository gates, focused Chromium screenshots, and cumulative CTA Band/Page Hero behavior. Exclude visual or media-policy redesign, other migrations, EmDash maintenance, commits, pushes, PRs, merges, publication, deployment, and external mutation."
+    "summary": "The user confirms Fact Rail as the first repeater feature-local pilot on exact origin/main 0259df4a1460b0e6a429f5a4f47c5dbbd3f05224. Migrate only its constant, FactItem and FactRailNode contracts, unchanged ariaLabel and facts repeater fields, unchanged renderer, and public feature entry into src/features/fact-rail/; preserve package and Astro facades, stored content, empty-row filtering, dl/dt/dd semantics, accessible-label fallback, tabindex, public hooks, horizontal overflow, theme tokens, CTA Band, Page Hero, Gallery Hero, architecture gates, and EmDash 0.35. Use only the shared portable-text contract. Update only boundary metadata, public facades, focused fixtures/tests, and curated local proof. Verify renderer identity, repeater insert/edit persistence, multiple and empty rows, accessible labeling and semantics, quick and full repository gates, focused Chromium screenshots, and cumulative prior-pilot behavior. Exclude visual, icon-system, repeater-API, URL/media-policy, or other-feature redesign, and exclude commits, pushes, pull requests, merges, publication, deployment, and production mutation."
   },
   "decisions": [
     {
-      "baseline_ref": "git:15c3684a85a98f8717b3c5a80f1bff9034241c62",
+      "baseline_ref": "git:0259df4a1460b0e6a429f5a4f47c5dbbd3f05224",
       "candidate_refs": [
-        ".grilltrack/archive/gt-20260827223336-b5457f/ledger.json",
         "AGENTS.md",
         "FEATURE_MAP.md",
-        "src/astro/GalleryHero.astro",
+        "src/astro/FactRail.astro",
         "src/index.ts",
         "src/types.ts",
-        "tests/e2e/gallery-hero.spec.ts",
+        "tests/e2e/fact-rail.spec.ts",
         "tests/fixture-site/seed/seed.json",
-        "proof/emdash-0.35-baseline-20260827/PROOF.md"
+        ".grilltrack/archive/gt-20260828212414-9acbd5/ledger.json"
       ],
-      "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+      "choice": "On exact origin/main 0259df4a1460b0e6a429f5a4f47c5dbbd3f05224, migrate only Fact Rail into src/features/fact-rail/ with a public feature entry owning FACT_RAIL_BLOCK_TYPE, FactItem, FactRailNode, the unchanged ariaLabel field and facts repeater with label, value, and icon children, and the unchanged renderer; preserve package-root and @dinkuskit/blocks/astro facades, stored content, empty-row filtering, dl/dt/dd semantics, default accessible label, tabindex, public classes, data hook, horizontal overflow behavior, and documented theme tokens; use only the shared portable-text contract and introduce no link or media policy; update only the feature map, boundary metadata and tests, public facades, focused fixtures/tests, and curated local proof needed to prove the boundary; preserve CTA Band, Page Hero, Gallery Hero, cumulative architecture gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, repeater insert/edit persistence, multiple and empty row behavior, accessible labeling and semantics, current-head quick checks, focused Chromium screenshots, the full verifier, and cumulative prior-pilot behavior; exclude visual redesign, icon-system work, repeater API redesign, URL or media policy changes, other feature migrations, commits, pushes, pull requests, merges, publication, deployment, and production mutation.",
       "context_ref": "thread:01a04a3e-1724-7f32-a6a1-eed0b3ed816b",
-      "created_at": "2026-08-28T21:24:35+00:00",
+      "created_at": "2026-08-28T23:03:18+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
       "dependencies": [],
-      "domain": "Gallery Hero as the third feature-local pilot",
+      "domain": "Fact Rail as the first repeater feature-local pilot",
       "history": [
         {
-          "at": "2026-08-28T21:27:08+00:00",
-          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "at": "2026-08-28T23:06:41+00:00",
+          "choice": "On exact origin/main 0259df4a1460b0e6a429f5a4f47c5dbbd3f05224, migrate only Fact Rail into src/features/fact-rail/ with a public feature entry owning FACT_RAIL_BLOCK_TYPE, FactItem, FactRailNode, the unchanged ariaLabel field and facts repeater with label, value, and icon children, and the unchanged renderer; preserve package-root and @dinkuskit/blocks/astro facades, stored content, empty-row filtering, dl/dt/dd semantics, default accessible label, tabindex, public classes, data hook, horizontal overflow behavior, and documented theme tokens; use only the shared portable-text contract and introduce no link or media policy; update only the feature map, boundary metadata and tests, public facades, focused fixtures/tests, and curated local proof needed to prove the boundary; preserve CTA Band, Page Hero, Gallery Hero, cumulative architecture gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, repeater insert/edit persistence, multiple and empty row behavior, accessible labeling and semantics, current-head quick checks, focused Chromium screenshots, the full verifier, and cumulative prior-pilot behavior; exclude visual redesign, icon-system work, repeater API redesign, URL or media policy changes, other feature migrations, commits, pushes, pull requests, merges, publication, deployment, and production mutation.",
           "from": "proposed",
           "implementation_ref": null,
           "note": "user accepted the scoped decision",
@@ -47,8 +46,8 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-28T21:43:55+00:00",
-          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "at": "2026-08-28T23:21:50+00:00",
+          "choice": "On exact origin/main 0259df4a1460b0e6a429f5a4f47c5dbbd3f05224, migrate only Fact Rail into src/features/fact-rail/ with a public feature entry owning FACT_RAIL_BLOCK_TYPE, FactItem, FactRailNode, the unchanged ariaLabel field and facts repeater with label, value, and icon children, and the unchanged renderer; preserve package-root and @dinkuskit/blocks/astro facades, stored content, empty-row filtering, dl/dt/dd semantics, default accessible label, tabindex, public classes, data hook, horizontal overflow behavior, and documented theme tokens; use only the shared portable-text contract and introduce no link or media policy; update only the feature map, boundary metadata and tests, public facades, focused fixtures/tests, and curated local proof needed to prove the boundary; preserve CTA Band, Page Hero, Gallery Hero, cumulative architecture gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, repeater insert/edit persistence, multiple and empty row behavior, accessible labeling and semantics, current-head quick checks, focused Chromium screenshots, the full verifier, and cumulative prior-pilot behavior; exclude visual redesign, icon-system work, repeater API redesign, URL or media policy changes, other feature migrations, commits, pushes, pull requests, merges, publication, deployment, and production mutation.",
           "from": "locked",
           "implementation_ref": null,
           "note": "bounded implementation recorded",
@@ -61,10 +60,10 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-28T21:43:59+00:00",
-          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "at": "2026-08-28T23:21:50+00:00",
+          "choice": "On exact origin/main 0259df4a1460b0e6a429f5a4f47c5dbbd3f05224, migrate only Fact Rail into src/features/fact-rail/ with a public feature entry owning FACT_RAIL_BLOCK_TYPE, FactItem, FactRailNode, the unchanged ariaLabel field and facts repeater with label, value, and icon children, and the unchanged renderer; preserve package-root and @dinkuskit/blocks/astro facades, stored content, empty-row filtering, dl/dt/dd semantics, default accessible label, tabindex, public classes, data hook, horizontal overflow behavior, and documented theme tokens; use only the shared portable-text contract and introduce no link or media policy; update only the feature map, boundary metadata and tests, public facades, focused fixtures/tests, and curated local proof needed to prove the boundary; preserve CTA Band, Page Hero, Gallery Hero, cumulative architecture gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, repeater insert/edit persistence, multiple and empty row behavior, accessible labeling and semantics, current-head quick checks, focused Chromium screenshots, the full verifier, and cumulative prior-pilot behavior; exclude visual redesign, icon-system work, repeater API redesign, URL or media policy changes, other feature migrations, commits, pushes, pull requests, merges, publication, deployment, and production mutation.",
           "from": "implemented",
-          "implementation_ref": "file:src/features/gallery-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/gallery-hero.spec.ts;file:tests/fixture-site/seed/seed.json;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": ".grilltrack/proof/fact-rail/PROOF.md#source-and-scope",
           "note": "verification recorded in cumulative context",
           "repair_required": false,
           "review_classifications": [],
@@ -75,10 +74,10 @@
           "verification_ref": null
         }
       ],
-      "id": "gallery-hero-pilot",
-      "implementation_ref": "file:src/features/gallery-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/gallery-hero.spec.ts;file:tests/fixture-site/seed/seed.json;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
-      "question": "Lock Gallery Hero as the third feature-local pilot under the cumulative CTA Band and Page Hero contracts?",
-      "rationale": "Gallery Hero is the smallest adjacent increase in boundary pressure: it repeats the proven two-path safe-link seam while adding one bounded media-picker, image-alt, rendering, and fallback contract without repeaters or shared-policy redesign.",
+      "id": "fact-rail-pilot",
+      "implementation_ref": ".grilltrack/proof/fact-rail/PROOF.md#source-and-scope",
+      "question": "Lock Fact Rail as the next feature-local pilot under the cumulative CTA Band, Page Hero, and Gallery Hero contracts?",
+      "rationale": "Fact Rail is the smallest adjacent increase in boundary pressure: it introduces the first nested repeater and reusable item type while avoiding link, media, and shared-policy changes.",
       "repair_required": false,
       "review_classifications": [],
       "review_history": [],
@@ -87,34 +86,28 @@
       "review_source_identity": null,
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-28T21:43:59+00:00",
-      "verification_ref": ".grilltrack/proof/gallery-hero/PROOF.md"
+      "updated_at": "2026-08-28T23:21:50+00:00",
+      "verification_ref": ".grilltrack/proof/fact-rail/PROOF.md#verification"
     }
   ],
   "last_activation": {
-    "at": "2026-08-28T21:50:21+00:00",
+    "at": "2026-08-28T23:03:18+00:00",
     "mechanism": "implicit"
   },
-  "last_pause": {
+  "last_pause": null,
+  "pause": {
     "artifact_refs": [
-      ".grilltrack/ledger.json",
-      ".grilltrack/proof/gallery-hero/PROOF.md",
-      ".grilltrack/work/gallery-hero-proof-20260828/MANIFEST.md",
-      "src/features/gallery-hero/",
-      "tests/e2e/gallery-hero.spec.ts",
-      "git:15c3684a85a98f8717b3c5a80f1bff9034241c62"
+      ".grilltrack/proof/fact-rail/PROOF.md"
     ],
-    "next_safe_action": "If the user explicitly authorizes a local task-owned commit, commit only the bounded Page Hero closeout bookkeeping and Gallery Hero implementation, ledger, and proof on codex/grilltrack-gallery-hero-lock-20260828; do not push. Re-run proportionate exact-head checks, perform separate repository-standards and confirmed-source-intent review bound to the commit SHA, classify every finding, repair and reverify any required fix, then inspect the next grill and request closure confirmation. Without commit authorization, preserve this verified working tree.",
-    "paused_at": "2026-08-28T21:44:21+00:00",
-    "reason": "Gallery Hero is implemented and fully verified, but exact-source review requires an immutable Git commit identity. The user confirmed the local slice but did not authorize a commit, so GrillTrack stops before creating one or claiming a clean review.",
-    "resumed_at": "2026-08-28T21:50:21+00:00"
+    "next_safe_action": "Inspect the verified diff, then obtain explicit commit authorization before independent exact-source review.",
+    "paused_at": "2026-08-28T23:21:50+00:00",
+    "reason": "Local verification is complete, but the user has not authorized a commit; exact-source review requires an immutable source identity."
   },
-  "pause": null,
-  "predecessor_track_id": "gt-20260827223336-b5457f",
+  "predecessor_track_id": "gt-20260828212414-9acbd5",
   "recommendation": null,
   "schema_version": "grilltrack/v0.1",
-  "status": "active",
-  "title": "Gallery Hero third feature-local pilot",
-  "track_id": "gt-20260828212414-9acbd5",
-  "updated_at": "2026-08-28T21:50:21+00:00"
+  "status": "paused",
+  "title": "Fact Rail first repeater feature-local pilot",
+  "track_id": "gt-20260828230318-6bc31b",
+  "updated_at": "2026-08-28T23:21:50+00:00"
 }
