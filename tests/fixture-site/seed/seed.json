@@ -134,7 +134,7 @@
             {
               "_type": "dinkus.gallery-hero",
               "_key": "gallery-hero-seed",
-              "image": "/media/fixture/hero.jpg",
+              "image": "/media/fixture/project-record.svg",
               "imageAlt": "Fixture hero image",
               "eyebrow": "Compatibility fixture",
               "headline": "Before: Gallery hero headline is editable",

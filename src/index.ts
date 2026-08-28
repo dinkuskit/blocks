@@ -10,6 +10,10 @@ import {
 	ctaBandFields,
 } from "./features/cta-band";
 import {
+	GALLERY_HERO_BLOCK_TYPE,
+	galleryHeroFields,
+} from "./features/gallery-hero";
+import {
 	PAGE_HERO_BLOCK_TYPE,
 	pageHeroFields,
 } from "./features/page-hero";
@@ -19,6 +23,11 @@ export {
 	ctaBandFields,
 	type CtaBandNode,
 } from "./features/cta-band";
+export {
+	GALLERY_HERO_BLOCK_TYPE,
+	galleryHeroFields,
+	type GalleryHeroNode,
+} from "./features/gallery-hero";
 export {
 	PAGE_HERO_BLOCK_TYPE,
 	pageHeroFields,
@@ -30,7 +39,6 @@ export type {
 	DispatchNode,
 	FactItem,
 	FactRailNode,
-	GalleryHeroNode,
 	GalleryLane,
 	GalleryLanesNode,
 	LedgerCard,
@@ -51,7 +59,6 @@ export type {
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
 export const SECTION_HEADER_BLOCK_TYPE = "dinkus.section-header";
 export const FACT_RAIL_BLOCK_TYPE = "dinkus.fact-rail";
-export const GALLERY_HERO_BLOCK_TYPE = "dinkus.gallery-hero";
 export const LEDGER_CARDS_BLOCK_TYPE = "dinkus.ledger-cards";
 export const GALLERY_LANES_BLOCK_TYPE = "dinkus.gallery-lanes";
 export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
@@ -113,57 +120,6 @@ export const factRailFields = [
 				label: "Icon slug",
 			},
 		],
-	},
-] satisfies Element[];
-
-export const galleryHeroFields = [
-	{
-		type: "media_picker",
-		action_id: "image",
-		label: "Hero image",
-	},
-	{
-		type: "text_input",
-		action_id: "imageAlt",
-		label: "Image alt text",
-	},
-	{
-		type: "text_input",
-		action_id: "eyebrow",
-		label: "Eyebrow",
-	},
-	{
-		type: "text_input",
-		action_id: "headline",
-		label: "Headline",
-	},
-	{
-		type: "text_input",
-		action_id: "deck",
-		label: "Deck",
-		multiline: true,
-	},
-	{
-		type: "text_input",
-		action_id: "primaryLabel",
-		label: "Primary CTA label",
-	},
-	{
-		type: "text_input",
-		action_id: "primaryHref",
-		label: "Primary CTA URL",
-		placeholder: "/contact",
-	},
-	{
-		type: "text_input",
-		action_id: "secondaryLabel",
-		label: "Secondary link label",
-	},
-	{
-		type: "text_input",
-		action_id: "secondaryHref",
-		label: "Secondary link URL",
-		placeholder: "/work",
 	},
 ] satisfies Element[];
 
