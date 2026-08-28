@@ -1,81 +1,40 @@
 {
   "closeout": null,
-  "created_at": "2026-08-27T22:33:36+00:00",
+  "created_at": "2026-08-28T21:24:14+00:00",
   "current_focus": {
     "cadence": "sequential",
     "confirmed": true,
-    "confirmed_at": "2026-08-27T23:02:10+00:00",
-    "domain": "Page Hero as the second feature-local pilot",
-    "started_at": "2026-08-27T22:35:14+00:00",
-    "status": "inspected",
-    "summary": "The user explicitly confirms Page Hero, not CTA Band, as the second feature-local pilot and authorized using fresh origin/main when PR #35 merged. The exact baseline is merge commit fcd539aa08fbce708761361832e4ff12fd33a761, tree-identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e. Localize only Page Hero's constant, node contract, seven-field schema, unchanged renderer, and public feature entry; preserve all public, stored-content, renderer, CTA, architecture, verifier, and proof-media contracts; prove safe and unsafe behavior on both CTA paths; make no excluded or delivery changes."
+    "confirmed_at": "2026-08-28T21:27:13+00:00",
+    "domain": "Gallery Hero as the third feature-local pilot",
+    "started_at": "2026-08-28T21:24:18+00:00",
+    "status": "confirmed",
+    "summary": "The user explicitly confirms Gallery Hero as the third feature-local pilot on exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62. Migrate only its constant, GalleryHeroNode contract, unchanged nine stored fields, unchanged renderer, and public feature entry into src/features/gallery-hero/; preserve package and Astro facades, stored content, markup, classes, data hook, tokens, eager/async image behavior, empty-alt fallback, no-image placeholder, both CTA paths through the approved shared safe-link policy, CTA Band, Page Hero, architecture gates, and EmDash 0.35. Update only boundary metadata, public facades, focused fixtures/tests, and curated local proof. Verify renderer identity, image/alt and fallback behavior, safe/unsafe behavior on both CTA paths, quick and full repository gates, focused Chromium screenshots, and cumulative CTA Band/Page Hero behavior. Exclude visual or media-policy redesign, other migrations, EmDash maintenance, commits, pushes, PRs, merges, publication, deployment, and external mutation."
   },
   "decisions": [
     {
-      "baseline_ref": "git:5909c0a3b95a4d9a441ae93506726b1eaead0ccb",
+      "baseline_ref": "git:15c3684a85a98f8717b3c5a80f1bff9034241c62",
       "candidate_refs": [
-        ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
-        "FEATURE_MAP.md",
-        "tests/e2e/page-hero.spec.ts"
-      ],
-      "choice": "On exact baseline 5909c0a3b95a4d9a441ae93506726b1eaead0ccb, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, fields, and unchanged renderer; keep the package root and @dinkuskit/blocks/astro surfaces, seven stored fields, markup, classes, data attribute, tokens, and runtime behavior compatible; declare direct reuse of src/shared/links.ts and src/shared/portable-text.ts; prove both primary and secondary paths use the same safe-link policy; update only the feature map, boundary metadata/tests, public facades, and focused Page Hero fixtures/tests needed for that proof; preserve CTA Band and all predecessor gates unchanged; exclude shared-policy redesign, CTA Band internals, other feature migrations, schema or styling changes, the EmDash race canary, CI dependency maintenance, delivery, and external mutation; verify with structural compatibility checks, bin/verify-blocks quick, the focused Page Hero Playwright scenario including safe and unsafe two-path behavior, bin/verify-blocks full, and cumulative CTA regression coverage.",
-      "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T22:35:14+00:00",
-      "deferred_reason": null,
-      "delivery_ref": null,
-      "dependencies": [],
-      "domain": "Page Hero as the second feature-local pilot",
-      "history": [
-        {
-          "at": "2026-08-27T22:55:41+00:00",
-          "choice": "On exact baseline 5909c0a3b95a4d9a441ae93506726b1eaead0ccb, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, fields, and unchanged renderer; keep the package root and @dinkuskit/blocks/astro surfaces, seven stored fields, markup, classes, data attribute, tokens, and runtime behavior compatible; declare direct reuse of src/shared/links.ts and src/shared/portable-text.ts; prove both primary and secondary paths use the same safe-link policy; update only the feature map, boundary metadata/tests, public facades, and focused Page Hero fixtures/tests needed for that proof; preserve CTA Band and all predecessor gates unchanged; exclude shared-policy redesign, CTA Band internals, other feature migrations, schema or styling changes, the EmDash race canary, CI dependency maintenance, delivery, and external mutation; verify with structural compatibility checks, bin/verify-blocks quick, the focused Page Hero Playwright scenario including safe and unsafe two-path behavior, bin/verify-blocks full, and cumulative CTA regression coverage.",
-          "from": "proposed",
-          "implementation_ref": null,
-          "note": "PR #35 advanced from 5909c0a3b95a4d9a441ae93506726b1eaead0ccb to e8c4fd1551352955d31665ad067b6d465f7a662e with a compatible proof-media repair; preserve the original proposal while binding implementation to the repaired exact baseline.",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "superseded",
-          "verification_ref": null
-        }
-      ],
-      "id": "page-hero-pilot",
-      "implementation_ref": null,
-      "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
-      "rationale": "This is the smallest high-leverage follow-up: it tests a second feature boundary and two direct consumers of the existing shared URL policy without requiring repeaters, media behavior, feature-to-feature imports, or a wider shared layer.",
-      "repair_required": false,
-      "review_classifications": [],
-      "review_history": [],
-      "review_ref": null,
-      "review_result": null,
-      "review_source_identity": null,
-      "status": "superseded",
-      "superseded_by": "page-hero-pilot-e8c4fd1",
-      "updated_at": "2026-08-27T22:55:41+00:00",
-      "verification_ref": null
-    },
-    {
-      "baseline_ref": "git:e8c4fd1551352955d31665ad067b6d465f7a662e",
-      "candidate_refs": [
-        ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
-        ".grilltrack/DELIVERY.md",
+        ".grilltrack/archive/gt-20260827223336-b5457f/ledger.json",
         "AGENTS.md",
         "FEATURE_MAP.md",
-        "tests/e2e/page-hero.spec.ts"
+        "src/astro/GalleryHero.astro",
+        "src/index.ts",
+        "src/types.ts",
+        "tests/e2e/gallery-hero.spec.ts",
+        "tests/fixture-site/seed/seed.json",
+        "proof/emdash-0.35-baseline-20260827/PROOF.md"
       ],
-      "choice": "On exact repaired CTA baseline e8c4fd1551352955d31665ad067b6d465f7a662e, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-      "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T22:55:41+00:00",
+      "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+      "context_ref": "thread:01a04a3e-1724-7f32-a6a1-eed0b3ed816b",
+      "created_at": "2026-08-28T21:24:35+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
       "dependencies": [],
-      "domain": "Page Hero as the second feature-local pilot",
+      "domain": "Gallery Hero as the third feature-local pilot",
       "history": [
         {
-          "at": "2026-08-27T22:55:41+00:00",
-          "choice": "On exact repaired CTA baseline e8c4fd1551352955d31665ad067b6d465f7a662e, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
+          "at": "2026-08-28T21:27:08+00:00",
+          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
           "from": "proposed",
           "implementation_ref": null,
           "note": "user accepted the scoped decision",
@@ -88,216 +47,74 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-27T23:02:10+00:00",
-          "choice": "On exact repaired CTA baseline e8c4fd1551352955d31665ad067b6d465f7a662e, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
+          "at": "2026-08-28T21:43:55+00:00",
+          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
           "from": "locked",
           "implementation_ref": null,
-          "note": "PR #35 merged during verification; bind the decision to fresh origin/main fcd539aa08fbce708761361832e4ff12fd33a761 while preserving the e8c4fd1 lock and its tree-identical verification history.",
+          "note": "bounded implementation recorded",
           "repair_required": false,
           "review_classifications": [],
           "review_ref": null,
           "review_result": null,
           "review_source_identity": null,
-          "to": "superseded",
+          "to": "implemented",
+          "verification_ref": null
+        },
+        {
+          "at": "2026-08-28T21:43:59+00:00",
+          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "from": "implemented",
+          "implementation_ref": "file:src/features/gallery-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/gallery-hero.spec.ts;file:tests/fixture-site/seed/seed.json;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+          "note": "verification recorded in cumulative context",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "verified",
           "verification_ref": null
         }
       ],
-      "id": "page-hero-pilot-e8c4fd1",
-      "implementation_ref": null,
-      "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
-      "rationale": "The e8c4fd1 drift only relocates CTA proof media and adds a cumulative repository gate; it does not change Page Hero behavior or the confirmed implementation boundary.",
+      "id": "gallery-hero-pilot",
+      "implementation_ref": "file:src/features/gallery-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/gallery-hero.spec.ts;file:tests/fixture-site/seed/seed.json;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+      "question": "Lock Gallery Hero as the third feature-local pilot under the cumulative CTA Band and Page Hero contracts?",
+      "rationale": "Gallery Hero is the smallest adjacent increase in boundary pressure: it repeats the proven two-path safe-link seam while adding one bounded media-picker, image-alt, rendering, and fallback contract without repeaters or shared-policy redesign.",
       "repair_required": false,
       "review_classifications": [],
       "review_history": [],
       "review_ref": null,
       "review_result": null,
       "review_source_identity": null,
-      "status": "superseded",
-      "superseded_by": "page-hero-pilot-fcd539a",
-      "updated_at": "2026-08-27T23:02:10+00:00",
-      "verification_ref": null
-    },
-    {
-      "baseline_ref": "git:fcd539aa08fbce708761361832e4ff12fd33a761",
-      "candidate_refs": [
-        ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
-        ".grilltrack/DELIVERY.md",
-        "AGENTS.md",
-        "FEATURE_MAP.md",
-        "tests/e2e/page-hero.spec.ts"
-      ],
-      "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-      "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T23:02:10+00:00",
-      "deferred_reason": null,
-      "delivery_ref": null,
-      "dependencies": [],
-      "domain": "Page Hero as the second feature-local pilot",
-      "history": [
-        {
-          "at": "2026-08-27T23:02:10+00:00",
-          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-          "from": "proposed",
-          "implementation_ref": null,
-          "note": "user accepted the scoped decision",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "locked",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T23:02:57+00:00",
-          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-          "from": "locked",
-          "implementation_ref": null,
-          "note": "bounded implementation recorded",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "implemented",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T23:02:57+00:00",
-          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-          "from": "implemented",
-          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T23:16:09+00:00",
-          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-          "from": "verified",
-          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "adjudicated review requires a fix",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "needs_reverification",
-          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
-        },
-        {
-          "at": "2026-08-27T23:17:04+00:00",
-          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-          "from": "needs_reverification",
-          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "bounded implementation recorded",
-          "repair_required": true,
-          "review_classifications": [
-            "required_fix"
-          ],
-          "review_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
-          "review_result": "findings",
-          "review_source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1",
-          "to": "implemented",
-          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
-        },
-        {
-          "at": "2026-08-27T23:17:22+00:00",
-          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
-          "from": "implemented",
-          "implementation_ref": "file:.grilltrack/proof/page-hero/PROOF.md;file:.grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
-        }
-      ],
-      "id": "page-hero-pilot-fcd539a",
-      "implementation_ref": "file:.grilltrack/proof/page-hero/PROOF.md;file:.grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
-      "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
-      "rationale": "PR #35 merged during verification as fcd539aa08fbce708761361832e4ff12fd33a761; its tree e8b6473dc2f3a69ff73cca569414a937f0009d3a is identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e, so the confirmed Page Hero scope and verified worktree are unchanged.",
-      "repair_required": false,
-      "review_classifications": [
-        "reject_false_positive",
-        "human_gate"
-      ],
-      "review_history": [
-        {
-          "classifications": [
-            "required_fix"
-          ],
-          "ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
-          "result": "findings",
-          "reviewed_at": "2026-08-27T23:16:09+00:00",
-          "source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1"
-        },
-        {
-          "classifications": [],
-          "ref": ".grilltrack/proof/review/2d671b86c0757879cad2b058aa1aa7722e526ed5.md",
-          "result": "clean",
-          "reviewed_at": "2026-08-27T23:18:15+00:00",
-          "source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5"
-        },
-        {
-          "classifications": [
-            "reject_false_positive",
-            "human_gate"
-          ],
-          "ref": ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
-          "result": "findings",
-          "reviewed_at": "2026-08-27T23:47:27+00:00",
-          "source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5"
-        }
-      ],
-      "review_ref": ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
-      "review_result": "findings",
-      "review_source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5",
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-27T23:47:27+00:00",
-      "verification_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md#repair-verification"
+      "updated_at": "2026-08-28T21:43:59+00:00",
+      "verification_ref": ".grilltrack/proof/gallery-hero/PROOF.md"
     }
   ],
   "last_activation": {
-    "at": "2026-08-27T23:49:05+00:00",
+    "at": "2026-08-28T21:50:21+00:00",
     "mechanism": "implicit"
   },
   "last_pause": {
     "artifact_refs": [
       ".grilltrack/ledger.json",
-      ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
-      ".grilltrack/work/page-hero-media-2d671b8/MANIFEST.md",
-      "git:2d671b86c0757879cad2b058aa1aa7722e526ed5",
-      "https://github.com/dinkuskit/blocks/pull/36#issuecomment-5446514173"
+      ".grilltrack/proof/gallery-hero/PROOF.md",
+      ".grilltrack/work/gallery-hero-proof-20260828/MANIFEST.md",
+      "src/features/gallery-hero/",
+      "tests/e2e/gallery-hero.spec.ts",
+      "git:15c3684a85a98f8717b3c5a80f1bff9034241c62"
     ],
-    "next_safe_action": "If the user explicitly authorizes immutable proof publication and the accompanying PR/source updates, publish the three inspected Page Hero candidates to the approved saari-co/swarm-pr-assets route with full hashes and provenance, update retained proof and PR context, bind any source change to a fresh immutable review, push as authorized, and request ClawSweeper re-review. Otherwise preserve the current PR head and do not remove the successor ledger.",
-    "paused_at": "2026-08-27T23:47:27+00:00",
-    "reason": "ClawSweeper PR #36 feedback was inspected and adjudicated. Removing all successor GrillTrack state is a rejected false positive; immutable external media is a real proof-rating gate. Fresh local media candidates were generated and directly inspected under the user-authorized gathering scope, but publication and PR/re-review updates are not yet authorized.",
-    "resumed_at": "2026-08-27T23:49:05+00:00"
+    "next_safe_action": "If the user explicitly authorizes a local task-owned commit, commit only the bounded Page Hero closeout bookkeeping and Gallery Hero implementation, ledger, and proof on codex/grilltrack-gallery-hero-lock-20260828; do not push. Re-run proportionate exact-head checks, perform separate repository-standards and confirmed-source-intent review bound to the commit SHA, classify every finding, repair and reverify any required fix, then inspect the next grill and request closure confirmation. Without commit authorization, preserve this verified working tree.",
+    "paused_at": "2026-08-28T21:44:21+00:00",
+    "reason": "Gallery Hero is implemented and fully verified, but exact-source review requires an immutable Git commit identity. The user confirmed the local slice but did not authorize a commit, so GrillTrack stops before creating one or claiming a clean review.",
+    "resumed_at": "2026-08-28T21:50:21+00:00"
   },
   "pause": null,
-  "predecessor_track_id": "gt-20260827204742-2f62eb",
-  "recommendation": {
-    "alternatives": [
-      "Section Header as the lowest-complexity scalar-only pilot.",
-      "Fact Rail as a later repeater-boundary pilot after one media-bearing feature is proven."
-    ],
-    "reason": "Gallery Hero is the smallest adjacent increase in feature-boundary pressure: its primary and secondary CTA paths should reuse the already-proven shared policy, while its image and image-alt fields add one new media-rendering seam without requiring repeater ownership or shared-policy redesign.",
-    "recommended": "Gallery Hero as the third feature-local pilot, preserving the cumulative CTA Band and Page Hero locks while proving the existing two-path safe-link policy alongside its bounded image and image-alt contract.",
-    "recorded_at": "2026-08-27T23:18:26+00:00"
-  },
+  "predecessor_track_id": "gt-20260827223336-b5457f",
+  "recommendation": null,
   "schema_version": "grilltrack/v0.1",
   "status": "active",
-  "title": "Page Hero second feature-local pilot",
-  "track_id": "gt-20260827223336-b5457f",
-  "updated_at": "2026-08-27T23:49:05+00:00"
+  "title": "Gallery Hero third feature-local pilot",
+  "track_id": "gt-20260828212414-9acbd5",
+  "updated_at": "2026-08-28T21:50:21+00:00"
 }

@@ -8,7 +8,7 @@ const rendererFiles = [
 	["CtaBand.astro", "../../src/features/cta-band/renderer.astro"],
 	["Dispatch.astro", "../../src/astro/Dispatch.astro"],
 	["FactRail.astro", "../../src/astro/FactRail.astro"],
-	["GalleryHero.astro", "../../src/astro/GalleryHero.astro"],
+	["GalleryHero.astro", "../../src/features/gallery-hero/renderer.astro"],
 	["GalleryLanes.astro", "../../src/astro/GalleryLanes.astro"],
 	["LedgerCards.astro", "../../src/astro/LedgerCards.astro"],
 	["PageHero.astro", "../../src/features/page-hero/renderer.astro"],
@@ -51,19 +51,24 @@ describe("renderer theming contract", () => {
 		}
 	});
 
-	it("keeps both Page Hero actions on the approved shared URL policy", () => {
-		const pageHero = rendererSources.find(
-			({ file }) => file === "PageHero.astro",
-		)?.source;
+	it("keeps both hero action pairs on the approved shared URL policy", () => {
+		for (const file of ["GalleryHero.astro", "PageHero.astro"]) {
+			const source = rendererSources.find(
+				(candidate) => candidate.file === file,
+			)?.source;
 
-		expect(pageHero).toContain(
-			'import { safeCtaHref } from "../../shared/links";',
-		);
-		expect(pageHero?.match(/safeCtaHref\(node\.(?:primary|secondary)Href\)/g)).toEqual([
-			"safeCtaHref(node.primaryHref)",
-			"safeCtaHref(node.secondaryHref)",
-		]);
-		expect(pageHero).not.toContain("features/cta-band");
+			expect(source, file).toContain(
+				'import { safeCtaHref } from "../../shared/links";',
+			);
+			expect(
+				source?.match(/safeCtaHref\(node\.(?:primary|secondary)Href\)/g),
+				file,
+			).toEqual([
+				"safeCtaHref(node.primaryHref)",
+				"safeCtaHref(node.secondaryHref)",
+			]);
+			expect(source, file).not.toContain("features/cta-band");
+		}
 	});
 
 	it("keeps Project Record color-only palette values independent", () => {

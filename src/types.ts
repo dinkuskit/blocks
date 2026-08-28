@@ -1,6 +1,7 @@
 import type { PortableTextNode } from "./shared/portable-text";
 
 export type { CtaBandNode } from "./features/cta-band";
+export type { GalleryHeroNode } from "./features/gallery-hero";
 export type { PageHeroNode } from "./features/page-hero";
 export type { PortableTextNode } from "./shared/portable-text";
 
@@ -23,19 +24,6 @@ export interface FactRailNode extends PortableTextNode {
 	_type?: "dinkus.fact-rail";
 	ariaLabel?: string;
 	facts?: FactItem[];
-}
-
-export interface GalleryHeroNode extends PortableTextNode {
-	_type?: "dinkus.gallery-hero";
-	image?: string;
-	imageAlt?: string;
-	eyebrow?: string;
-	headline?: string;
-	deck?: string;
-	primaryLabel?: string;
-	primaryHref?: string;
-	secondaryLabel?: string;
-	secondaryHref?: string;
 }
 
 export interface LedgerCard {
