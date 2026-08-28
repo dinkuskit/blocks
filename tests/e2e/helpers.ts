@@ -74,28 +74,6 @@ export async function submitModalAndWaitForSave(
 	await expect(page.getByRole("button", { name: "Saved" }).first()).toBeVisible({
 		timeout: 15_000,
 	});
-	await forceFreshAutosaveAfterEmdashIssue2160ModalSubmitRace(
-		page,
-		contentMatches,
-	);
-}
-
-async function forceFreshAutosaveAfterEmdashIssue2160ModalSubmitRace(
-	page: Page,
-	contentMatches: (content: Array<Record<string, unknown>>) => boolean,
-) {
-	const autosave = page.waitForResponse(matchingContentPut(contentMatches), {
-		timeout: 15_000,
-	});
-	const editor = page.locator(".ProseMirror");
-	const box = await editor.boundingBox();
-	await editor.click({
-		position: { x: 12, y: Math.max((box?.height ?? 24) - 8, 12) },
-	});
-	await page.keyboard.press("End");
-	await page.keyboard.press("Enter");
-	const autosaveResponse = await autosave;
-	expect(autosaveResponse.ok()).toBe(true);
 }
 
 export function modalField(dialog: Locator, label: string) {

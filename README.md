@@ -156,6 +156,33 @@ Stored block fields and documented hooks follow the
 [compatibility covenant](COMPAT.md). Breaking field changes require migration
 fixtures and tooling in the same change.
 
+## EmDash 0.35 integration boundaries
+
+The verified compatibility target is exact EmDash 0.35.0. Consumers should
+treat Portable Text `_key` values as editor transport metadata, not durable
+content identity: admin and inline-editor round trips can replace them. Use a
+stored semantic field or the owning entry ID for routing, ordering, annotation
+identity, and cross-record references.
+
+EmDash's inline visual editor preserves plugin-contributed Dinkus blocks as
+read-only placeholders. Edit their fields through the owning Portable Text
+field in the admin or its Block Kit modal. The renderers in this package remain
+CMS-neutral; collection rehydration, draft ordering, and custom annotated-link
+editing belong to the consuming site. If a site layers an edit-mode control on
+an ordinary link, it must cancel navigation synchronously before awaiting a
+manifest fetch or other asynchronous routing work.
+
+A fresh public request can bootstrap schema without inserting sample seed
+content. Acceptance harnesses that assert seeded rows must complete EmDash
+setup or dev-bypass with content before making public-page assertions. The
+`authenticate` helper in `tests/e2e/helpers.ts` is the executable example for
+this repository.
+
+The public `safeCtaHref` export and direct Block Kit modal persistence are the
+current package contract. The extra autosave previously used to compensate for
+the EmDash 0.29 modal-submit race is intentionally absent from the 0.35
+acceptance harness.
+
 ## Verify
 
 ```sh
