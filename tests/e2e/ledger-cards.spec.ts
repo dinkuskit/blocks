@@ -116,7 +116,7 @@ test("declares, inserts, edits, persists, and renders ledger cards", async (
 	await expect(
 		reloadedEditor.getByRole("button", { name: "Edit" }),
 	).toHaveCount(2);
-	await page.getByRole("button", { name: "Publish changes" }).click();
+	await page.getByRole("button", { name: "Publish", exact: true }).click();
 	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
 		timeout: 15_000,
 	});

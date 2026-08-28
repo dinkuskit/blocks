@@ -140,7 +140,7 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	await page.reload();
 	await waitForAdmin(page);
 	await expect(page.getByRole("button", { name: "Edit" })).toHaveCount(2);
-	await page.getByRole("button", { name: "Publish changes" }).click();
+	await page.getByRole("button", { name: "Publish", exact: true }).click();
 	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
 		timeout: 15_000,
 	});
