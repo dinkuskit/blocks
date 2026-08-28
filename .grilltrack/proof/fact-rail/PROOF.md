@@ -15,7 +15,7 @@ Decision: `fact-rail-pilot`
 - The package root and Astro facades remain intact.
 - `FEATURE_MAP.md`, the architecture allowlist and its tests, renderer-path coverage, and focused browser coverage were updated for the new owner.
 - No field, stored-content, visual, icon, URL, media, repeater-API, EmDash-version, or other-feature behavior was redesigned.
-- No commit, push, pull request, merge, publication, deployment, or production mutation was performed.
+- Merge, package publication, deployment, and production mutation remain outside this delivery.
 
 ## Renderer identity
 
@@ -49,6 +49,15 @@ Decision: `fact-rail-pilot`
    - Architecture checks, root and fixture typechecks, 29 unit tests, 11 workflow tests, fixture build, package-content validation, and all 12 serial Chromium scenarios passed.
    - Full report: `tests/fixture-site/.artifacts/e2e/2026-08-28T23-11-29-541Z/report/`
 
+## Selected immutable assets
+
+- Capture source identity: `git:2fe1e2f66c7cc6ad7922555f59ae41f15041868e`
+- Release: `https://github.com/dinkuskit/dinkus-pr-assets/releases/tag/blocks-fact-rail-2fe1e2f66c7c`
+- Rendered screenshot: `https://github.com/dinkuskit/dinkus-pr-assets/releases/download/blocks-fact-rail-2fe1e2f66c7c/rendered-fact-rail.png`; 21853 bytes; SHA-256 `61e591a33d8e06f46da1080b12a43f49e7ec81aa1bea0b2737ccca07fc5ae65e`; directly inspected; no redaction required; contains only generic disposable fixture content.
+- Focused verification transcript: `https://github.com/dinkuskit/dinkus-pr-assets/releases/download/blocks-fact-rail-2fe1e2f66c7c/playwright-fact-rail.txt`; 899 bytes; SHA-256 `23f94dce9bc4608e0b5ad9326accce94d111195f1478d12631e9c29e3c63b9be`.
+- Published manifest: `https://github.com/dinkuskit/dinkus-pr-assets/releases/download/blocks-fact-rail-2fe1e2f66c7c/PUBLISHED_MANIFEST.md`; 1322 bytes; SHA-256 `d3c11dc1791a19b32ffabdd57cd5cfb8a17db34a286ab7a36e25a7a01b413d7f`.
+- GitHub reports matching `sha256:` digests for all three release assets.
+
 ## Gate
 
-The implementation is locally verified but intentionally uncommitted. A terminal independent review cannot be bound to an immutable source identity until the user separately authorizes a commit. The safe next action is to inspect the verified diff, then obtain explicit commit authorization before exact-source review. Delivery remains separately gated.
+The selected browser capture is bound to the first immutable source commit above. This retained proof and ledger-resume follow-up changes no product or test source. A terminal independent review must bind to the final head after that proof-only follow-up is committed. Merge, publication, deployment, and production mutation remain separately gated.

@@ -91,23 +91,24 @@
     }
   ],
   "last_activation": {
-    "at": "2026-08-28T23:03:18+00:00",
+    "at": "2026-08-28T23:29:09+00:00",
     "mechanism": "implicit"
   },
-  "last_pause": null,
-  "pause": {
+  "last_pause": {
     "artifact_refs": [
       ".grilltrack/proof/fact-rail/PROOF.md"
     ],
     "next_safe_action": "Inspect the verified diff, then obtain explicit commit authorization before independent exact-source review.",
     "paused_at": "2026-08-28T23:21:50+00:00",
-    "reason": "Local verification is complete, but the user has not authorized a commit; exact-source review requires an immutable source identity."
+    "reason": "Local verification is complete, but the user has not authorized a commit; exact-source review requires an immutable source identity.",
+    "resumed_at": "2026-08-28T23:29:09+00:00"
   },
+  "pause": null,
   "predecessor_track_id": "gt-20260828212414-9acbd5",
   "recommendation": null,
   "schema_version": "grilltrack/v0.1",
-  "status": "paused",
+  "status": "active",
   "title": "Fact Rail first repeater feature-local pilot",
   "track_id": "gt-20260828230318-6bc31b",
-  "updated_at": "2026-08-28T23:21:50+00:00"
+  "updated_at": "2026-08-28T23:29:09+00:00"
 }
