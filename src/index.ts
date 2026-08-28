@@ -9,12 +9,21 @@ import {
 	CTA_BAND_BLOCK_TYPE,
 	ctaBandFields,
 } from "./features/cta-band";
+import {
+	PAGE_HERO_BLOCK_TYPE,
+	pageHeroFields,
+} from "./features/page-hero";
 
 export {
 	CTA_BAND_BLOCK_TYPE,
 	ctaBandFields,
 	type CtaBandNode,
 } from "./features/cta-band";
+export {
+	PAGE_HERO_BLOCK_TYPE,
+	pageHeroFields,
+	type PageHeroNode,
+} from "./features/page-hero";
 export { safeCtaHref } from "./links";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type {
@@ -27,7 +36,6 @@ export type {
 	LedgerCard,
 	LedgerCardsNode,
 	LegendEntry,
-	PageHeroNode,
 	PortableTextNode,
 	ProjectRecordLink,
 	ProjectRecordAnnotations,
@@ -41,7 +49,6 @@ export type {
 } from "./types";
 
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
-export const PAGE_HERO_BLOCK_TYPE = "dinkus.page-hero";
 export const SECTION_HEADER_BLOCK_TYPE = "dinkus.section-header";
 export const FACT_RAIL_BLOCK_TYPE = "dinkus.fact-rail";
 export const GALLERY_HERO_BLOCK_TYPE = "dinkus.gallery-hero";
@@ -51,47 +58,6 @@ export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
 export const SERVICE_AREA_MAP_BLOCK_TYPE = "dinkus.service-area-map";
 export const DISPATCH_BLOCK_TYPE = "dinkus.dispatch";
 export const PROJECT_RECORD_BLOCK_TYPE = "dinkus.project-record";
-
-export const pageHeroFields = [
-	{
-		type: "text_input",
-		action_id: "eyebrow",
-		label: "Eyebrow",
-	},
-	{
-		type: "text_input",
-		action_id: "headline",
-		label: "Headline",
-	},
-	{
-		type: "text_input",
-		action_id: "deck",
-		label: "Deck",
-		multiline: true,
-	},
-	{
-		type: "text_input",
-		action_id: "primaryLabel",
-		label: "Primary CTA label",
-	},
-	{
-		type: "text_input",
-		action_id: "primaryHref",
-		label: "Primary CTA URL",
-		placeholder: "/contact",
-	},
-	{
-		type: "text_input",
-		action_id: "secondaryLabel",
-		label: "Secondary CTA label",
-	},
-	{
-		type: "text_input",
-		action_id: "secondaryHref",
-		label: "Secondary CTA URL",
-		placeholder: "/about",
-	},
-] satisfies Element[];
 
 export const sectionHeaderFields = [
 	{

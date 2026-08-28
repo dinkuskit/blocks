@@ -22,6 +22,10 @@ const FEATURE_SHARED_DEPENDENCIES = new Map([
 		"cta-band",
 		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
 	],
+	[
+		"page-hero",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
 ]);
 
 const GOVERNED_EXTENSIONS = new Set([
@@ -506,8 +510,12 @@ export function validateFeatureMap(root, source = readFileSync(resolve(root, "FE
 		if (!observed.includes(id)) errors.push(`feature map is missing ${id}`);
 	}
 	const migrated = rows.filter((cells) => cells[9] === "migrated pilot").map((cells) => codeSpans(cells[0])[0]);
-	if (migrated.length !== 1 || migrated[0] !== "dinkus.cta-band") {
-		errors.push("CTA Band must be the only migrated pilot");
+	if (
+		migrated.length !== 2 ||
+		migrated[0] !== "dinkus.cta-band" ||
+		migrated[1] !== "dinkus.page-hero"
+	) {
+		errors.push("CTA Band and Page Hero must be the migrated pilots");
 	}
 	return errors;
 }

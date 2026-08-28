@@ -1,264 +1,81 @@
 {
-  "closeout": {
-    "closed_at": "2026-08-27T22:19:53+00:00",
-    "confirmed_by": "user",
-    "deferred_decisions": [],
-    "proof_refs": [
-      ".grilltrack/proof/PROOF.md",
-      ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
-      ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md",
-      ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md"
-    ],
-    "reason": "The user explicitly confirmed closure of the CTA Band feature-boundary cycle and authorized focused pull-request delivery, with Page Hero reserved for a separate successor GrillTrack.",
-    "reviews": [
-      {
-        "classifications": [],
-        "decision_id": "architecture-contract",
-        "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-        "result": "clean",
-        "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-      },
-      {
-        "classifications": [],
-        "decision_id": "cta-band-pilot",
-        "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-        "result": "clean",
-        "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-      },
-      {
-        "classifications": [],
-        "decision_id": "verification-entrypoint",
-        "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-        "result": "clean",
-        "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-      },
-      {
-        "classifications": [],
-        "decision_id": "portfolio-boundary",
-        "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-        "result": "clean",
-        "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-      }
-    ],
-    "summary": "CTA Band alone was migrated behind a feature-local public boundary on baseline 17529d477ab19a0c3fbae05e514d14029e70feda. All eleven blocks are mapped; import, comment, feature-map, quick, full, and browser gates passed. Reviews at 72569a835b3bb907c993eb80642a25290a82caf2 and ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d each found a required_fix, both were repaired and reverified, and the final immutable implementation 0df43df8db053f5840d21d57ac491edab6eda39f was clean on repository-standards and confirmed-source-intent axes. Remaining risk is bounded: the other ten blocks are mapped but structurally unmigrated, and the known upstream EmDash modal-submit race remains an expected-failure canary. No product/runtime change is included in closeout bookkeeping.",
-    "superseded_decisions": [],
-    "verified_decisions": [
-      "architecture-contract",
-      "cta-band-pilot",
-      "verification-entrypoint",
-      "portfolio-boundary"
-    ]
-  },
-  "created_at": "2026-08-27T20:47:42+00:00",
+  "closeout": null,
+  "created_at": "2026-08-27T22:33:36+00:00",
   "current_focus": {
     "cadence": "sequential",
     "confirmed": true,
-    "confirmed_at": "2026-08-27T20:47:59+00:00",
-    "domain": "agent-contained feature architecture for dinkuskit/blocks",
-    "started_at": "2026-08-27T20:47:42+00:00",
-    "status": "closed",
-    "summary": "On exact origin/main 17529d477ab19a0c3fbae05e514d14029e70feda, establish a reusable feature-ownership contract and deterministic gates, migrate only CTA Band into a feature-local public boundary without changing compatibility or behavior, map the remaining ten blocks in place, add honest quick/full verification including real admin reload and SSR browser proof, keep the package generic and all other project histories out, and stop before commit or exact-source review because delivery authority was not granted."
+    "confirmed_at": "2026-08-27T23:02:10+00:00",
+    "domain": "Page Hero as the second feature-local pilot",
+    "started_at": "2026-08-27T22:35:14+00:00",
+    "status": "inspected",
+    "summary": "The user explicitly confirms Page Hero, not CTA Band, as the second feature-local pilot and authorized using fresh origin/main when PR #35 merged. The exact baseline is merge commit fcd539aa08fbce708761361832e4ff12fd33a761, tree-identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e. Localize only Page Hero's constant, node contract, seven-field schema, unchanged renderer, and public feature entry; preserve all public, stored-content, renderer, CTA, architecture, verifier, and proof-media contracts; prove safe and unsafe behavior on both CTA paths; make no excluded or delivery changes."
   },
   "decisions": [
     {
-      "baseline_ref": "git:17529d477ab19a0c3fbae05e514d14029e70feda",
-      "candidate_refs": [],
-      "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
+      "baseline_ref": "git:5909c0a3b95a4d9a441ae93506726b1eaead0ccb",
+      "candidate_refs": [
+        ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
+        "FEATURE_MAP.md",
+        "tests/e2e/page-hero.spec.ts"
+      ],
+      "choice": "On exact baseline 5909c0a3b95a4d9a441ae93506726b1eaead0ccb, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, fields, and unchanged renderer; keep the package root and @dinkuskit/blocks/astro surfaces, seven stored fields, markup, classes, data attribute, tokens, and runtime behavior compatible; declare direct reuse of src/shared/links.ts and src/shared/portable-text.ts; prove both primary and secondary paths use the same safe-link policy; update only the feature map, boundary metadata/tests, public facades, and focused Page Hero fixtures/tests needed for that proof; preserve CTA Band and all predecessor gates unchanged; exclude shared-policy redesign, CTA Band internals, other feature migrations, schema or styling changes, the EmDash race canary, CI dependency maintenance, delivery, and external mutation; verify with structural compatibility checks, bin/verify-blocks quick, the focused Page Hero Playwright scenario including safe and unsafe two-path behavior, bin/verify-blocks full, and cumulative CTA regression coverage.",
       "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T20:47:59+00:00",
+      "created_at": "2026-08-27T22:35:14+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
       "dependencies": [],
-      "domain": "agent-contained feature architecture for dinkuskit/blocks",
+      "domain": "Page Hero as the second feature-local pilot",
       "history": [
         {
-          "at": "2026-08-27T20:47:59+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
+          "at": "2026-08-27T22:55:41+00:00",
+          "choice": "On exact baseline 5909c0a3b95a4d9a441ae93506726b1eaead0ccb, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, fields, and unchanged renderer; keep the package root and @dinkuskit/blocks/astro surfaces, seven stored fields, markup, classes, data attribute, tokens, and runtime behavior compatible; declare direct reuse of src/shared/links.ts and src/shared/portable-text.ts; prove both primary and secondary paths use the same safe-link policy; update only the feature map, boundary metadata/tests, public facades, and focused Page Hero fixtures/tests needed for that proof; preserve CTA Band and all predecessor gates unchanged; exclude shared-policy redesign, CTA Band internals, other feature migrations, schema or styling changes, the EmDash race canary, CI dependency maintenance, delivery, and external mutation; verify with structural compatibility checks, bin/verify-blocks quick, the focused Page Hero Playwright scenario including safe and unsafe two-path behavior, bin/verify-blocks full, and cumulative CTA regression coverage.",
           "from": "proposed",
           "implementation_ref": null,
-          "note": "user accepted the scoped decision",
+          "note": "PR #35 advanced from 5909c0a3b95a4d9a441ae93506726b1eaead0ccb to e8c4fd1551352955d31665ad067b6d465f7a662e with a compatible proof-media repair; preserve the original proposal while binding implementation to the repaired exact baseline.",
           "repair_required": false,
           "review_classifications": [],
           "review_ref": null,
           "review_result": null,
           "review_source_identity": null,
-          "to": "locked",
+          "to": "superseded",
           "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "locked",
-          "implementation_ref": null,
-          "note": "bounded implementation recorded",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "implemented",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "implemented",
-          "implementation_ref": "file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-architecture.mjs",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T22:08:38+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "verified",
-          "implementation_ref": "file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-architecture.mjs",
-          "note": "adjudicated review requires a fix",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "needs_reverification",
-          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
-        },
-        {
-          "at": "2026-08-27T22:10:00+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "needs_reverification",
-          "implementation_ref": "file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-architecture.mjs",
-          "note": "bounded implementation recorded",
-          "repair_required": true,
-          "review_classifications": [
-            "required_fix"
-          ],
-          "review_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
-          "review_result": "findings",
-          "review_source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2",
-          "to": "implemented",
-          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
-        },
-        {
-          "at": "2026-08-27T22:10:00+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "implemented",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
-        },
-        {
-          "at": "2026-08-27T22:11:25+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "verified",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "adjudicated review requires a fix",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "needs_reverification",
-          "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
-        },
-        {
-          "at": "2026-08-27T22:14:02+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "needs_reverification",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "bounded implementation recorded",
-          "repair_required": true,
-          "review_classifications": [
-            "required_fix"
-          ],
-          "review_ref": ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md",
-          "review_result": "findings",
-          "review_source_identity": "git:ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d",
-          "to": "implemented",
-          "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
-        },
-        {
-          "at": "2026-08-27T22:14:02+00:00",
-          "choice": "A root feature map, feature-owned public boundaries, deterministic import-boundary enforcement, and strict governed-file no-human-authored-comments enforcement.",
-          "from": "implemented",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs;file:package.json;file:pnpm-lock.yaml",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
         }
       ],
-      "id": "architecture-contract",
-      "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs;file:package.json;file:pnpm-lock.yaml",
-      "question": "What durable convention should Blocks establish for agent-contained feature work?",
-      "rationale": "Blocks is the first portfolio repository to establish a reusable convention before agents work across repositories; Inventory and Commerce will adapt the concepts to their own feature grains.",
+      "id": "page-hero-pilot",
+      "implementation_ref": null,
+      "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
+      "rationale": "This is the smallest high-leverage follow-up: it tests a second feature boundary and two direct consumers of the existing shared URL policy without requiring repeaters, media behavior, feature-to-feature imports, or a wider shared layer.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [
-        {
-          "classifications": [
-            "required_fix"
-          ],
-          "ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
-          "result": "findings",
-          "reviewed_at": "2026-08-27T22:08:38+00:00",
-          "source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2"
-        },
-        {
-          "classifications": [
-            "required_fix"
-          ],
-          "ref": ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md",
-          "result": "findings",
-          "reviewed_at": "2026-08-27T22:11:25+00:00",
-          "source_identity": "git:ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d"
-        },
-        {
-          "classifications": [],
-          "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-          "result": "clean",
-          "reviewed_at": "2026-08-27T22:15:35+00:00",
-          "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-        }
-      ],
-      "review_ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-      "review_result": "clean",
-      "review_source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f",
-      "status": "verified",
-      "superseded_by": null,
-      "updated_at": "2026-08-27T22:15:35+00:00",
-      "verification_ref": ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md#repair-verification"
+      "review_history": [],
+      "review_ref": null,
+      "review_result": null,
+      "review_source_identity": null,
+      "status": "superseded",
+      "superseded_by": "page-hero-pilot-e8c4fd1",
+      "updated_at": "2026-08-27T22:55:41+00:00",
+      "verification_ref": null
     },
     {
-      "baseline_ref": "git:17529d477ab19a0c3fbae05e514d14029e70feda",
-      "candidate_refs": [],
-      "choice": "Migrate CTA Band only into src/features/cta-band while preserving every existing export, stored-content contract, renderer hook, class, token, and runtime behavior; map the other ten blocks in place.",
+      "baseline_ref": "git:e8c4fd1551352955d31665ad067b6d465f7a662e",
+      "candidate_refs": [
+        ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
+        ".grilltrack/DELIVERY.md",
+        "AGENTS.md",
+        "FEATURE_MAP.md",
+        "tests/e2e/page-hero.spec.ts"
+      ],
+      "choice": "On exact repaired CTA baseline e8c4fd1551352955d31665ad067b6d465f7a662e, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
       "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T20:47:59+00:00",
+      "created_at": "2026-08-27T22:55:41+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
-      "dependencies": [
-        "architecture-contract"
-      ],
-      "domain": "agent-contained feature architecture for dinkuskit/blocks",
+      "dependencies": [],
+      "domain": "Page Hero as the second feature-local pilot",
       "history": [
         {
-          "at": "2026-08-27T20:47:59+00:00",
-          "choice": "Migrate CTA Band only into src/features/cta-band while preserving every existing export, stored-content contract, renderer hook, class, token, and runtime behavior; map the other ten blocks in place.",
+          "at": "2026-08-27T22:55:41+00:00",
+          "choice": "On exact repaired CTA baseline e8c4fd1551352955d31665ad067b6d465f7a662e, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "proposed",
           "implementation_ref": null,
           "note": "user accepted the scoped decision",
@@ -271,74 +88,55 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "Migrate CTA Band only into src/features/cta-band while preserving every existing export, stored-content contract, renderer hook, class, token, and runtime behavior; map the other ten blocks in place.",
+          "at": "2026-08-27T23:02:10+00:00",
+          "choice": "On exact repaired CTA baseline e8c4fd1551352955d31665ad067b6d465f7a662e, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "locked",
           "implementation_ref": null,
-          "note": "bounded implementation recorded",
+          "note": "PR #35 merged during verification; bind the decision to fresh origin/main fcd539aa08fbce708761361832e4ff12fd33a761 while preserving the e8c4fd1 lock and its tree-identical verification history.",
           "repair_required": false,
           "review_classifications": [],
           "review_ref": null,
           "review_result": null,
           "review_source_identity": null,
-          "to": "implemented",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "Migrate CTA Band only into src/features/cta-band while preserving every existing export, stored-content contract, renderer hook, class, token, and runtime behavior; map the other ten blocks in place.",
-          "from": "implemented",
-          "implementation_ref": "file:src/features/cta-band/;file:src/shared/;file:src/index.ts;file:src/astro/index.ts",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
+          "to": "superseded",
           "verification_ref": null
         }
       ],
-      "id": "cta-band-pilot",
-      "implementation_ref": "file:src/features/cta-band/;file:src/shared/;file:src/index.ts;file:src/astro/index.ts",
-      "question": "Which feature should prove the convention now?",
-      "rationale": "One bounded pilot makes the architecture inspectable without widening the cycle.",
+      "id": "page-hero-pilot-e8c4fd1",
+      "implementation_ref": null,
+      "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
+      "rationale": "The e8c4fd1 drift only relocates CTA proof media and adds a cumulative repository gate; it does not change Page Hero behavior or the confirmed implementation boundary.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [
-        {
-          "classifications": [],
-          "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-          "result": "clean",
-          "reviewed_at": "2026-08-27T22:15:35+00:00",
-          "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-        }
-      ],
-      "review_ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-      "review_result": "clean",
-      "review_source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f",
-      "status": "verified",
-      "superseded_by": null,
-      "updated_at": "2026-08-27T22:15:35+00:00",
-      "verification_ref": ".grilltrack/proof/PROOF.md#curated-visible-evidence"
+      "review_history": [],
+      "review_ref": null,
+      "review_result": null,
+      "review_source_identity": null,
+      "status": "superseded",
+      "superseded_by": "page-hero-pilot-fcd539a",
+      "updated_at": "2026-08-27T23:02:10+00:00",
+      "verification_ref": null
     },
     {
-      "baseline_ref": "git:17529d477ab19a0c3fbae05e514d14029e70feda",
-      "candidate_refs": [],
-      "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+      "baseline_ref": "git:fcd539aa08fbce708761361832e4ff12fd33a761",
+      "candidate_refs": [
+        ".grilltrack/archive/gt-20260827204742-2f62eb/ledger.json",
+        ".grilltrack/DELIVERY.md",
+        "AGENTS.md",
+        "FEATURE_MAP.md",
+        "tests/e2e/page-hero.spec.ts"
+      ],
+      "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
       "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T20:47:59+00:00",
+      "created_at": "2026-08-27T23:02:10+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
-      "dependencies": [
-        "architecture-contract",
-        "cta-band-pilot"
-      ],
-      "domain": "agent-contained feature architecture for dinkuskit/blocks",
+      "dependencies": [],
+      "domain": "Page Hero as the second feature-local pilot",
       "history": [
         {
-          "at": "2026-08-27T20:47:59+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "at": "2026-08-27T23:02:10+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "proposed",
           "implementation_ref": null,
           "note": "user accepted the scoped decision",
@@ -351,8 +149,8 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "at": "2026-08-27T23:02:57+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "locked",
           "implementation_ref": null,
           "note": "bounded implementation recorded",
@@ -365,10 +163,10 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "at": "2026-08-27T23:02:57+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "implemented",
-          "implementation_ref": "file:bin/verify-blocks;file:.github/workflows/ci.yml;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
           "note": "verification recorded in cumulative context",
           "repair_required": false,
           "review_classifications": [],
@@ -379,10 +177,10 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-27T22:08:47+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "at": "2026-08-27T23:16:09+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "verified",
-          "implementation_ref": "file:bin/verify-blocks;file:.github/workflows/ci.yml;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
           "note": "adjudicated review requires a fix",
           "repair_required": false,
           "review_classifications": [],
@@ -390,29 +188,29 @@
           "review_result": null,
           "review_source_identity": null,
           "to": "needs_reverification",
-          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
         },
         {
-          "at": "2026-08-27T22:10:00+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "at": "2026-08-27T23:17:04+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "needs_reverification",
-          "implementation_ref": "file:bin/verify-blocks;file:.github/workflows/ci.yml;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": "file:src/features/page-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/page-hero.spec.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
           "note": "bounded implementation recorded",
           "repair_required": true,
           "review_classifications": [
             "required_fix"
           ],
-          "review_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
+          "review_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
           "review_result": "findings",
-          "review_source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2",
+          "review_source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1",
           "to": "implemented",
-          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
+          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
         },
         {
-          "at": "2026-08-27T22:10:00+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
+          "at": "2026-08-27T23:17:22+00:00",
+          "choice": "On freshly fetched merged CTA baseline fcd539aa08fbce708761361832e4ff12fd33a761, migrate only Page Hero into src/features/page-hero/ with a public feature entry for its block constant, node contract, seven-field schema, and unchanged renderer; preserve the package root and @dinkuskit/blocks/astro surfaces, stored fields, markup, classes, data hook, tokens, runtime behavior, CTA Band, feature-map/import/comment gates, proof-media preflight across proof/ and .grilltrack/proof/, and quick/full verifier contracts; reuse only src/shared/links.ts and src/shared/portable-text.ts for both primary and secondary safe-link paths; add proportionate safe and unsafe structural/browser regression coverage; exclude CTA Band changes, shared-policy redesign, schema/styling changes, other migrations, EmDash race work, CI dependency maintenance, commits, delivery, and external mutation.",
           "from": "implemented",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": "file:.grilltrack/proof/page-hero/PROOF.md;file:.grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
           "note": "verification recorded in cumulative context",
           "repair_required": false,
           "review_classifications": [],
@@ -420,202 +218,86 @@
           "review_result": null,
           "review_source_identity": null,
           "to": "verified",
-          "verification_ref": ".grilltrack/proof/PROOF.md#verification"
-        },
-        {
-          "at": "2026-08-27T22:11:26+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
-          "from": "verified",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "adjudicated review requires a fix",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "needs_reverification",
-          "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
-        },
-        {
-          "at": "2026-08-27T22:14:02+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
-          "from": "needs_reverification",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs",
-          "note": "bounded implementation recorded",
-          "repair_required": true,
-          "review_classifications": [
-            "required_fix"
-          ],
-          "review_ref": ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md",
-          "review_result": "findings",
-          "review_source_identity": "git:ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d",
-          "to": "implemented",
-          "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
-        },
-        {
-          "at": "2026-08-27T22:14:02+00:00",
-          "choice": "Provide executable bin/verify-blocks with honest quick and full scopes; quick covers typecheck, unit tests, feature-map validation, import boundaries, and comments; full preserves all package/build checks and Playwright browser proof, with CI routed through the verified entry point without reduced coverage.",
-          "from": "implemented",
-          "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs;file:package.json;file:pnpm-lock.yaml",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md#repair-verification"
+          "verification_ref": ".grilltrack/proof/page-hero/PROOF.md"
         }
       ],
-      "id": "verification-entrypoint",
-      "implementation_ref": "file:scripts/architecture-rules.mjs;file:tests/workflows/architecture-rules.test.mjs;file:package.json;file:pnpm-lock.yaml",
-      "question": "How should contributors verify the architecture and behavior?",
-      "rationale": "One deterministic verifier makes the convention usable by people and agents while retaining existing checks.",
+      "id": "page-hero-pilot-fcd539a",
+      "implementation_ref": "file:.grilltrack/proof/page-hero/PROOF.md;file:.grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
+      "question": "Should Page Hero become the second feature-local pilot under the cumulative CTA architecture locks?",
+      "rationale": "PR #35 merged during verification as fcd539aa08fbce708761361832e4ff12fd33a761; its tree e8b6473dc2f3a69ff73cca569414a937f0009d3a is identical to repaired head e8c4fd1551352955d31665ad067b6d465f7a662e, so the confirmed Page Hero scope and verified worktree are unchanged.",
       "repair_required": false,
-      "review_classifications": [],
+      "review_classifications": [
+        "reject_false_positive",
+        "human_gate"
+      ],
       "review_history": [
         {
           "classifications": [
             "required_fix"
           ],
-          "ref": ".grilltrack/proof/review/72569a835b3bb907c993eb80642a25290a82caf2.md",
+          "ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md",
           "result": "findings",
-          "reviewed_at": "2026-08-27T22:08:47+00:00",
-          "source_identity": "git:72569a835b3bb907c993eb80642a25290a82caf2"
+          "reviewed_at": "2026-08-27T23:16:09+00:00",
+          "source_identity": "git:9a00651591570ffe240655131b79e61a9174c2a1"
+        },
+        {
+          "classifications": [],
+          "ref": ".grilltrack/proof/review/2d671b86c0757879cad2b058aa1aa7722e526ed5.md",
+          "result": "clean",
+          "reviewed_at": "2026-08-27T23:18:15+00:00",
+          "source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5"
         },
         {
           "classifications": [
-            "required_fix"
+            "reject_false_positive",
+            "human_gate"
           ],
-          "ref": ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md",
+          "ref": ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
           "result": "findings",
-          "reviewed_at": "2026-08-27T22:11:26+00:00",
-          "source_identity": "git:ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d"
-        },
-        {
-          "classifications": [],
-          "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-          "result": "clean",
-          "reviewed_at": "2026-08-27T22:15:36+00:00",
-          "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
+          "reviewed_at": "2026-08-27T23:47:27+00:00",
+          "source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5"
         }
       ],
-      "review_ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-      "review_result": "clean",
-      "review_source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f",
+      "review_ref": ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
+      "review_result": "findings",
+      "review_source_identity": "git:2d671b86c0757879cad2b058aa1aa7722e526ed5",
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-27T22:15:36+00:00",
-      "verification_ref": ".grilltrack/proof/review/ff0629c0eb637e393c04ee2e3f57fbbc4a8f101d.md#repair-verification"
-    },
-    {
-      "baseline_ref": "git:17529d477ab19a0c3fbae05e514d14029e70feda",
-      "candidate_refs": [],
-      "choice": "Blocks owns reusable blocks; SmokyClub remains the customer-facing consumer; Commerce owns product identity, price, sellability, stock mode, cart, checkout, and orders; Inventory owns physical stock truth; AICommerce remains migration and research input only. Import no private histories, ledgers, proof bundles, or source.",
-      "context_ref": "thread:01a044e0-12ed-7873-a767-2a9afa182e81",
-      "created_at": "2026-08-27T20:47:59+00:00",
-      "deferred_reason": null,
-      "delivery_ref": null,
-      "dependencies": [
-        "architecture-contract"
-      ],
-      "domain": "agent-contained feature architecture for dinkuskit/blocks",
-      "history": [
-        {
-          "at": "2026-08-27T20:47:59+00:00",
-          "choice": "Blocks owns reusable blocks; SmokyClub remains the customer-facing consumer; Commerce owns product identity, price, sellability, stock mode, cart, checkout, and orders; Inventory owns physical stock truth; AICommerce remains migration and research input only. Import no private histories, ledgers, proof bundles, or source.",
-          "from": "proposed",
-          "implementation_ref": null,
-          "note": "user accepted the scoped decision",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "locked",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "Blocks owns reusable blocks; SmokyClub remains the customer-facing consumer; Commerce owns product identity, price, sellability, stock mode, cart, checkout, and orders; Inventory owns physical stock truth; AICommerce remains migration and research input only. Import no private histories, ledgers, proof bundles, or source.",
-          "from": "locked",
-          "implementation_ref": null,
-          "note": "bounded implementation recorded",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "implemented",
-          "verification_ref": null
-        },
-        {
-          "at": "2026-08-27T20:59:11+00:00",
-          "choice": "Blocks owns reusable blocks; SmokyClub remains the customer-facing consumer; Commerce owns product identity, price, sellability, stock mode, cart, checkout, and orders; Inventory owns physical stock truth; AICommerce remains migration and research input only. Import no private histories, ledgers, proof bundles, or source.",
-          "from": "implemented",
-          "implementation_ref": "file:FEATURE_MAP.md;file:AGENTS.md",
-          "note": "verification recorded in cumulative context",
-          "repair_required": false,
-          "review_classifications": [],
-          "review_ref": null,
-          "review_result": null,
-          "review_source_identity": null,
-          "to": "verified",
-          "verification_ref": null
-        }
-      ],
-      "id": "portfolio-boundary",
-      "implementation_ref": "file:FEATURE_MAP.md;file:AGENTS.md",
-      "question": "What cross-project boundaries govern this Blocks slice?",
-      "rationale": "Keep the public package generic and prevent ownership drift.",
-      "repair_required": false,
-      "review_classifications": [],
-      "review_history": [
-        {
-          "classifications": [],
-          "ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-          "result": "clean",
-          "reviewed_at": "2026-08-27T22:15:36+00:00",
-          "source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f"
-        }
-      ],
-      "review_ref": ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-      "review_result": "clean",
-      "review_source_identity": "git:0df43df8db053f5840d21d57ac491edab6eda39f",
-      "status": "verified",
-      "superseded_by": null,
-      "updated_at": "2026-08-27T22:15:36+00:00",
-      "verification_ref": ".grilltrack/proof/PROOF.md#accepted-lock"
+      "updated_at": "2026-08-27T23:47:27+00:00",
+      "verification_ref": ".grilltrack/proof/review/9a00651591570ffe240655131b79e61a9174c2a1.md#repair-verification"
     }
   ],
   "last_activation": {
-    "at": "2026-08-27T22:19:53+00:00",
+    "at": "2026-08-27T23:49:05+00:00",
     "mechanism": "implicit"
   },
   "last_pause": {
     "artifact_refs": [
-      ".grilltrack/STATE.md",
-      ".grilltrack/proof/review/0df43df8db053f5840d21d57ac491edab6eda39f.md",
-      "FEATURE_MAP.md"
+      ".grilltrack/ledger.json",
+      ".grilltrack/proof/delivery/page-hero-pr-36-clawsweeper.md",
+      ".grilltrack/work/page-hero-media-2d671b8/MANIFEST.md",
+      "git:2d671b86c0757879cad2b058aa1aa7722e526ed5",
+      "https://github.com/dinkuskit/blocks/pull/36#issuecomment-5446514173"
     ],
-    "next_safe_action": "User confirms closure of this cycle or confirms the recommended Page Hero focused grill; no external delivery without separate authorization.",
-    "paused_at": "2026-08-27T22:16:04+00:00",
-    "reason": "The confirmed slice is implemented, verified, and cleanly reviewed at immutable commit 0df43df8db053f5840d21d57ac491edab6eda39f; user closure confirmation or next-grill confirmation is now required.",
-    "resumed_at": "2026-08-27T22:19:53+00:00"
+    "next_safe_action": "If the user explicitly authorizes immutable proof publication and the accompanying PR/source updates, publish the three inspected Page Hero candidates to the approved saari-co/swarm-pr-assets route with full hashes and provenance, update retained proof and PR context, bind any source change to a fresh immutable review, push as authorized, and request ClawSweeper re-review. Otherwise preserve the current PR head and do not remove the successor ledger.",
+    "paused_at": "2026-08-27T23:47:27+00:00",
+    "reason": "ClawSweeper PR #36 feedback was inspected and adjudicated. Removing all successor GrillTrack state is a rejected false positive; immutable external media is a real proof-rating gate. Fresh local media candidates were generated and directly inspected under the user-authorized gathering scope, but publication and PR/re-review updates are not yet authorized.",
+    "resumed_at": "2026-08-27T23:49:05+00:00"
   },
   "pause": null,
+  "predecessor_track_id": "gt-20260827204742-2f62eb",
   "recommendation": {
     "alternatives": [
-      "Migrate Section Header next as the lowest-complexity scalar-field follow-up.",
-      "Migrate Fact Rail next to exercise a repeater contract and nested field ownership."
+      "Section Header as the lowest-complexity scalar-only pilot.",
+      "Fact Rail as a later repeater-boundary pilot after one media-bearing feature is proven."
     ],
-    "reason": "Page Hero is the smallest next slice that tests whether the CTA Band convention scales to richer shared-link behavior without introducing repeater or specialist-runtime complexity.",
-    "recommended": "Migrate Page Hero as the second feature-local pilot, preserving its package surface and browser behavior while proving shared safe-link reuse for two CTA paths.",
-    "recorded_at": "2026-08-27T22:16:04+00:00"
+    "reason": "Gallery Hero is the smallest adjacent increase in feature-boundary pressure: its primary and secondary CTA paths should reuse the already-proven shared policy, while its image and image-alt fields add one new media-rendering seam without requiring repeater ownership or shared-policy redesign.",
+    "recommended": "Gallery Hero as the third feature-local pilot, preserving the cumulative CTA Band and Page Hero locks while proving the existing two-path safe-link policy alongside its bounded image and image-alt contract.",
+    "recorded_at": "2026-08-27T23:18:26+00:00"
   },
   "schema_version": "grilltrack/v0.1",
-  "status": "closed",
-  "title": "Agent-contained feature architecture pilot",
-  "track_id": "gt-20260827204742-2f62eb",
-  "updated_at": "2026-08-27T22:19:53+00:00"
+  "status": "active",
+  "title": "Page Hero second feature-local pilot",
+  "track_id": "gt-20260827223336-b5457f",
+  "updated_at": "2026-08-27T23:49:05+00:00"
 }
