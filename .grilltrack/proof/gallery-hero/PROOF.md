@@ -31,6 +31,24 @@ No CTA Band, Page Hero, shared-policy, package metadata, dependency, CI, or unre
 
 The fixture build retained the baseline-existing large-chunk warning and completed successfully.
 
+## Immutable browser proof
+
+The selected sanitized Gallery Hero proof is published outside Git in immutable private release [`blocks-pr-40-0359ee917d4a`](https://github.com/saari-co/swarm-pr-assets/releases/tag/blocks-pr-40-0359ee917d4a). The captures and terminal transcript are bound to product/test source `0359ee917d4a636258a824820ae1de7488874af6`.
+
+- [Published manifest](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-40-0359ee917d4a/PUBLISHED_MANIFEST.md): 1887 bytes; SHA-256 `d6350ca5a09c2f2b147665712f3df80b949d47f172a55d53782d72a95fb7fdfb`; records provenance, claim mapping, hashes, and redaction status.
+- [Focused Playwright terminal output](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-40-0359ee917d4a/playwright-gallery-hero.txt): 784 bytes; SHA-256 `d06ecff67f27dcb14b70ae0256664888b33ac03fe8b58f7a54b3e48927b08a9b`; exact source head, command, exit code 0, and one Chromium scenario passed in 1.2 minutes.
+- [Persisted unsafe CTA values](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-40-0359ee917d4a/unsafe-admin-modal.png): 87804 bytes; SHA-256 `267a00d42871b8ba4d74fee12d7ee04970b11b2103ed61c8ed3a9ff36d2046ed`; both unsafe CTA values are visible in admin.
+- [Inserted safe CTA values](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-40-0359ee917d4a/safe-admin-modal.png): 89102 bytes; SHA-256 `bcdc02e30ea8ff14d32adcb3d851305dc3d8dcd1a2d8212b87a377c917a4532f`; both safe CTA values are visible in admin.
+- [Rendered safe and unsafe result](https://github.com/saari-co/swarm-pr-assets/releases/download/blocks-pr-40-0359ee917d4a/rendered-safe-unsafe.png): 72006 bytes; SHA-256 `75d9334baf5806ed22483128e39175ca9d37044bda7e34f072e900c46d509288`; the unsafe image-bearing hero renders no actions while the safe no-image hero renders both actions.
+
+All three images were directly inspected. They contain only generic disposable fixture content, with no credentials, personal identity, customer or production data, browser address bar, or device chrome; no redaction was required. Raw and rejected captures remain outside the release.
+
 ## Review and delivery boundary
 
-The user separately authorized one local task-owned commit solely to establish an immutable identity for exact-source review. That authority does not include a push, pull request, merge, publication, deployment, or other external mutation. Review will be recorded only after the commit exists and proportionate exact-head checks pass; no clean review or delivery is claimed in this pre-review proof.
+The user separately authorized the local task-owned commit `0359ee917d4a636258a824820ae1de7488874af6`, then authorized its focused branch push and pull request. Exact-head `bin/verify-blocks quick` passed in 15.87 seconds, and `.grilltrack/proof/review/0359ee917d4a636258a824820ae1de7488874af6.md` records a clean review on repository-standards and confirmed-source-intent axes with no classifications.
+
+PR `https://github.com/dinkuskit/blocks/pull/40` is open from `codex/grilltrack-gallery-hero-lock-20260828` at exact head `0359ee917d4a636258a824820ae1de7488874af6` against immutable base `15c3684a85a98f8717b3c5a80f1bff9034241c62`. The official Spark-2 OpenClaw request `req-20260828T215523Z-154861129635` completed clean with zero findings and no edits; its terminal cockpit proof is `runs/spark-openclaw-autoreview-runs/spark-openclaw-autoreview-20260828T215545Z-643211/PROOF.md` in `saari-co/x-api`. The PR closeout comment records exact-head convergence and contains the standalone `@clawsweeper review` trigger. GitHub CI `verify` passed in 10 minutes 13 seconds.
+
+ClawSweeper's first re-review after publication could read the links but did not receive the private attachments in its isolated review bundle. That proof-availability finding is classified `required_fix` and is addressed by this retained proof-only follow-up plus inline image embeds in the PR body, matching the accepted Page Hero PR #36 pattern. Its request to delete the Page Hero GrillTrack archive is classified `reject_false_positive`: the user explicitly requested the completed predecessor track be closed; GrillTrack's `new` transition requires the immutable archive; `origin/main` already tracks CLI-managed GrillTrack archives; `.grilltrack` is outside the package `files` allowlist; and the exact-head pack check passed. The adjudication is recorded locally in `.grilltrack/proof/review/clawsweeper-pr40-0359ee917d4a.md`.
+
+Merge, package or marketplace publication, deployment, and unrelated external mutation remain unauthorized. The only external publication authorized and performed was the selected sanitized PR proof release above.
