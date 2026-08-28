@@ -156,7 +156,7 @@ Stored block fields and documented hooks follow the
 [compatibility covenant](COMPAT.md). Breaking field changes require migration
 fixtures and tooling in the same change.
 
-## EmDash 0.35 integration boundaries
+## EmDash 0.35 compatibility baseline
 
 The verified compatibility target is exact EmDash 0.35.0. Consumers should
 treat Portable Text `_key` values as editor transport metadata, not durable
@@ -166,9 +166,15 @@ identity, and cross-record references.
 
 EmDash's inline visual editor preserves plugin-contributed Dinkus blocks as
 read-only placeholders. Edit their fields through the owning Portable Text
-field in the admin or its Block Kit modal. The renderers in this package remain
-CMS-neutral; collection rehydration, draft ordering, and custom annotated-link
-editing belong to the consuming site. If a site layers an edit-mode control on
+field in the admin or its Block Kit modal. This is the verified 0.35 fallback,
+not DinkusKit's intended final visual-editing experience.
+[Issue #41](https://github.com/dinkuskit/blocks/issues/41) tracks preserving the
+real Dinkus renderers on the public editing surface and adding block-level
+edit, reorder, insert, duplicate, remove, and Block Kit field controls.
+
+Until that bridge lands, collection rehydration, draft ordering, and custom
+annotated-link behavior remain consumer concerns only when a site adds its own
+bounded edit-mode integration. If that integration layers an edit control on
 an ordinary link, it must cancel navigation synchronously before awaiting a
 manifest fetch or other asynchronous routing work.
 
@@ -179,7 +185,8 @@ setup or dev-bypass with content before making public-page assertions. The
 this repository.
 
 The public `safeCtaHref` export and direct Block Kit modal persistence are the
-current package contract. The extra autosave previously used to compensate for
+current 0.35 package contract. They do not close the actual-page visual-editing
+work tracked in issue #41. The extra autosave previously used to compensate for
 the EmDash 0.29 modal-submit race is intentionally absent from the 0.35
 acceptance harness.
 
