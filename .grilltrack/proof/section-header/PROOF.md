@@ -51,4 +51,4 @@ Decision: `section-header-pilot`
 
 ## Review boundary
 
-The task-owned implementation commit supplies the immutable identity for a separate repository-standards and confirmed-source-intent review. Any finding will be classified through GrillTrack before repair. No delivery action is authorized in this lane.
+The task-owned implementation source is `git:cbfaa6b92abe70bf686c08a9c6e35923552f9f39`. A separate repository-standards and confirmed-source-intent review found no accepted findings on either axis. Its durable record is `.grilltrack/proof/review/cbfaa6b92abe70bf686c08a9c6e35923552f9f39.md`. No repair cycle was required and no delivery action is authorized in this lane.
