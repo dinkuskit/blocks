@@ -1,6 +1,7 @@
 import type { PortableTextNode } from "./shared/portable-text";
 
 export type { CtaBandNode } from "./features/cta-band";
+export type { FactItem, FactRailNode } from "./features/fact-rail";
 export type { GalleryHeroNode } from "./features/gallery-hero";
 export type { PageHeroNode } from "./features/page-hero";
 export type { PortableTextNode } from "./shared/portable-text";
@@ -11,19 +12,6 @@ export interface SectionHeaderNode extends PortableTextNode {
 	kicker?: string;
 	title?: string;
 	intro?: string;
-}
-
-export interface FactItem {
-	_key?: string;
-	label?: string;
-	value?: string;
-	icon?: string;
-}
-
-export interface FactRailNode extends PortableTextNode {
-	_type?: "dinkus.fact-rail";
-	ariaLabel?: string;
-	facts?: FactItem[];
 }
 
 export interface LedgerCard {

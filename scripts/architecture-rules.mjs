@@ -22,6 +22,7 @@ const FEATURE_SHARED_DEPENDENCIES = new Map([
 		"cta-band",
 		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
 	],
+	["fact-rail", new Set(["src/shared/portable-text.ts"])],
 	[
 		"gallery-hero",
 		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
@@ -515,12 +516,13 @@ export function validateFeatureMap(root, source = readFileSync(resolve(root, "FE
 	}
 	const migrated = rows.filter((cells) => cells[9] === "migrated pilot").map((cells) => codeSpans(cells[0])[0]);
 	if (
-		migrated.length !== 3 ||
+		migrated.length !== 4 ||
 		migrated[0] !== "dinkus.cta-band" ||
 		migrated[1] !== "dinkus.page-hero" ||
-		migrated[2] !== "dinkus.gallery-hero"
+		migrated[2] !== "dinkus.fact-rail" ||
+		migrated[3] !== "dinkus.gallery-hero"
 	) {
-		errors.push("CTA Band, Page Hero, and Gallery Hero must be the migrated pilots");
+		errors.push("CTA Band, Page Hero, Fact Rail, and Gallery Hero must be the migrated pilots");
 	}
 	return errors;
 }

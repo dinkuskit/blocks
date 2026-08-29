@@ -7,7 +7,7 @@ import { DINKUS_THEME_TOKENS } from "@dinkuskit/blocks";
 const rendererFiles = [
 	["CtaBand.astro", "../../src/features/cta-band/renderer.astro"],
 	["Dispatch.astro", "../../src/astro/Dispatch.astro"],
-	["FactRail.astro", "../../src/astro/FactRail.astro"],
+	["FactRail.astro", "../../src/features/fact-rail/renderer.astro"],
 	["GalleryHero.astro", "../../src/features/gallery-hero/renderer.astro"],
 	["GalleryLanes.astro", "../../src/astro/GalleryLanes.astro"],
 	["LedgerCards.astro", "../../src/astro/LedgerCards.astro"],

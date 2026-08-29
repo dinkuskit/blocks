@@ -44,6 +44,13 @@ test("accepts imports through feature and package public entries", () => {
 	);
 	assert.deepEqual(
 		findImportViolations(
+			"src/features/fact-rail/contract.ts",
+			'import type { PortableTextNode } from "../../shared/portable-text";',
+		),
+		[],
+	);
+	assert.deepEqual(
+		findImportViolations(
 			"src/features/page-hero/renderer.ts",
 			'import { CTA_BAND_BLOCK_TYPE } from "../cta-band";',
 		),
@@ -91,6 +98,20 @@ test("rejects feature internals, deep package imports, and undeclared shared mod
 		findImportViolations(
 			"src/features/gallery-hero/renderer.ts",
 			'import { safeCtaHref } from "../../links";',
+		).length,
+		1,
+	);
+	assert.equal(
+		findImportViolations(
+			"src/features/fact-rail/contract.ts",
+			'import type { FactRailNode } from "../../types";',
+		).length,
+		1,
+	);
+	assert.equal(
+		findImportViolations(
+			"src/features/fact-rail/renderer.ts",
+			'import { safeCtaHref } from "../../shared/links";',
 		).length,
 		1,
 	);
