@@ -4,15 +4,8 @@ export type { CtaBandNode } from "./features/cta-band";
 export type { FactItem, FactRailNode } from "./features/fact-rail";
 export type { GalleryHeroNode } from "./features/gallery-hero";
 export type { PageHeroNode } from "./features/page-hero";
+export type { SectionHeaderNode } from "./features/section-header";
 export type { PortableTextNode } from "./shared/portable-text";
-
-export interface SectionHeaderNode extends PortableTextNode {
-	_type?: "dinkus.section-header";
-	number?: string;
-	kicker?: string;
-	title?: string;
-	intro?: string;
-}
 
 export interface LedgerCard {
 	_key?: string;

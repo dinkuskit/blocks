@@ -2,12 +2,12 @@ import CtaBandComponent from "../features/cta-band/renderer.astro";
 import FactRailComponent from "../features/fact-rail/renderer.astro";
 import GalleryHeroComponent from "../features/gallery-hero/renderer.astro";
 import PageHeroComponent from "../features/page-hero/renderer.astro";
+import SectionHeaderComponent from "../features/section-header/renderer.astro";
 import DispatchComponent from "./Dispatch.astro";
 import GalleryLanesComponent from "./GalleryLanes.astro";
 import LedgerCardsComponent from "./LedgerCards.astro";
 import ProjectRecordComponent from "./ProjectRecord.astro";
 import SearchBoardComponent from "./SearchBoard.astro";
-import SectionHeaderComponent from "./SectionHeader.astro";
 import ServiceAreaMapComponent from "./ServiceAreaMap.astro";
 
 export { CtaBandComponent as CtaBand };

@@ -14,7 +14,7 @@ const rendererFiles = [
 	["PageHero.astro", "../../src/features/page-hero/renderer.astro"],
 	["ProjectRecord.astro", "../../src/astro/ProjectRecord.astro"],
 	["SearchBoard.astro", "../../src/astro/SearchBoard.astro"],
-	["SectionHeader.astro", "../../src/astro/SectionHeader.astro"],
+	["SectionHeader.astro", "../../src/features/section-header/renderer.astro"],
 	["ServiceAreaMap.astro", "../../src/astro/ServiceAreaMap.astro"],
 ] as const;
 

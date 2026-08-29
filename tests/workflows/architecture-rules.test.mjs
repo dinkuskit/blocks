@@ -16,6 +16,13 @@ test("accepts imports through feature and package public entries", () => {
 	);
 	assert.deepEqual(
 		findImportViolations(
+			"src/astro/index.ts",
+			'import SectionHeader from "../features/section-header/renderer.astro";',
+		),
+		[],
+	);
+	assert.deepEqual(
+		findImportViolations(
 			"tests/unit/consumer.test.ts",
 			'import { CtaBandNode } from "@dinkuskit/blocks";',
 		),
@@ -66,6 +73,13 @@ test("accepts imports through feature and package public entries", () => {
 	assert.deepEqual(
 		findImportViolations(
 			"src/features/page-hero/contract.ts",
+			'import type { PortableTextNode } from "../../shared/portable-text";',
+		),
+		[],
+	);
+	assert.deepEqual(
+		findImportViolations(
+			"src/features/section-header/contract.ts",
 			'import type { PortableTextNode } from "../../shared/portable-text";',
 		),
 		[],
@@ -126,6 +140,20 @@ test("rejects feature internals, deep package imports, and undeclared shared mod
 		findImportViolations(
 			"src/features/page-hero/renderer.ts",
 			'import { safeCtaHref } from "../../links";',
+		).length,
+		1,
+	);
+	assert.equal(
+		findImportViolations(
+			"src/features/section-header/contract.ts",
+			'import type { SectionHeaderNode } from "../../types";',
+		).length,
+		1,
+	);
+	assert.equal(
+		findImportViolations(
+			"src/features/section-header/renderer.ts",
+			'import { safeCtaHref } from "../../shared/links";',
 		).length,
 		1,
 	);
