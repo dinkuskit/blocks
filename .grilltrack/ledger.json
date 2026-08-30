@@ -1,40 +1,44 @@
 {
   "closeout": null,
-  "created_at": "2026-08-28T21:24:14+00:00",
+  "created_at": "2026-08-29T16:06:31+00:00",
   "current_focus": {
     "cadence": "sequential",
     "confirmed": true,
-    "confirmed_at": "2026-08-28T21:27:13+00:00",
-    "domain": "Gallery Hero as the third feature-local pilot",
-    "started_at": "2026-08-28T21:24:18+00:00",
+    "confirmed_at": "2026-08-29T16:06:49+00:00",
+    "domain": "Section Header as the fifth feature-local pilot",
+    "started_at": "2026-08-29T16:06:49+00:00",
     "status": "confirmed",
-    "summary": "The user explicitly confirms Gallery Hero as the third feature-local pilot on exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62. Migrate only its constant, GalleryHeroNode contract, unchanged nine stored fields, unchanged renderer, and public feature entry into src/features/gallery-hero/; preserve package and Astro facades, stored content, markup, classes, data hook, tokens, eager/async image behavior, empty-alt fallback, no-image placeholder, both CTA paths through the approved shared safe-link policy, CTA Band, Page Hero, architecture gates, and EmDash 0.35. Update only boundary metadata, public facades, focused fixtures/tests, and curated local proof. Verify renderer identity, image/alt and fallback behavior, safe/unsafe behavior on both CTA paths, quick and full repository gates, focused Chromium screenshots, and cumulative CTA Band/Page Hero behavior. Exclude visual or media-policy redesign, other migrations, EmDash maintenance, commits, pushes, PRs, merges, publication, deployment, and external mutation."
+    "summary": "The user delegates Section Header as the fifth feature-local pilot on exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a. Move only its constant, SectionHeaderNode contract, unchanged ordered four fields, unchanged renderer, and public feature entry into src/features/section-header/. Preserve root and Astro facades, stored shape, markup and semantics, public hooks and tokens, CSS, EmDash 0.35, no-comments/static-analysis/export barriers, and CTA Band, Page Hero, Gallery Hero, and Fact Rail. Reuse only portable text. Update only boundary metadata, facades, proportional tests, focused fixture coverage, and curated local proof. Verify diff checks, quick checks, focused Chromium with inspected screenshots, the full verifier, and cumulative prior pilots. Exclude redesign, Search Board reuse, shared utility work, repeaters, media, uploads, link policy, other migrations, dependencies, and all delivery or external mutation."
   },
   "decisions": [
     {
-      "baseline_ref": "git:15c3684a85a98f8717b3c5a80f1bff9034241c62",
+      "baseline_ref": "git:7725b255f58f885d675480607c0326cf28d7f23a",
       "candidate_refs": [
-        ".grilltrack/archive/gt-20260827223336-b5457f/ledger.json",
         "AGENTS.md",
         "FEATURE_MAP.md",
-        "src/astro/GalleryHero.astro",
+        "COMPAT.md",
+        "docs/architecture.md",
+        "src/astro/SectionHeader.astro",
         "src/index.ts",
         "src/types.ts",
-        "tests/e2e/gallery-hero.spec.ts",
+        "src/astro/index.ts",
+        "scripts/architecture-rules.mjs",
+        "tests/e2e/section-header.spec.ts",
         "tests/fixture-site/seed/seed.json",
-        "proof/emdash-0.35-baseline-20260827/PROOF.md"
+        "tests/unit/theming-contract.test.ts",
+        "tests/workflows/architecture-rules.test.mjs"
       ],
-      "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
-      "context_ref": "thread:01a04a3e-1724-7f32-a6a1-eed0b3ed816b",
-      "created_at": "2026-08-28T21:24:35+00:00",
+      "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
+      "context_ref": "thread:01a04881-78e6-7240-a1ab-eca08c379da7",
+      "created_at": "2026-08-29T16:06:49+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
       "dependencies": [],
-      "domain": "Gallery Hero as the third feature-local pilot",
+      "domain": "Section Header as the fifth feature-local pilot",
       "history": [
         {
-          "at": "2026-08-28T21:27:08+00:00",
-          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "at": "2026-08-29T16:06:49+00:00",
+          "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
           "from": "proposed",
           "implementation_ref": null,
           "note": "user accepted the scoped decision",
@@ -47,8 +51,8 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-28T21:43:55+00:00",
-          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "at": "2026-08-29T16:14:58+00:00",
+          "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
           "from": "locked",
           "implementation_ref": null,
           "note": "bounded implementation recorded",
@@ -61,10 +65,10 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-28T21:43:59+00:00",
-          "choice": "On exact origin/main 15c3684a85a98f8717b3c5a80f1bff9034241c62, migrate only Gallery Hero into src/features/gallery-hero/ with a public feature entry owning GALLERY_HERO_BLOCK_TYPE, GalleryHeroNode, the unchanged nine-field schema, and the unchanged renderer; preserve the package root and @dinkuskit/blocks/astro facades, stored-content contract, markup, public classes, data hook, theme tokens, eager image loading, async decoding, empty-alt fallback, no-image placeholder, and runtime behavior; reuse only src/shared/links.ts and src/shared/portable-text.ts, with both CTA paths continuing through the approved safe-link policy; update only the feature map, boundary metadata and tests, public facades, and focused Gallery Hero fixtures and tests needed to prove the boundary; preserve CTA Band, Page Hero, all cumulative architecture and verifier gates, and EmDash 0.35 compatibility; verify exact renderer compatibility, image and image-alt behavior, the no-image fallback, safe and unsafe behavior on both CTA paths, current-head quick checks, focused Chromium behavior with directly inspected screenshots, the full verifier, and cumulative CTA Band and Page Hero regressions; exclude visual redesign, imagery art direction, crop or loading-policy changes, media URL-policy changes, shared-policy redesign, other feature migrations, EmDash maintenance, commits, pushes, pull requests, merges, publication, deployment, and external mutation.",
+          "at": "2026-08-29T16:14:58+00:00",
+          "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
           "from": "implemented",
-          "implementation_ref": "file:src/features/gallery-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/gallery-hero.spec.ts;file:tests/fixture-site/seed/seed.json;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": "file:src/features/section-header/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/section-header.spec.ts;file:tests/unit/plugin.test.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
           "note": "verification recorded in cumulative context",
           "repair_required": false,
           "review_classifications": [],
@@ -75,46 +79,41 @@
           "verification_ref": null
         }
       ],
-      "id": "gallery-hero-pilot",
-      "implementation_ref": "file:src/features/gallery-hero/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/gallery-hero.spec.ts;file:tests/fixture-site/seed/seed.json;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
-      "question": "Lock Gallery Hero as the third feature-local pilot under the cumulative CTA Band and Page Hero contracts?",
-      "rationale": "Gallery Hero is the smallest adjacent increase in boundary pressure: it repeats the proven two-path safe-link seam while adding one bounded media-picker, image-alt, rendering, and fallback contract without repeaters or shared-policy redesign.",
+      "id": "section-header-pilot",
+      "implementation_ref": "file:src/features/section-header/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/section-header.spec.ts;file:tests/unit/plugin.test.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+      "question": "Lock Section Header as the fifth feature-local pilot under the cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts?",
+      "rationale": "Section Header creates a common scalar heading seam with an existing focused browser journey while adding no repeater, media, upload, or link-policy complexity.",
       "repair_required": false,
       "review_classifications": [],
-      "review_history": [],
-      "review_ref": null,
-      "review_result": null,
-      "review_source_identity": null,
+      "review_history": [
+        {
+          "classifications": [],
+          "ref": ".grilltrack/proof/review/cbfaa6b92abe70bf686c08a9c6e35923552f9f39.md",
+          "result": "clean",
+          "reviewed_at": "2026-08-29T16:18:50+00:00",
+          "source_identity": "git:cbfaa6b92abe70bf686c08a9c6e35923552f9f39"
+        }
+      ],
+      "review_ref": ".grilltrack/proof/review/cbfaa6b92abe70bf686c08a9c6e35923552f9f39.md",
+      "review_result": "clean",
+      "review_source_identity": "git:cbfaa6b92abe70bf686c08a9c6e35923552f9f39",
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-28T21:43:59+00:00",
-      "verification_ref": ".grilltrack/proof/gallery-hero/PROOF.md"
+      "updated_at": "2026-08-29T16:18:50+00:00",
+      "verification_ref": ".grilltrack/proof/section-header/PROOF.md"
     }
   ],
   "last_activation": {
-    "at": "2026-08-28T21:50:21+00:00",
+    "at": "2026-08-29T16:06:31+00:00",
     "mechanism": "implicit"
   },
-  "last_pause": {
-    "artifact_refs": [
-      ".grilltrack/ledger.json",
-      ".grilltrack/proof/gallery-hero/PROOF.md",
-      ".grilltrack/work/gallery-hero-proof-20260828/MANIFEST.md",
-      "src/features/gallery-hero/",
-      "tests/e2e/gallery-hero.spec.ts",
-      "git:15c3684a85a98f8717b3c5a80f1bff9034241c62"
-    ],
-    "next_safe_action": "If the user explicitly authorizes a local task-owned commit, commit only the bounded Page Hero closeout bookkeeping and Gallery Hero implementation, ledger, and proof on codex/grilltrack-gallery-hero-lock-20260828; do not push. Re-run proportionate exact-head checks, perform separate repository-standards and confirmed-source-intent review bound to the commit SHA, classify every finding, repair and reverify any required fix, then inspect the next grill and request closure confirmation. Without commit authorization, preserve this verified working tree.",
-    "paused_at": "2026-08-28T21:44:21+00:00",
-    "reason": "Gallery Hero is implemented and fully verified, but exact-source review requires an immutable Git commit identity. The user confirmed the local slice but did not authorize a commit, so GrillTrack stops before creating one or claiming a clean review.",
-    "resumed_at": "2026-08-28T21:50:21+00:00"
-  },
+  "last_pause": null,
   "pause": null,
-  "predecessor_track_id": "gt-20260827223336-b5457f",
+  "predecessor_track_id": "gt-20260828212414-9acbd5",
   "recommendation": null,
   "schema_version": "grilltrack/v0.1",
   "status": "active",
-  "title": "Gallery Hero third feature-local pilot",
-  "track_id": "gt-20260828212414-9acbd5",
-  "updated_at": "2026-08-28T21:50:21+00:00"
+  "title": "Section Header fifth feature-local pilot",
+  "track_id": "gt-20260829160631-923b76",
+  "updated_at": "2026-08-29T16:18:50+00:00"
 }

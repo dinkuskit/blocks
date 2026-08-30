@@ -11,6 +11,10 @@ import {
 const SEEDED_TITLE = "Before: Section header title is editable";
 const EDITED_TITLE = "After: Section header title persisted";
 const INSERTED_TITLE = "Inserted: Section header via slash menu";
+const SEEDED_INTRO =
+	"This sentinel intro must round-trip through the EmDash admin.";
+const INSERTED_INTRO =
+	"This section header was inserted through the slash menu.";
 
 test("declares, inserts, edits, persists, and renders a section header", async (
 	{ page },
@@ -38,7 +42,12 @@ test("declares, inserts, edits, persists, and renders a section header", async (
 		name: "Edit Section Header",
 	});
 	await expect(editDialog).toBeVisible();
+	await expect(modalField(editDialog, "Section number")).toHaveValue("01");
+	await expect(modalField(editDialog, "Kicker")).toHaveValue(
+		"Compatibility fixture",
+	);
 	await expect(modalField(editDialog, "Title")).toHaveValue(SEEDED_TITLE);
+	await expect(modalField(editDialog, "Intro")).toHaveValue(SEEDED_INTRO);
 	await modalField(editDialog, "Title").fill(EDITED_TITLE);
 	await submitModalAndWaitForSave(
 		page,
@@ -77,12 +86,10 @@ test("declares, inserts, edits, persists, and renders a section header", async (
 	const insertDialog = page.getByRole("dialog", {
 		name: "Insert Section Header",
 	});
-	await modalField(insertDialog, "Section number").fill("02");
-	await modalField(insertDialog, "Kicker").fill("Slash-menu fixture");
+	await expect(modalField(insertDialog, "Section number")).toHaveValue("");
+	await expect(modalField(insertDialog, "Kicker")).toHaveValue("");
 	await modalField(insertDialog, "Title").fill(INSERTED_TITLE);
-	await modalField(insertDialog, "Intro").fill(
-		"This section header was inserted through the slash menu.",
-	);
+	await modalField(insertDialog, "Intro").fill(INSERTED_INTRO);
 	await page.screenshot({
 		path: testInfo.outputPath("admin-modal.png"),
 		fullPage: true,
@@ -110,16 +117,40 @@ test("declares, inserts, edits, persists, and renders a section header", async (
 	await page.goto("/section-header");
 	const rendered = page.locator('[data-dinkus-block="section-header"]');
 	await expect(rendered).toHaveCount(2);
-	await expect(rendered.nth(0).getByRole("heading", { level: 2 })).toHaveText(
+	const seededHeader = rendered.nth(0);
+	const insertedHeader = rendered.nth(1);
+	await expect(seededHeader.getByRole("heading", { level: 2 })).toHaveText(
 		EDITED_TITLE,
 	);
-	await expect(rendered.nth(1).getByRole("heading", { level: 2 })).toHaveText(
+	await expect(insertedHeader.getByRole("heading", { level: 2 })).toHaveText(
 		INSERTED_TITLE,
 	);
-	await expect(rendered.nth(1)).toContainText("02");
-	await expect(rendered.nth(1)).toContainText("Slash-menu fixture");
-	await expect(rendered.nth(1)).toContainText(
-		"This section header was inserted through the slash menu.",
+	await expect(seededHeader.locator(".dinkus-section-header__meta")).toHaveCount(
+		1,
+	);
+	await expect(
+		seededHeader.locator(".dinkus-section-header__number"),
+	).toHaveText("01");
+	await expect(
+		seededHeader.locator(".dinkus-section-header__number"),
+	).toHaveAttribute("aria-hidden", "true");
+	await expect(
+		seededHeader.locator(".dinkus-section-header__kicker"),
+	).toHaveText("Compatibility fixture");
+	await expect(seededHeader.locator(".dinkus-section-header__intro")).toHaveText(
+		SEEDED_INTRO,
+	);
+	await expect(insertedHeader.locator(".dinkus-section-header__meta")).toHaveCount(
+		0,
+	);
+	await expect(insertedHeader.locator(".dinkus-section-header__intro")).toHaveText(
+		INSERTED_INTRO,
+	);
+	expect(await seededHeader.evaluate((element) => element.tagName)).toBe(
+		"HEADER",
+	);
+	expect(await insertedHeader.evaluate((element) => element.tagName)).toBe(
+		"HEADER",
 	);
 	await page.screenshot({
 		path: testInfo.outputPath("rendered-blocks.png"),

@@ -21,6 +21,10 @@ import {
 	PAGE_HERO_BLOCK_TYPE,
 	pageHeroFields,
 } from "./features/page-hero";
+import {
+	SECTION_HEADER_BLOCK_TYPE,
+	sectionHeaderFields,
+} from "./features/section-header";
 
 export {
 	CTA_BAND_BLOCK_TYPE,
@@ -43,6 +47,11 @@ export {
 	pageHeroFields,
 	type PageHeroNode,
 } from "./features/page-hero";
+export {
+	SECTION_HEADER_BLOCK_TYPE,
+	sectionHeaderFields,
+	type SectionHeaderNode,
+} from "./features/section-header";
 export { safeCtaHref } from "./links";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type {
@@ -60,43 +69,16 @@ export type {
 	ProjectRecordNode,
 	SearchBoardNode,
 	SearchLink,
-	SectionHeaderNode,
 	ServiceAreaMapNode,
 } from "./types";
 
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
-export const SECTION_HEADER_BLOCK_TYPE = "dinkus.section-header";
 export const LEDGER_CARDS_BLOCK_TYPE = "dinkus.ledger-cards";
 export const GALLERY_LANES_BLOCK_TYPE = "dinkus.gallery-lanes";
 export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
 export const SERVICE_AREA_MAP_BLOCK_TYPE = "dinkus.service-area-map";
 export const DISPATCH_BLOCK_TYPE = "dinkus.dispatch";
 export const PROJECT_RECORD_BLOCK_TYPE = "dinkus.project-record";
-
-export const sectionHeaderFields = [
-	{
-		type: "text_input",
-		action_id: "number",
-		label: "Section number",
-		placeholder: "01",
-	},
-	{
-		type: "text_input",
-		action_id: "kicker",
-		label: "Kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "title",
-		label: "Title",
-	},
-	{
-		type: "text_input",
-		action_id: "intro",
-		label: "Intro",
-		multiline: true,
-	},
-] satisfies Element[];
 
 export const ledgerCardsFields = [
 	{

@@ -145,6 +145,17 @@ describe("@dinkuskit/blocks", () => {
 			"title",
 			"intro",
 		]);
+		expect(sectionHeaderFields.every((field) => field.type === "text_input")).toBe(
+			true,
+		);
+		expect(
+			sectionHeaderFields.find((field) => field.action_id === "number")
+				?.placeholder,
+		).toBe("01");
+		expect(
+			sectionHeaderFields.find((field) => field.action_id === "intro")
+				?.multiline,
+		).toBe(true);
 	});
 
 	it("locks the fact-rail field contract, repeater sub-fields included", () => {
