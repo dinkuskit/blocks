@@ -52,3 +52,11 @@ Decision: `section-header-pilot`
 ## Review boundary
 
 The task-owned implementation source is `git:cbfaa6b92abe70bf686c08a9c6e35923552f9f39`. A separate repository-standards and confirmed-source-intent review found no accepted findings on either axis. Its durable record is `.grilltrack/proof/review/cbfaa6b92abe70bf686c08a9c6e35923552f9f39.md`. No repair cycle was required and no delivery action is authorized in this lane.
+
+## Event-driven Review Conductor replay
+
+- Bobby authorized one delivery-only fresh head after the repaired CP-1 userland Review Conductor release `6ba87b8320af26c84c0d2e9c5b79da2221076fc8` was merged and started.
+- The replay begins from the unchanged reviewed PR head `b17e1285a88ab3df83f2b93488e830ece70c2aec`.
+- This proof-only update changes no package source, public contract, renderer, fixture, test, dependency, workflow, or product behavior.
+- The new immutable head and terminal CI, OpenClaw, ClawSweeper, notification, and ready-for-human receipts belong to the PR delivery record because the head does not exist until this update is committed.
+- The replay acceptance path is exact-head CI success, one OpenClaw review, one ClawSweeper verdict, sufficient proof, ready-for-maintainer publication, and no merge attempt.
