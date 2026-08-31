@@ -38,6 +38,19 @@ merge a breaking stored-content change without its migration and fixtures.
 Run `pnpm check` before closeout. Browser acceptance additionally requires
 `pnpm test:e2e`.
 
+## Review delivery
+
+GitHub `CI` must succeed on the exact pull-request head before the external
+review rails begin. A successful head proceeds through OpenClaw and then one
+ClawSweeper verdict. An accepted finding returns to the source owner, and the
+resulting new head restarts CI and both rails. Two review-triggered repair
+cycles are the automatic limit; reaching that limit requires Bobby's attention.
+
+The Review Conductor publishes rail status and the existing maintainer-look
+label without agents polling CI. A Platinum Hermit-or-better verdict with
+sufficient proof is a merge-candidate signal, not merge authority. Bobby still
+approves every merge explicitly.
+
 ## Gates
 
 Do not publish to npm, list in an EmDash marketplace or registry, deploy,
