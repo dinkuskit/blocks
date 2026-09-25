@@ -1,0 +1,141 @@
+{
+  "closeout": {
+    "closed_at": "2026-09-25T20:24:10+00:00",
+    "confirmed_by": "user",
+    "deferred_decisions": [],
+    "proof_refs": [
+      ".grilltrack/proof/lanes-search-dispatch/PROOF.md",
+      ".grilltrack/proof/review/1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099.md"
+    ],
+    "reason": "The user left the verified Gallery Lanes, Search Board, and Dispatch move and directed Service Area Map and Project Record immediately.",
+    "reviews": [
+      {
+        "classifications": [],
+        "decision_id": "lanes-search-dispatch",
+        "ref": ".grilltrack/proof/review/1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099.md",
+        "result": "clean",
+        "source_identity": "sha256:1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099"
+      }
+    ],
+    "summary": "Gallery Lanes, Search Board, and Dispatch are feature-local pilots. The decision lanes-search-dispatch is verified, with a clean review at sha256:1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099. No commit or pull request was authorized.",
+    "superseded_decisions": [],
+    "verified_decisions": [
+      "lanes-search-dispatch"
+    ]
+  },
+  "created_at": "2026-09-25T20:13:34+00:00",
+  "current_focus": {
+    "cadence": "sequential",
+    "confirmed": true,
+    "confirmed_at": "2026-09-25T20:13:35+00:00",
+    "domain": "Gallery Lanes, Search Board, and Dispatch feature boundaries",
+    "started_at": "2026-09-25T20:13:34+00:00",
+    "status": "closed",
+    "summary": "On the uncommitted Ledger Cards tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Gallery Lanes, Search Board, and Dispatch behind src/features/. Keep each constant, node contract, ordered field array, and renderer markup and CSS unchanged. Point each renderer at its feature contract and at src/shared/links.ts. Keep portable-text on the node types. Preserve the package root and Astro facades, stored shapes, safe-link behavior, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the six earlier pilots. Leave Service Area Map and Project Record at src/astro/. Update only FEATURE_MAP.md, the architecture allowlist and migrated-pilot assertion, the three public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for the three blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, the two remaining blocks, dependency changes, commit, push, pull request, proof publication, merge, and deploy."
+  },
+  "decisions": [
+    {
+      "baseline_ref": "git:2566c3524b78c54c894e6da4c59225a7350888c6",
+      "candidate_refs": [
+        "src/astro/GalleryLanes.astro",
+        "src/astro/SearchBoard.astro",
+        "src/astro/Dispatch.astro",
+        "FEATURE_MAP.md",
+        "scripts/architecture-rules.mjs"
+      ],
+      "choice": "On the uncommitted Ledger Cards tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Gallery Lanes, Search Board, and Dispatch behind src/features/. Keep each constant, node contract, ordered field array, and renderer markup and CSS unchanged. Point each renderer at its feature contract and at src/shared/links.ts. Keep portable-text on the node types. Preserve the package root and Astro facades, stored shapes, safe-link behavior, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the six earlier pilots. Leave Service Area Map and Project Record at src/astro/. Update only FEATURE_MAP.md, the architecture allowlist and migrated-pilot assertion, the three public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for the three blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, the two remaining blocks, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
+      "context_ref": "session:ae3a8a99-c6b0-4558-b85e-d3cdfbdad1a8",
+      "created_at": "2026-09-25T20:13:34+00:00",
+      "deferred_reason": null,
+      "delivery_ref": null,
+      "dependencies": [],
+      "domain": "Gallery Lanes, Search Board, and Dispatch feature boundaries",
+      "history": [
+        {
+          "at": "2026-09-25T20:13:35+00:00",
+          "choice": "On the uncommitted Ledger Cards tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Gallery Lanes, Search Board, and Dispatch behind src/features/. Keep each constant, node contract, ordered field array, and renderer markup and CSS unchanged. Point each renderer at its feature contract and at src/shared/links.ts. Keep portable-text on the node types. Preserve the package root and Astro facades, stored shapes, safe-link behavior, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the six earlier pilots. Leave Service Area Map and Project Record at src/astro/. Update only FEATURE_MAP.md, the architecture allowlist and migrated-pilot assertion, the three public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for the three blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, the two remaining blocks, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
+          "from": "proposed",
+          "implementation_ref": null,
+          "note": "user accepted the scoped decision",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "locked",
+          "verification_ref": null
+        },
+        {
+          "at": "2026-09-25T20:13:35+00:00",
+          "choice": "On the uncommitted Ledger Cards tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Gallery Lanes, Search Board, and Dispatch behind src/features/. Keep each constant, node contract, ordered field array, and renderer markup and CSS unchanged. Point each renderer at its feature contract and at src/shared/links.ts. Keep portable-text on the node types. Preserve the package root and Astro facades, stored shapes, safe-link behavior, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the six earlier pilots. Leave Service Area Map and Project Record at src/astro/. Update only FEATURE_MAP.md, the architecture allowlist and migrated-pilot assertion, the three public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for the three blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, the two remaining blocks, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
+          "from": "locked",
+          "implementation_ref": null,
+          "note": "bounded implementation recorded",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "implemented",
+          "verification_ref": null
+        },
+        {
+          "at": "2026-09-25T20:13:35+00:00",
+          "choice": "On the uncommitted Ledger Cards tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Gallery Lanes, Search Board, and Dispatch behind src/features/. Keep each constant, node contract, ordered field array, and renderer markup and CSS unchanged. Point each renderer at its feature contract and at src/shared/links.ts. Keep portable-text on the node types. Preserve the package root and Astro facades, stored shapes, safe-link behavior, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the six earlier pilots. Leave Service Area Map and Project Record at src/astro/. Update only FEATURE_MAP.md, the architecture allowlist and migrated-pilot assertion, the three public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for the three blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, the two remaining blocks, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
+          "from": "implemented",
+          "implementation_ref": "file:src/features/gallery-lanes/;file:src/features/search-board/;file:src/features/dispatch/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/unit/theming-contract.test.ts",
+          "note": "verification recorded in cumulative context",
+          "repair_required": false,
+          "review_classifications": [],
+          "review_ref": null,
+          "review_result": null,
+          "review_source_identity": null,
+          "to": "verified",
+          "verification_ref": null
+        }
+      ],
+      "id": "lanes-search-dispatch",
+      "implementation_ref": "file:src/features/gallery-lanes/;file:src/features/search-board/;file:src/features/dispatch/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/unit/theming-contract.test.ts",
+      "question": "Move Gallery Lanes, Search Board, and Dispatch behind features without changing what they store or render?",
+      "rationale": "The user explicitly directed all three boundary moves in one pass, using the same preserve-and-relocate rule as Ledger Cards.",
+      "repair_required": false,
+      "review_classifications": [],
+      "review_history": [
+        {
+          "classifications": [],
+          "ref": ".grilltrack/proof/review/1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099.md",
+          "result": "clean",
+          "reviewed_at": "2026-09-25T20:13:35+00:00",
+          "source_identity": "sha256:1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099"
+        }
+      ],
+      "review_ref": ".grilltrack/proof/review/1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099.md",
+      "review_result": "clean",
+      "review_source_identity": "sha256:1df13e7116729e5a31d4a98eca8ce1cbf48f496b61a413efa14ad376d9217099",
+      "status": "verified",
+      "superseded_by": null,
+      "updated_at": "2026-09-25T20:13:35+00:00",
+      "verification_ref": ".grilltrack/proof/lanes-search-dispatch/PROOF.md"
+    }
+  ],
+  "last_activation": {
+    "at": "2026-09-25T20:13:34+00:00",
+    "mechanism": "implicit"
+  },
+  "last_pause": null,
+  "pause": null,
+  "predecessor_track_id": "gt-20260925194716-59b7b0",
+  "recommendation": {
+    "alternatives": [
+      "Move Project Record behind the same feature boundary, preserving its identity, status, evidence, and next link."
+    ],
+    "reason": "Nine blocks are now feature-local. Service Area Map and Project Record are the only blocks still outside src/features/.",
+    "recommended": "Move Service Area Map behind the same feature boundary, preserving its image, alt text, caption, and legend.",
+    "recorded_at": "2026-09-25T20:13:35+00:00"
+  },
+  "schema_version": "grilltrack/v0.1",
+  "status": "closed",
+  "title": "Gallery Lanes, Search Board, and Dispatch feature moves",
+  "track_id": "gt-20260925201334-774dbd",
+  "updated_at": "2026-09-25T20:24:10+00:00"
+}

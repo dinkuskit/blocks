@@ -1,11 +1,11 @@
 ---
-import {
-	safeCtaHref,
-	type FieldAnnotationAttributes,
-	type ProjectRecordLink,
-	type ProjectRecordAnnotations,
-	type ProjectRecordNode,
-} from "@dinkuskit/blocks";
+import type {
+	FieldAnnotationAttributes,
+	ProjectRecordAnnotations,
+	ProjectRecordLink,
+	ProjectRecordNode,
+} from "./contract";
+import { safeCtaHref } from "../../shared/links";
 
 interface Props {
 	node: ProjectRecordNode;

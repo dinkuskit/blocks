@@ -36,7 +36,14 @@ for (const required of [
 	"src/features/cta-band/renderer.astro",
 	"src/shared/links.ts",
 	"src/shared/portable-text.ts",
-	"src/astro/ProjectRecord.astro",
+	"src/features/service-area-map/contract.ts",
+	"src/features/service-area-map/fields.ts",
+	"src/features/service-area-map/index.ts",
+	"src/features/service-area-map/renderer.astro",
+	"src/features/project-record/contract.ts",
+	"src/features/project-record/fields.ts",
+	"src/features/project-record/index.ts",
+	"src/features/project-record/renderer.astro",
 	"src/astro/index.ts",
 ]) {
 	if (!files.includes(required)) {

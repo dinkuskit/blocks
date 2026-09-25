@@ -31,6 +31,27 @@ const FEATURE_SHARED_DEPENDENCIES = new Map([
 		"page-hero",
 		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
 	],
+	[
+		"ledger-cards",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
+	[
+		"gallery-lanes",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
+	[
+		"search-board",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
+	[
+		"dispatch",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
+	["service-area-map", new Set(["src/shared/portable-text.ts"])],
+	[
+		"project-record",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
 	["section-header", new Set(["src/shared/portable-text.ts"])],
 ]);
 
@@ -517,14 +538,20 @@ export function validateFeatureMap(root, source = readFileSync(resolve(root, "FE
 	}
 	const migrated = rows.filter((cells) => cells[9] === "migrated pilot").map((cells) => codeSpans(cells[0])[0]);
 	if (
-		migrated.length !== 5 ||
+		migrated.length !== 11 ||
 		migrated[0] !== "dinkus.cta-band" ||
 		migrated[1] !== "dinkus.page-hero" ||
 		migrated[2] !== "dinkus.section-header" ||
 		migrated[3] !== "dinkus.fact-rail" ||
-		migrated[4] !== "dinkus.gallery-hero"
+		migrated[4] !== "dinkus.gallery-hero" ||
+		migrated[5] !== "dinkus.ledger-cards" ||
+		migrated[6] !== "dinkus.gallery-lanes" ||
+		migrated[7] !== "dinkus.search-board" ||
+		migrated[8] !== "dinkus.service-area-map" ||
+		migrated[9] !== "dinkus.dispatch" ||
+		migrated[10] !== "dinkus.project-record"
 	) {
-		errors.push("CTA Band, Page Hero, Section Header, Fact Rail, and Gallery Hero must be the migrated pilots");
+		errors.push("all eleven blocks must be migrated pilots");
 	}
 	return errors;
 }

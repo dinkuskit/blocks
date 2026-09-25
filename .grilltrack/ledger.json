@@ -1,44 +1,36 @@
 {
   "closeout": null,
-  "created_at": "2026-08-29T16:06:31+00:00",
+  "created_at": "2026-09-25T20:24:10+00:00",
   "current_focus": {
     "cadence": "sequential",
     "confirmed": true,
-    "confirmed_at": "2026-08-29T16:06:49+00:00",
-    "domain": "Section Header as the fifth feature-local pilot",
-    "started_at": "2026-08-29T16:06:49+00:00",
-    "status": "confirmed",
-    "summary": "The user delegates Section Header as the fifth feature-local pilot on exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a. Move only its constant, SectionHeaderNode contract, unchanged ordered four fields, unchanged renderer, and public feature entry into src/features/section-header/. Preserve root and Astro facades, stored shape, markup and semantics, public hooks and tokens, CSS, EmDash 0.35, no-comments/static-analysis/export barriers, and CTA Band, Page Hero, Gallery Hero, and Fact Rail. Reuse only portable text. Update only boundary metadata, facades, proportional tests, focused fixture coverage, and curated local proof. Verify diff checks, quick checks, focused Chromium with inspected screenshots, the full verifier, and cumulative prior pilots. Exclude redesign, Search Board reuse, shared utility work, repeaters, media, uploads, link policy, other migrations, dependencies, and all delivery or external mutation."
+    "confirmed_at": "2026-09-25T20:24:10+00:00",
+    "domain": "Service Area Map and Project Record feature boundaries",
+    "started_at": "2026-09-25T20:24:10+00:00",
+    "status": "inspected",
+    "summary": "On the uncommitted feature tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Service Area Map and Project Record behind src/features/. Keep each constant, node contract, annotation types, ordered field array, and renderer markup and CSS unchanged. Point Service Area Map at its contract and portable text. Point Project Record at its contract and src/shared/links.ts instead of the package root. Preserve the package root and Astro facades, the media picker, safe-link behavior, named slots, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the nine earlier pilots. Update FEATURE_MAP.md, the architecture allowlist and eleven-pilot assertion, the pack required paths, the public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for both blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, dependency changes, commit, push, pull request, proof publication, merge, and deploy."
   },
   "decisions": [
     {
-      "baseline_ref": "git:7725b255f58f885d675480607c0326cf28d7f23a",
+      "baseline_ref": "git:2566c3524b78c54c894e6da4c59225a7350888c6",
       "candidate_refs": [
-        "AGENTS.md",
+        "src/astro/ServiceAreaMap.astro",
+        "src/astro/ProjectRecord.astro",
         "FEATURE_MAP.md",
-        "COMPAT.md",
-        "docs/architecture.md",
-        "src/astro/SectionHeader.astro",
-        "src/index.ts",
-        "src/types.ts",
-        "src/astro/index.ts",
         "scripts/architecture-rules.mjs",
-        "tests/e2e/section-header.spec.ts",
-        "tests/fixture-site/seed/seed.json",
-        "tests/unit/theming-contract.test.ts",
-        "tests/workflows/architecture-rules.test.mjs"
+        "scripts/check-pack.mjs"
       ],
-      "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
-      "context_ref": "thread:01a04881-78e6-7240-a1ab-eca08c379da7",
-      "created_at": "2026-08-29T16:06:49+00:00",
+      "choice": "On the uncommitted feature tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Service Area Map and Project Record behind src/features/. Keep each constant, node contract, annotation types, ordered field array, and renderer markup and CSS unchanged. Point Service Area Map at its contract and portable text. Point Project Record at its contract and src/shared/links.ts instead of the package root. Preserve the package root and Astro facades, the media picker, safe-link behavior, named slots, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the nine earlier pilots. Update FEATURE_MAP.md, the architecture allowlist and eleven-pilot assertion, the pack required paths, the public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for both blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
+      "context_ref": "session:ae3a8a99-c6b0-4558-b85e-d3cdfbdad1a8",
+      "created_at": "2026-09-25T20:24:10+00:00",
       "deferred_reason": null,
       "delivery_ref": null,
       "dependencies": [],
-      "domain": "Section Header as the fifth feature-local pilot",
+      "domain": "Service Area Map and Project Record feature boundaries",
       "history": [
         {
-          "at": "2026-08-29T16:06:49+00:00",
-          "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
+          "at": "2026-09-25T20:24:10+00:00",
+          "choice": "On the uncommitted feature tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Service Area Map and Project Record behind src/features/. Keep each constant, node contract, annotation types, ordered field array, and renderer markup and CSS unchanged. Point Service Area Map at its contract and portable text. Point Project Record at its contract and src/shared/links.ts instead of the package root. Preserve the package root and Astro facades, the media picker, safe-link behavior, named slots, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the nine earlier pilots. Update FEATURE_MAP.md, the architecture allowlist and eleven-pilot assertion, the pack required paths, the public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for both blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
           "from": "proposed",
           "implementation_ref": null,
           "note": "user accepted the scoped decision",
@@ -51,8 +43,8 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-29T16:14:58+00:00",
-          "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
+          "at": "2026-09-25T20:24:10+00:00",
+          "choice": "On the uncommitted feature tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Service Area Map and Project Record behind src/features/. Keep each constant, node contract, annotation types, ordered field array, and renderer markup and CSS unchanged. Point Service Area Map at its contract and portable text. Point Project Record at its contract and src/shared/links.ts instead of the package root. Preserve the package root and Astro facades, the media picker, safe-link behavior, named slots, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the nine earlier pilots. Update FEATURE_MAP.md, the architecture allowlist and eleven-pilot assertion, the pack required paths, the public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for both blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
           "from": "locked",
           "implementation_ref": null,
           "note": "bounded implementation recorded",
@@ -65,10 +57,10 @@
           "verification_ref": null
         },
         {
-          "at": "2026-08-29T16:14:58+00:00",
-          "choice": "On exact origin/main 7725b255f58f885d675480607c0326cf28d7f23a, migrate only SECTION_HEADER_BLOCK_TYPE, SectionHeaderNode, the unchanged ordered four-field schema, the unchanged renderer, and a public feature entry into src/features/section-header/; preserve the package root and @dinkuskit/blocks/astro facades, stored-content shape, header markup, conditional meta rendering, aria-hidden number, h2 and intro semantics, public classes, data hook, theme tokens, CSS, EmDash 0.35, the governed no-comments/static-analysis/export boundaries, and cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts; reuse only src/shared/portable-text.ts; update only FEATURE_MAP.md, architecture allowlists and migrated-feature assertions, public facades, theming-path assertions, focused Section Header fixtures and browser assertions, and curated proof needed to prove the boundary; verify git diff checks, the quick verifier, focused Chromium behavior with directly inspected local screenshots, the full verifier, and cumulative prior-pilot behavior; exclude schema or copy changes, visual or accessibility redesign, Search Board reuse, shared-utility redesign, repeater, media, upload, or link-policy work, other feature migrations, dependency changes, push, pull request, hosted CI or review triggers, proof publication, merge, deployment, and external mutation.",
+          "at": "2026-09-25T20:24:10+00:00",
+          "choice": "On the uncommitted feature tree from origin/main 2566c3524b78c54c894e6da4c59225a7350888c6, move only Service Area Map and Project Record behind src/features/. Keep each constant, node contract, annotation types, ordered field array, and renderer markup and CSS unchanged. Point Service Area Map at its contract and portable text. Point Project Record at its contract and src/shared/links.ts instead of the package root. Preserve the package root and Astro facades, the media picker, safe-link behavior, named slots, public classes, data hooks, theme tokens, CSS, the dinkus-blocks layer, EmDash 0.35, and the nine earlier pilots. Update FEATURE_MAP.md, the architecture allowlist and eleven-pilot assertion, the pack required paths, the public facades, the theming paths, and local proof. Verify a boundary diff, quick checks, focused Chromium for both blocks with inspected screenshots, and the full verifier. Exclude schema, copy, visual, or accessibility changes, media uploads, a new link policy, shared-utility work, dependency changes, commit, push, pull request, proof publication, merge, and deploy.",
           "from": "implemented",
-          "implementation_ref": "file:src/features/section-header/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/section-header.spec.ts;file:tests/unit/plugin.test.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
+          "implementation_ref": "file:src/features/service-area-map/;file:src/features/project-record/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-pack.mjs;file:tests/unit/theming-contract.test.ts",
           "note": "verification recorded in cumulative context",
           "repair_required": false,
           "review_classifications": [],
@@ -79,41 +71,48 @@
           "verification_ref": null
         }
       ],
-      "id": "section-header-pilot",
-      "implementation_ref": "file:src/features/section-header/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:tests/e2e/section-header.spec.ts;file:tests/unit/plugin.test.ts;file:tests/unit/theming-contract.test.ts;file:tests/workflows/architecture-rules.test.mjs",
-      "question": "Lock Section Header as the fifth feature-local pilot under the cumulative CTA Band, Page Hero, Gallery Hero, and Fact Rail contracts?",
-      "rationale": "Section Header creates a common scalar heading seam with an existing focused browser journey while adding no repeater, media, upload, or link-policy complexity.",
+      "id": "service-map-project-record",
+      "implementation_ref": "file:src/features/service-area-map/;file:src/features/project-record/;file:src/index.ts;file:src/types.ts;file:src/astro/index.ts;file:FEATURE_MAP.md;file:scripts/architecture-rules.mjs;file:scripts/check-pack.mjs;file:tests/unit/theming-contract.test.ts",
+      "question": "Move Service Area Map and Project Record behind features without changing what they store or render?",
+      "rationale": "The user explicitly directed the last two boundary moves in one pass, using the same preserve-and-relocate rule.",
       "repair_required": false,
       "review_classifications": [],
       "review_history": [
         {
           "classifications": [],
-          "ref": ".grilltrack/proof/review/cbfaa6b92abe70bf686c08a9c6e35923552f9f39.md",
+          "ref": ".grilltrack/proof/review/2f16a9c2f95295e35085246d4897e916b2416487adcb183ead61ae21a2e040bf.md",
           "result": "clean",
-          "reviewed_at": "2026-08-29T16:18:50+00:00",
-          "source_identity": "git:cbfaa6b92abe70bf686c08a9c6e35923552f9f39"
+          "reviewed_at": "2026-09-25T20:24:10+00:00",
+          "source_identity": "sha256:2f16a9c2f95295e35085246d4897e916b2416487adcb183ead61ae21a2e040bf"
         }
       ],
-      "review_ref": ".grilltrack/proof/review/cbfaa6b92abe70bf686c08a9c6e35923552f9f39.md",
+      "review_ref": ".grilltrack/proof/review/2f16a9c2f95295e35085246d4897e916b2416487adcb183ead61ae21a2e040bf.md",
       "review_result": "clean",
-      "review_source_identity": "git:cbfaa6b92abe70bf686c08a9c6e35923552f9f39",
+      "review_source_identity": "sha256:2f16a9c2f95295e35085246d4897e916b2416487adcb183ead61ae21a2e040bf",
       "status": "verified",
       "superseded_by": null,
-      "updated_at": "2026-08-29T16:18:50+00:00",
-      "verification_ref": ".grilltrack/proof/section-header/PROOF.md"
+      "updated_at": "2026-09-25T20:24:10+00:00",
+      "verification_ref": ".grilltrack/proof/service-map-project-record/PROOF.md"
     }
   ],
   "last_activation": {
-    "at": "2026-08-29T16:06:31+00:00",
+    "at": "2026-09-25T20:24:10+00:00",
     "mechanism": "implicit"
   },
   "last_pause": null,
   "pause": null,
-  "predecessor_track_id": "gt-20260828212414-9acbd5",
-  "recommendation": null,
+  "predecessor_track_id": "gt-20260925201334-774dbd",
+  "recommendation": {
+    "alternatives": [
+      "Leave the working tree uncommitted for inspection."
+    ],
+    "reason": "Every block now lives in src/features/. The full verifier passed. Commit and a pull request were not part of this move.",
+    "recommended": "Commit the eleven feature-local pilots and open a pull request.",
+    "recorded_at": "2026-09-25T20:24:10+00:00"
+  },
   "schema_version": "grilltrack/v0.1",
   "status": "active",
-  "title": "Section Header fifth feature-local pilot",
-  "track_id": "gt-20260829160631-923b76",
-  "updated_at": "2026-08-29T16:18:50+00:00"
+  "title": "Service Area Map and Project Record feature moves",
+  "track_id": "gt-20260925202410-f84ce2",
+  "updated_at": "2026-09-25T20:24:10+00:00"
 }
