@@ -1,0 +1,111 @@
+name: ClawSweeper dispatch
+
+# pull_request_target runs the copy of this file on the default branch and can
+# pass the existing canary secrets. This workflow does not check out pull
+# request code. It reads the live base and head, then calls the pinned
+# dinkuskit/clawsweeper canary. Drafts wait for ready_for_review. An edit with
+# no changes does not start a review.
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited, synchronize, ready_for_review]
+
+permissions: {}
+
+jobs:
+  bind:
+    name: Read the live pull request tuple
+    if: >-
+      github.event.repository.full_name == 'dinkuskit/blocks' &&
+      github.event.repository.id == 1306882611 &&
+      github.event.pull_request.base.repo.full_name == 'dinkuskit/blocks' &&
+      github.event.pull_request.draft == false &&
+      (
+        github.event.action != 'edited' ||
+        toJSON(github.event.changes) != '{}'
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      requested: ${{ steps.live.outputs.requested }}
+      pr_number: ${{ steps.live.outputs.pr_number }}
+      base_sha: ${{ steps.live.outputs.base_sha }}
+      head_sha: ${{ steps.live.outputs.head_sha }}
+    steps:
+      - name: Read the live base and head
+        id: live
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$PR_NUMBER" =~ ^[1-9][0-9]*$ ]]; then
+            echo "pr_number must be a positive integer." >&2
+            exit 1
+          fi
+
+          repo_json="$(gh api repos/dinkuskit/blocks)"
+          repository_id="$(jq -r '.id' <<<"$repo_json")"
+          default_branch="$(jq -r '.default_branch' <<<"$repo_json")"
+          if [ "$repository_id" != "1306882611" ] \
+            || ! [[ "$default_branch" =~ ^[A-Za-z0-9._/-]+$ ]]; then
+            echo "dinkuskit/blocks identity is not admitted." >&2
+            exit 1
+          fi
+
+          pull_json="$(gh api "repos/dinkuskit/blocks/pulls/$PR_NUMBER")"
+          state="$(jq -r '.state' <<<"$pull_json")"
+          draft="$(jq -r '.draft' <<<"$pull_json")"
+          base_repo="$(jq -r '.base.repo.full_name' <<<"$pull_json")"
+          base_ref="$(jq -r '.base.ref' <<<"$pull_json")"
+          head_sha="$(jq -r '.head.sha' <<<"$pull_json")"
+          if [ "$state" != "open" ] \
+            || [ "$draft" != "false" ] \
+            || [ "$base_repo" != "dinkuskit/blocks" ] \
+            || [ "$base_ref" != "$default_branch" ]; then
+            echo "requested=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if ! [[ "$head_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "The live head SHA is invalid." >&2
+            exit 1
+          fi
+
+          base_sha="$(gh api "repos/dinkuskit/blocks/git/ref/heads/$default_branch" --jq '.object.sha')"
+          if ! [[ "$base_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "The live base SHA is invalid." >&2
+            exit 1
+          fi
+
+          {
+            echo "requested=true"
+            echo "pr_number=$PR_NUMBER"
+            echo "base_sha=$base_sha"
+            echo "head_sha=$head_sha"
+          } >> "$GITHUB_OUTPUT"
+
+  review:
+    name: Run pinned native ClawSweeper
+    needs: bind
+    if: needs.bind.outputs.requested == 'true'
+    concurrency:
+      group: blocks-clawsweeper-dispatch-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    permissions:
+      actions: read
+      contents: read
+    uses: dinkuskit/clawsweeper/.github/workflows/dinkuskit-native-canary.yml@80cdeb241ab529008b1082749584be28a318e9ca
+    with:
+      target_repository: blocks
+      target_repository_id: "1306882611"
+      pr_number: ${{ needs.bind.outputs.pr_number }}
+      expected_base_sha: ${{ needs.bind.outputs.base_sha }}
+      expected_head_sha: ${{ needs.bind.outputs.head_sha }}
+      engine_sha: 80cdeb241ab529008b1082749584be28a318e9ca
+      publish: true
+    secrets:
+      CLAWSWEEPER_APP_PRIVATE_KEY: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
+      COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
