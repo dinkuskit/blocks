@@ -43,6 +43,33 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/clawsweeper-comment-admission.mjs
 
+      - name: Mint the command acknowledgement token
+        id: ack-token
+        if: steps.admission.outputs.requested == 'true'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.CLAWSWEEPER_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
+          owner: dinkuskit
+          repositories: blocks
+          permission-issues: write
+
+      - name: Acknowledge the review command
+        if: steps.admission.outputs.requested == 'true'
+        env:
+          GH_TOKEN: ${{ steps.ack-token.outputs.token }}
+          COMMENT_ID: ${{ github.event.comment.id }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$COMMENT_ID" =~ ^[1-9][0-9]*$ ]]; then
+            echo "The comment id is invalid." >&2
+            exit 1
+          fi
+          gh api -X POST \
+            -H "Accept: application/vnd.github+json" \
+            "repos/dinkuskit/blocks/issues/comments/$COMMENT_ID/reactions" \
+            -f content="eyes" >/dev/null || true
+
   review:
     name: Run pinned native ClawSweeper
     needs: admit
