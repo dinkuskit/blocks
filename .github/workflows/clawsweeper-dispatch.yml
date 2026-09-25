@@ -91,6 +91,7 @@ jobs:
           owner: dinkuskit
           repositories: blocks
           permission-issues: write
+          permission-pull-requests: write
 
       - name: Post the pickup comment
         if: steps.live.outputs.requested == 'true'
