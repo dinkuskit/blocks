@@ -81,6 +81,38 @@ jobs:
             echo "head_sha=$head_sha"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Mint the pickup token
+        id: pickup-token
+        if: steps.live.outputs.requested == 'true'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ vars.CLAWSWEEPER_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CLAWSWEEPER_APP_PRIVATE_KEY }}
+          owner: dinkuskit
+          repositories: blocks
+          permission-issues: write
+
+      - name: Post the pickup comment
+        if: steps.live.outputs.requested == 'true'
+        env:
+          GH_TOKEN: ${{ steps.pickup-token.outputs.token }}
+          PR_NUMBER: ${{ steps.live.outputs.pr_number }}
+        run: |
+          set -euo pipefail
+          if ! [[ "$PR_NUMBER" =~ ^[1-9][0-9]*$ ]]; then
+            echo "The pull request number is invalid." >&2
+            exit 1
+          fi
+          marker="<!-- clawsweeper-review item=${PR_NUMBER} -->"
+          payload="$(jq -n --arg marker "$marker" '{body: ("\ud83e\udd9e\ud83d\udc40\nClawSweeper picked this up.\n\nPull request received. I will update this comment when the review is ready.\n\n" + $marker)}')"
+          comments="$(gh api --paginate "repos/dinkuskit/blocks/issues/${PR_NUMBER}/comments?per_page=100" | jq -s 'add // []')"
+          existing="$(jq -r --arg marker "$marker" '[.[] | select((.body // "") | contains($marker))] | first | .id // empty' <<<"$comments")"
+          if [ -n "$existing" ]; then
+            gh api -X PATCH "repos/dinkuskit/blocks/issues/comments/${existing}" --input - <<<"$payload" >/dev/null
+          else
+            gh api -X POST "repos/dinkuskit/blocks/issues/${PR_NUMBER}/comments" --input - <<<"$payload" >/dev/null
+          fi
+
   review:
     name: Run pinned native ClawSweeper
     needs: bind
