@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 import {
 	authenticate,
+	publishPendingChanges,
 	expectBlockDeclared,
 	modalField,
 	submitModalAndWaitForSave,
@@ -120,7 +121,7 @@ test("declares, inserts, edits, persists, and accessibly renders fact rows", asy
 	await expect(
 		reloadedEditor.getByRole("button", { name: "Edit" }),
 	).toHaveCount(2);
-	await page.getByRole("button", { name: "Publish", exact: true }).click();
+	await publishPendingChanges(page);
 	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
 		timeout: 15_000,
 	});
