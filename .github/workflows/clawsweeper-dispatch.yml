@@ -1,11 +1,5 @@
 name: ClawSweeper dispatch
 
-# pull_request_target runs the copy of this file on the default branch and can
-# pass the existing canary secrets. This workflow does not check out pull
-# request code. It reads the live base and head, then calls the pinned
-# dinkuskit/clawsweeper canary. Drafts wait for ready_for_review. An edit with
-# no changes does not start a review.
-
 on:
   pull_request_target:
     types: [opened, reopened, edited, synchronize, ready_for_review]
