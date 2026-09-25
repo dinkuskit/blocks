@@ -15,7 +15,7 @@ dogfood, and [COMPAT.md](COMPAT.md) for stored-content change rules.
 ## Block vocabulary
 
 The package declares a vocabulary of recurring section blocks as native
-Portable Text blocks, each proven end to end against EmDash 0.35.0:
+Portable Text blocks, each proven end to end against EmDash 0.40.1:
 
 - native plugin registration;
 - admin slash-menu insertion and field editing;
@@ -156,9 +156,9 @@ Stored block fields and documented hooks follow the
 [compatibility covenant](COMPAT.md). Breaking field changes require migration
 fixtures and tooling in the same change.
 
-## EmDash 0.35 compatibility baseline
+## EmDash 0.40.1 compatibility baseline
 
-The verified compatibility target is exact EmDash 0.35.0. Consumers should
+The verified compatibility target is exact EmDash 0.40.1. Consumers should
 treat Portable Text `_key` values as editor transport metadata, not durable
 content identity: admin and inline-editor round trips can replace them. Use a
 stored semantic field or the owning entry ID for routing, ordering, annotation
@@ -166,7 +166,7 @@ identity, and cross-record references.
 
 EmDash's inline visual editor preserves plugin-contributed Dinkus blocks as
 read-only placeholders. Edit their fields through the owning Portable Text
-field in the admin or its Block Kit modal. This is the verified 0.35 fallback,
+field in the admin or its Block Kit modal. This is the verified 0.40.1 fallback,
 not DinkusKit's intended final visual-editing experience.
 [Issue #41](https://github.com/dinkuskit/blocks/issues/41) tracks preserving the
 real Dinkus renderers on the public editing surface and adding block-level

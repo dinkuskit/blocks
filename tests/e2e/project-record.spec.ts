@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 
 import {
 	authenticate,
+	publishPendingChanges,
 	expectBlockDeclared,
 	modalField,
 	submitModalAndWaitForSave,
@@ -140,7 +141,7 @@ test("declares, edits, persists, inserts, and renders a project record", async (
 	await page.reload();
 	await waitForAdmin(page);
 	await expect(page.getByRole("button", { name: "Edit" })).toHaveCount(2);
-	await page.getByRole("button", { name: "Publish", exact: true }).click();
+	await publishPendingChanges(page);
 	await expect(page.getByRole("button", { name: "Unpublish" })).toBeVisible({
 		timeout: 15_000,
 	});

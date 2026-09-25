@@ -76,6 +76,16 @@ export async function submitModalAndWaitForSave(
 	});
 }
 
+export async function publishPendingChanges(page: Page) {
+	await page
+		.getByRole("button", { name: "Publish changes", exact: true })
+		.click();
+	const dialog = page.getByRole("dialog", { name: "Publish changes?" });
+	await dialog
+		.getByRole("button", { name: "Publish changes", exact: true })
+		.click();
+}
+
 export function modalField(dialog: Locator, label: string) {
 	return dialog
 		.getByText(label, { exact: true })
