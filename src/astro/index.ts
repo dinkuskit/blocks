@@ -3,12 +3,12 @@ import FactRailComponent from "../features/fact-rail/renderer.astro";
 import GalleryHeroComponent from "../features/gallery-hero/renderer.astro";
 import PageHeroComponent from "../features/page-hero/renderer.astro";
 import SectionHeaderComponent from "../features/section-header/renderer.astro";
-import DispatchComponent from "./Dispatch.astro";
-import GalleryLanesComponent from "./GalleryLanes.astro";
-import LedgerCardsComponent from "./LedgerCards.astro";
-import ProjectRecordComponent from "./ProjectRecord.astro";
-import SearchBoardComponent from "./SearchBoard.astro";
-import ServiceAreaMapComponent from "./ServiceAreaMap.astro";
+import LedgerCardsComponent from "../features/ledger-cards/renderer.astro";
+import GalleryLanesComponent from "../features/gallery-lanes/renderer.astro";
+import SearchBoardComponent from "../features/search-board/renderer.astro";
+import DispatchComponent from "../features/dispatch/renderer.astro";
+import ServiceAreaMapComponent from "../features/service-area-map/renderer.astro";
+import ProjectRecordComponent from "../features/project-record/renderer.astro";
 
 export { CtaBandComponent as CtaBand };
 export { DispatchComponent as Dispatch };

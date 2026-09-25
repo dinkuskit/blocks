@@ -6,16 +6,16 @@ import { DINKUS_THEME_TOKENS } from "@dinkuskit/blocks";
 
 const rendererFiles = [
 	["CtaBand.astro", "../../src/features/cta-band/renderer.astro"],
-	["Dispatch.astro", "../../src/astro/Dispatch.astro"],
+	["Dispatch.astro", "../../src/features/dispatch/renderer.astro"],
 	["FactRail.astro", "../../src/features/fact-rail/renderer.astro"],
 	["GalleryHero.astro", "../../src/features/gallery-hero/renderer.astro"],
-	["GalleryLanes.astro", "../../src/astro/GalleryLanes.astro"],
-	["LedgerCards.astro", "../../src/astro/LedgerCards.astro"],
+	["GalleryLanes.astro", "../../src/features/gallery-lanes/renderer.astro"],
+	["LedgerCards.astro", "../../src/features/ledger-cards/renderer.astro"],
 	["PageHero.astro", "../../src/features/page-hero/renderer.astro"],
-	["ProjectRecord.astro", "../../src/astro/ProjectRecord.astro"],
-	["SearchBoard.astro", "../../src/astro/SearchBoard.astro"],
+	["ProjectRecord.astro", "../../src/features/project-record/renderer.astro"],
+	["SearchBoard.astro", "../../src/features/search-board/renderer.astro"],
 	["SectionHeader.astro", "../../src/features/section-header/renderer.astro"],
-	["ServiceAreaMap.astro", "../../src/astro/ServiceAreaMap.astro"],
+	["ServiceAreaMap.astro", "../../src/features/service-area-map/renderer.astro"],
 ] as const;
 
 const documentedTokens = Object.values(DINKUS_THEME_TOKENS);

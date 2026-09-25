@@ -1,4 +1,3 @@
-import type { Element } from "@emdash-cms/blocks";
 import {
 	definePlugin,
 	type PluginDescriptor,
@@ -25,6 +24,30 @@ import {
 	SECTION_HEADER_BLOCK_TYPE,
 	sectionHeaderFields,
 } from "./features/section-header";
+import {
+	LEDGER_CARDS_BLOCK_TYPE,
+	ledgerCardsFields,
+} from "./features/ledger-cards";
+import {
+	GALLERY_LANES_BLOCK_TYPE,
+	galleryLanesFields,
+} from "./features/gallery-lanes";
+import {
+	SEARCH_BOARD_BLOCK_TYPE,
+	searchBoardFields,
+} from "./features/search-board";
+import {
+	DISPATCH_BLOCK_TYPE,
+	dispatchFields,
+} from "./features/dispatch";
+import {
+	SERVICE_AREA_MAP_BLOCK_TYPE,
+	serviceAreaMapFields,
+} from "./features/service-area-map";
+import {
+	PROJECT_RECORD_BLOCK_TYPE,
+	projectRecordFields,
+} from "./features/project-record";
 
 export {
 	CTA_BAND_BLOCK_TYPE,
@@ -52,333 +75,49 @@ export {
 	sectionHeaderFields,
 	type SectionHeaderNode,
 } from "./features/section-header";
+export {
+	LEDGER_CARDS_BLOCK_TYPE,
+	ledgerCardsFields,
+	type LedgerCard,
+	type LedgerCardsNode,
+} from "./features/ledger-cards";
+export {
+	GALLERY_LANES_BLOCK_TYPE,
+	galleryLanesFields,
+	type GalleryLane,
+	type GalleryLanesNode,
+} from "./features/gallery-lanes";
+export {
+	SEARCH_BOARD_BLOCK_TYPE,
+	searchBoardFields,
+	type SearchBoardNode,
+	type SearchLink,
+} from "./features/search-board";
+export {
+	DISPATCH_BLOCK_TYPE,
+	dispatchFields,
+	type DispatchNode,
+} from "./features/dispatch";
+export {
+	SERVICE_AREA_MAP_BLOCK_TYPE,
+	serviceAreaMapFields,
+	type LegendEntry,
+	type ServiceAreaMapNode,
+} from "./features/service-area-map";
+export {
+	PROJECT_RECORD_BLOCK_TYPE,
+	projectRecordFields,
+	type FieldAnnotationAttributes,
+	type ProjectRecordAnnotations,
+	type ProjectRecordLink,
+	type ProjectRecordLinkAnnotation,
+	type ProjectRecordNode,
+} from "./features/project-record";
 export { safeCtaHref } from "./links";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
-export type {
-	DispatchNode,
-	GalleryLane,
-	GalleryLanesNode,
-	LedgerCard,
-	LedgerCardsNode,
-	LegendEntry,
-	PortableTextNode,
-	ProjectRecordLink,
-	ProjectRecordAnnotations,
-	ProjectRecordLinkAnnotation,
-	FieldAnnotationAttributes,
-	ProjectRecordNode,
-	SearchBoardNode,
-	SearchLink,
-	ServiceAreaMapNode,
-} from "./types";
+export type { PortableTextNode } from "./types";
 
 export const DINKUS_BLOCKS_PLUGIN_ID = "dinkus-blocks";
-export const LEDGER_CARDS_BLOCK_TYPE = "dinkus.ledger-cards";
-export const GALLERY_LANES_BLOCK_TYPE = "dinkus.gallery-lanes";
-export const SEARCH_BOARD_BLOCK_TYPE = "dinkus.search-board";
-export const SERVICE_AREA_MAP_BLOCK_TYPE = "dinkus.service-area-map";
-export const DISPATCH_BLOCK_TYPE = "dinkus.dispatch";
-export const PROJECT_RECORD_BLOCK_TYPE = "dinkus.project-record";
-
-export const ledgerCardsFields = [
-	{
-		type: "repeater",
-		action_id: "cards",
-		label: "Cards",
-		item_label: "Card",
-		fields: [
-			{
-				type: "text_input",
-				action_id: "code",
-				label: "Record code",
-			},
-			{
-				type: "text_input",
-				action_id: "title",
-				label: "Title",
-			},
-			{
-				type: "text_input",
-				action_id: "body",
-				label: "Body",
-				multiline: true,
-			},
-			{
-				type: "text_input",
-				action_id: "ctaLabel",
-				label: "CTA label",
-			},
-			{
-				type: "text_input",
-				action_id: "ctaHref",
-				label: "CTA URL",
-			},
-		],
-	},
-] satisfies Element[];
-
-export const galleryLanesFields = [
-	{
-		type: "repeater",
-		action_id: "lanes",
-		label: "Lanes",
-		item_label: "Lane",
-		fields: [
-			{
-				type: "text_input",
-				action_id: "label",
-				label: "Label",
-			},
-			{
-				type: "text_input",
-				action_id: "meta",
-				label: "Meta",
-			},
-			{
-				type: "text_input",
-				action_id: "href",
-				label: "Link URL",
-			},
-			{
-				type: "text_input",
-				action_id: "image",
-				label: "Image URL",
-			},
-		],
-	},
-] satisfies Element[];
-
-export const searchBoardFields = [
-	{
-		type: "text_input",
-		action_id: "number",
-		label: "Section number",
-		placeholder: "LOC",
-	},
-	{
-		type: "text_input",
-		action_id: "kicker",
-		label: "Kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "title",
-		label: "Title",
-	},
-	{
-		type: "text_input",
-		action_id: "intro",
-		label: "Intro",
-		multiline: true,
-	},
-	{
-		type: "repeater",
-		action_id: "links",
-		label: "Links",
-		item_label: "Link",
-		fields: [
-			{
-				type: "text_input",
-				action_id: "label",
-				label: "Label",
-			},
-			{
-				type: "text_input",
-				action_id: "href",
-				label: "Link URL",
-			},
-		],
-	},
-] satisfies Element[];
-
-export const serviceAreaMapFields = [
-	{
-		type: "media_picker",
-		action_id: "image",
-		label: "Map image",
-	},
-	{
-		type: "text_input",
-		action_id: "imageAlt",
-		label: "Map image alt text",
-	},
-	{
-		type: "text_input",
-		action_id: "caption",
-		label: "Caption",
-		multiline: true,
-	},
-	{
-		type: "repeater",
-		action_id: "legend",
-		label: "Legend",
-		item_label: "Legend entry",
-		fields: [
-			{
-				type: "text_input",
-				action_id: "label",
-				label: "Label",
-			},
-			{
-				type: "text_input",
-				action_id: "icon",
-				label: "Icon slug",
-			},
-		],
-	},
-] satisfies Element[];
-
-export const dispatchFields = [
-	{
-		type: "text_input",
-		action_id: "kicker",
-		label: "Kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "title",
-		label: "Title",
-	},
-	{
-		type: "text_input",
-		action_id: "body",
-		label: "Body",
-		multiline: true,
-	},
-	{
-		type: "text_input",
-		action_id: "ctaLabel",
-		label: "CTA label",
-	},
-	{
-		type: "text_input",
-		action_id: "ctaHref",
-		label: "CTA URL",
-		placeholder: "/contact",
-	},
-	{
-		type: "text_input",
-		action_id: "phone",
-		label: "Phone",
-		placeholder: "tel:+15551234567",
-	},
-	{
-		type: "text_input",
-		action_id: "email",
-		label: "Email",
-		placeholder: "mailto:hello@example.com",
-	},
-] satisfies Element[];
-
-export const projectRecordFields = [
-	{
-		type: "text_input",
-		action_id: "recordId",
-		label: "Record ID",
-		placeholder: "project-slug",
-	},
-	{
-		type: "text_input",
-		action_id: "category",
-		label: "Category",
-	},
-	{
-		type: "text_input",
-		action_id: "title",
-		label: "Title",
-	},
-	{
-		type: "text_input",
-		action_id: "summary",
-		label: "Summary",
-		multiline: true,
-	},
-	{
-		type: "media_picker",
-		action_id: "identityImage",
-		label: "Identity artwork",
-	},
-	{
-		type: "text_input",
-		action_id: "identityAlt",
-		label: "Identity artwork alt text",
-	},
-	{
-		type: "text_input",
-		action_id: "statusKicker",
-		label: "Status kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "status",
-		label: "Status",
-	},
-	{
-		type: "text_input",
-		action_id: "roleKicker",
-		label: "Role kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "roleHeadline",
-		label: "Role headline",
-	},
-	{
-		type: "text_input",
-		action_id: "roleBody",
-		label: "Role body",
-		multiline: true,
-	},
-	{
-		type: "text_input",
-		action_id: "evidenceKicker",
-		label: "Evidence kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "proofHeadline",
-		label: "Proof headline",
-	},
-	{
-		type: "text_input",
-		action_id: "evidence",
-		label: "Evidence",
-		multiline: true,
-	},
-	{
-		type: "repeater",
-		action_id: "links",
-		label: "Evidence links",
-		item_label: "Link",
-		fields: [
-			{
-				type: "text_input",
-				action_id: "label",
-				label: "Label",
-			},
-			{
-				type: "text_input",
-				action_id: "href",
-				label: "URL",
-			},
-		],
-	},
-	{
-		type: "text_input",
-		action_id: "nextKicker",
-		label: "Next-project kicker",
-	},
-	{
-		type: "text_input",
-		action_id: "nextTitle",
-		label: "Next-project title",
-	},
-	{
-		type: "text_input",
-		action_id: "nextHref",
-		label: "Next-project URL",
-	},
-] satisfies Element[];
 
 const definition: PluginDefinition = {
 	id: DINKUS_BLOCKS_PLUGIN_ID,
