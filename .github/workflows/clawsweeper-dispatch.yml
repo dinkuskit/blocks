@@ -1,0 +1,68 @@
+name: clawsweeper dispatch
+
+# Public-repo doorbell. blocks is public, so this job stays on a GitHub-hosted
+# runner and never checks out the pull request. Fork pull requests are ignored.
+# Same-repo open, edit, push, and ready-for-review events dispatch to the
+# private spark-2 relay in saari-co/spark-dgx, which reviews on the host
+# Codex subscription and posts with the dinkuskit-clawsweeper App.
+#
+# One-time enrolment: repository secret CLAWSWEEPER_DISPATCH_TOKEN, a
+# fine-grained token whose only permission is Contents: Read and write on
+# saari-co/spark-dgx. Nothing on this repo.
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  relay:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      PR: ${{ github.event.pull_request.number }}
+      RELAY_REPO: saari-co/spark-dgx
+      RELAY_EVENT: clawsweeper_command
+    steps:
+      - name: Fail loud when the relay secret is not provisioned
+        env:
+          HAS_DISPATCH_TOKEN: ${{ secrets.CLAWSWEEPER_DISPATCH_TOKEN != '' }}
+        run: |
+          set -euo pipefail
+          [ "$HAS_DISPATCH_TOKEN" = "true" ] && exit 0
+          gh pr comment "$PR" --repo "$REPO" --body "ClawSweeper is not enrolled for this repository: \`CLAWSWEEPER_DISPATCH_TOKEN\` is missing, so this pull request cannot reach spark-2." || true
+          echo "::error::CLAWSWEEPER_DISPATCH_TOKEN is not set"
+          exit 1
+
+      - name: Resolve open PR head
+        run: |
+          set -euo pipefail
+          state="$(gh api "repos/$REPO/pulls/$PR" --jq .state)"
+          [ "$state" = "open" ] || { echo "PR #$PR is $state; nothing to review."; exit 0; }
+          head="$(gh api "repos/$REPO/pulls/$PR" --jq .head.sha)"
+          printf '%s' "$head" | grep -qE '^[0-9a-f]{40}$' || { echo "::error::unexpected head sha"; exit 1; }
+          echo "REQUESTED_HEAD=$head" >> "$GITHUB_ENV"
+          echo "PR_OPEN=1" >> "$GITHUB_ENV"
+
+      - name: Dispatch to spark-2 relay
+        if: env.PR_OPEN == '1'
+        env:
+          GH_TOKEN: ${{ secrets.CLAWSWEEPER_DISPATCH_TOKEN }}
+          RELAY_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          payload="$(jq -n \
+            --arg event_type "$RELAY_EVENT" \
+            --arg target_repo "$REPO" \
+            --arg pr "$PR" \
+            --arg requested_head "$REQUESTED_HEAD" \
+            --arg relay_run_url "$RELAY_RUN_URL" \
+            '{event_type: $event_type, client_payload: {kind: "pull_request", target_repo: $target_repo, pr: $pr, requested_head: $requested_head, relay_run_url: $relay_run_url}}')"
+          printf '%s' "$payload" | gh api -X POST "repos/$RELAY_REPO/dispatches" --input -
+          echo "Dispatched $RELAY_EVENT for $REPO#$PR head $REQUESTED_HEAD."
