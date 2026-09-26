@@ -38,10 +38,11 @@ EmDash is pre-1.0. Fixture versions stay exact, and the peer range names only
 versions proven by the compatibility suite. A wider range requires current
 admin edit/save/publish and public SSR proof.
 
-The current dogfood matrix is exact EmDash `0.40.1`,
-`@emdash-cms/blocks` `0.40.1`, and Astro `7.1.3`. The verified move from the
-`0.35.0` baseline is recorded in
+The current dogfood matrix is exact EmDash `0.41.0`,
+`@emdash-cms/blocks` `0.41.0`, and Astro `7.1.3`. The verified move from the
+`0.35.0` baseline to `0.40.1` is recorded in
 [`docs/spikes/2026-09-25-emdash-0.40.1-compatibility.md`](docs/spikes/2026-09-25-emdash-0.40.1-compatibility.md).
+The `0.41.0` pin does not widen that range or change stored block fields.
 The prior `0.29.0` to `0.35.0` baseline remains in
 [`docs/spikes/2026-08-27-emdash-0.35-compatibility.md`](docs/spikes/2026-08-27-emdash-0.35-compatibility.md).
 
