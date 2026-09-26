@@ -28,6 +28,38 @@
           "type": "portableText"
         }
       ]
+    },
+    {
+      "slug": "notices",
+      "label": "Notices",
+      "labelSingular": "Notice",
+      "supports": [
+        "drafts",
+        "revisions"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "text",
+          "label": "Text",
+          "type": "string"
+        },
+        {
+          "slug": "image",
+          "label": "Image",
+          "type": "string"
+        },
+        {
+          "slug": "link",
+          "label": "Link",
+          "type": "string"
+        }
+      ]
     }
   ],
   "content": {
@@ -328,6 +360,56 @@
               "email": "mailto:hello@example.com"
             }
           ]
+        }
+      },
+      {
+        "id": "query-card",
+        "slug": "query-card",
+        "status": "published",
+        "data": {
+          "title": "Query card fixture",
+          "content": [
+            {
+              "_type": "dinkus.query-card",
+              "_key": "query-card-seed",
+              "source": "notices",
+              "limit": "6"
+            }
+          ]
+        }
+      }
+    ],
+    "notices": [
+      {
+        "id": "notice-current",
+        "slug": "notice-current",
+        "status": "published",
+        "data": {
+          "title": "Before: Notice title is current",
+          "text": "This current notice is listed by the query card.",
+          "image": "/media/fixture/project-record.svg",
+          "link": "/field"
+        }
+      },
+      {
+        "id": "notice-second",
+        "slug": "notice-second",
+        "status": "published",
+        "data": {
+          "title": "Second current notice",
+          "text": "An unsafe link must not render.",
+          "image": "/media/fixture/project-record.svg",
+          "link": "javascript:alert(1)"
+        }
+      },
+      {
+        "id": "notice-draft",
+        "slug": "notice-draft",
+        "status": "draft",
+        "data": {
+          "title": "Draft notice stays off the page",
+          "text": "Drafts are not current records.",
+          "link": "/field"
         }
       }
     ]

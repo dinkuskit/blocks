@@ -19,6 +19,7 @@ import {
 	type ProjectRecordLinkAnnotation,
 	type ProjectRecordLink,
 	type ProjectRecordNode,
+	type QueryCardNode,
 	type SearchBoardNode,
 	type SearchLink,
 	type SectionHeaderNode,
@@ -34,6 +35,7 @@ type PublicBlockNode =
 	| LedgerCardsNode
 	| PageHeroNode
 	| ProjectRecordNode
+	| QueryCardNode
 	| SearchBoardNode
 	| SectionHeaderNode
 	| ServiceAreaMapNode;
@@ -100,11 +102,17 @@ describe("public package entrypoint", () => {
 			],
 		} satisfies ProjectRecordAnnotations;
 
+		const queryCard = {
+			_type: "dinkus.query-card",
+			source: "notices",
+			limit: "6",
+		} satisfies QueryCardNode;
 		const nodes = [
 			scalar,
 			media,
 			repeater,
 			projectRecord,
+			queryCard,
 		] satisfies PublicBlockNode[];
 		const portableNodes: PortableTextNode[] = nodes;
 		const items: PublicRepeaterItem[] = [fact, projectLink];
@@ -117,6 +125,7 @@ describe("public package entrypoint", () => {
 			"dinkus.gallery-hero",
 			"dinkus.fact-rail",
 			"dinkus.project-record",
+			"dinkus.query-card",
 		]);
 		expect(items).toEqual([fact, projectLink]);
 		expect(safeCtaHref("/contact")).toBe("/contact");

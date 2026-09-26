@@ -44,6 +44,11 @@ for (const required of [
 	"src/features/project-record/fields.ts",
 	"src/features/project-record/index.ts",
 	"src/features/project-record/renderer.astro",
+	"src/features/query-card/contract.ts",
+	"src/features/query-card/fields.ts",
+	"src/features/query-card/index.ts",
+	"src/features/query-card/records.ts",
+	"src/features/query-card/renderer.astro",
 	"src/astro/index.ts",
 ]) {
 	if (!files.includes(required)) {

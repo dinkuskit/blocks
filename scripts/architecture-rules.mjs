@@ -15,6 +15,7 @@ const FEATURE_IDS = [
 	"dinkus.service-area-map",
 	"dinkus.dispatch",
 	"dinkus.project-record",
+	"dinkus.query-card",
 ];
 
 const FEATURE_SHARED_DEPENDENCIES = new Map([
@@ -50,6 +51,10 @@ const FEATURE_SHARED_DEPENDENCIES = new Map([
 	["service-area-map", new Set(["src/shared/portable-text.ts"])],
 	[
 		"project-record",
+		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
+	],
+	[
+		"query-card",
 		new Set(["src/shared/links.ts", "src/shared/portable-text.ts"]),
 	],
 	["section-header", new Set(["src/shared/portable-text.ts"])],
@@ -538,7 +543,7 @@ export function validateFeatureMap(root, source = readFileSync(resolve(root, "FE
 	}
 	const migrated = rows.filter((cells) => cells[9] === "migrated pilot").map((cells) => codeSpans(cells[0])[0]);
 	if (
-		migrated.length !== 11 ||
+		migrated.length !== 12 ||
 		migrated[0] !== "dinkus.cta-band" ||
 		migrated[1] !== "dinkus.page-hero" ||
 		migrated[2] !== "dinkus.section-header" ||
@@ -549,9 +554,10 @@ export function validateFeatureMap(root, source = readFileSync(resolve(root, "FE
 		migrated[7] !== "dinkus.search-board" ||
 		migrated[8] !== "dinkus.service-area-map" ||
 		migrated[9] !== "dinkus.dispatch" ||
-		migrated[10] !== "dinkus.project-record"
+		migrated[10] !== "dinkus.project-record" ||
+		migrated[11] !== "dinkus.query-card"
 	) {
-		errors.push("all eleven blocks must be migrated pilots");
+		errors.push("all twelve blocks must be migrated pilots");
 	}
 	return errors;
 }

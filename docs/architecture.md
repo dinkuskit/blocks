@@ -18,6 +18,14 @@ Layout novelty, a named page kind, or a single site's visual design is not
 enough. Querying, iteration, forms, and other specialist runtime behavior can
 justify a block when composition cannot supply that behavior.
 
+`dinkus.query-card` is that query case. Ledger Cards plus a copied pattern are
+a typed snapshot: the shop owner pastes each card, and a new collection record
+does not appear. The query card stores one collection source and one limit.
+Each current published record renders as one card with an image, title, text,
+and safe link. It does not filter, paginate, or carry price, stock, or cart.
+Category and product pages stay template routes. The card introduces no stored
+field on the other eleven blocks and no migration of existing block content.
+
 ## Rendering and theming
 
 Block fields own content semantics. Renderers provide accessible neutral
