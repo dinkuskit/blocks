@@ -3,7 +3,7 @@
 
 /// <reference types="emdash/locals" />
 
-import type { BylineSummary, ContentBylineCredit, TaxonomyTerm, PortableTextBlock } from "emdash";
+import type { BylineSummary, ContentBylineCredit, TaxonomyTerm, PortableTextBlock, ReferencePage } from "emdash";
 
 export interface Page {
   id: string;
@@ -19,8 +19,15 @@ export interface Page {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
+export interface PageReferences {
+  related_pages: ReferencePage<Page>;
+}
+
 declare module "emdash" {
   interface EmDashCollections {
     pages: Page;
+  }
+  interface EmDashCollectionReferences {
+    pages: PageReferences;
   }
 }
