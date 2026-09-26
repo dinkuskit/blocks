@@ -34,8 +34,6 @@ These preserve the component backlog, not an approved order for the whole kit:
 - Dynamic tags only if EmDash has no adequate native mechanism; syntax and
   commerce integration need their own design decision.
 - Slots/conditions only if EmDash Widget Areas cannot meet real template demand.
-- Actual-page visual editing: [issue #41](https://github.com/dinkuskit/blocks/issues/41)
-  tracks real renderers and block-level editing controls.
 
 Templates consume Blocks, while Commerce owns product and purchase policy and
 Inventory owns stock truth. Their integration, launch sequence and wider kit
