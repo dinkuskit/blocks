@@ -22,7 +22,7 @@ Until the foundation campaign issue is closed with Smoky Works P0 proof:
 | Breaking field renames without migration + fixtures | **Rejected** (`COMPAT.md`) |
 | npm publish / marketplace listing PRs | **Rejected** (release-gated) |
 | Dynamic tag language PRs | **Wait** — confirm EmDash has no native mechanism; then design review first |
-| Query/Looper family | **Wait** — tracked as post-foundation follow-on |
+| Query/Looper family | **One card admitted** — `dinkus.query-card` is one source, one limit, and one card. Filters, pagination, price, stock, cart, and further query blocks still wait |
 | Display-conditions / slots package | **Wait** — use EmDash Widget Areas first |
 | Commerce, cart, or checkout features | **Wrong repo** — see AICommerce / commerce extensions |
 

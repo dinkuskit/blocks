@@ -1,0 +1,113 @@
+---
+import { getEmDashCollection } from "emdash";
+import type { QueryCardNode, QueryCardRecord } from "./contract";
+import {
+	queryCardLimit,
+	queryCardSource,
+	readQueryCardRecords,
+} from "./records";
+
+interface Props {
+	node: QueryCardNode;
+}
+
+const { node } = Astro.props;
+const source = queryCardSource(node.source);
+const limit = queryCardLimit(node.limit);
+
+let records: QueryCardRecord[] = [];
+if (source && limit) {
+	try {
+		const result = await getEmDashCollection(source, {
+			status: "published",
+			limit,
+			orderBy: { created_at: "desc" },
+		});
+		if (!result.error) {
+			records = readQueryCardRecords(result.entries);
+		}
+	} catch {
+		records = [];
+	}
+}
+---
+
+{
+	records.length > 0 && (
+		<div class="dinkus-query-card" data-dinkus-block="query-card">
+			{records.map((record) => (
+				<article class="dinkus-query-card__card">
+					{record.imageSrc && (
+						<img
+							class="dinkus-query-card__image"
+							src={record.imageSrc}
+							alt={record.imageAlt ?? ""}
+						/>
+					)}
+					{record.title &&
+						(record.href ? (
+							<h3>
+								<a class="dinkus-query-card__link" href={record.href}>
+									{record.title}
+								</a>
+							</h3>
+						) : (
+							<h3>{record.title}</h3>
+						))}
+					{record.text && <p>{record.text}</p>}
+				</article>
+			))}
+		</div>
+	)
+}
+
+<style>
+	@layer dinkus-blocks {
+	.dinkus-query-card {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: var(--dinkus-content-gap, 1rem);
+		margin: var(--dinkus-section-spacing, 1.5rem) 0;
+	}
+
+	.dinkus-query-card__card {
+		display: grid;
+		gap: var(--dinkus-item-gap, 0.5rem);
+		align-content: start;
+		padding: var(--dinkus-panel-padding, 1.25rem);
+		border: var(
+			--dinkus-panel-border,
+			1px solid color-mix(in srgb, currentColor 20%, transparent)
+		);
+		border-radius: var(--dinkus-panel-radius, 0.75rem);
+		background: var(
+			--dinkus-panel-surface,
+			color-mix(in srgb, currentColor 4%, transparent)
+		);
+	}
+
+	.dinkus-query-card__image {
+		width: 100%;
+		height: auto;
+		border-radius: var(--dinkus-panel-radius, 0.75rem);
+	}
+
+	h3 {
+		margin: 0;
+		font-size: var(--dinkus-title-size, 1.25rem);
+		line-height: var(--dinkus-title-line-height, 1.3);
+	}
+
+	p {
+		max-width: var(--dinkus-copy-max-width, 65ch);
+		margin: 0;
+		line-height: 1.6;
+	}
+
+	.dinkus-query-card__link {
+		color: inherit;
+		font-weight: 700;
+		text-decoration: none;
+	}
+	}
+</style>

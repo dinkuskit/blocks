@@ -3,7 +3,23 @@
 
 /// <reference types="emdash/locals" />
 
-import type { BylineSummary, ContentBylineCredit, TaxonomyTerm, PortableTextBlock, ReferencePage } from "emdash";
+import type { BylineSummary, ContentBylineCredit, TaxonomyTerm, PortableTextBlock } from "emdash";
+
+export interface Notice {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  text?: string;
+  image?: string;
+  link?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  byline?: BylineSummary | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
 
 export interface Page {
   id: string;
@@ -19,15 +35,9 @@ export interface Page {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
-export interface PageReferences {
-  related_pages: ReferencePage<Page>;
-}
-
 declare module "emdash" {
   interface EmDashCollections {
+    notices: Notice;
     pages: Page;
-  }
-  interface EmDashCollectionReferences {
-    pages: PageReferences;
   }
 }

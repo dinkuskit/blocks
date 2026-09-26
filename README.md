@@ -47,6 +47,7 @@ and [pattern catalog contract](patterns/README.md).
 | Service Area Map | `dinkus.service-area-map` | map image, caption, legend repeater |
 | Dispatch | `dinkus.dispatch` | contact band with CTA + tel/mailto links |
 | Project Record | `dinkus.project-record` | identity art, status ticket, role, evidence-link repeater, next-project navigation |
+| Query Card | `dinkus.query-card` | one collection source, one limit, one card of image, title, text, and link |
 
 The current stored contract keeps repeater sub-fields scalar, so image
 sub-fields (gallery lanes) carry URL strings rather than a media picker — a
@@ -110,7 +111,11 @@ does not yet ship a display-conditions engine.
 The package root exports `safeCtaHref`, the shared `PortableTextNode` base,
 one `*Node` type for each block, and the repeater item types `FactItem`,
 `LedgerCard`, `GalleryLane`, `SearchLink`, `LegendEntry`, and
-`ProjectRecordLink`.
+`ProjectRecordLink`. The query card also exports `QueryCardRecord`,
+`queryCardSource`, `queryCardLimit`, and `readQueryCardRecords`. It stores
+only the collection source and the limit. Image, title, text, and link come
+from current published records in that collection. It does not filter, paginate,
+or read price, stock, or cart fields.
 
 A site-level renderer override can use the same node contract as the
 shipped renderer and the same URL policy:

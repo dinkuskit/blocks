@@ -13,6 +13,7 @@ const rendererFiles = [
 	["LedgerCards.astro", "../../src/features/ledger-cards/renderer.astro"],
 	["PageHero.astro", "../../src/features/page-hero/renderer.astro"],
 	["ProjectRecord.astro", "../../src/features/project-record/renderer.astro"],
+	["QueryCard.astro", "../../src/features/query-card/renderer.astro"],
 	["SearchBoard.astro", "../../src/features/search-board/renderer.astro"],
 	["SectionHeader.astro", "../../src/features/section-header/renderer.astro"],
 	["ServiceAreaMap.astro", "../../src/features/service-area-map/renderer.astro"],

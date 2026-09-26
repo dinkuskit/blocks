@@ -48,6 +48,10 @@ import {
 	PROJECT_RECORD_BLOCK_TYPE,
 	projectRecordFields,
 } from "./features/project-record";
+import {
+	QUERY_CARD_BLOCK_TYPE,
+	queryCardFields,
+} from "./features/query-card";
 
 export {
 	CTA_BAND_BLOCK_TYPE,
@@ -113,6 +117,16 @@ export {
 	type ProjectRecordLinkAnnotation,
 	type ProjectRecordNode,
 } from "./features/project-record";
+export {
+	QUERY_CARD_BLOCK_TYPE,
+	queryCardFields,
+	queryCardLimit,
+	queryCardSource,
+	readQueryCardRecords,
+	type QueryCardEntry,
+	type QueryCardNode,
+	type QueryCardRecord,
+} from "./features/query-card";
 export { safeCtaHref } from "./links";
 export { DINKUS_THEME_TOKENS, type DinkusThemeToken } from "./theme";
 export type { PortableTextNode } from "./types";
@@ -201,6 +215,13 @@ const definition: PluginDefinition = {
 				category: "Sections",
 				description: "A full project record with identity, status, evidence, and next navigation",
 				fields: projectRecordFields,
+			},
+			{
+				type: QUERY_CARD_BLOCK_TYPE,
+				label: "Query Card",
+				category: "Sections",
+				description: "A list of current records from one collection",
+				fields: queryCardFields,
 			},
 		],
 	},

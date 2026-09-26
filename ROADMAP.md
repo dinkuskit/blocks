@@ -23,7 +23,7 @@ Ordered for business value:
 
 1. **Works home spine → full home parity** — remaining home sections as CMS streams  
 2. **Second house site** (e.g. SmokyProduct) on the same blocks pin → unlocks starters  
-3. **`dinkus.query` family** — admin-composable listings (archives, card grids)  
+3. **`dinkus.query` family** — `dinkus.query-card` is the first card: one source, one limit, image, title, text, and link. Filters, pagination, archives, and further cards remain
 4. **Pattern catalog format** — first real pattern seed + gallery material *in this repo*  
 5. **Dynamic tags** — only if EmDash still has no native tag language; blocks own syntax; commerce-sdk registers commerce tags  
 6. **Templates** (`template-services` / marketing / store) after two house proofs  

@@ -12,6 +12,7 @@ import {
 	PROJECT_RECORD_BLOCK_TYPE,
 	SEARCH_BOARD_BLOCK_TYPE,
 	SECTION_HEADER_BLOCK_TYPE,
+	QUERY_CARD_BLOCK_TYPE,
 	SERVICE_AREA_MAP_BLOCK_TYPE,
 	createPlugin,
 	ctaBandFields,
@@ -26,6 +27,7 @@ import {
 	safeCtaHref,
 	searchBoardFields,
 	sectionHeaderFields,
+	queryCardFields,
 	serviceAreaMapFields,
 } from "../../src/index";
 
@@ -113,6 +115,12 @@ describe("@dinkuskit/blocks", () => {
 						label: "Project Record",
 						category: "Sections",
 						fields: projectRecordFields,
+					},
+					{
+						type: QUERY_CARD_BLOCK_TYPE,
+						label: "Query Card",
+						category: "Sections",
+						fields: queryCardFields,
 					},
 				],
 			},
@@ -319,6 +327,16 @@ describe("@dinkuskit/blocks", () => {
 			"href",
 		]);
 		expect(links.fields.every((field) => field.type === "text_input")).toBe(
+			true,
+		);
+	});
+
+	it("locks the query-card contract to one source and one limit", () => {
+		expect(queryCardFields.map((field) => field.action_id)).toEqual([
+			"source",
+			"limit",
+		]);
+		expect(queryCardFields.every((field) => field.type === "text_input")).toBe(
 			true,
 		);
 	});
