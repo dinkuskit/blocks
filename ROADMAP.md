@@ -1,11 +1,15 @@
 # Roadmap
 
-This is the public kit trajectory for Dinkus **blocks** and the wider Dinkus
-family. It is shaped by the Smoky **Business North Star** (agent-managed
-multi-website commerce OS), not by feature tourism.
+This is the **Blocks-specific backlog**, reconciled on 2026-09-26 with the
+canonical [kit vision](https://github.com/dinkuskit/.github/blob/main/VISION.md)
+and [kit roadmap](https://github.com/dinkuskit/.github/blob/main/ROADMAP.md).
+Whole-kit sequencing lives there: the first goal is a human-operable EmDash
+store, with Commerce and Inventory launching side by side. Inventory is not a
+post-Commerce extension. Advanced promotions and bundles can follow later.
 
-Package remains private at `0.0.0` until a real Smoky dogfood gate passes.
-Building in the open is fine; shipping is release-gated.
+Package remains private at `0.0.0` until its dogfood and release gates pass.
+This backlog is not a release-readiness claim. Component work below does not
+block or reorder the kit's approved current Store Template catalog slice.
 
 ## Foundation (current campaign — closes when done)
 
@@ -17,25 +21,24 @@ Building in the open is fine; shipping is release-gated.
 - [ ] Smoky Works **P0** dogfood: admin-operable home thin trio (hero + mid + CTA)
 - [ ] Campaign issue closed with proof links
 
-## Next (pre-filed follow-ons — not infinite deferral)
+## Follow-on candidates — Blocks scope
 
-Ordered for business value:
+These preserve the component backlog, not an approved order for the whole kit:
 
-1. **Works home spine → full home parity** — remaining home sections as CMS streams  
-2. **Second house site** (e.g. SmokyProduct) on the same blocks pin → unlocks starters  
-3. **`dinkus.query` family** — `dinkus.query-card` is the first card: one source, one limit, image, title, text, and link. Filters, pagination, archives, and further cards remain
-4. **Pattern catalog format** — first real pattern seed + gallery material *in this repo*  
-5. **Dynamic tags** — only if EmDash still has no native tag language; blocks own syntax; commerce-sdk registers commerce tags  
-6. **Templates** (`template-services` / marketing / store) after two house proofs  
-7. **AICommerce essentials** dogfood on GFB → CBD (not marketing sites as fake stores)  
-8. **Inventory / coupons / bundles** extensions after commerce kernel dogfood  
-9. **Slots/conditions package** only if EmDash Widget Areas cannot meet real template demand  
-10. **Kit assembly (S5)** when pieces have each shipped a real site  
+- Home section parity and a second consumer proof on the same Blocks pin.
+- `dinkus.query` family: `dinkus.query-card` is the first card (one source,
+  one limit, image, title, text and link). Filters, pagination, archives and
+  further cards remain candidates.
+- Pattern catalog: expand real copied-composition seeds and gallery material
+  in this repo under the existing admission contract.
+- Dynamic tags only if EmDash has no adequate native mechanism; syntax and
+  commerce integration need their own design decision.
+- Slots/conditions only if EmDash Widget Areas cannot meet real template demand.
 
-## Hard deadlines that order commerce work
-
-- Katana inventory exit / non-renewal boundary (see house commerce plans; ~2026-11-30)  
-- GFB EmDash rehearsal before smokymountaincbd.com redesign/migrate (EOY 2026 target)  
+Templates consume Blocks, while Commerce owns product and purchase policy and
+Inventory owns stock truth. Their integration, launch sequence and wider kit
+assembly belong to the canonical roadmap, not this component backlog. No
+private operating deadlines are product gates here.
 
 ## Will not do in this package
 
