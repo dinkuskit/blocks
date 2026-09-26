@@ -8,8 +8,11 @@ Part of [Dinkus](https://github.com/dinkuskit) — plugins and templates for [Em
 
 Under construction, dogfooding in the open. MIT.
 
-See [ROADMAP.md](ROADMAP.md) for the North-Star-shaped kit trajectory,
-[CONTRIBUTING.md](CONTRIBUTING.md) for what PRs we will not accept during
+See the canonical [kit vision](https://github.com/dinkuskit/.github/blob/main/VISION.md)
+and [kit roadmap](https://github.com/dinkuskit/.github/blob/main/ROADMAP.md) for
+whole-kit direction: Commerce and Inventory launch side by side in a
+human-operable EmDash store. [ROADMAP.md](ROADMAP.md) retains the Blocks backlog.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for what PRs we will not accept during
 dogfood, and [COMPAT.md](COMPAT.md) for stored-content change rules.
 
 ## Block vocabulary
