@@ -1,6 +1,5 @@
 name: ClawSweeper dispatch
 
-# Native events are independent of CI and agent-owned OpenClaw review.
 on:
   pull_request_target:
     types: [opened, reopened, edited, synchronize, ready_for_review]
