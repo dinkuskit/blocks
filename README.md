@@ -1,12 +1,33 @@
 # blocks
 
+> **Retired project — historical reference only.** This experimental package is
+> no longer an active product direction. The current Template Store direction
+> uses upstream EmDash 1.0.1 native page/content Blocks fields and local
+> renderers instead of depending on this package. Retained legacy `dinkus.*`
+> Portable Text data uses local compatibility renderers. Native page/content
+> Blocks are distinct from EmDash admin Block Kit, an admin UI composition
+> system. See the [Template Store transition record](https://github.com/dinkuskit/template-store/blob/bd997144517242e0a70596e15de20bbfc3314df8/docs/implementation/upstream-blocks-transition.md),
+> [EmDash native Blocks guide](https://docs.emdashcms.com/guides/blocks/),
+> [Portable Text rendering documentation](https://docs.emdashcms.com/plugins/creating-native-plugins/portable-text-components/),
+> and [admin Block Kit documentation](https://docs.emdashcms.com/plugins/creating-plugins/block-kit/).
+>
+> Source, history, releases, and issues are preserved. Archive metadata is
+> pending owner closeout; this notice does not claim that GitHub has already
+> archived the repository or that all consumers have migrated.
+
+## Historical documentation
+
+The material below describes the retired experiment and is retained for
+historical reference. It is not a roadmap, adoption guide, or indication of
+current product support.
+
 `* * *`
 
-A library of section blocks — hero, features, CTA, FAQ, and friends — so whole pages are composed and edited in the EmDash admin, not in code. Will ship as `@dinkuskit/blocks` on npm.
+A library of section blocks — hero, features, CTA, FAQ, and friends — so whole pages were intended to be composed and edited in the EmDash admin, not in code. The retired experiment was intended for `@dinkuskit/blocks` on npm.
 
-Part of [Dinkus](https://github.com/dinkuskit) — plugins and templates for [EmDash](https://github.com/emdash-cms/emdash) sites. Plugins include editable section blocks and commerce tooling; templates provide complete site starting points. Use one or combine them.
+Part of [Dinkus](https://github.com/dinkuskit) — plugins and templates for [EmDash](https://github.com/emdash-cms/emdash) sites. Plugins include editable section blocks and commerce tooling; templates provide complete site starting points. This paragraph records the historical kit positioning.
 
-Under construction, dogfooding in the open. MIT.
+This historical package was under construction and dogfooded in the open. MIT.
 
 See the canonical [kit vision](https://github.com/dinkuskit/.github/blob/main/VISION.md)
 and [kit roadmap](https://github.com/dinkuskit/.github/blob/main/ROADMAP.md) for

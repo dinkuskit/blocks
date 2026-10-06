@@ -1,5 +1,22 @@
 # Agent Contract
 
+> **Retired project — historical reference only.** This experimental package is
+> no longer an active product direction. The current Template Store direction
+> uses upstream EmDash 1.0.1 native page/content Blocks fields and local
+> renderers instead of depending on this package. Retained legacy `dinkus.*`
+> Portable Text data uses local compatibility renderers. Native page/content
+> Blocks are distinct from EmDash admin Block Kit, an admin UI composition
+> system. See the [Template Store transition record](https://github.com/dinkuskit/template-store/blob/bd997144517242e0a70596e15de20bbfc3314df8/docs/implementation/upstream-blocks-transition.md),
+> [EmDash native Blocks guide](https://docs.emdashcms.com/guides/blocks/),
+> [Portable Text rendering documentation](https://docs.emdashcms.com/plugins/creating-native-plugins/portable-text-components/),
+> and [admin Block Kit documentation](https://docs.emdashcms.com/plugins/creating-plugins/block-kit/).
+>
+> Source, history, releases, and issues are preserved. Archive metadata is
+> pending owner closeout; this notice does not claim that GitHub has already
+> archived the repository or that all consumers have migrated. The contract
+> below is retained as historical project guidance and does not authorize new
+> features, dependencies, imports, adoption, or active contribution.
+
 This public repository owns the reusable Dinkus section-block plugin for
 EmDash. Keep the package generic: site copy, customer data, Smoky branding,
 credentials, and production configuration do not belong here.
