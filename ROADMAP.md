@@ -1,5 +1,12 @@
 # Roadmap
 
+> **Retired project — historical backlog only.** New package work and adoption
+> are no longer planned. The unfinished items below record the experiment’s
+> status when retired; they are preserved and are not current commitments.
+> See the [retirement notice](README.md) for the upstream native Blocks direction
+> and local compatibility path. Existing consumers must complete their own
+> migration; repository archive remains pending owner closeout.
+
 This is the **Blocks-specific backlog**, reconciled on 2026-09-26 with the
 canonical [kit vision](https://github.com/dinkuskit/.github/blob/main/VISION.md)
 and [kit roadmap](https://github.com/dinkuskit/.github/blob/main/ROADMAP.md).
@@ -11,7 +18,7 @@ Package remains private at `0.0.0` until its dogfood and release gates pass.
 This backlog is not a release-readiness claim. Component work below does not
 block or reorder the kit's approved current Store Template catalog slice.
 
-## Foundation (current campaign — closes when done)
+## Foundation (historical campaign)
 
 - [x] Small section vocabulary + patterns-for-variety rule (`docs/architecture.md`)
 - [x] `--dinkus-*` theming contract + documented class hooks
@@ -21,7 +28,7 @@ block or reorder the kit's approved current Store Template catalog slice.
 - [ ] Smoky Works **P0** dogfood: admin-operable home thin trio (hero + mid + CTA)
 - [ ] Campaign issue closed with proof links
 
-## Follow-on candidates — Blocks scope
+## Historical follow-on candidates — Blocks scope
 
 These preserve the component backlog, not an approved order for the whole kit:
 
