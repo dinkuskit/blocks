@@ -38,17 +38,20 @@ describe("renderer theming contract", () => {
 		}
 	});
 
-	it("exports unique documented token names that renderers consume", () => {
+	it("exports unique token names that renderers consume and keeps README tombstone-only", () => {
 		const combinedSources = rendererSources
 			.map(({ source }) => source)
 			.join("\n");
 		const readme = readFileSync(new URL("../../README.md", import.meta.url), "utf8");
 
+		expect(readme).toContain("Retired project — historical reference only.");
+		expect(readme).not.toContain("@dinkuskit/blocks");
+		expect(readme).not.toContain("dinkusBlocks");
 		expect(new Set(documentedTokens).size).toBe(documentedTokens.length);
 		for (const token of documentedTokens) {
 			expect(token).toMatch(/^--dinkus-[a-z][a-z-]+$/);
 			expect(combinedSources, token).toContain(token);
-			expect(readme, token).toContain(token);
+			expect(readme, token).not.toContain(token);
 		}
 	});
 
